@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="chessDSL" nsURI="http://www.ac.uk/kcl/inf/nerosiegfried/chessdsl/ChessDSL"
+    nsPrefix="chessDSL">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="game" eType="#//Game" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Game">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="players" upperBound="-1"
+        eType="#//Player" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initial" eType="#//InitialState"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moves" upperBound="-1"
+        eType="#//MovePair" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conclusion" eType="#//Conclusion"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Player">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="#//Color"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InitialState">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="positions" eType="#//CustomPositions"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomPositions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="placement" upperBound="-1"
+        eType="#//Placement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Placement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="piece" eType="#//CustomPiece"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="square" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomPiece">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="#//Color"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//Piece"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MovePair">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="moveNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="color1" eType="#//Player"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="whiteMove" eType="#//AnyMove"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="color2" eType="#//Player"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blackMove" eType="#//AnyMove"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnyMove">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="move" eType="#//DSLMove"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="remarks" unique="false"
+        upperBound="-1" eType="#//Remark"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSLMove"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Move" eSuperTypes="#//DSLMove">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="piece" eType="#//Piece"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="from" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Capture" eSuperTypes="#//DSLMove">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="move" eType="#//Move" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="capture" eType="#//Piece"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Castle" eSuperTypes="#//DSLMove">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="move" eType="#//Move" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnPassant" eSuperTypes="#//DSLMove">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="capture" eType="#//Capture"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="square" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Promotion" eSuperTypes="#//DSLMove">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="move" eType="#//DSLMove"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="piece" eType="#//Piece"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Remark">
+    <eLiterals name="Good" literal="Good"/>
+    <eLiterals name="Bad" value="1" literal="Bad"/>
+    <eLiterals name="Excellent" value="2" literal="Excellent"/>
+    <eLiterals name="Risky" value="3" literal="Risky"/>
+    <eLiterals name="Dubious" value="4" literal="Dubious"/>
+    <eLiterals name="Check" value="5" literal="Check"/>
+    <eLiterals name="Checkmate" value="6" literal="Checkmate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Conclusion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="method" eType="#//Method"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="result" eType="#//Result"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Method"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Win" eSuperTypes="#//Method"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeUp" eSuperTypes="#//Win">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="player" eType="#//Player"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Resign" eSuperTypes="#//Win">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="player" eType="#//Player"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Checkmate" eSuperTypes="#//Win">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="player1" eType="#//Player"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="player2" eType="#//Player"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Draw" eSuperTypes="#//Method">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="player1" eType="#//Player"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="player2" eType="#//Player"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="result" eType="#//EString"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Result">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="player" eType="#//Player"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="#//Color"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Color">
+    <eLiterals name="White" literal="White"/>
+    <eLiterals name="Black" value="1" literal="Black"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Piece">
+    <eLiterals name="King" literal="King"/>
+    <eLiterals name="Queen" value="1" literal="Queen"/>
+    <eLiterals name="Rook" value="2" literal="Rook"/>
+    <eLiterals name="Bishop" value="3" literal="Bishop"/>
+    <eLiterals name="Knight" value="4" literal="Knight"/>
+    <eLiterals name="Pawn" value="5" literal="Pawn"/>
+  </eClassifiers>
+</ecore:EPackage>
