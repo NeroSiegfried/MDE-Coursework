@@ -1,0 +1,370 @@
+grammar uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL with org.eclipse.xtext.common.Terminals
+
+generate chessDSL "http://www.ac.uk/kcl/in/nerosiegfried/chessdsl/ChessDSL"
+
+
+
+Model:
+
+	game=Game
+
+;
+
+
+
+Game:
+
+	'Game' title=STRING
+
+	('Players:' players+=Player+)?
+
+	(initial=InitialState)?
+
+	'Moves:' moves+=MovePair*
+
+	'end'
+
+	(conclusion=Conclusion)?
+
+;
+
+
+
+Player:
+
+	color=Color ':' name=STRING
+
+;
+
+
+
+InitialState:
+
+	{InitialState}
+
+	'InitialState' ('fresh' | 'custom' positions=CustomPositions)?
+
+;
+
+
+
+CustomPositions:
+
+	{CustomPositions}
+
+	'Positions:' '{'
+
+		(placement+=Placement)*
+
+	'}'
+
+;
+
+
+
+Placement:
+
+	//e.g., "WhiteKing on e1" or "BlackPawn = a7"
+
+	piece=CustomPiece ('=' | 'on') square=Square
+
+;
+
+
+
+CustomPiece:
+
+	(color=Color)
+
+	(kind=Piece)
+
+;
+
+
+
+MovePair:
+
+	//whiteMove can also be '...' when Black plays first in the position
+
+	//or from where the records start. blackMove is optional depending on
+
+	//where the records end or how the game itself ends
+
+	moveNumber=MOVENUMBER
+
+	(((color1=[PlayerOrColor])? whiteMove=AnyMove )| "...")
+
+	((color2=[PlayerOrColor])?blackMove=AnyMove)?
+
+;
+
+
+
+MOVENUMBER hidden():
+
+	INT "."
+
+;
+
+
+
+AnyMove:
+
+	//for possible extensions to the language
+
+	move=DSLMove ('(' remarks+=Remark* ')')?
+
+;
+
+
+
+DSLMove:
+
+	(Move | Capture | Castle | EnPassant | Promotion | Dummy)
+
+;
+
+
+
+Dummy:
+	{Dummy}
+	'dummy'
+
+;
+
+
+
+Move:
+
+	//Pawn(e2 -> e4), Knight from b1 to c3, etc.
+
+	('moves')?
+
+	(piece=Piece)
+
+	('(' from=Square '->' to=Square ')'|
+
+	'from' from=Square 'to' to=Square
+
+	)
+
+;
+
+
+
+Capture:
+
+	//An extension of a regular Move
+
+	move=Move
+
+	(('Capture(' capture=Piece ')')|
+
+	(('and')? 'captures' capture=Piece))
+
+;
+
+
+
+Castle:
+
+	('Castle(' side=('Kingside'|'Queenside') ')')|
+
+	('castles' ('on' 'the')? side=('Kingside'|'Queenside'))|
+
+	(move=Move 'Castle(' side=('Kingside'|'Queenside') ')')|
+
+	(move=Move 'and' 'castles' side=('Kingside'|'Queenside'))
+
+;
+
+
+
+EnPassant:
+
+	//An extension of a Capture
+
+	capture=Capture 'on' square=Square
+
+;
+
+
+
+Promotion:
+
+	//e.g., promotes pawn to Queen on e8,
+
+	//
+
+	move=(Move|Capture) 'Promotion(' piece=Piece ')'
+
+;
+
+
+
+enum Remark:
+	Good |
+
+	Bad |
+
+	Excellent |
+
+	Risky |
+
+	Dubious |
+
+	Check |
+
+	Checkmate
+
+;
+
+
+
+Conclusion:
+
+	(method=Method)? result=Result
+
+;
+
+
+
+Method:
+
+	(win = Win )|
+	(draw = Draw)
+
+;
+
+
+
+Win:
+
+	(time = TimeUp) |
+	(resign = Resign) |
+	(mate = Checkmate)
+
+;
+
+
+
+
+
+TimeUp:
+
+	player=PlayerOrColor 'ran' 'out' 'of' 'time'
+
+;
+
+
+
+Resign:
+
+	player=PlayerOrColor 'resigned'
+
+;
+
+
+
+Checkmate:
+
+	player1=PlayerOrColor 'checkmated' player2=PlayerOrColor
+
+;
+
+
+
+Draw:
+
+	player1=PlayerOrColor 'and' player2=PlayerOrColor
+
+	result=(Stalemate|Threefold|Fifty|Agree)
+
+;
+
+
+
+Stalemate returns EString:
+
+	'ended' 'the' 'game' 'in' 'a' 'stalemate'
+
+;
+
+
+
+Threefold returns EString:
+
+	'repeated' 'a' 'position' 'three' 'times'
+
+;
+
+
+
+Fifty returns EString:
+
+	'played' 'fifty' 'moves' 'without' 'a' 'capture'
+
+;
+
+
+
+Agree returns EString:
+
+	'agreed' 'to' 'a' 'draw'
+
+;
+
+
+
+Result:
+
+	((player=[Player]|color=Color) 'wins')|
+
+	('draw')
+
+;
+
+
+PlayerOrColor:
+	(player = [Player]) |
+	(color = Color)
+;
+
+
+
+enum Color:
+
+	White | Black
+
+;
+
+
+
+enum Piece:
+
+	King  |
+
+	Queen |
+
+	Rook  |
+
+	Bishop|
+
+	Knight|
+
+	Pawn
+
+;
+
+
+
+Square:
+	square=SQUARETERMINAL
+;
+
+
+
+terminal SQUARETERMINAL:
+	('a'..'h'|'A'..'H')('1'..'8')
+
+;
