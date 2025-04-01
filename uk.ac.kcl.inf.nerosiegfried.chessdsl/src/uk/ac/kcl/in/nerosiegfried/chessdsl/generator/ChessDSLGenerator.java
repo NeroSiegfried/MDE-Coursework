@@ -355,6 +355,15 @@ public class ChessDSLGenerator extends AbstractGenerator {
         }
         return "";
     }
+    
+    private String toConcise(DSLMove move, Color side, BoardState board) {
+        //Stub
+        return "";
+    }
+    private String toVerbose(DSLMove move, Color side, BoardState board) {
+        //Stub
+    	return "";
+    }
 
     private String convertBasic(Move mv, Color side, BoardState board, List<Remark> remarks) {
         Piece p = mv.getPiece();
@@ -679,30 +688,49 @@ public class ChessDSLGenerator extends AbstractGenerator {
             sb.append(")");
         }
         sb.append("\n");
-
+        
+        StringBuilder sb2 = sb; //Concise DSL
+        StringBuilder sb3 = sb; //Verbose DSL
+        
         int moveIndex = 1;
         for (MovePair mp : game.getMoves()) {
             boolean skipWhite = "...".equals(mp.getWhiteMove());
             sb.append(moveIndex).append(". ");
+            sb2.append(moveIndex).append(". ");
+            sb3.append(moveIndex).append(". ");
             if (skipWhite) {
                 if (mp.getBlackMove() != null && mp.getBlackMove().getMove() != null) {
                     DSLMove bmove = mp.getBlackMove().getMove();
                     String note = toAlgebraic(bmove, Color.BLACK, board);
+                    String note2 = toConcise(bmove, Color.BLACK, board);
+                    String note3 = toVerbose(bmove, Color.BLACK, board);
                     applyMove(board, bmove, Color.BLACK);
                     sb.append("... ").append(note).append("\n");
+                    sb2.append("... ").append(note2).append("\n");
+                    sb3.append("... ").append(note3).append("\n");
                 }
             } else {
                 if (mp.getWhiteMove() != null && mp.getWhiteMove().getMove() != null) {
                     DSLMove wmove = mp.getWhiteMove().getMove();
                     String note = toAlgebraic(wmove, Color.WHITE, board);
+                    String note2 = toConcise(wmove, Color.WHITE, board);
+                    String note3 = toVerbose(wmove, Color.WHITE, board);
                     applyMove(board, wmove, Color.WHITE);
                     sb.append(note).append(" ");
+                    sb2.append(note2);
+                    sb3.append(note3);
                 }
                 if (mp.getBlackMove() != null && mp.getBlackMove().getMove() != null) {
+                	sb2.append("; ");
+                	sb3.append(" and ");
                     DSLMove bmove = mp.getBlackMove().getMove();
                     String note = toAlgebraic(bmove, Color.BLACK, board);
+                    String note2 = toConcise(bmove, Color.BLACK, board);
+                    String note3 = toVerbose(bmove, Color.BLACK, board);
                     applyMove(board, bmove, Color.BLACK);
                     sb.append(note).append(" ");
+                    sb2.append(note2).append(" ");
+                    sb3.append(note3).append(" ");
                 }
                 sb.append("\n");
             }
@@ -711,10 +739,14 @@ public class ChessDSLGenerator extends AbstractGenerator {
 
         if (game.getConclusion() != null) {
             sb.append("Conclusion: ").append(renderConclusion(game.getConclusion(), game)).append("\n");
+            sb2.append("Conclusion: ").append(renderConclusion(game.getConclusion(), game)).append("\n");
+            sb3.append("Conclusion: ").append(renderConclusion(game.getConclusion(), game)).append("\n");
         }
         String filename = resource.getURI().lastSegment();
         filename = filename.split("[.]")[0];
-        fsa.generateFile(filename + ".txt", sb.toString());
+        fsa.generateFile(filename + "_algebraic.txt", sb.toString());
+        fsa.generateFile(filename + "_concise.txt", sb2.toString());
+        fsa.generateFile(filename + "_verbose.txt", sb3.toString());
     }
     
     private Color opposite(Color c) {
