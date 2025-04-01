@@ -156,7 +156,8 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         LastMoveInfo lastMove = null; // track the last move for en passant
 
         // We'll assume White moves first, unless the DSL says otherwise
-        // but your grammar has color references. We'll keep it simple
+        // but the grammar has color references. We'll keep it simple
+        boolean skipWhiteFirstMove = false;
         for(MovePair mp : game.getMoves()) {
             if(isGameOver) {
                 error("Moves continue after checkmate/game over", mp, null);
@@ -175,6 +176,13 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
                     // update lastMove
                     lastMove = buildLastMoveInfo(board, wm.getMove(), Color.WHITE);
                 }
+            } else {
+            	if (skipWhiteFirstMove) {
+            		error("Cannot skip move", mp.getWhiteMove(), null);
+            		return;
+            	} else {
+            		skipWhiteFirstMove = true;
+            	}
             }
             // Black
             if(mp.getBlackMove() != null && mp.getBlackMove().getMove() != null) {
@@ -231,16 +239,16 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
 
         // Check occupant
         if(!board.isOccupied(from)) {
-            error("No piece at " + from + " for basic move", mp, null);
+            error("No piece at " + from + " for basic move", bm, null);
             return false;
         }
         PieceInfo pi = board.getPieceAt(from);
         if(pi.color != side) {
-            error("Wrong color piece at " + from, mp, null);
+            error("Wrong color piece at " + from, bm, null);
             return false;
         }
         if(pi.type != p) {
-            error("Mismatch piece type at " + from + ": expected " + p + " but found " + pi.type, mp, null);
+            error("Mismatch piece type at " + from + ": expected " + p + " but found " + pi.type, bm, null);
             return false;
         }
 
@@ -248,24 +256,24 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         if(board.isOccupied(to)) {
             PieceInfo occupant = board.getPieceAt(to);
             if(occupant.color != side) {
-                error("Move is actually a capture but not declared as capture", mp, null);
+                error("Move is actually a capture but not declared as capture", bm, null);
                 return false;
             } else {
-                error("Cannot capture your own piece at " + to, mp, null);
+                error("Cannot capture your own piece at " + to, bm, null);
                 return false;
             }
         }
 
         // Check movement pattern
         if(!isMovePatternLegal(board, from, to, p, side, false)) {
-            error("Illegal move pattern from " + from + " to " + to, mp, null);
+            error("Illegal move pattern from " + from + " to " + to, bm, null);
             return false;
         }
 
         // If it's a Pawn moving to last rank => must be promotion
         if(p == Piece.PAWN) {
             if((side == Color.WHITE && to.endsWith("8")) || (side == Color.BLACK && to.endsWith("1"))) {
-                error("Pawn reached last rank but not declared as promotion", mp, null);
+                error("Pawn reached last rank but not declared as promotion", bm, null);
                 return false;
             }
         }
@@ -275,7 +283,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
 
         // Check if side is still in check
         if(isInCheck(board, side)) {
-            error("Move leaves your king in check", mp, null);
+            error("Move leaves your king in check", bm, null);
             // revert?
             //board.movePiece(to, from);
             return false;
@@ -286,7 +294,8 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         //validateRemarksCheck(bm.getRemarks(), board, oppositeColor(side), mp);
         if (bm.eContainer() instanceof AnyMove) {
             AnyMove anyMove = (AnyMove) bm.eContainer();
-            validateRemarksCheck(anyMove.getRemarks(), board, oppositeColor(side), mp);
+            
+            validateRemarksCheck(anyMove.getRemarks(), board, oppositeColor(side), anyMove);
         }
 
         return true;
@@ -303,44 +312,44 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         Piece victim = cm.getCapture();
 
         if(!board.isOccupied(from)) {
-            error("No piece at " + from + " for capture", mp, null);
+            error("No piece at " + from + " for capture", cm, null);
             return false;
         }
         PieceInfo pi = board.getPieceAt(from);
         if(pi.color != side) {
-            error("Wrong color piece at " + from + " for capture", mp, null);
+            error("Wrong color piece at " + from + " for capture", cm, null);
             return false;
         }
         if(pi.type != p) {
-            error("Expected " + p + " but found " + pi.type, mp, null);
+            error("Expected " + p + " but found " + pi.type, cm, null);
             return false;
         }
 
         // Must be capturing an enemy piece on 'to' (unless we do en passant)
         if(!board.isOccupied(to)) {
-            error("Capture is declared but no piece found at " + to, mp, null);
+            error("Capture is declared but no piece found at " + to, cm, null);
             return false;
         }
         PieceInfo occupant = board.getPieceAt(to);
         if(occupant.color == side) {
-            error("Cannot capture your own piece at " + to, mp, null);
+            error("Cannot capture your own piece at " + to, cm, null);
             return false;
         }
         if(occupant.type != victim) {
-        	error("Declared capuring a "+ victim + " but actually found a " + occupant.type + " on " + to, mp, null);
+        	error("Declared capuring a "+ victim + " but actually found a " + occupant.type + " on " + to, cm, null);
         	return false;
         }
 
         // check pattern
         if(!isMovePatternLegal(board, from, to, p, side, true)) {
-            error("Illegal capture pattern from " + from + " to " + to, mp, null);
+            error("Illegal capture pattern from " + from + " to " + to, cm, null);
             return false;
         }
 
         // If it's a Pawn capturing on last rank => must be promotion
         if(p == Piece.PAWN) {
             if((side == Color.WHITE && to.endsWith("8")) || (side == Color.BLACK && to.endsWith("1"))) {
-                error("Pawn captured on last rank but not declared as promotion", mp, null);
+                error("Pawn captured on last rank but not declared as promotion", cm, null);
                 return false;
             }
         }
@@ -349,7 +358,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         board.movePiece(from, to);
 
         if(isInCheck(board, side)) {
-            error("Capture leaves your king in check", mp, null);
+            error("Capture leaves your king in check", cm, null);
             return false;
         }
 
@@ -357,7 +366,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         //validateRemarksCheck(base.getRemarks(), board, oppositeColor(side), mp);
         if (base.eContainer() instanceof AnyMove) {
             AnyMove anyMove = (AnyMove) base.eContainer();
-            validateRemarksCheck(anyMove.getRemarks(), board, oppositeColor(side), mp);
+            validateRemarksCheck(anyMove.getRemarks(), board, oppositeColor(side), anyMove);
         }
 
         return true;
@@ -372,7 +381,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         String from = base.getFrom().getSquare();
         String to   = base.getTo().getSquare();
         if(base.getPiece() != Piece.PAWN) {
-            error("Only pawns can do en passant", mp, null);
+            error("Only pawns can do en passant", em, null);
             return false;
         }
 
@@ -381,28 +390,32 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
 
         // We also must verify that the last move was a 2-square pawn push from the occupant's color
         if(lastMove == null || !lastMove.wasDoublePawnAdvance) {
-            // for demonstration, user said default to true if in proper rank & no previous moves
-            if(!assumeEnPassantAllowed(from, side, lastMove)) {
-                error("No valid 2-square pawn push to allow en passant", mp, null);
+        	if(lastMove.to == capturedSquare) {
+        		//I can swear I wanted to do something here
+        	}
+            // for demonstration, default to true if in proper rank & no previous moves
+        	else if(!assumeEnPassantAllowed(from, side, lastMove)) {
+                error("No valid 2-square pawn push to allow en passant", em, null);
                 return false;
             }
         }
 
         // Check occupant of capturedSquare must be an enemy Pawn
         if(!board.isOccupied(capturedSquare)) {
-            error("No piece found to capture for en passant at " + capturedSquare, mp, null);
+        	//this probably won't ever execute because of the last if block
+            error("No piece found to capture for en passant at " + capturedSquare, em, null);
             return false;
         }
         PieceInfo victim = board.getPieceAt(capturedSquare);
         if(victim.type != Piece.PAWN || victim.color == side) {
-            error("En passant target must be an enemy pawn", mp, null);
+            error("En passant target must be an enemy pawn", em, null);
             return false;
         }
 
         // If side is White, from rank should be 5, to rank 6, capturedSquare rank 5, etc. 
         // We'll skip the deep rank logic but here's the placeholder:
         if(!isMovePatternLegal(board, from, to, Piece.PAWN, side, true)) {
-            error("Invalid en passant move pattern", mp, null);
+            error("Invalid en passant move pattern", em, null);
             return false;
         }
 
@@ -411,7 +424,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         board.removePiece(capturedSquare);
 
         if(isInCheck(board, side)) {
-            error("En passant leaves your king in check", mp, null);
+            error("En passant leaves your king in check", em, null);
             return false;
         }
 
@@ -419,14 +432,14 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         //validateRemarksCheck(base.getRemarks(), board, oppositeColor(side), mp);
         if (base.eContainer() instanceof AnyMove) {
             AnyMove anyMove = (AnyMove) base.eContainer();
-            validateRemarksCheck(anyMove.getRemarks(), board, oppositeColor(side), mp);
+            validateRemarksCheck(anyMove.getRemarks(), board, oppositeColor(side), anyMove);
         }
         return true;
     }
 
     private boolean assumeEnPassantAllowed(String from, Color side, LastMoveInfo lastMove) {
         // We'll do a minimal check: if from is e5 & side=White, we pretend it might be valid. 
-        // The user said "defaults to true for demonstrative purposes if in the proper rank & no previous moves".
+        // Defaults to true for demonstrative purposes if pawns in the proper rank & no previous moves
         if(lastMove == null) {
             // if White and from rank=5 or Black and from rank=4
             if(side == Color.WHITE && from.endsWith("5")) return true;
@@ -447,12 +460,12 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             bm = ((Capture)base).getMove();
             isCapture = true;
         } else {
-            error("Promotion must have a base move or capture", mp, null);
+            error("Promotion must have a base move or capture", pm, null);
             return false;
         }
 
         if(bm.getPiece() != Piece.PAWN) {
-            error("Only a pawn can promote", mp, null);
+            error("Only a pawn can promote", pm, null);
             return false;
         }
 
@@ -460,34 +473,34 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         String to   = bm.getTo().getSquare();
         // if side=White -> to ends with 8
         if(side == Color.WHITE && !to.endsWith("8")) {
-            error("White pawn must promote on rank 8", mp, null);
+            error("White pawn must promote on rank 8", pm, null);
             return false;
         }
         if(side == Color.BLACK && !to.endsWith("1")) {
-            error("Black pawn must promote on rank 1", mp, null);
+            error("Black pawn must promote on rank 1", pm, null);
             return false;
         }
         // If capture, ensure occupant is enemy
         if(isCapture) {
             if(!board.isOccupied(to)) {
-                error("Declared capture promotion but no enemy piece at " + to, mp, null);
+                error("Declared capture promotion but no enemy piece at " + to, pm, null);
                 return false;
             }
             PieceInfo occupant = board.getPieceAt(to);
             if(occupant.color == side) {
-                error("Cannot capture own piece in promotion", mp, null);
+                error("Cannot capture own piece in promotion", pm, null);
                 return false;
             }
         } else {
             // if there's occupant => error
             if(board.isOccupied(to)) {
-                error("Not declared as capture but occupant found at " + to, mp, null);
+                error("Not declared as capture but occupant found at " + to, pm, null);
                 return false;
             }
         }
         // check pattern
         if(!isMovePatternLegal(board, from, to, Piece.PAWN, side, false) && !isMovePatternLegal(board, from, to, Piece.PAWN, side, true)) {
-            error("Illegal pawn move for promotion", mp, null);
+            error("Illegal pawn move for promotion", pm, null);
             return false;
         }
         // apply
@@ -497,7 +510,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         board.place(to, side, pm.getPiece());
 
         if(isInCheck(board, side)) {
-            error("Promotion leaves king in check", mp, null);
+            error("Promotion leaves king in check", pm, null);
             return false;
         }
 
@@ -510,10 +523,10 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
 //        return true;
         if (base instanceof Move) {
             AnyMove any = (AnyMove)((Move)base).eContainer();
-            validateRemarksCheck(any.getRemarks(), board, oppositeColor(side), mp);
+            validateRemarksCheck(any.getRemarks(), board, oppositeColor(side), any);
         } else {
             AnyMove any = (AnyMove)((Capture)base).eContainer();
-            validateRemarksCheck(any.getRemarks(), board, oppositeColor(side), mp);
+            validateRemarksCheck(any.getRemarks(), board, oppositeColor(side), any);
         }
         return true;
         
@@ -525,7 +538,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         // We'll get the type from checkCastleType 
         String ctype = checkCastleType(cm, side, board);
         if(!Objects.equals(ctype, "Kingside") && !Objects.equals(ctype, "Queenside")) {
-            error("Cannot deduce valid castling side or conditions not met", mp, null);
+            error("Cannot deduce valid castling side or conditions not met", cm, null);
             return false;
         }
         // e1 with h1 if white kingside, etc.
@@ -538,24 +551,24 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         PieceInfo kingPi = board.getPieceAt(kingSq);
         PieceInfo rookPi = board.getPieceAt(rookSq);
         if(kingPi==null || rookPi==null) {
-            error("King or rook not in castling position", mp, null);
+            error("King or rook not in castling position", cm, null);
             return false;
         }
         if(kingPi.type != Piece.KING || kingPi.color != side) {
-            error("No king found for castling at " + kingSq, mp, null);
+            error("No king found for castling at " + kingSq, cm, null);
             return false;
         }
         if(rookPi.type != Piece.ROOK || rookPi.color != side) {
-            error("No rook found for castling at " + rookSq, mp, null);
+            error("No rook found for castling at " + rookSq, cm, null);
             return false;
         }
         if(kingPi.hasMoved || rookPi.hasMoved) {
-            error("King or rook has already moved, cannot castle", mp, null);
+            error("King or rook has already moved, cannot castle", cm, null);
             return false;
         }
         // Check if king is in check now or passes through check
         if(isInCheck(board, side)) {
-            error("Cannot castle while in check", mp, null);
+            error("Cannot castle while in check", cm, null);
             return false;
         }
         // squares that the king passes
@@ -575,7 +588,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         }
         // must be empty
         if(board.isOccupied(pass1) || board.isOccupied(pass2)) {
-            error("Path is blocked for castling", mp, null);
+            error("Path is blocked for castling", cm, null);
             return false;
         }
         // check if passing squares are in check
@@ -584,7 +597,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         board.removePiece(kingSq);
         board.place(pass1, side, Piece.KING);
         if(isInCheck(board, side)) {
-            error("King passes through check at " + pass1, mp, null);
+            error("King passes through check at " + pass1, cm, null);
             // revert
             board.removePiece(pass1);
             board.place(kingSq, side, Piece.KING);
@@ -594,7 +607,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         board.removePiece(pass1);
         board.place(pass2, side, Piece.KING);
         if(isInCheck(board, side)) {
-            error("King passes through check at " + pass2, mp, null);
+            error("King passes through check at " + pass2, cm, null);
             // revert
             board.removePiece(pass2);
             board.place(kingSq, side, Piece.KING);
@@ -613,8 +626,9 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         board.place(rookDest, side, Piece.ROOK);
 
         // final check
+        // kinda unnecessary now that I'm going through the logic again
         if(isInCheck(board, side)) {
-            error("Castling ends in check", mp, null);
+            error("Castling ends in check", cm, null);
             return false;
         }
         return true;
@@ -622,6 +636,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
     
     private String disambiguate(BoardState board, String from, String to, Color side, Piece p) {
         // gather all squares that have a piece of the same type & color
+    	// not used at the moment but will be useful once I add algebraic notation support, I think
         List<String> samePieces = new ArrayList<>();
         for(String sq : board.boardMap.keySet()) {
             PieceInfo pi = board.boardMap.get(sq);
@@ -662,6 +677,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
                 return fromRank;
             } else {
                 // we have to return file+rank
+            	// redundant because two pieces can't be on the same square concurrently
                 return from;
             }
         }
@@ -674,9 +690,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         // For demonstration, let's do a trivial approach:
         // If the user wrote "Castle(Kingside)" => "Kingside"
         // If "Castle(Queenside)" => "Queenside"
-        // If the move text is something else, guess from position
-        // We'll just return "Kingside" for brevity
-        // Real code: parse the cm fields or text from your DSL
+    	// shouldn't be hard to change for algebraic notation if I adjust my grammar well
     	return cm.getSide();
     }
     // endregion
@@ -769,9 +783,9 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
 
     /**
      * pathClear checks squares in between from->to for rooks/bishops/queens. 
-     * We'll do a naive approach.
      */
     private boolean pathClear(BoardState board, String from, String to) {
+    	// We'll do a naive approach.
         // skip if from==to
         if(from.equals(to)) return false;
         int c1=from.charAt(0), r1=from.charAt(1);
@@ -798,6 +812,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
                 break;
             }
         }
+        // Seems funny but might be useful
         if (kingSquare == null)
             return false;
         
@@ -832,6 +847,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
     }
 
     // Helper methods:
+    // Could probably do a bit of refactoring with this and the isMoveLegal method
     private boolean isKnightMove(String from, String to) {
         int c1 = from.charAt(0), r1 = from.charAt(1);
         int c2 = to.charAt(0),   r2 = to.charAt(1);
@@ -881,7 +897,8 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
                                 PieceInfo savedTo   = occupant;
                                 board.removePiece(sq);
                                 board.removePiece(to);
-                                pi.hasMoved=true;
+                                pi.hasMoved=true; // this doesn't seem quite right
+                                // should probably save the current status and then revert it. Or leave it unchanged?
                                 board.boardMap.put(to, pi);
 
                                 boolean stillCheck = isInCheck(board, side);
@@ -935,7 +952,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
      * If the DSL claims there's a remark=Check or Checkmate,
      * verify it's actually so for the opposite side.
      */
-    private void validateRemarksCheck(List<Remark> remarks, BoardState board, Color sideInCheck, MovePair mp) {
+    private void validateRemarksCheck(List<Remark> remarks, BoardState board, Color sideInCheck, AnyMove mp) {
         if(remarks.isEmpty()) return;
         // If there's Check => isInCheck
         if(remarks.contains(Remark.CHECKMATE)) {
