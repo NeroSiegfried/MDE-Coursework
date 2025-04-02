@@ -111,12 +111,15 @@ terminal MOVENUMBER returns ecore::EString:
 
 
 AnyMove:
-
 	//for possible extensions to the language
+	
+	//Pushed up to correct some errors
+	
+	algebraicmove=Escaped_SANMove |
 
-	move=DSLMove ('(' remarks+=Remark* ')')? |
+	move=DSLMove ('(' remarks+=Remark* ')')?
 	//An extension of the language, experimental
-	algebraicmove=SANMove
+	//algebraicmove=SANMove
 
 ;
 
@@ -227,15 +230,21 @@ enum Remark:
  * SanMove and Related Implementations in this segment
  */
  
-SANMove returns SANMove:
-    SAN_TOKEN
+ /**
+  * Introduced an AlgebraicBlock so I don't have to parse every individual move
+  */
+ 
+Escaped_SANMove returns SANMove:
+	{SANMove}
+	SAN_TOKEN
 ;
-
+ 
 terminal SAN_TOKEN:
-    (('K'|'Q'|'R'|'B'|'N')?                  // Optional piece letter; if missing, it's a pawn.
+	 ESCAPE
+     (('K'|'Q'|'R'|'B'|'N')?                  // Optional piece letter; if missing, it's a pawn.
      (LETTER | RANKDIGIT)*                   // Optional disambiguation.
      ('x')?                                  // Optional capture indicator.
-     LETTER RANKDIGIT                        // Target square.
+     SQUARETERMINAL                        // Target square.
      ('=' ('Q'|'R'|'B'|'N'))?                // Optional promotion.
      ('+'|'#')*                              // Optional check or mate markers.
      ('!'|'?')*                              // Optional remarks.
@@ -244,6 +253,7 @@ terminal SAN_TOKEN:
 
 terminal LETTER: ('a'..'h'|'A'..'H');
 terminal RANKDIGIT: ('1'..'8');
+terminal ESCAPE: ('@') ;
  
  //End segment
 

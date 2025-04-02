@@ -10,13 +10,6 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>SAN Move</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove#getCastle <em>Castle</em>}</li>
- *   <li>{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove#getNormal <em>Normal</em>}</li>
- * </ul>
  *
  * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.ChessDSLPackage#getSANMove()
  * @model
@@ -24,48 +17,4 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface SANMove extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Castle</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Castle</em>' containment reference.
-   * @see #setCastle(SANCastle)
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.ChessDSLPackage#getSANMove_Castle()
-   * @model containment="true"
-   * @generated
-   */
-  SANCastle getCastle();
-
-  /**
-   * Sets the value of the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove#getCastle <em>Castle</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Castle</em>' containment reference.
-   * @see #getCastle()
-   * @generated
-   */
-  void setCastle(SANCastle value);
-
-  /**
-   * Returns the value of the '<em><b>Normal</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Normal</em>' containment reference.
-   * @see #setNormal(SANNormal)
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.ChessDSLPackage#getSANMove_Normal()
-   * @model containment="true"
-   * @generated
-   */
-  SANNormal getNormal();
-
-  /**
-   * Sets the value of the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove#getNormal <em>Normal</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Normal</em>' containment reference.
-   * @see #getNormal()
-   * @generated
-   */
-  void setNormal(SANNormal value);
-
 } // SANMove

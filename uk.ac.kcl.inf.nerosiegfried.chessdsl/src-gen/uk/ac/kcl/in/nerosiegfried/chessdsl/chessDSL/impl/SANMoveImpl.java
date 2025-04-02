@@ -3,56 +3,22 @@
  */
 package uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.ChessDSLPackage;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANCastle;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>SAN Move</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * </p>
- * <ul>
- *   <li>{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANMoveImpl#getCastle <em>Castle</em>}</li>
- *   <li>{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANMoveImpl#getNormal <em>Normal</em>}</li>
- * </ul>
  *
  * @generated
  */
 public class SANMoveImpl extends MinimalEObjectImpl.Container implements SANMove
 {
-  /**
-   * The cached value of the '{@link #getCastle() <em>Castle</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getCastle()
-   * @generated
-   * @ordered
-   */
-  protected SANCastle castle;
-
-  /**
-   * The cached value of the '{@link #getNormal() <em>Normal</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getNormal()
-   * @generated
-   * @ordered
-   */
-  protected SANNormal normal;
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -72,200 +38,6 @@ public class SANMoveImpl extends MinimalEObjectImpl.Container implements SANMove
   protected EClass eStaticClass()
   {
     return ChessDSLPackage.Literals.SAN_MOVE;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public SANCastle getCastle()
-  {
-    return castle;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetCastle(SANCastle newCastle, NotificationChain msgs)
-  {
-    SANCastle oldCastle = castle;
-    castle = newCastle;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ChessDSLPackage.SAN_MOVE__CASTLE, oldCastle, newCastle);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setCastle(SANCastle newCastle)
-  {
-    if (newCastle != castle)
-    {
-      NotificationChain msgs = null;
-      if (castle != null)
-        msgs = ((InternalEObject)castle).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ChessDSLPackage.SAN_MOVE__CASTLE, null, msgs);
-      if (newCastle != null)
-        msgs = ((InternalEObject)newCastle).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ChessDSLPackage.SAN_MOVE__CASTLE, null, msgs);
-      msgs = basicSetCastle(newCastle, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ChessDSLPackage.SAN_MOVE__CASTLE, newCastle, newCastle));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public SANNormal getNormal()
-  {
-    return normal;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetNormal(SANNormal newNormal, NotificationChain msgs)
-  {
-    SANNormal oldNormal = normal;
-    normal = newNormal;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ChessDSLPackage.SAN_MOVE__NORMAL, oldNormal, newNormal);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setNormal(SANNormal newNormal)
-  {
-    if (newNormal != normal)
-    {
-      NotificationChain msgs = null;
-      if (normal != null)
-        msgs = ((InternalEObject)normal).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ChessDSLPackage.SAN_MOVE__NORMAL, null, msgs);
-      if (newNormal != null)
-        msgs = ((InternalEObject)newNormal).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ChessDSLPackage.SAN_MOVE__NORMAL, null, msgs);
-      msgs = basicSetNormal(newNormal, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ChessDSLPackage.SAN_MOVE__NORMAL, newNormal, newNormal));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case ChessDSLPackage.SAN_MOVE__CASTLE:
-        return basicSetCastle(null, msgs);
-      case ChessDSLPackage.SAN_MOVE__NORMAL:
-        return basicSetNormal(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
-    switch (featureID)
-    {
-      case ChessDSLPackage.SAN_MOVE__CASTLE:
-        return getCastle();
-      case ChessDSLPackage.SAN_MOVE__NORMAL:
-        return getNormal();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
-    switch (featureID)
-    {
-      case ChessDSLPackage.SAN_MOVE__CASTLE:
-        setCastle((SANCastle)newValue);
-        return;
-      case ChessDSLPackage.SAN_MOVE__NORMAL:
-        setNormal((SANNormal)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID)
-  {
-    switch (featureID)
-    {
-      case ChessDSLPackage.SAN_MOVE__CASTLE:
-        setCastle((SANCastle)null);
-        return;
-      case ChessDSLPackage.SAN_MOVE__NORMAL:
-        setNormal((SANNormal)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
-    switch (featureID)
-    {
-      case ChessDSLPackage.SAN_MOVE__CASTLE:
-        return castle != null;
-      case ChessDSLPackage.SAN_MOVE__NORMAL:
-        return normal != null;
-    }
-    return super.eIsSet(featureID);
   }
 
 } //SANMoveImpl

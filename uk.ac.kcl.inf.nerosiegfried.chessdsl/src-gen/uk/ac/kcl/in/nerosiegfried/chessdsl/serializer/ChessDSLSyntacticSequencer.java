@@ -22,59 +22,41 @@ import uk.ac.kcl.in.nerosiegfried.chessdsl.services.ChessDSLGrammarAccess;
 public class ChessDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected ChessDSLGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_AnyMove___LeftParenthesisKeyword_0_1_0_RightParenthesisKeyword_0_1_2__q;
+	protected AbstractElementAlias match_AnyMove___LeftParenthesisKeyword_1_1_0_RightParenthesisKeyword_1_1_2__q;
 	protected AbstractElementAlias match_Capture_AndKeyword_1_1_0_q;
 	protected AbstractElementAlias match_Castle___OnKeyword_1_1_0_TheKeyword_1_1_1__q;
 	protected AbstractElementAlias match_InitialState_FreshKeyword_2_0_q;
 	protected AbstractElementAlias match_Move_MovesKeyword_0_q;
 	protected AbstractElementAlias match_Placement_EqualsSignKeyword_1_0_or_OnKeyword_1_1;
-	protected AbstractElementAlias match_SANCheckMarker___NumberSignKeyword_1_1_or_PlusSignKeyword_1_0__p;
-	protected AbstractElementAlias match_SANDisambiguation___LETTERTerminalRuleCall_1_0_or_RANKDIGITTerminalRuleCall_1_1__p;
-	protected AbstractElementAlias match_SANPiece_BKeyword_1_3_or_KKeyword_1_0_or_NKeyword_1_4_or_QKeyword_1_1_or_RKeyword_1_2;
-	protected AbstractElementAlias match_SANPromotion_BKeyword_2_2_or_NKeyword_2_3_or_QKeyword_2_0_or_RKeyword_2_1;
-	protected AbstractElementAlias match_SANRemark___ExclamationMarkKeyword_1_0_or_QuestionMarkKeyword_1_1__p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (ChessDSLGrammarAccess) access;
-		match_AnyMove___LeftParenthesisKeyword_0_1_0_RightParenthesisKeyword_0_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getAnyMoveAccess().getLeftParenthesisKeyword_0_1_0()), new TokenAlias(false, false, grammarAccess.getAnyMoveAccess().getRightParenthesisKeyword_0_1_2()));
+		match_AnyMove___LeftParenthesisKeyword_1_1_0_RightParenthesisKeyword_1_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getAnyMoveAccess().getLeftParenthesisKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getAnyMoveAccess().getRightParenthesisKeyword_1_1_2()));
 		match_Capture_AndKeyword_1_1_0_q = new TokenAlias(false, true, grammarAccess.getCaptureAccess().getAndKeyword_1_1_0());
 		match_Castle___OnKeyword_1_1_0_TheKeyword_1_1_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getCastleAccess().getOnKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getCastleAccess().getTheKeyword_1_1_1()));
 		match_InitialState_FreshKeyword_2_0_q = new TokenAlias(false, true, grammarAccess.getInitialStateAccess().getFreshKeyword_2_0());
 		match_Move_MovesKeyword_0_q = new TokenAlias(false, true, grammarAccess.getMoveAccess().getMovesKeyword_0());
 		match_Placement_EqualsSignKeyword_1_0_or_OnKeyword_1_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getPlacementAccess().getEqualsSignKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getPlacementAccess().getOnKeyword_1_1()));
-		match_SANCheckMarker___NumberSignKeyword_1_1_or_PlusSignKeyword_1_0__p = new AlternativeAlias(true, false, new TokenAlias(false, false, grammarAccess.getSANCheckMarkerAccess().getNumberSignKeyword_1_1()), new TokenAlias(false, false, grammarAccess.getSANCheckMarkerAccess().getPlusSignKeyword_1_0()));
-		match_SANDisambiguation___LETTERTerminalRuleCall_1_0_or_RANKDIGITTerminalRuleCall_1_1__p = new AlternativeAlias(true, false, new TokenAlias(false, false, grammarAccess.getSANDisambiguationAccess().getLETTERTerminalRuleCall_1_0()), new TokenAlias(false, false, grammarAccess.getSANDisambiguationAccess().getRANKDIGITTerminalRuleCall_1_1()));
-		match_SANPiece_BKeyword_1_3_or_KKeyword_1_0_or_NKeyword_1_4_or_QKeyword_1_1_or_RKeyword_1_2 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getSANPieceAccess().getBKeyword_1_3()), new TokenAlias(false, false, grammarAccess.getSANPieceAccess().getKKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getSANPieceAccess().getNKeyword_1_4()), new TokenAlias(false, false, grammarAccess.getSANPieceAccess().getQKeyword_1_1()), new TokenAlias(false, false, grammarAccess.getSANPieceAccess().getRKeyword_1_2()));
-		match_SANPromotion_BKeyword_2_2_or_NKeyword_2_3_or_QKeyword_2_0_or_RKeyword_2_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getSANPromotionAccess().getBKeyword_2_2()), new TokenAlias(false, false, grammarAccess.getSANPromotionAccess().getNKeyword_2_3()), new TokenAlias(false, false, grammarAccess.getSANPromotionAccess().getQKeyword_2_0()), new TokenAlias(false, false, grammarAccess.getSANPromotionAccess().getRKeyword_2_1()));
-		match_SANRemark___ExclamationMarkKeyword_1_0_or_QuestionMarkKeyword_1_1__p = new AlternativeAlias(true, false, new TokenAlias(false, false, grammarAccess.getSANRemarkAccess().getExclamationMarkKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getSANRemarkAccess().getQuestionMarkKeyword_1_1()));
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (ruleCall.getRule() == grammarAccess.getLETTERRule())
-			return getLETTERToken(semanticObject, ruleCall, node);
-		else if (ruleCall.getRule() == grammarAccess.getRANKDIGITRule())
-			return getRANKDIGITToken(semanticObject, ruleCall, node);
+		if (ruleCall.getRule() == grammarAccess.getSAN_TOKENRule())
+			return getSAN_TOKENToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
 	/**
-	 * terminal LETTER: ('a'..'h'|'A'..'H');
+	 * terminal SAN_TOKEN:
+	 * 	 ESCAPE
+	 *      (('K'|'Q'|'R'|'B'|'N')?                       (LETTER | RANKDIGIT)*                        ('x')?                                       SQUARETERMINAL                             ('=' ('Q'|'R'|'B'|'N'))?                     ('+'|'#')*                                   ('!'|'?')*                                  )
+	 * ;
 	 */
-	protected String getLETTERToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+	protected String getSAN_TOKENToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
-		return "";
-	}
-	
-	/**
-	 * terminal RANKDIGIT: ('1'..'8');
-	 */
-	protected String getRANKDIGITToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "";
+		return "@";
 	}
 	
 	@Override
@@ -83,8 +65,8 @@ public class ChessDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_AnyMove___LeftParenthesisKeyword_0_1_0_RightParenthesisKeyword_0_1_2__q.equals(syntax))
-				emit_AnyMove___LeftParenthesisKeyword_0_1_0_RightParenthesisKeyword_0_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_AnyMove___LeftParenthesisKeyword_1_1_0_RightParenthesisKeyword_1_1_2__q.equals(syntax))
+				emit_AnyMove___LeftParenthesisKeyword_1_1_0_RightParenthesisKeyword_1_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Capture_AndKeyword_1_1_0_q.equals(syntax))
 				emit_Capture_AndKeyword_1_1_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Castle___OnKeyword_1_1_0_TheKeyword_1_1_1__q.equals(syntax))
@@ -95,16 +77,6 @@ public class ChessDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_Move_MovesKeyword_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Placement_EqualsSignKeyword_1_0_or_OnKeyword_1_1.equals(syntax))
 				emit_Placement_EqualsSignKeyword_1_0_or_OnKeyword_1_1(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_SANCheckMarker___NumberSignKeyword_1_1_or_PlusSignKeyword_1_0__p.equals(syntax))
-				emit_SANCheckMarker___NumberSignKeyword_1_1_or_PlusSignKeyword_1_0__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_SANDisambiguation___LETTERTerminalRuleCall_1_0_or_RANKDIGITTerminalRuleCall_1_1__p.equals(syntax))
-				emit_SANDisambiguation___LETTERTerminalRuleCall_1_0_or_RANKDIGITTerminalRuleCall_1_1__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_SANPiece_BKeyword_1_3_or_KKeyword_1_0_or_NKeyword_1_4_or_QKeyword_1_1_or_RKeyword_1_2.equals(syntax))
-				emit_SANPiece_BKeyword_1_3_or_KKeyword_1_0_or_NKeyword_1_4_or_QKeyword_1_1_or_RKeyword_1_2(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_SANPromotion_BKeyword_2_2_or_NKeyword_2_3_or_QKeyword_2_0_or_RKeyword_2_1.equals(syntax))
-				emit_SANPromotion_BKeyword_2_2_or_NKeyword_2_3_or_QKeyword_2_0_or_RKeyword_2_1(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_SANRemark___ExclamationMarkKeyword_1_0_or_QuestionMarkKeyword_1_1__p.equals(syntax))
-				emit_SANRemark___ExclamationMarkKeyword_1_0_or_QuestionMarkKeyword_1_1__p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -119,7 +91,7 @@ public class ChessDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 	 
 	 * </pre>
 	 */
-	protected void emit_AnyMove___LeftParenthesisKeyword_0_1_0_RightParenthesisKeyword_0_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_AnyMove___LeftParenthesisKeyword_1_1_0_RightParenthesisKeyword_1_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -191,76 +163,6 @@ public class ChessDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * </pre>
 	 */
 	protected void emit_Placement_EqualsSignKeyword_1_0_or_OnKeyword_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     ('+' | '#')+
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) (rule start)
-	 
-	 * </pre>
-	 */
-	protected void emit_SANCheckMarker___NumberSignKeyword_1_1_or_PlusSignKeyword_1_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     (LETTER | RANKDIGIT)+
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) (rule start)
-	 
-	 * </pre>
-	 */
-	protected void emit_SANDisambiguation___LETTERTerminalRuleCall_1_0_or_RANKDIGITTerminalRuleCall_1_1__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     'K' | 'Q' | 'R' | 'B' | 'N'
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) (rule start)
-	 
-	 * </pre>
-	 */
-	protected void emit_SANPiece_BKeyword_1_3_or_KKeyword_1_0_or_NKeyword_1_4_or_QKeyword_1_1_or_RKeyword_1_2(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     'Q' | 'R' | 'B' | 'N'
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) '=' (ambiguity) (rule start)
-	 
-	 * </pre>
-	 */
-	protected void emit_SANPromotion_BKeyword_2_2_or_NKeyword_2_3_or_QKeyword_2_0_or_RKeyword_2_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     ('!' | '?')+
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) (rule start)
-	 
-	 * </pre>
-	 */
-	protected void emit_SANRemark___ExclamationMarkKeyword_1_0_or_QuestionMarkKeyword_1_1__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

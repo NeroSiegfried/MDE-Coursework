@@ -37,15 +37,7 @@ import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.PlayerOrColor;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Promotion;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Resign;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Result;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANCapture;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANCastle;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANCheckMarker;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANDisambiguation;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANPiece;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANPromotion;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANRemark;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Square;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.TimeUp;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Win;
@@ -131,32 +123,8 @@ public class ChessDSLSemanticSequencer extends AbstractDelegatingSemanticSequenc
 			case ChessDSLPackage.RESULT:
 				sequence_Result(context, (Result) semanticObject); 
 				return; 
-			case ChessDSLPackage.SAN_CAPTURE:
-				sequence_SANCapture(context, (SANCapture) semanticObject); 
-				return; 
-			case ChessDSLPackage.SAN_CASTLE:
-				sequence_SANCastle(context, (SANCastle) semanticObject); 
-				return; 
-			case ChessDSLPackage.SAN_CHECK_MARKER:
-				sequence_SANCheckMarker(context, (SANCheckMarker) semanticObject); 
-				return; 
-			case ChessDSLPackage.SAN_DISAMBIGUATION:
-				sequence_SANDisambiguation(context, (SANDisambiguation) semanticObject); 
-				return; 
 			case ChessDSLPackage.SAN_MOVE:
-				sequence_SANMove(context, (SANMove) semanticObject); 
-				return; 
-			case ChessDSLPackage.SAN_NORMAL:
-				sequence_SANNormal(context, (SANNormal) semanticObject); 
-				return; 
-			case ChessDSLPackage.SAN_PIECE:
-				sequence_SANPiece(context, (SANPiece) semanticObject); 
-				return; 
-			case ChessDSLPackage.SAN_PROMOTION:
-				sequence_SANPromotion(context, (SANPromotion) semanticObject); 
-				return; 
-			case ChessDSLPackage.SAN_REMARK:
-				sequence_SANRemark(context, (SANRemark) semanticObject); 
+				sequence_Escaped_SANMove(context, (SANMove) semanticObject); 
 				return; 
 			case ChessDSLPackage.SQUARE:
 				sequence_Square(context, (Square) semanticObject); 
@@ -178,7 +146,7 @@ public class ChessDSLSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     AnyMove returns AnyMove
 	 *
 	 * Constraint:
-	 *     ((move=DSLMove remarks+=Remark*) | algebraicmove=SANMove)
+	 *     (algebraicmove=Escaped_SANMove | (move=DSLMove remarks+=Remark*))
 	 * </pre>
 	 */
 	protected void sequence_AnyMove(ISerializationContext context, AnyMove semanticObject) {
@@ -347,6 +315,20 @@ public class ChessDSLSemanticSequencer extends AbstractDelegatingSemanticSequenc
 		feeder.accept(grammarAccess.getEnPassantAccess().getCaptureCaptureParserRuleCall_0_0(), semanticObject.getCapture());
 		feeder.accept(grammarAccess.getEnPassantAccess().getSquareSquareParserRuleCall_2_0(), semanticObject.getSquare());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Escaped_SANMove returns SANMove
+	 *
+	 * Constraint:
+	 *     {SANMove}
+	 * </pre>
+	 */
+	protected void sequence_Escaped_SANMove(ISerializationContext context, SANMove semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -546,140 +528,6 @@ public class ChessDSLSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 * </pre>
 	 */
 	protected void sequence_Result(ISerializationContext context, Result semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     SANCapture returns SANCapture
-	 *
-	 * Constraint:
-	 *     {SANCapture}
-	 * </pre>
-	 */
-	protected void sequence_SANCapture(ISerializationContext context, SANCapture semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     SANCastle returns SANCastle
-	 *
-	 * Constraint:
-	 *     (side='Queenside' | side='Kingside')
-	 * </pre>
-	 */
-	protected void sequence_SANCastle(ISerializationContext context, SANCastle semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     SANCheckMarker returns SANCheckMarker
-	 *
-	 * Constraint:
-	 *     {SANCheckMarker}
-	 * </pre>
-	 */
-	protected void sequence_SANCheckMarker(ISerializationContext context, SANCheckMarker semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     SANDisambiguation returns SANDisambiguation
-	 *
-	 * Constraint:
-	 *     {SANDisambiguation}
-	 * </pre>
-	 */
-	protected void sequence_SANDisambiguation(ISerializationContext context, SANDisambiguation semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     SANMove returns SANMove
-	 *
-	 * Constraint:
-	 *     (castle=SANCastle | normal=SANNormal)
-	 * </pre>
-	 */
-	protected void sequence_SANMove(ISerializationContext context, SANMove semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     SANNormal returns SANNormal
-	 *
-	 * Constraint:
-	 *     (
-	 *         piece=SANPiece? 
-	 *         disamb=SANDisambiguation? 
-	 *         capture=SANCapture? 
-	 *         target=Square 
-	 *         promotion=SANPromotion? 
-	 *         check=SANCheckMarker? 
-	 *         remark=SANRemark?
-	 *     )
-	 * </pre>
-	 */
-	protected void sequence_SANNormal(ISerializationContext context, SANNormal semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     SANPiece returns SANPiece
-	 *
-	 * Constraint:
-	 *     {SANPiece}
-	 * </pre>
-	 */
-	protected void sequence_SANPiece(ISerializationContext context, SANPiece semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     SANPromotion returns SANPromotion
-	 *
-	 * Constraint:
-	 *     {SANPromotion}
-	 * </pre>
-	 */
-	protected void sequence_SANPromotion(ISerializationContext context, SANPromotion semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     SANRemark returns SANRemark
-	 *
-	 * Constraint:
-	 *     {SANRemark}
-	 * </pre>
-	 */
-	protected void sequence_SANRemark(ISerializationContext context, SANRemark semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

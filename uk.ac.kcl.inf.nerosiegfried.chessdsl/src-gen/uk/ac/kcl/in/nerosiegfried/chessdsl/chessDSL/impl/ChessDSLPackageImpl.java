@@ -40,15 +40,7 @@ import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Promotion;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Remark;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Resign;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Result;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANCapture;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANCastle;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANCheckMarker;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANDisambiguation;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANPiece;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANPromotion;
-import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANRemark;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Square;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.TimeUp;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Win;
@@ -179,62 +171,6 @@ public class ChessDSLPackageImpl extends EPackageImpl implements ChessDSLPackage
    * @generated
    */
   private EClass sanMoveEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass sanCastleEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass sanNormalEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass sanPieceEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass sanDisambiguationEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass sanPromotionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass sanCheckMarkerEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass sanCaptureEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass sanRemarkEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -710,7 +646,7 @@ public class ChessDSLPackageImpl extends EPackageImpl implements ChessDSLPackage
    * @generated
    */
   @Override
-  public EReference getAnyMove_Move()
+  public EReference getAnyMove_Algebraicmove()
   {
     return (EReference)anyMoveEClass.getEStructuralFeatures().get(0);
   }
@@ -721,9 +657,9 @@ public class ChessDSLPackageImpl extends EPackageImpl implements ChessDSLPackage
    * @generated
    */
   @Override
-  public EAttribute getAnyMove_Remarks()
+  public EReference getAnyMove_Move()
   {
-    return (EAttribute)anyMoveEClass.getEStructuralFeatures().get(1);
+    return (EReference)anyMoveEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -732,9 +668,9 @@ public class ChessDSLPackageImpl extends EPackageImpl implements ChessDSLPackage
    * @generated
    */
   @Override
-  public EReference getAnyMove_Algebraicmove()
+  public EAttribute getAnyMove_Remarks()
   {
-    return (EReference)anyMoveEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)anyMoveEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -944,204 +880,6 @@ public class ChessDSLPackageImpl extends EPackageImpl implements ChessDSLPackage
   public EClass getSANMove()
   {
     return sanMoveEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getSANMove_Castle()
-  {
-    return (EReference)sanMoveEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getSANMove_Normal()
-  {
-    return (EReference)sanMoveEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getSANCastle()
-  {
-    return sanCastleEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getSANCastle_Side()
-  {
-    return (EAttribute)sanCastleEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getSANNormal()
-  {
-    return sanNormalEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getSANNormal_Piece()
-  {
-    return (EReference)sanNormalEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getSANNormal_Disamb()
-  {
-    return (EReference)sanNormalEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getSANNormal_Capture()
-  {
-    return (EReference)sanNormalEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getSANNormal_Target()
-  {
-    return (EReference)sanNormalEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getSANNormal_Promotion()
-  {
-    return (EReference)sanNormalEClass.getEStructuralFeatures().get(4);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getSANNormal_Check()
-  {
-    return (EReference)sanNormalEClass.getEStructuralFeatures().get(5);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getSANNormal_Remark()
-  {
-    return (EReference)sanNormalEClass.getEStructuralFeatures().get(6);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getSANPiece()
-  {
-    return sanPieceEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getSANDisambiguation()
-  {
-    return sanDisambiguationEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getSANPromotion()
-  {
-    return sanPromotionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getSANCheckMarker()
-  {
-    return sanCheckMarkerEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getSANCapture()
-  {
-    return sanCaptureEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getSANRemark()
-  {
-    return sanRemarkEClass;
   }
 
   /**
@@ -1574,9 +1312,9 @@ public class ChessDSLPackageImpl extends EPackageImpl implements ChessDSLPackage
     createEReference(movePairEClass, MOVE_PAIR__BLACK_MOVE);
 
     anyMoveEClass = createEClass(ANY_MOVE);
+    createEReference(anyMoveEClass, ANY_MOVE__ALGEBRAICMOVE);
     createEReference(anyMoveEClass, ANY_MOVE__MOVE);
     createEAttribute(anyMoveEClass, ANY_MOVE__REMARKS);
-    createEReference(anyMoveEClass, ANY_MOVE__ALGEBRAICMOVE);
 
     dslMoveEClass = createEClass(DSL_MOVE);
 
@@ -1604,32 +1342,6 @@ public class ChessDSLPackageImpl extends EPackageImpl implements ChessDSLPackage
     createEAttribute(promotionEClass, PROMOTION__PIECE);
 
     sanMoveEClass = createEClass(SAN_MOVE);
-    createEReference(sanMoveEClass, SAN_MOVE__CASTLE);
-    createEReference(sanMoveEClass, SAN_MOVE__NORMAL);
-
-    sanCastleEClass = createEClass(SAN_CASTLE);
-    createEAttribute(sanCastleEClass, SAN_CASTLE__SIDE);
-
-    sanNormalEClass = createEClass(SAN_NORMAL);
-    createEReference(sanNormalEClass, SAN_NORMAL__PIECE);
-    createEReference(sanNormalEClass, SAN_NORMAL__DISAMB);
-    createEReference(sanNormalEClass, SAN_NORMAL__CAPTURE);
-    createEReference(sanNormalEClass, SAN_NORMAL__TARGET);
-    createEReference(sanNormalEClass, SAN_NORMAL__PROMOTION);
-    createEReference(sanNormalEClass, SAN_NORMAL__CHECK);
-    createEReference(sanNormalEClass, SAN_NORMAL__REMARK);
-
-    sanPieceEClass = createEClass(SAN_PIECE);
-
-    sanDisambiguationEClass = createEClass(SAN_DISAMBIGUATION);
-
-    sanPromotionEClass = createEClass(SAN_PROMOTION);
-
-    sanCheckMarkerEClass = createEClass(SAN_CHECK_MARKER);
-
-    sanCaptureEClass = createEClass(SAN_CAPTURE);
-
-    sanRemarkEClass = createEClass(SAN_REMARK);
 
     conclusionEClass = createEClass(CONCLUSION);
     createEReference(conclusionEClass, CONCLUSION__METHOD);
@@ -1751,9 +1463,9 @@ public class ChessDSLPackageImpl extends EPackageImpl implements ChessDSLPackage
     initEReference(getMovePair_BlackMove(), this.getAnyMove(), null, "blackMove", null, 0, 1, MovePair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(anyMoveEClass, AnyMove.class, "AnyMove", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAnyMove_Algebraicmove(), this.getSANMove(), null, "algebraicmove", null, 0, 1, AnyMove.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAnyMove_Move(), this.getDSLMove(), null, "move", null, 0, 1, AnyMove.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAnyMove_Remarks(), this.getRemark(), "remarks", null, 0, -1, AnyMove.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAnyMove_Algebraicmove(), this.getSANMove(), null, "algebraicmove", null, 0, 1, AnyMove.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(dslMoveEClass, DSLMove.class, "DSLMove", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1781,32 +1493,6 @@ public class ChessDSLPackageImpl extends EPackageImpl implements ChessDSLPackage
     initEAttribute(getPromotion_Piece(), this.getPiece(), "piece", null, 0, 1, Promotion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(sanMoveEClass, SANMove.class, "SANMove", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getSANMove_Castle(), this.getSANCastle(), null, "castle", null, 0, 1, SANMove.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSANMove_Normal(), this.getSANNormal(), null, "normal", null, 0, 1, SANMove.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(sanCastleEClass, SANCastle.class, "SANCastle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSANCastle_Side(), ecorePackage.getEString(), "side", null, 0, 1, SANCastle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(sanNormalEClass, SANNormal.class, "SANNormal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getSANNormal_Piece(), this.getSANPiece(), null, "piece", null, 0, 1, SANNormal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSANNormal_Disamb(), this.getSANDisambiguation(), null, "disamb", null, 0, 1, SANNormal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSANNormal_Capture(), this.getSANCapture(), null, "capture", null, 0, 1, SANNormal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSANNormal_Target(), this.getSquare(), null, "target", null, 0, 1, SANNormal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSANNormal_Promotion(), this.getSANPromotion(), null, "promotion", null, 0, 1, SANNormal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSANNormal_Check(), this.getSANCheckMarker(), null, "check", null, 0, 1, SANNormal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSANNormal_Remark(), this.getSANRemark(), null, "remark", null, 0, 1, SANNormal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(sanPieceEClass, SANPiece.class, "SANPiece", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(sanDisambiguationEClass, SANDisambiguation.class, "SANDisambiguation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(sanPromotionEClass, SANPromotion.class, "SANPromotion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(sanCheckMarkerEClass, SANCheckMarker.class, "SANCheckMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(sanCaptureEClass, SANCapture.class, "SANCapture", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(sanRemarkEClass, SANRemark.class, "SANRemark", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(conclusionEClass, Conclusion.class, "Conclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getConclusion_Method(), this.getMethod(), null, "method", null, 0, 1, Conclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

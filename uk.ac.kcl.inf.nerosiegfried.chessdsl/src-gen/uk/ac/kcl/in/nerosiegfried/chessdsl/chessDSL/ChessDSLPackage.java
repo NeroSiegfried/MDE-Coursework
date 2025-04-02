@@ -392,13 +392,22 @@ public interface ChessDSLPackage extends EPackage
   int ANY_MOVE = 8;
 
   /**
+   * The feature id for the '<em><b>Algebraicmove</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ANY_MOVE__ALGEBRAICMOVE = 0;
+
+  /**
    * The feature id for the '<em><b>Move</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ANY_MOVE__MOVE = 0;
+  int ANY_MOVE__MOVE = 1;
 
   /**
    * The feature id for the '<em><b>Remarks</b></em>' attribute list.
@@ -407,16 +416,7 @@ public interface ChessDSLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ANY_MOVE__REMARKS = 1;
-
-  /**
-   * The feature id for the '<em><b>Algebraicmove</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ANY_MOVE__ALGEBRAICMOVE = 2;
+  int ANY_MOVE__REMARKS = 2;
 
   /**
    * The number of structural features of the '<em>Any Move</em>' class.
@@ -670,255 +670,13 @@ public interface ChessDSLPackage extends EPackage
   int SAN_MOVE = 16;
 
   /**
-   * The feature id for the '<em><b>Castle</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_MOVE__CASTLE = 0;
-
-  /**
-   * The feature id for the '<em><b>Normal</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_MOVE__NORMAL = 1;
-
-  /**
    * The number of structural features of the '<em>SAN Move</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SAN_MOVE_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANCastleImpl <em>SAN Castle</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANCastleImpl
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANCastle()
-   * @generated
-   */
-  int SAN_CASTLE = 17;
-
-  /**
-   * The feature id for the '<em><b>Side</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_CASTLE__SIDE = 0;
-
-  /**
-   * The number of structural features of the '<em>SAN Castle</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_CASTLE_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANNormalImpl <em>SAN Normal</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANNormalImpl
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANNormal()
-   * @generated
-   */
-  int SAN_NORMAL = 18;
-
-  /**
-   * The feature id for the '<em><b>Piece</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_NORMAL__PIECE = 0;
-
-  /**
-   * The feature id for the '<em><b>Disamb</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_NORMAL__DISAMB = 1;
-
-  /**
-   * The feature id for the '<em><b>Capture</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_NORMAL__CAPTURE = 2;
-
-  /**
-   * The feature id for the '<em><b>Target</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_NORMAL__TARGET = 3;
-
-  /**
-   * The feature id for the '<em><b>Promotion</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_NORMAL__PROMOTION = 4;
-
-  /**
-   * The feature id for the '<em><b>Check</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_NORMAL__CHECK = 5;
-
-  /**
-   * The feature id for the '<em><b>Remark</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_NORMAL__REMARK = 6;
-
-  /**
-   * The number of structural features of the '<em>SAN Normal</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_NORMAL_FEATURE_COUNT = 7;
-
-  /**
-   * The meta object id for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANPieceImpl <em>SAN Piece</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANPieceImpl
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANPiece()
-   * @generated
-   */
-  int SAN_PIECE = 19;
-
-  /**
-   * The number of structural features of the '<em>SAN Piece</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_PIECE_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANDisambiguationImpl <em>SAN Disambiguation</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANDisambiguationImpl
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANDisambiguation()
-   * @generated
-   */
-  int SAN_DISAMBIGUATION = 20;
-
-  /**
-   * The number of structural features of the '<em>SAN Disambiguation</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_DISAMBIGUATION_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANPromotionImpl <em>SAN Promotion</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANPromotionImpl
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANPromotion()
-   * @generated
-   */
-  int SAN_PROMOTION = 21;
-
-  /**
-   * The number of structural features of the '<em>SAN Promotion</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_PROMOTION_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANCheckMarkerImpl <em>SAN Check Marker</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANCheckMarkerImpl
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANCheckMarker()
-   * @generated
-   */
-  int SAN_CHECK_MARKER = 22;
-
-  /**
-   * The number of structural features of the '<em>SAN Check Marker</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_CHECK_MARKER_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANCaptureImpl <em>SAN Capture</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANCaptureImpl
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANCapture()
-   * @generated
-   */
-  int SAN_CAPTURE = 23;
-
-  /**
-   * The number of structural features of the '<em>SAN Capture</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_CAPTURE_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANRemarkImpl <em>SAN Remark</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANRemarkImpl
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANRemark()
-   * @generated
-   */
-  int SAN_REMARK = 24;
-
-  /**
-   * The number of structural features of the '<em>SAN Remark</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SAN_REMARK_FEATURE_COUNT = 0;
+  int SAN_MOVE_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ConclusionImpl <em>Conclusion</em>}' class.
@@ -928,7 +686,7 @@ public interface ChessDSLPackage extends EPackage
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getConclusion()
    * @generated
    */
-  int CONCLUSION = 25;
+  int CONCLUSION = 17;
 
   /**
    * The feature id for the '<em><b>Method</b></em>' containment reference.
@@ -965,7 +723,7 @@ public interface ChessDSLPackage extends EPackage
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getMethod()
    * @generated
    */
-  int METHOD = 26;
+  int METHOD = 18;
 
   /**
    * The feature id for the '<em><b>Win</b></em>' containment reference.
@@ -1002,7 +760,7 @@ public interface ChessDSLPackage extends EPackage
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getWin()
    * @generated
    */
-  int WIN = 27;
+  int WIN = 19;
 
   /**
    * The feature id for the '<em><b>Time</b></em>' containment reference.
@@ -1048,7 +806,7 @@ public interface ChessDSLPackage extends EPackage
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getTimeUp()
    * @generated
    */
-  int TIME_UP = 28;
+  int TIME_UP = 20;
 
   /**
    * The feature id for the '<em><b>Player</b></em>' containment reference.
@@ -1076,7 +834,7 @@ public interface ChessDSLPackage extends EPackage
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getResign()
    * @generated
    */
-  int RESIGN = 29;
+  int RESIGN = 21;
 
   /**
    * The feature id for the '<em><b>Player</b></em>' containment reference.
@@ -1104,7 +862,7 @@ public interface ChessDSLPackage extends EPackage
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getCheckmate()
    * @generated
    */
-  int CHECKMATE = 30;
+  int CHECKMATE = 22;
 
   /**
    * The feature id for the '<em><b>Player1</b></em>' containment reference.
@@ -1141,7 +899,7 @@ public interface ChessDSLPackage extends EPackage
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getDraw()
    * @generated
    */
-  int DRAW = 31;
+  int DRAW = 23;
 
   /**
    * The feature id for the '<em><b>Player1</b></em>' containment reference.
@@ -1187,7 +945,7 @@ public interface ChessDSLPackage extends EPackage
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getEString()
    * @generated
    */
-  int ESTRING = 32;
+  int ESTRING = 24;
 
   /**
    * The number of structural features of the '<em>EString</em>' class.
@@ -1206,7 +964,7 @@ public interface ChessDSLPackage extends EPackage
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getResult()
    * @generated
    */
-  int RESULT = 33;
+  int RESULT = 25;
 
   /**
    * The feature id for the '<em><b>Player</b></em>' reference.
@@ -1243,7 +1001,7 @@ public interface ChessDSLPackage extends EPackage
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getPlayerOrColor()
    * @generated
    */
-  int PLAYER_OR_COLOR = 34;
+  int PLAYER_OR_COLOR = 26;
 
   /**
    * The feature id for the '<em><b>Player</b></em>' reference.
@@ -1280,7 +1038,7 @@ public interface ChessDSLPackage extends EPackage
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSquare()
    * @generated
    */
-  int SQUARE = 35;
+  int SQUARE = 27;
 
   /**
    * The feature id for the '<em><b>Square</b></em>' attribute.
@@ -1308,7 +1066,7 @@ public interface ChessDSLPackage extends EPackage
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getRemark()
    * @generated
    */
-  int REMARK = 36;
+  int REMARK = 28;
 
   /**
    * The meta object id for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Color <em>Color</em>}' enum.
@@ -1318,7 +1076,7 @@ public interface ChessDSLPackage extends EPackage
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getColor()
    * @generated
    */
-  int COLOR = 37;
+  int COLOR = 29;
 
   /**
    * The meta object id for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Piece <em>Piece</em>}' enum.
@@ -1328,7 +1086,7 @@ public interface ChessDSLPackage extends EPackage
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getPiece()
    * @generated
    */
-  int PIECE = 38;
+  int PIECE = 30;
 
 
   /**
@@ -1631,6 +1389,17 @@ public interface ChessDSLPackage extends EPackage
   EClass getAnyMove();
 
   /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.AnyMove#getAlgebraicmove <em>Algebraicmove</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Algebraicmove</em>'.
+   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.AnyMove#getAlgebraicmove()
+   * @see #getAnyMove()
+   * @generated
+   */
+  EReference getAnyMove_Algebraicmove();
+
+  /**
    * Returns the meta object for the containment reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.AnyMove#getMove <em>Move</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1651,17 +1420,6 @@ public interface ChessDSLPackage extends EPackage
    * @generated
    */
   EAttribute getAnyMove_Remarks();
-
-  /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.AnyMove#getAlgebraicmove <em>Algebraicmove</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Algebraicmove</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.AnyMove#getAlgebraicmove()
-   * @see #getAnyMove()
-   * @generated
-   */
-  EReference getAnyMove_Algebraicmove();
 
   /**
    * Returns the meta object for class '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.DSLMove <em>DSL Move</em>}'.
@@ -1863,196 +1621,6 @@ public interface ChessDSLPackage extends EPackage
    * @generated
    */
   EClass getSANMove();
-
-  /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove#getCastle <em>Castle</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Castle</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove#getCastle()
-   * @see #getSANMove()
-   * @generated
-   */
-  EReference getSANMove_Castle();
-
-  /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove#getNormal <em>Normal</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Normal</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove#getNormal()
-   * @see #getSANMove()
-   * @generated
-   */
-  EReference getSANMove_Normal();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANCastle <em>SAN Castle</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>SAN Castle</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANCastle
-   * @generated
-   */
-  EClass getSANCastle();
-
-  /**
-   * Returns the meta object for the attribute '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANCastle#getSide <em>Side</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Side</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANCastle#getSide()
-   * @see #getSANCastle()
-   * @generated
-   */
-  EAttribute getSANCastle_Side();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal <em>SAN Normal</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>SAN Normal</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal
-   * @generated
-   */
-  EClass getSANNormal();
-
-  /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal#getPiece <em>Piece</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Piece</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal#getPiece()
-   * @see #getSANNormal()
-   * @generated
-   */
-  EReference getSANNormal_Piece();
-
-  /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal#getDisamb <em>Disamb</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Disamb</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal#getDisamb()
-   * @see #getSANNormal()
-   * @generated
-   */
-  EReference getSANNormal_Disamb();
-
-  /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal#getCapture <em>Capture</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Capture</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal#getCapture()
-   * @see #getSANNormal()
-   * @generated
-   */
-  EReference getSANNormal_Capture();
-
-  /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal#getTarget <em>Target</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Target</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal#getTarget()
-   * @see #getSANNormal()
-   * @generated
-   */
-  EReference getSANNormal_Target();
-
-  /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal#getPromotion <em>Promotion</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Promotion</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal#getPromotion()
-   * @see #getSANNormal()
-   * @generated
-   */
-  EReference getSANNormal_Promotion();
-
-  /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal#getCheck <em>Check</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Check</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal#getCheck()
-   * @see #getSANNormal()
-   * @generated
-   */
-  EReference getSANNormal_Check();
-
-  /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal#getRemark <em>Remark</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Remark</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANNormal#getRemark()
-   * @see #getSANNormal()
-   * @generated
-   */
-  EReference getSANNormal_Remark();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANPiece <em>SAN Piece</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>SAN Piece</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANPiece
-   * @generated
-   */
-  EClass getSANPiece();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANDisambiguation <em>SAN Disambiguation</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>SAN Disambiguation</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANDisambiguation
-   * @generated
-   */
-  EClass getSANDisambiguation();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANPromotion <em>SAN Promotion</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>SAN Promotion</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANPromotion
-   * @generated
-   */
-  EClass getSANPromotion();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANCheckMarker <em>SAN Check Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>SAN Check Marker</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANCheckMarker
-   * @generated
-   */
-  EClass getSANCheckMarker();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANCapture <em>SAN Capture</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>SAN Capture</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANCapture
-   * @generated
-   */
-  EClass getSANCapture();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANRemark <em>SAN Remark</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>SAN Remark</em>'.
-   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANRemark
-   * @generated
-   */
-  EClass getSANRemark();
 
   /**
    * Returns the meta object for class '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Conclusion <em>Conclusion</em>}'.
@@ -2669,6 +2237,14 @@ public interface ChessDSLPackage extends EPackage
     EClass ANY_MOVE = eINSTANCE.getAnyMove();
 
     /**
+     * The meta object literal for the '<em><b>Algebraicmove</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ANY_MOVE__ALGEBRAICMOVE = eINSTANCE.getAnyMove_Algebraicmove();
+
+    /**
      * The meta object literal for the '<em><b>Move</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2683,14 +2259,6 @@ public interface ChessDSLPackage extends EPackage
      * @generated
      */
     EAttribute ANY_MOVE__REMARKS = eINSTANCE.getAnyMove_Remarks();
-
-    /**
-     * The meta object literal for the '<em><b>Algebraicmove</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ANY_MOVE__ALGEBRAICMOVE = eINSTANCE.getAnyMove_Algebraicmove();
 
     /**
      * The meta object literal for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.DSLMoveImpl <em>DSL Move</em>}' class.
@@ -2859,166 +2427,6 @@ public interface ChessDSLPackage extends EPackage
      * @generated
      */
     EClass SAN_MOVE = eINSTANCE.getSANMove();
-
-    /**
-     * The meta object literal for the '<em><b>Castle</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SAN_MOVE__CASTLE = eINSTANCE.getSANMove_Castle();
-
-    /**
-     * The meta object literal for the '<em><b>Normal</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SAN_MOVE__NORMAL = eINSTANCE.getSANMove_Normal();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANCastleImpl <em>SAN Castle</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANCastleImpl
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANCastle()
-     * @generated
-     */
-    EClass SAN_CASTLE = eINSTANCE.getSANCastle();
-
-    /**
-     * The meta object literal for the '<em><b>Side</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute SAN_CASTLE__SIDE = eINSTANCE.getSANCastle_Side();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANNormalImpl <em>SAN Normal</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANNormalImpl
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANNormal()
-     * @generated
-     */
-    EClass SAN_NORMAL = eINSTANCE.getSANNormal();
-
-    /**
-     * The meta object literal for the '<em><b>Piece</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SAN_NORMAL__PIECE = eINSTANCE.getSANNormal_Piece();
-
-    /**
-     * The meta object literal for the '<em><b>Disamb</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SAN_NORMAL__DISAMB = eINSTANCE.getSANNormal_Disamb();
-
-    /**
-     * The meta object literal for the '<em><b>Capture</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SAN_NORMAL__CAPTURE = eINSTANCE.getSANNormal_Capture();
-
-    /**
-     * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SAN_NORMAL__TARGET = eINSTANCE.getSANNormal_Target();
-
-    /**
-     * The meta object literal for the '<em><b>Promotion</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SAN_NORMAL__PROMOTION = eINSTANCE.getSANNormal_Promotion();
-
-    /**
-     * The meta object literal for the '<em><b>Check</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SAN_NORMAL__CHECK = eINSTANCE.getSANNormal_Check();
-
-    /**
-     * The meta object literal for the '<em><b>Remark</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SAN_NORMAL__REMARK = eINSTANCE.getSANNormal_Remark();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANPieceImpl <em>SAN Piece</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANPieceImpl
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANPiece()
-     * @generated
-     */
-    EClass SAN_PIECE = eINSTANCE.getSANPiece();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANDisambiguationImpl <em>SAN Disambiguation</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANDisambiguationImpl
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANDisambiguation()
-     * @generated
-     */
-    EClass SAN_DISAMBIGUATION = eINSTANCE.getSANDisambiguation();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANPromotionImpl <em>SAN Promotion</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANPromotionImpl
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANPromotion()
-     * @generated
-     */
-    EClass SAN_PROMOTION = eINSTANCE.getSANPromotion();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANCheckMarkerImpl <em>SAN Check Marker</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANCheckMarkerImpl
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANCheckMarker()
-     * @generated
-     */
-    EClass SAN_CHECK_MARKER = eINSTANCE.getSANCheckMarker();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANCaptureImpl <em>SAN Capture</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANCaptureImpl
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANCapture()
-     * @generated
-     */
-    EClass SAN_CAPTURE = eINSTANCE.getSANCapture();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANRemarkImpl <em>SAN Remark</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.SANRemarkImpl
-     * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ChessDSLPackageImpl#getSANRemark()
-     * @generated
-     */
-    EClass SAN_REMARK = eINSTANCE.getSANRemark();
 
     /**
      * The meta object literal for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ConclusionImpl <em>Conclusion</em>}' class.
