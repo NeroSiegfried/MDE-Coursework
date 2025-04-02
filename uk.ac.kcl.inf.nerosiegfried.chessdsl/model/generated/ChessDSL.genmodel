@@ -65,6 +65,7 @@
     <genClasses ecoreClass="ChessDSL.ecore#//AnyMove">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//AnyMove/move"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ChessDSL.ecore#//AnyMove/remarks"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//AnyMove/algebraicmove"/>
     </genClasses>
     <genClasses ecoreClass="ChessDSL.ecore#//DSLMove"/>
     <genClasses ecoreClass="ChessDSL.ecore#//Dummy"/>
@@ -89,6 +90,28 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//Promotion/move"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ChessDSL.ecore#//Promotion/piece"/>
     </genClasses>
+    <genClasses ecoreClass="ChessDSL.ecore#//SANMove">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//SANMove/castle"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//SANMove/normal"/>
+    </genClasses>
+    <genClasses ecoreClass="ChessDSL.ecore#//SANCastle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ChessDSL.ecore#//SANCastle/side"/>
+    </genClasses>
+    <genClasses ecoreClass="ChessDSL.ecore#//SANNormal">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//SANNormal/piece"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//SANNormal/disamb"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//SANNormal/capture"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//SANNormal/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//SANNormal/promotion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//SANNormal/check"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//SANNormal/remark"/>
+    </genClasses>
+    <genClasses ecoreClass="ChessDSL.ecore#//SANPiece"/>
+    <genClasses ecoreClass="ChessDSL.ecore#//SANDisambiguation"/>
+    <genClasses ecoreClass="ChessDSL.ecore#//SANPromotion"/>
+    <genClasses ecoreClass="ChessDSL.ecore#//SANCheckMarker"/>
+    <genClasses ecoreClass="ChessDSL.ecore#//SANCapture"/>
+    <genClasses ecoreClass="ChessDSL.ecore#//SANRemark"/>
     <genClasses ecoreClass="ChessDSL.ecore#//Conclusion">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//Conclusion/method"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//Conclusion/result"/>

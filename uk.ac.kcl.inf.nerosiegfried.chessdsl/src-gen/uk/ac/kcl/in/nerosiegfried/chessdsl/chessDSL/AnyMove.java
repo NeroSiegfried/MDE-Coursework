@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.AnyMove#getMove <em>Move</em>}</li>
  *   <li>{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.AnyMove#getRemarks <em>Remarks</em>}</li>
+ *   <li>{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.AnyMove#getAlgebraicmove <em>Algebraicmove</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.ChessDSLPackage#getAnyMove()
@@ -61,5 +62,27 @@ public interface AnyMove extends EObject
    * @generated
    */
   EList<Remark> getRemarks();
+
+  /**
+   * Returns the value of the '<em><b>Algebraicmove</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Algebraicmove</em>' containment reference.
+   * @see #setAlgebraicmove(SANMove)
+   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.ChessDSLPackage#getAnyMove_Algebraicmove()
+   * @model containment="true"
+   * @generated
+   */
+  SANMove getAlgebraicmove();
+
+  /**
+   * Sets the value of the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.AnyMove#getAlgebraicmove <em>Algebraicmove</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Algebraicmove</em>' containment reference.
+   * @see #getAlgebraicmove()
+   * @generated
+   */
+  void setAlgebraicmove(SANMove value);
 
 } // AnyMove

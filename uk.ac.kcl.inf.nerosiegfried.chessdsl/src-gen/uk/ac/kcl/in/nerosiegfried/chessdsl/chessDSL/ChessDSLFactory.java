@@ -168,6 +168,87 @@ public interface ChessDSLFactory extends EFactory
   Promotion createPromotion();
 
   /**
+   * Returns a new object of class '<em>SAN Move</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>SAN Move</em>'.
+   * @generated
+   */
+  SANMove createSANMove();
+
+  /**
+   * Returns a new object of class '<em>SAN Castle</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>SAN Castle</em>'.
+   * @generated
+   */
+  SANCastle createSANCastle();
+
+  /**
+   * Returns a new object of class '<em>SAN Normal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>SAN Normal</em>'.
+   * @generated
+   */
+  SANNormal createSANNormal();
+
+  /**
+   * Returns a new object of class '<em>SAN Piece</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>SAN Piece</em>'.
+   * @generated
+   */
+  SANPiece createSANPiece();
+
+  /**
+   * Returns a new object of class '<em>SAN Disambiguation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>SAN Disambiguation</em>'.
+   * @generated
+   */
+  SANDisambiguation createSANDisambiguation();
+
+  /**
+   * Returns a new object of class '<em>SAN Promotion</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>SAN Promotion</em>'.
+   * @generated
+   */
+  SANPromotion createSANPromotion();
+
+  /**
+   * Returns a new object of class '<em>SAN Check Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>SAN Check Marker</em>'.
+   * @generated
+   */
+  SANCheckMarker createSANCheckMarker();
+
+  /**
+   * Returns a new object of class '<em>SAN Capture</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>SAN Capture</em>'.
+   * @generated
+   */
+  SANCapture createSANCapture();
+
+  /**
+   * Returns a new object of class '<em>SAN Remark</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>SAN Remark</em>'.
+   * @generated
+   */
+  SANRemark createSANRemark();
+
+  /**
    * Returns a new object of class '<em>Conclusion</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

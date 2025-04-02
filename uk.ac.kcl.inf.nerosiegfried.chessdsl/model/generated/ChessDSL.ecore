@@ -52,6 +52,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="remarks" unique="false"
         upperBound="-1" eType="#//Remark"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="algebraicmove" eType="#//SANMove"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DSLMove"/>
   <eClassifiers xsi:type="ecore:EClass" name="Dummy" eSuperTypes="#//DSLMove"/>
@@ -89,6 +91,37 @@
     <eLiterals name="Check" value="5" literal="Check"/>
     <eLiterals name="Checkmate" value="6" literal="Checkmate"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SANMove">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="castle" eType="#//SANCastle"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="normal" eType="#//SANNormal"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SANCastle">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="side" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SANNormal">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="piece" eType="#//SANPiece"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="disamb" eType="#//SANDisambiguation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="capture" eType="#//SANCapture"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Square"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="promotion" eType="#//SANPromotion"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="check" eType="#//SANCheckMarker"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="remark" eType="#//SANRemark"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SANPiece"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SANDisambiguation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SANPromotion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SANCheckMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SANCapture"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SANRemark"/>
   <eClassifiers xsi:type="ecore:EClass" name="Conclusion">
     <eStructuralFeatures xsi:type="ecore:EReference" name="method" eType="#//Method"
         containment="true"/>

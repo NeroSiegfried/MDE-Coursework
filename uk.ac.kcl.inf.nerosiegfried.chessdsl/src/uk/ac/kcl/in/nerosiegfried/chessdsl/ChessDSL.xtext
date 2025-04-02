@@ -2,7 +2,7 @@ grammar uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL with org.eclipse.xtext.comm
 
 generate chessDSL "http://www.ac.uk/kcl/in/nerosiegfried/chessdsl/ChessDSL"
 
-
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Model:
 
@@ -20,8 +20,10 @@ Game:
 
 	(initial=InitialState)?
 
-	'Moves:' moves+=MovePair*
-
+	'Moves:' 
+	
+		moves+=MovePair*
+		
 	'end'
 
 	(conclusion=Conclusion)?
@@ -94,15 +96,15 @@ MovePair:
 
 	(((color1=[PlayerOrColor])? whiteMove=AnyMove )| "...")
 
-	((color2=[PlayerOrColor])?blackMove=AnyMove)?
+	((color2=[PlayerOrColor])? blackMove=AnyMove)?
 
 ;
 
 
 
-MOVENUMBER hidden():
+terminal MOVENUMBER returns ecore::EString:
 
-	INT "."
+	('0'..'9')+ "."
 
 ;
 
@@ -112,7 +114,9 @@ AnyMove:
 
 	//for possible extensions to the language
 
-	move=DSLMove ('(' remarks+=Remark* ')')?
+	move=DSLMove ('(' remarks+=Remark* ')')? |
+	//An extension of the language, experimental
+	algebraicmove=SANMove
 
 ;
 
@@ -219,7 +223,61 @@ enum Remark:
 
 ;
 
+/**
+ * SanMove and Related Implementations in this segment
+ */
+ 
+ SANMove returns SANMove:
+    {SANMove}
+    ( castle=SANCastle | normal=SANNormal )
+;
 
+SANCastle returns SANCastle:
+    {SANCastle}
+    ( "O-O-O"  side = "Queenside"  )|
+    ( "O-O"  side = "Kingside" )
+;
+
+SANNormal returns SANNormal:
+    {SANNormal}
+    piece=SANPiece? disamb=SANDisambiguation? capture=SANCapture? target=Square promotion=SANPromotion? check=SANCheckMarker?
+    remark=SANRemark?
+;
+
+SANPiece:
+    {SANPiece}
+    ('K' | 'Q' | 'R' | 'B' | 'N')
+;
+
+SANDisambiguation hidden():
+    {SANDisambiguation}
+    (LETTER | RANKDIGIT)+
+;
+
+SANPromotion returns SANPromotion:
+    {SANPromotion}
+    '=' ('Q' | 'R' | 'B' | 'N')
+;
+
+SANCheckMarker returns SANCheckMarker:
+    {SANCheckMarker}
+    ('+' | '#')+
+;
+
+SANCapture:
+	{SANCapture}
+	'x'
+;
+
+SANRemark returns SANRemark:
+	{SANRemark}
+	('!'|'?')+
+;
+
+terminal LETTER: ('a'..'h'|'A'..'H');
+terminal RANKDIGIT: ('1'..'8');
+ 
+ //End segment
 
 Conclusion:
 
@@ -365,6 +423,6 @@ Square:
 
 
 terminal SQUARETERMINAL:
-	('a'..'h'|'A'..'H')('1'..'8')
+	LETTER RANKDIGIT
 
 ;

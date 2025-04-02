@@ -65,7 +65,8 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//    'Game' title=STRING
 		//    ('Players:' players+=Player+)?
 		//    (initial=InitialState)?
-		//    'Moves:' moves+=MovePair*
+		//    'Moves:'
+		//        moves+=MovePair*
 		//    'end'
 		//    (conclusion=Conclusion)?
 		//;
@@ -74,7 +75,8 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//'Game' title=STRING
 		//('Players:' players+=Player+)?
 		//(initial=InitialState)?
-		//'Moves:' moves+=MovePair*
+		//'Moves:'
+		//    moves+=MovePair*
 		//'end'
 		//(conclusion=Conclusion)?
 		public Group getGroup() { return cGroup; }
@@ -321,7 +323,7 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.MovePair");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cMoveNumberAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cMoveNumberMOVENUMBERParserRuleCall_0_0 = (RuleCall)cMoveNumberAssignment_0.eContents().get(0);
+		private final RuleCall cMoveNumberMOVENUMBERTerminalRuleCall_0_0 = (RuleCall)cMoveNumberAssignment_0.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
 		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
 		private final Assignment cColor1Assignment_1_0_0 = (Assignment)cGroup_1_0.eContents().get(0);
@@ -343,7 +345,7 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//    //where the records end or how the game itself ends
 		//    moveNumber=MOVENUMBER
 		//    (((color1=[PlayerOrColor])? whiteMove=AnyMove )| "...")
-		//    ((color2=[PlayerOrColor])?blackMove=AnyMove)?
+		//    ((color2=[PlayerOrColor])? blackMove=AnyMove)?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -352,7 +354,7 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		////where the records end or how the game itself ends
 		//moveNumber=MOVENUMBER
 		//(((color1=[PlayerOrColor])? whiteMove=AnyMove )| "...")
-		//((color2=[PlayerOrColor])?blackMove=AnyMove)?
+		//((color2=[PlayerOrColor])? blackMove=AnyMove)?
 		public Group getGroup() { return cGroup; }
 		
 		////whiteMove can also be '...' when Black plays first in the position
@@ -362,7 +364,7 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		public Assignment getMoveNumberAssignment_0() { return cMoveNumberAssignment_0; }
 		
 		//MOVENUMBER
-		public RuleCall getMoveNumberMOVENUMBERParserRuleCall_0_0() { return cMoveNumberMOVENUMBERParserRuleCall_0_0; }
+		public RuleCall getMoveNumberMOVENUMBERTerminalRuleCall_0_0() { return cMoveNumberMOVENUMBERTerminalRuleCall_0_0; }
 		
 		//(((color1=[PlayerOrColor])? whiteMove=AnyMove )| "...")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
@@ -388,7 +390,7 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//"..."
 		public Keyword getFullStopFullStopFullStopKeyword_1_1() { return cFullStopFullStopFullStopKeyword_1_1; }
 		
-		//((color2=[PlayerOrColor])?blackMove=AnyMove)?
+		//((color2=[PlayerOrColor])? blackMove=AnyMove)?
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//(color2=[PlayerOrColor])?
@@ -406,68 +408,66 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//AnyMove
 		public RuleCall getBlackMoveAnyMoveParserRuleCall_2_1_0() { return cBlackMoveAnyMoveParserRuleCall_2_1_0; }
 	}
-	public class MOVENUMBERElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.MOVENUMBER");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//MOVENUMBER hidden():
-		//    INT "."
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//INT "."
-		public Group getGroup() { return cGroup; }
-		
-		//INT
-		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
-		
-		//"."
-		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
-	}
 	public class AnyMoveElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.AnyMove");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cMoveAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cMoveDSLMoveParserRuleCall_0_0 = (RuleCall)cMoveAssignment_0.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cLeftParenthesisKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cRemarksAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cRemarksRemarkEnumRuleCall_1_1_0 = (RuleCall)cRemarksAssignment_1_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Assignment cMoveAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final RuleCall cMoveDSLMoveParserRuleCall_0_0_0 = (RuleCall)cMoveAssignment_0_0.eContents().get(0);
+		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_0_1_0 = (Keyword)cGroup_0_1.eContents().get(0);
+		private final Assignment cRemarksAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
+		private final RuleCall cRemarksRemarkEnumRuleCall_0_1_1_0 = (RuleCall)cRemarksAssignment_0_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_0_1_2 = (Keyword)cGroup_0_1.eContents().get(2);
+		private final Assignment cAlgebraicmoveAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cAlgebraicmoveSANMoveParserRuleCall_1_0 = (RuleCall)cAlgebraicmoveAssignment_1.eContents().get(0);
 		
 		//AnyMove:
 		//    //for possible extensions to the language
-		//    move=DSLMove ('(' remarks+=Remark* ')')?
+		//    move=DSLMove ('(' remarks+=Remark* ')')? |
+		//    //An extension of the language, experimental
+		//    algebraicmove=SANMove
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		////for possible extensions to the language
+		//move=DSLMove ('(' remarks+=Remark* ')')? |
+		////An extension of the language, experimental
+		//algebraicmove=SANMove
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		////for possible extensions to the language
 		//move=DSLMove ('(' remarks+=Remark* ')')?
-		public Group getGroup() { return cGroup; }
+		public Group getGroup_0() { return cGroup_0; }
 		
 		////for possible extensions to the language
 		//move=DSLMove
-		public Assignment getMoveAssignment_0() { return cMoveAssignment_0; }
+		public Assignment getMoveAssignment_0_0() { return cMoveAssignment_0_0; }
 		
 		//DSLMove
-		public RuleCall getMoveDSLMoveParserRuleCall_0_0() { return cMoveDSLMoveParserRuleCall_0_0; }
+		public RuleCall getMoveDSLMoveParserRuleCall_0_0_0() { return cMoveDSLMoveParserRuleCall_0_0_0; }
 		
 		//('(' remarks+=Remark* ')')?
-		public Group getGroup_1() { return cGroup_1; }
+		public Group getGroup_0_1() { return cGroup_0_1; }
 		
 		//'('
-		public Keyword getLeftParenthesisKeyword_1_0() { return cLeftParenthesisKeyword_1_0; }
+		public Keyword getLeftParenthesisKeyword_0_1_0() { return cLeftParenthesisKeyword_0_1_0; }
 		
 		//remarks+=Remark*
-		public Assignment getRemarksAssignment_1_1() { return cRemarksAssignment_1_1; }
+		public Assignment getRemarksAssignment_0_1_1() { return cRemarksAssignment_0_1_1; }
 		
 		//Remark
-		public RuleCall getRemarksRemarkEnumRuleCall_1_1_0() { return cRemarksRemarkEnumRuleCall_1_1_0; }
+		public RuleCall getRemarksRemarkEnumRuleCall_0_1_1_0() { return cRemarksRemarkEnumRuleCall_0_1_1_0; }
 		
 		//')'
-		public Keyword getRightParenthesisKeyword_1_2() { return cRightParenthesisKeyword_1_2; }
+		public Keyword getRightParenthesisKeyword_0_1_2() { return cRightParenthesisKeyword_0_1_2; }
+		
+		////An extension of the language, experimental
+		//algebraicmove=SANMove
+		public Assignment getAlgebraicmoveAssignment_1() { return cAlgebraicmoveAssignment_1; }
+		
+		//SANMove
+		public RuleCall getAlgebraicmoveSANMoveParserRuleCall_1_0() { return cAlgebraicmoveSANMoveParserRuleCall_1_0; }
 	}
 	public class DSLMoveElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.DSLMove");
@@ -939,6 +939,376 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//')'
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 	}
+	public class SANMoveElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANMove");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cSANMoveAction_0 = (Action)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Assignment cCastleAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final RuleCall cCastleSANCastleParserRuleCall_1_0_0 = (RuleCall)cCastleAssignment_1_0.eContents().get(0);
+		private final Assignment cNormalAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final RuleCall cNormalSANNormalParserRuleCall_1_1_0 = (RuleCall)cNormalAssignment_1_1.eContents().get(0);
+		
+		///**
+		// * SanMove and Related Implementations in this segment
+		// */
+		// SANMove returns SANMove:
+		//    {SANMove}
+		//    ( castle=SANCastle | normal=SANNormal )
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{SANMove}
+		//( castle=SANCastle | normal=SANNormal )
+		public Group getGroup() { return cGroup; }
+		
+		//{SANMove}
+		public Action getSANMoveAction_0() { return cSANMoveAction_0; }
+		
+		//( castle=SANCastle | normal=SANNormal )
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+		
+		//castle=SANCastle
+		public Assignment getCastleAssignment_1_0() { return cCastleAssignment_1_0; }
+		
+		//SANCastle
+		public RuleCall getCastleSANCastleParserRuleCall_1_0_0() { return cCastleSANCastleParserRuleCall_1_0_0; }
+		
+		//normal=SANNormal
+		public Assignment getNormalAssignment_1_1() { return cNormalAssignment_1_1; }
+		
+		//SANNormal
+		public RuleCall getNormalSANNormalParserRuleCall_1_1_0() { return cNormalSANNormalParserRuleCall_1_1_0; }
+	}
+	public class SANCastleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANCastle");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Action cSANCastleAction_0_0 = (Action)cGroup_0.eContents().get(0);
+		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
+		private final Keyword cOOOKeyword_0_1_0 = (Keyword)cGroup_0_1.eContents().get(0);
+		private final Assignment cSideAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
+		private final Keyword cSideQueensideKeyword_0_1_1_0 = (Keyword)cSideAssignment_0_1_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Keyword cOOKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cSideAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final Keyword cSideKingsideKeyword_1_1_0 = (Keyword)cSideAssignment_1_1.eContents().get(0);
+		
+		//SANCastle returns SANCastle:
+		//    {SANCastle}
+		//    ( "O-O-O"  side = "Queenside"  )|
+		//    ( "O-O"  side = "Kingside" )
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{SANCastle}
+		//( "O-O-O"  side = "Queenside"  )|
+		//( "O-O"  side = "Kingside" )
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//{SANCastle}
+		//( "O-O-O"  side = "Queenside"  )
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//{SANCastle}
+		public Action getSANCastleAction_0_0() { return cSANCastleAction_0_0; }
+		
+		//( "O-O-O"  side = "Queenside"  )
+		public Group getGroup_0_1() { return cGroup_0_1; }
+		
+		//"O-O-O"
+		public Keyword getOOOKeyword_0_1_0() { return cOOOKeyword_0_1_0; }
+		
+		//side = "Queenside"
+		public Assignment getSideAssignment_0_1_1() { return cSideAssignment_0_1_1; }
+		
+		//"Queenside"
+		public Keyword getSideQueensideKeyword_0_1_1_0() { return cSideQueensideKeyword_0_1_1_0; }
+		
+		//( "O-O"  side = "Kingside" )
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//"O-O"
+		public Keyword getOOKeyword_1_0() { return cOOKeyword_1_0; }
+		
+		//side = "Kingside"
+		public Assignment getSideAssignment_1_1() { return cSideAssignment_1_1; }
+		
+		//"Kingside"
+		public Keyword getSideKingsideKeyword_1_1_0() { return cSideKingsideKeyword_1_1_0; }
+	}
+	public class SANNormalElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANNormal");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cSANNormalAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cPieceAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cPieceSANPieceParserRuleCall_1_0 = (RuleCall)cPieceAssignment_1.eContents().get(0);
+		private final Assignment cDisambAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cDisambSANDisambiguationParserRuleCall_2_0 = (RuleCall)cDisambAssignment_2.eContents().get(0);
+		private final Assignment cCaptureAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cCaptureSANCaptureParserRuleCall_3_0 = (RuleCall)cCaptureAssignment_3.eContents().get(0);
+		private final Assignment cTargetAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTargetSquareParserRuleCall_4_0 = (RuleCall)cTargetAssignment_4.eContents().get(0);
+		private final Assignment cPromotionAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cPromotionSANPromotionParserRuleCall_5_0 = (RuleCall)cPromotionAssignment_5.eContents().get(0);
+		private final Assignment cCheckAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cCheckSANCheckMarkerParserRuleCall_6_0 = (RuleCall)cCheckAssignment_6.eContents().get(0);
+		private final Assignment cRemarkAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cRemarkSANRemarkParserRuleCall_7_0 = (RuleCall)cRemarkAssignment_7.eContents().get(0);
+		
+		//SANNormal returns SANNormal:
+		//    {SANNormal}
+		//    piece=SANPiece? disamb=SANDisambiguation? capture=SANCapture? target=Square promotion=SANPromotion? check=SANCheckMarker?
+		//    remark=SANRemark?
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{SANNormal}
+		//piece=SANPiece? disamb=SANDisambiguation? capture=SANCapture? target=Square promotion=SANPromotion? check=SANCheckMarker?
+		//remark=SANRemark?
+		public Group getGroup() { return cGroup; }
+		
+		//{SANNormal}
+		public Action getSANNormalAction_0() { return cSANNormalAction_0; }
+		
+		//piece=SANPiece?
+		public Assignment getPieceAssignment_1() { return cPieceAssignment_1; }
+		
+		//SANPiece
+		public RuleCall getPieceSANPieceParserRuleCall_1_0() { return cPieceSANPieceParserRuleCall_1_0; }
+		
+		//disamb=SANDisambiguation?
+		public Assignment getDisambAssignment_2() { return cDisambAssignment_2; }
+		
+		//SANDisambiguation
+		public RuleCall getDisambSANDisambiguationParserRuleCall_2_0() { return cDisambSANDisambiguationParserRuleCall_2_0; }
+		
+		//capture=SANCapture?
+		public Assignment getCaptureAssignment_3() { return cCaptureAssignment_3; }
+		
+		//SANCapture
+		public RuleCall getCaptureSANCaptureParserRuleCall_3_0() { return cCaptureSANCaptureParserRuleCall_3_0; }
+		
+		//target=Square
+		public Assignment getTargetAssignment_4() { return cTargetAssignment_4; }
+		
+		//Square
+		public RuleCall getTargetSquareParserRuleCall_4_0() { return cTargetSquareParserRuleCall_4_0; }
+		
+		//promotion=SANPromotion?
+		public Assignment getPromotionAssignment_5() { return cPromotionAssignment_5; }
+		
+		//SANPromotion
+		public RuleCall getPromotionSANPromotionParserRuleCall_5_0() { return cPromotionSANPromotionParserRuleCall_5_0; }
+		
+		//check=SANCheckMarker?
+		public Assignment getCheckAssignment_6() { return cCheckAssignment_6; }
+		
+		//SANCheckMarker
+		public RuleCall getCheckSANCheckMarkerParserRuleCall_6_0() { return cCheckSANCheckMarkerParserRuleCall_6_0; }
+		
+		//remark=SANRemark?
+		public Assignment getRemarkAssignment_7() { return cRemarkAssignment_7; }
+		
+		//SANRemark
+		public RuleCall getRemarkSANRemarkParserRuleCall_7_0() { return cRemarkSANRemarkParserRuleCall_7_0; }
+	}
+	public class SANPieceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANPiece");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cSANPieceAction_0 = (Action)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Keyword cKKeyword_1_0 = (Keyword)cAlternatives_1.eContents().get(0);
+		private final Keyword cQKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
+		private final Keyword cRKeyword_1_2 = (Keyword)cAlternatives_1.eContents().get(2);
+		private final Keyword cBKeyword_1_3 = (Keyword)cAlternatives_1.eContents().get(3);
+		private final Keyword cNKeyword_1_4 = (Keyword)cAlternatives_1.eContents().get(4);
+		
+		//SANPiece:
+		//    {SANPiece}
+		//    ('K' | 'Q' | 'R' | 'B' | 'N')
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{SANPiece}
+		//('K' | 'Q' | 'R' | 'B' | 'N')
+		public Group getGroup() { return cGroup; }
+		
+		//{SANPiece}
+		public Action getSANPieceAction_0() { return cSANPieceAction_0; }
+		
+		//('K' | 'Q' | 'R' | 'B' | 'N')
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+		
+		//'K'
+		public Keyword getKKeyword_1_0() { return cKKeyword_1_0; }
+		
+		//'Q'
+		public Keyword getQKeyword_1_1() { return cQKeyword_1_1; }
+		
+		//'R'
+		public Keyword getRKeyword_1_2() { return cRKeyword_1_2; }
+		
+		//'B'
+		public Keyword getBKeyword_1_3() { return cBKeyword_1_3; }
+		
+		//'N'
+		public Keyword getNKeyword_1_4() { return cNKeyword_1_4; }
+	}
+	public class SANDisambiguationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANDisambiguation");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cSANDisambiguationAction_0 = (Action)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final RuleCall cLETTERTerminalRuleCall_1_0 = (RuleCall)cAlternatives_1.eContents().get(0);
+		private final RuleCall cRANKDIGITTerminalRuleCall_1_1 = (RuleCall)cAlternatives_1.eContents().get(1);
+		
+		//SANDisambiguation hidden():
+		//    {SANDisambiguation}
+		//    (LETTER | RANKDIGIT)+
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{SANDisambiguation}
+		//(LETTER | RANKDIGIT)+
+		public Group getGroup() { return cGroup; }
+		
+		//{SANDisambiguation}
+		public Action getSANDisambiguationAction_0() { return cSANDisambiguationAction_0; }
+		
+		//(LETTER | RANKDIGIT)+
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+		
+		//LETTER
+		public RuleCall getLETTERTerminalRuleCall_1_0() { return cLETTERTerminalRuleCall_1_0; }
+		
+		//RANKDIGIT
+		public RuleCall getRANKDIGITTerminalRuleCall_1_1() { return cRANKDIGITTerminalRuleCall_1_1; }
+	}
+	public class SANPromotionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANPromotion");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cSANPromotionAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Keyword cQKeyword_2_0 = (Keyword)cAlternatives_2.eContents().get(0);
+		private final Keyword cRKeyword_2_1 = (Keyword)cAlternatives_2.eContents().get(1);
+		private final Keyword cBKeyword_2_2 = (Keyword)cAlternatives_2.eContents().get(2);
+		private final Keyword cNKeyword_2_3 = (Keyword)cAlternatives_2.eContents().get(3);
+		
+		//SANPromotion returns SANPromotion:
+		//    {SANPromotion}
+		//    '=' ('Q' | 'R' | 'B' | 'N')
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{SANPromotion}
+		//'=' ('Q' | 'R' | 'B' | 'N')
+		public Group getGroup() { return cGroup; }
+		
+		//{SANPromotion}
+		public Action getSANPromotionAction_0() { return cSANPromotionAction_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
+		
+		//('Q' | 'R' | 'B' | 'N')
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+		
+		//'Q'
+		public Keyword getQKeyword_2_0() { return cQKeyword_2_0; }
+		
+		//'R'
+		public Keyword getRKeyword_2_1() { return cRKeyword_2_1; }
+		
+		//'B'
+		public Keyword getBKeyword_2_2() { return cBKeyword_2_2; }
+		
+		//'N'
+		public Keyword getNKeyword_2_3() { return cNKeyword_2_3; }
+	}
+	public class SANCheckMarkerElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANCheckMarker");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cSANCheckMarkerAction_0 = (Action)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Keyword cPlusSignKeyword_1_0 = (Keyword)cAlternatives_1.eContents().get(0);
+		private final Keyword cNumberSignKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
+		
+		//SANCheckMarker returns SANCheckMarker:
+		//    {SANCheckMarker}
+		//    ('+' | '#')+
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{SANCheckMarker}
+		//('+' | '#')+
+		public Group getGroup() { return cGroup; }
+		
+		//{SANCheckMarker}
+		public Action getSANCheckMarkerAction_0() { return cSANCheckMarkerAction_0; }
+		
+		//('+' | '#')+
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+		
+		//'+'
+		public Keyword getPlusSignKeyword_1_0() { return cPlusSignKeyword_1_0; }
+		
+		//'#'
+		public Keyword getNumberSignKeyword_1_1() { return cNumberSignKeyword_1_1; }
+	}
+	public class SANCaptureElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANCapture");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cSANCaptureAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cXKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//SANCapture:
+		//    {SANCapture}
+		//    'x'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{SANCapture}
+		//'x'
+		public Group getGroup() { return cGroup; }
+		
+		//{SANCapture}
+		public Action getSANCaptureAction_0() { return cSANCaptureAction_0; }
+		
+		//'x'
+		public Keyword getXKeyword_1() { return cXKeyword_1; }
+	}
+	public class SANRemarkElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANRemark");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cSANRemarkAction_0 = (Action)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Keyword cExclamationMarkKeyword_1_0 = (Keyword)cAlternatives_1.eContents().get(0);
+		private final Keyword cQuestionMarkKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
+		
+		//SANRemark returns SANRemark:
+		//    {SANRemark}
+		//    ('!'|'?')+
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{SANRemark}
+		//('!'|'?')+
+		public Group getGroup() { return cGroup; }
+		
+		//{SANRemark}
+		public Action getSANRemarkAction_0() { return cSANRemarkAction_0; }
+		
+		//('!'|'?')+
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+		
+		//'!'
+		public Keyword getExclamationMarkKeyword_1_0() { return cExclamationMarkKeyword_1_0; }
+		
+		//'?'
+		public Keyword getQuestionMarkKeyword_1_1() { return cQuestionMarkKeyword_1_1; }
+	}
 	public class ConclusionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.Conclusion");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -947,6 +1317,7 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final Assignment cResultAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cResultResultParserRuleCall_1_0 = (RuleCall)cResultAssignment_1.eContents().get(0);
 		
+		// //End segment
 		//Conclusion:
 		//    (method=Method)? result=Result
 		//;
@@ -1592,7 +1963,7 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	private final PlacementElements pPlacement;
 	private final CustomPieceElements pCustomPiece;
 	private final MovePairElements pMovePair;
-	private final MOVENUMBERElements pMOVENUMBER;
+	private final TerminalRule tMOVENUMBER;
 	private final AnyMoveElements pAnyMove;
 	private final DSLMoveElements pDSLMove;
 	private final DummyElements pDummy;
@@ -1602,6 +1973,17 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	private final EnPassantElements pEnPassant;
 	private final PromotionElements pPromotion;
 	private final RemarkElements eRemark;
+	private final SANMoveElements pSANMove;
+	private final SANCastleElements pSANCastle;
+	private final SANNormalElements pSANNormal;
+	private final SANPieceElements pSANPiece;
+	private final SANDisambiguationElements pSANDisambiguation;
+	private final SANPromotionElements pSANPromotion;
+	private final SANCheckMarkerElements pSANCheckMarker;
+	private final SANCaptureElements pSANCapture;
+	private final SANRemarkElements pSANRemark;
+	private final TerminalRule tLETTER;
+	private final TerminalRule tRANKDIGIT;
 	private final ConclusionElements pConclusion;
 	private final MethodElements pMethod;
 	private final WinElements pWin;
@@ -1637,7 +2019,7 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		this.pPlacement = new PlacementElements();
 		this.pCustomPiece = new CustomPieceElements();
 		this.pMovePair = new MovePairElements();
-		this.pMOVENUMBER = new MOVENUMBERElements();
+		this.tMOVENUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.MOVENUMBER");
 		this.pAnyMove = new AnyMoveElements();
 		this.pDSLMove = new DSLMoveElements();
 		this.pDummy = new DummyElements();
@@ -1647,6 +2029,17 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		this.pEnPassant = new EnPassantElements();
 		this.pPromotion = new PromotionElements();
 		this.eRemark = new RemarkElements();
+		this.pSANMove = new SANMoveElements();
+		this.pSANCastle = new SANCastleElements();
+		this.pSANNormal = new SANNormalElements();
+		this.pSANPiece = new SANPieceElements();
+		this.pSANDisambiguation = new SANDisambiguationElements();
+		this.pSANPromotion = new SANPromotionElements();
+		this.pSANCheckMarker = new SANCheckMarkerElements();
+		this.pSANCapture = new SANCaptureElements();
+		this.pSANRemark = new SANRemarkElements();
+		this.tLETTER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.LETTER");
+		this.tRANKDIGIT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.RANKDIGIT");
 		this.pConclusion = new ConclusionElements();
 		this.pMethod = new MethodElements();
 		this.pWin = new WinElements();
@@ -1708,7 +2101,8 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	//    'Game' title=STRING
 	//    ('Players:' players+=Player+)?
 	//    (initial=InitialState)?
-	//    'Moves:' moves+=MovePair*
+	//    'Moves:'
+	//        moves+=MovePair*
 	//    'end'
 	//    (conclusion=Conclusion)?
 	//;
@@ -1787,7 +2181,7 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	//    //where the records end or how the game itself ends
 	//    moveNumber=MOVENUMBER
 	//    (((color1=[PlayerOrColor])? whiteMove=AnyMove )| "...")
-	//    ((color2=[PlayerOrColor])?blackMove=AnyMove)?
+	//    ((color2=[PlayerOrColor])? blackMove=AnyMove)?
 	//;
 	public MovePairElements getMovePairAccess() {
 		return pMovePair;
@@ -1797,20 +2191,18 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getMovePairAccess().getRule();
 	}
 	
-	//MOVENUMBER hidden():
-	//    INT "."
+	//terminal MOVENUMBER returns ecore::EString:
+	//    ('0'..'9')+ "."
 	//;
-	public MOVENUMBERElements getMOVENUMBERAccess() {
-		return pMOVENUMBER;
-	}
-	
-	public ParserRule getMOVENUMBERRule() {
-		return getMOVENUMBERAccess().getRule();
+	public TerminalRule getMOVENUMBERRule() {
+		return tMOVENUMBER;
 	}
 	
 	//AnyMove:
 	//    //for possible extensions to the language
-	//    move=DSLMove ('(' remarks+=Remark* ')')?
+	//    move=DSLMove ('(' remarks+=Remark* ')')? |
+	//    //An extension of the language, experimental
+	//    algebraicmove=SANMove
 	//;
 	public AnyMoveElements getAnyMoveAccess() {
 		return pAnyMove;
@@ -1929,6 +2321,130 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getRemarkAccess().getRule();
 	}
 	
+	///**
+	// * SanMove and Related Implementations in this segment
+	// */
+	// SANMove returns SANMove:
+	//    {SANMove}
+	//    ( castle=SANCastle | normal=SANNormal )
+	//;
+	public SANMoveElements getSANMoveAccess() {
+		return pSANMove;
+	}
+	
+	public ParserRule getSANMoveRule() {
+		return getSANMoveAccess().getRule();
+	}
+	
+	//SANCastle returns SANCastle:
+	//    {SANCastle}
+	//    ( "O-O-O"  side = "Queenside"  )|
+	//    ( "O-O"  side = "Kingside" )
+	//;
+	public SANCastleElements getSANCastleAccess() {
+		return pSANCastle;
+	}
+	
+	public ParserRule getSANCastleRule() {
+		return getSANCastleAccess().getRule();
+	}
+	
+	//SANNormal returns SANNormal:
+	//    {SANNormal}
+	//    piece=SANPiece? disamb=SANDisambiguation? capture=SANCapture? target=Square promotion=SANPromotion? check=SANCheckMarker?
+	//    remark=SANRemark?
+	//;
+	public SANNormalElements getSANNormalAccess() {
+		return pSANNormal;
+	}
+	
+	public ParserRule getSANNormalRule() {
+		return getSANNormalAccess().getRule();
+	}
+	
+	//SANPiece:
+	//    {SANPiece}
+	//    ('K' | 'Q' | 'R' | 'B' | 'N')
+	//;
+	public SANPieceElements getSANPieceAccess() {
+		return pSANPiece;
+	}
+	
+	public ParserRule getSANPieceRule() {
+		return getSANPieceAccess().getRule();
+	}
+	
+	//SANDisambiguation hidden():
+	//    {SANDisambiguation}
+	//    (LETTER | RANKDIGIT)+
+	//;
+	public SANDisambiguationElements getSANDisambiguationAccess() {
+		return pSANDisambiguation;
+	}
+	
+	public ParserRule getSANDisambiguationRule() {
+		return getSANDisambiguationAccess().getRule();
+	}
+	
+	//SANPromotion returns SANPromotion:
+	//    {SANPromotion}
+	//    '=' ('Q' | 'R' | 'B' | 'N')
+	//;
+	public SANPromotionElements getSANPromotionAccess() {
+		return pSANPromotion;
+	}
+	
+	public ParserRule getSANPromotionRule() {
+		return getSANPromotionAccess().getRule();
+	}
+	
+	//SANCheckMarker returns SANCheckMarker:
+	//    {SANCheckMarker}
+	//    ('+' | '#')+
+	//;
+	public SANCheckMarkerElements getSANCheckMarkerAccess() {
+		return pSANCheckMarker;
+	}
+	
+	public ParserRule getSANCheckMarkerRule() {
+		return getSANCheckMarkerAccess().getRule();
+	}
+	
+	//SANCapture:
+	//    {SANCapture}
+	//    'x'
+	//;
+	public SANCaptureElements getSANCaptureAccess() {
+		return pSANCapture;
+	}
+	
+	public ParserRule getSANCaptureRule() {
+		return getSANCaptureAccess().getRule();
+	}
+	
+	//SANRemark returns SANRemark:
+	//    {SANRemark}
+	//    ('!'|'?')+
+	//;
+	public SANRemarkElements getSANRemarkAccess() {
+		return pSANRemark;
+	}
+	
+	public ParserRule getSANRemarkRule() {
+		return getSANRemarkAccess().getRule();
+	}
+	
+	//terminal LETTER: ('a'..'h'|'A'..'H');
+	public TerminalRule getLETTERRule() {
+		return tLETTER;
+	}
+	
+	//terminal RANKDIGIT: ('1'..'8');
+	public TerminalRule getRANKDIGITRule() {
+		return tRANKDIGIT;
+	}
+	
+	// //End segment
 	//Conclusion:
 	//    (method=Method)? result=Result
 	//;
@@ -2117,7 +2633,7 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//terminal SQUARETERMINAL:
-	//    ('a'..'h'|'A'..'H')('1'..'8')
+	//    LETTER RANKDIGIT
 	//;
 	public TerminalRule getSQUARETERMINALRule() {
 		return tSQUARETERMINAL;

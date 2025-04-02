@@ -191,6 +191,69 @@ public class ChessDSLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ChessDSLPackage.SAN_MOVE:
+      {
+        SANMove sanMove = (SANMove)theEObject;
+        T result = caseSANMove(sanMove);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ChessDSLPackage.SAN_CASTLE:
+      {
+        SANCastle sanCastle = (SANCastle)theEObject;
+        T result = caseSANCastle(sanCastle);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ChessDSLPackage.SAN_NORMAL:
+      {
+        SANNormal sanNormal = (SANNormal)theEObject;
+        T result = caseSANNormal(sanNormal);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ChessDSLPackage.SAN_PIECE:
+      {
+        SANPiece sanPiece = (SANPiece)theEObject;
+        T result = caseSANPiece(sanPiece);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ChessDSLPackage.SAN_DISAMBIGUATION:
+      {
+        SANDisambiguation sanDisambiguation = (SANDisambiguation)theEObject;
+        T result = caseSANDisambiguation(sanDisambiguation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ChessDSLPackage.SAN_PROMOTION:
+      {
+        SANPromotion sanPromotion = (SANPromotion)theEObject;
+        T result = caseSANPromotion(sanPromotion);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ChessDSLPackage.SAN_CHECK_MARKER:
+      {
+        SANCheckMarker sanCheckMarker = (SANCheckMarker)theEObject;
+        T result = caseSANCheckMarker(sanCheckMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ChessDSLPackage.SAN_CAPTURE:
+      {
+        SANCapture sanCapture = (SANCapture)theEObject;
+        T result = caseSANCapture(sanCapture);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ChessDSLPackage.SAN_REMARK:
+      {
+        SANRemark sanRemark = (SANRemark)theEObject;
+        T result = caseSANRemark(sanRemark);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ChessDSLPackage.CONCLUSION:
       {
         Conclusion conclusion = (Conclusion)theEObject;
@@ -524,6 +587,150 @@ public class ChessDSLSwitch<T> extends Switch<T>
    * @generated
    */
   public T casePromotion(Promotion object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>SAN Move</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>SAN Move</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSANMove(SANMove object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>SAN Castle</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>SAN Castle</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSANCastle(SANCastle object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>SAN Normal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>SAN Normal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSANNormal(SANNormal object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>SAN Piece</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>SAN Piece</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSANPiece(SANPiece object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>SAN Disambiguation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>SAN Disambiguation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSANDisambiguation(SANDisambiguation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>SAN Promotion</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>SAN Promotion</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSANPromotion(SANPromotion object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>SAN Check Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>SAN Check Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSANCheckMarker(SANCheckMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>SAN Capture</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>SAN Capture</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSANCapture(SANCapture object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>SAN Remark</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>SAN Remark</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSANRemark(SANRemark object)
   {
     return null;
   }

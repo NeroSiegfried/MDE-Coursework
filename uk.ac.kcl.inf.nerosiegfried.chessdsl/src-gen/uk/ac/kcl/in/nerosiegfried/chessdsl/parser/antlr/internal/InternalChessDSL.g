@@ -550,20 +550,19 @@ ruleMovePair returns [EObject current=null]
 	(
 		(
 			(
+				lv_moveNumber_0_0=RULE_MOVENUMBER
 				{
-					newCompositeNode(grammarAccess.getMovePairAccess().getMoveNumberMOVENUMBERParserRuleCall_0_0());
+					newLeafNode(lv_moveNumber_0_0, grammarAccess.getMovePairAccess().getMoveNumberMOVENUMBERTerminalRuleCall_0_0());
 				}
-				lv_moveNumber_0_0=ruleMOVENUMBER
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getMovePairRule());
+						$current = createModelElement(grammarAccess.getMovePairRule());
 					}
-					set(
+					setWithLastConsumed(
 						$current,
 						"moveNumber",
 						lv_moveNumber_0_0,
 						"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.MOVENUMBER");
-					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -645,46 +644,6 @@ ruleMovePair returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleMOVENUMBER
-entryRuleMOVENUMBER returns [String current=null]@init {
-	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-}:
-	{ newCompositeNode(grammarAccess.getMOVENUMBERRule()); }
-	iv_ruleMOVENUMBER=ruleMOVENUMBER
-	{ $current=$iv_ruleMOVENUMBER.current.getText(); }
-	EOF;
-finally {
-	myHiddenTokenState.restore();
-}
-
-// Rule MOVENUMBER
-ruleMOVENUMBER returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-}
-@after {
-	leaveRule();
-}:
-	(
-		this_INT_0=RULE_INT
-		{
-			$current.merge(this_INT_0);
-		}
-		{
-			newLeafNode(this_INT_0, grammarAccess.getMOVENUMBERAccess().getINTTerminalRuleCall_0());
-		}
-		kw='.'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getMOVENUMBERAccess().getFullStopKeyword_1());
-		}
-	)
-;
-finally {
-	myHiddenTokenState.restore();
-}
-
 // Entry rule entryRuleAnyMove
 entryRuleAnyMove returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getAnyMoveRule()); }
@@ -703,52 +662,74 @@ ruleAnyMove returns [EObject current=null]
 	(
 		(
 			(
+				(
+					{
+						newCompositeNode(grammarAccess.getAnyMoveAccess().getMoveDSLMoveParserRuleCall_0_0_0());
+					}
+					lv_move_0_0=ruleDSLMove
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getAnyMoveRule());
+						}
+						set(
+							$current,
+							"move",
+							lv_move_0_0,
+							"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.DSLMove");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			(
+				otherlv_1='('
 				{
-					newCompositeNode(grammarAccess.getAnyMoveAccess().getMoveDSLMoveParserRuleCall_0_0());
+					newLeafNode(otherlv_1, grammarAccess.getAnyMoveAccess().getLeftParenthesisKeyword_0_1_0());
 				}
-				lv_move_0_0=ruleDSLMove
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getAnyMoveAccess().getRemarksRemarkEnumRuleCall_0_1_1_0());
+						}
+						lv_remarks_2_0=ruleRemark
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getAnyMoveRule());
+							}
+							add(
+								$current,
+								"remarks",
+								lv_remarks_2_0,
+								"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.Remark");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)*
+				otherlv_3=')'
+				{
+					newLeafNode(otherlv_3, grammarAccess.getAnyMoveAccess().getRightParenthesisKeyword_0_1_2());
+				}
+			)?
+		)
+		    |
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getAnyMoveAccess().getAlgebraicmoveSANMoveParserRuleCall_1_0());
+				}
+				lv_algebraicmove_4_0=ruleSANMove
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getAnyMoveRule());
 					}
 					set(
 						$current,
-						"move",
-						lv_move_0_0,
-						"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.DSLMove");
+						"algebraicmove",
+						lv_algebraicmove_4_0,
+						"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANMove");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		(
-			otherlv_1='('
-			{
-				newLeafNode(otherlv_1, grammarAccess.getAnyMoveAccess().getLeftParenthesisKeyword_1_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getAnyMoveAccess().getRemarksRemarkEnumRuleCall_1_1_0());
-					}
-					lv_remarks_2_0=ruleRemark
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getAnyMoveRule());
-						}
-						add(
-							$current,
-							"remarks",
-							lv_remarks_2_0,
-							"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.Remark");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)*
-			otherlv_3=')'
-			{
-				newLeafNode(otherlv_3, grammarAccess.getAnyMoveAccess().getRightParenthesisKeyword_1_2());
-			}
-		)?
 	)
 ;
 
@@ -1457,6 +1438,554 @@ rulePromotion returns [EObject current=null]
 		{
 			newLeafNode(otherlv_3, grammarAccess.getPromotionAccess().getRightParenthesisKeyword_3());
 		}
+	)
+;
+
+// Entry rule entryRuleSANMove
+entryRuleSANMove returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSANMoveRule()); }
+	iv_ruleSANMove=ruleSANMove
+	{ $current=$iv_ruleSANMove.current; }
+	EOF;
+
+// Rule SANMove
+ruleSANMove returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getSANMoveAccess().getSANMoveAction_0(),
+					$current);
+			}
+		)
+		(
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getSANMoveAccess().getCastleSANCastleParserRuleCall_1_0_0());
+					}
+					lv_castle_1_0=ruleSANCastle
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getSANMoveRule());
+						}
+						set(
+							$current,
+							"castle",
+							lv_castle_1_0,
+							"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANCastle");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getSANMoveAccess().getNormalSANNormalParserRuleCall_1_1_0());
+					}
+					lv_normal_2_0=ruleSANNormal
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getSANMoveRule());
+						}
+						set(
+							$current,
+							"normal",
+							lv_normal_2_0,
+							"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANNormal");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleSANCastle
+entryRuleSANCastle returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSANCastleRule()); }
+	iv_ruleSANCastle=ruleSANCastle
+	{ $current=$iv_ruleSANCastle.current; }
+	EOF;
+
+// Rule SANCastle
+ruleSANCastle returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					$current = forceCreateModelElement(
+						grammarAccess.getSANCastleAccess().getSANCastleAction_0_0(),
+						$current);
+				}
+			)
+			(
+				otherlv_1='O-O-O'
+				{
+					newLeafNode(otherlv_1, grammarAccess.getSANCastleAccess().getOOOKeyword_0_1_0());
+				}
+				(
+					(
+						lv_side_2_0='Queenside'
+						{
+							newLeafNode(lv_side_2_0, grammarAccess.getSANCastleAccess().getSideQueensideKeyword_0_1_1_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getSANCastleRule());
+							}
+							setWithLastConsumed($current, "side", lv_side_2_0, "Queenside");
+						}
+					)
+				)
+			)
+		)
+		    |
+		(
+			otherlv_3='O-O'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getSANCastleAccess().getOOKeyword_1_0());
+			}
+			(
+				(
+					lv_side_4_0='Kingside'
+					{
+						newLeafNode(lv_side_4_0, grammarAccess.getSANCastleAccess().getSideKingsideKeyword_1_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getSANCastleRule());
+						}
+						setWithLastConsumed($current, "side", lv_side_4_0, "Kingside");
+					}
+				)
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleSANNormal
+entryRuleSANNormal returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSANNormalRule()); }
+	iv_ruleSANNormal=ruleSANNormal
+	{ $current=$iv_ruleSANNormal.current; }
+	EOF;
+
+// Rule SANNormal
+ruleSANNormal returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getSANNormalAccess().getSANNormalAction_0(),
+					$current);
+			}
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getSANNormalAccess().getPieceSANPieceParserRuleCall_1_0());
+				}
+				lv_piece_1_0=ruleSANPiece
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getSANNormalRule());
+					}
+					set(
+						$current,
+						"piece",
+						lv_piece_1_0,
+						"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANPiece");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getSANNormalAccess().getDisambSANDisambiguationParserRuleCall_2_0());
+				}
+				lv_disamb_2_0=ruleSANDisambiguation
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getSANNormalRule());
+					}
+					set(
+						$current,
+						"disamb",
+						lv_disamb_2_0,
+						"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANDisambiguation");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getSANNormalAccess().getCaptureSANCaptureParserRuleCall_3_0());
+				}
+				lv_capture_3_0=ruleSANCapture
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getSANNormalRule());
+					}
+					set(
+						$current,
+						"capture",
+						lv_capture_3_0,
+						"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANCapture");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getSANNormalAccess().getTargetSquareParserRuleCall_4_0());
+				}
+				lv_target_4_0=ruleSquare
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getSANNormalRule());
+					}
+					set(
+						$current,
+						"target",
+						lv_target_4_0,
+						"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.Square");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getSANNormalAccess().getPromotionSANPromotionParserRuleCall_5_0());
+				}
+				lv_promotion_5_0=ruleSANPromotion
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getSANNormalRule());
+					}
+					set(
+						$current,
+						"promotion",
+						lv_promotion_5_0,
+						"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANPromotion");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getSANNormalAccess().getCheckSANCheckMarkerParserRuleCall_6_0());
+				}
+				lv_check_6_0=ruleSANCheckMarker
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getSANNormalRule());
+					}
+					set(
+						$current,
+						"check",
+						lv_check_6_0,
+						"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANCheckMarker");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getSANNormalAccess().getRemarkSANRemarkParserRuleCall_7_0());
+				}
+				lv_remark_7_0=ruleSANRemark
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getSANNormalRule());
+					}
+					set(
+						$current,
+						"remark",
+						lv_remark_7_0,
+						"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SANRemark");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+	)
+;
+
+// Entry rule entryRuleSANPiece
+entryRuleSANPiece returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSANPieceRule()); }
+	iv_ruleSANPiece=ruleSANPiece
+	{ $current=$iv_ruleSANPiece.current; }
+	EOF;
+
+// Rule SANPiece
+ruleSANPiece returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getSANPieceAccess().getSANPieceAction_0(),
+					$current);
+			}
+		)
+		(
+			otherlv_1='K'
+			{
+				newLeafNode(otherlv_1, grammarAccess.getSANPieceAccess().getKKeyword_1_0());
+			}
+			    |
+			otherlv_2='Q'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getSANPieceAccess().getQKeyword_1_1());
+			}
+			    |
+			otherlv_3='R'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getSANPieceAccess().getRKeyword_1_2());
+			}
+			    |
+			otherlv_4='B'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getSANPieceAccess().getBKeyword_1_3());
+			}
+			    |
+			otherlv_5='N'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getSANPieceAccess().getNKeyword_1_4());
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleSANDisambiguation
+entryRuleSANDisambiguation returns [EObject current=null]@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}:
+	{ newCompositeNode(grammarAccess.getSANDisambiguationRule()); }
+	iv_ruleSANDisambiguation=ruleSANDisambiguation
+	{ $current=$iv_ruleSANDisambiguation.current; }
+	EOF;
+finally {
+	myHiddenTokenState.restore();
+}
+
+// Rule SANDisambiguation
+ruleSANDisambiguation returns [EObject current=null]
+@init {
+	enterRule();
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getSANDisambiguationAccess().getSANDisambiguationAction_0(),
+					$current);
+			}
+		)
+		(
+			this_LETTER_1=RULE_LETTER
+			{
+				newLeafNode(this_LETTER_1, grammarAccess.getSANDisambiguationAccess().getLETTERTerminalRuleCall_1_0());
+			}
+			    |
+			this_RANKDIGIT_2=RULE_RANKDIGIT
+			{
+				newLeafNode(this_RANKDIGIT_2, grammarAccess.getSANDisambiguationAccess().getRANKDIGITTerminalRuleCall_1_1());
+			}
+		)+
+	)
+;
+finally {
+	myHiddenTokenState.restore();
+}
+
+// Entry rule entryRuleSANPromotion
+entryRuleSANPromotion returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSANPromotionRule()); }
+	iv_ruleSANPromotion=ruleSANPromotion
+	{ $current=$iv_ruleSANPromotion.current; }
+	EOF;
+
+// Rule SANPromotion
+ruleSANPromotion returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getSANPromotionAccess().getSANPromotionAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='='
+		{
+			newLeafNode(otherlv_1, grammarAccess.getSANPromotionAccess().getEqualsSignKeyword_1());
+		}
+		(
+			otherlv_2='Q'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getSANPromotionAccess().getQKeyword_2_0());
+			}
+			    |
+			otherlv_3='R'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getSANPromotionAccess().getRKeyword_2_1());
+			}
+			    |
+			otherlv_4='B'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getSANPromotionAccess().getBKeyword_2_2());
+			}
+			    |
+			otherlv_5='N'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getSANPromotionAccess().getNKeyword_2_3());
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleSANCheckMarker
+entryRuleSANCheckMarker returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSANCheckMarkerRule()); }
+	iv_ruleSANCheckMarker=ruleSANCheckMarker
+	{ $current=$iv_ruleSANCheckMarker.current; }
+	EOF;
+
+// Rule SANCheckMarker
+ruleSANCheckMarker returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getSANCheckMarkerAccess().getSANCheckMarkerAction_0(),
+					$current);
+			}
+		)
+		(
+			otherlv_1='+'
+			{
+				newLeafNode(otherlv_1, grammarAccess.getSANCheckMarkerAccess().getPlusSignKeyword_1_0());
+			}
+			    |
+			otherlv_2='#'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getSANCheckMarkerAccess().getNumberSignKeyword_1_1());
+			}
+		)+
+	)
+;
+
+// Entry rule entryRuleSANCapture
+entryRuleSANCapture returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSANCaptureRule()); }
+	iv_ruleSANCapture=ruleSANCapture
+	{ $current=$iv_ruleSANCapture.current; }
+	EOF;
+
+// Rule SANCapture
+ruleSANCapture returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getSANCaptureAccess().getSANCaptureAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='x'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getSANCaptureAccess().getXKeyword_1());
+		}
+	)
+;
+
+// Entry rule entryRuleSANRemark
+entryRuleSANRemark returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSANRemarkRule()); }
+	iv_ruleSANRemark=ruleSANRemark
+	{ $current=$iv_ruleSANRemark.current; }
+	EOF;
+
+// Rule SANRemark
+ruleSANRemark returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getSANRemarkAccess().getSANRemarkAction_0(),
+					$current);
+			}
+		)
+		(
+			otherlv_1='!'
+			{
+				newLeafNode(otherlv_1, grammarAccess.getSANRemarkAccess().getExclamationMarkKeyword_1_0());
+			}
+			    |
+			otherlv_2='?'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getSANRemarkAccess().getQuestionMarkKeyword_1_1());
+			}
+		)+
 	)
 ;
 
@@ -2405,7 +2934,13 @@ rulePiece returns [Enumerator current=null]
 	)
 ;
 
-RULE_SQUARETERMINAL : ('a'..'h'|'A'..'H') '1'..'8';
+RULE_MOVENUMBER : ('0'..'9')+ '.';
+
+RULE_LETTER : ('a'..'h'|'A'..'H');
+
+RULE_RANKDIGIT : '1'..'8';
+
+RULE_SQUARETERMINAL : RULE_LETTER RULE_RANKDIGIT;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

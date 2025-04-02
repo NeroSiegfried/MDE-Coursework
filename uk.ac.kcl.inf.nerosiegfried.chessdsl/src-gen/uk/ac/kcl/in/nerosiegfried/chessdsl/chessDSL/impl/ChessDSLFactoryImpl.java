@@ -82,6 +82,15 @@ public class ChessDSLFactoryImpl extends EFactoryImpl implements ChessDSLFactory
       case ChessDSLPackage.CASTLE: return createCastle();
       case ChessDSLPackage.EN_PASSANT: return createEnPassant();
       case ChessDSLPackage.PROMOTION: return createPromotion();
+      case ChessDSLPackage.SAN_MOVE: return createSANMove();
+      case ChessDSLPackage.SAN_CASTLE: return createSANCastle();
+      case ChessDSLPackage.SAN_NORMAL: return createSANNormal();
+      case ChessDSLPackage.SAN_PIECE: return createSANPiece();
+      case ChessDSLPackage.SAN_DISAMBIGUATION: return createSANDisambiguation();
+      case ChessDSLPackage.SAN_PROMOTION: return createSANPromotion();
+      case ChessDSLPackage.SAN_CHECK_MARKER: return createSANCheckMarker();
+      case ChessDSLPackage.SAN_CAPTURE: return createSANCapture();
+      case ChessDSLPackage.SAN_REMARK: return createSANRemark();
       case ChessDSLPackage.CONCLUSION: return createConclusion();
       case ChessDSLPackage.METHOD: return createMethod();
       case ChessDSLPackage.WIN: return createWin();
@@ -330,6 +339,114 @@ public class ChessDSLFactoryImpl extends EFactoryImpl implements ChessDSLFactory
   {
     PromotionImpl promotion = new PromotionImpl();
     return promotion;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SANMove createSANMove()
+  {
+    SANMoveImpl sanMove = new SANMoveImpl();
+    return sanMove;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SANCastle createSANCastle()
+  {
+    SANCastleImpl sanCastle = new SANCastleImpl();
+    return sanCastle;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SANNormal createSANNormal()
+  {
+    SANNormalImpl sanNormal = new SANNormalImpl();
+    return sanNormal;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SANPiece createSANPiece()
+  {
+    SANPieceImpl sanPiece = new SANPieceImpl();
+    return sanPiece;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SANDisambiguation createSANDisambiguation()
+  {
+    SANDisambiguationImpl sanDisambiguation = new SANDisambiguationImpl();
+    return sanDisambiguation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SANPromotion createSANPromotion()
+  {
+    SANPromotionImpl sanPromotion = new SANPromotionImpl();
+    return sanPromotion;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SANCheckMarker createSANCheckMarker()
+  {
+    SANCheckMarkerImpl sanCheckMarker = new SANCheckMarkerImpl();
+    return sanCheckMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SANCapture createSANCapture()
+  {
+    SANCaptureImpl sanCapture = new SANCaptureImpl();
+    return sanCapture;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SANRemark createSANRemark()
+  {
+    SANRemarkImpl sanRemark = new SANRemarkImpl();
+    return sanRemark;
   }
 
   /**

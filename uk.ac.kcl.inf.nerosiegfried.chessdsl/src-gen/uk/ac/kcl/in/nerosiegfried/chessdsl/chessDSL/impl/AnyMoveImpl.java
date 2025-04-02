@@ -22,6 +22,7 @@ import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.AnyMove;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.ChessDSLPackage;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.DSLMove;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Remark;
+import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,6 +34,7 @@ import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Remark;
  * <ul>
  *   <li>{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.AnyMoveImpl#getMove <em>Move</em>}</li>
  *   <li>{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.AnyMoveImpl#getRemarks <em>Remarks</em>}</li>
+ *   <li>{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.AnyMoveImpl#getAlgebraicmove <em>Algebraicmove</em>}</li>
  * </ul>
  *
  * @generated
@@ -58,6 +60,16 @@ public class AnyMoveImpl extends MinimalEObjectImpl.Container implements AnyMove
    * @ordered
    */
   protected EList<Remark> remarks;
+
+  /**
+   * The cached value of the '{@link #getAlgebraicmove() <em>Algebraicmove</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAlgebraicmove()
+   * @generated
+   * @ordered
+   */
+  protected SANMove algebraicmove;
 
   /**
    * <!-- begin-user-doc -->
@@ -151,12 +163,64 @@ public class AnyMoveImpl extends MinimalEObjectImpl.Container implements AnyMove
    * @generated
    */
   @Override
+  public SANMove getAlgebraicmove()
+  {
+    return algebraicmove;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetAlgebraicmove(SANMove newAlgebraicmove, NotificationChain msgs)
+  {
+    SANMove oldAlgebraicmove = algebraicmove;
+    algebraicmove = newAlgebraicmove;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ChessDSLPackage.ANY_MOVE__ALGEBRAICMOVE, oldAlgebraicmove, newAlgebraicmove);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setAlgebraicmove(SANMove newAlgebraicmove)
+  {
+    if (newAlgebraicmove != algebraicmove)
+    {
+      NotificationChain msgs = null;
+      if (algebraicmove != null)
+        msgs = ((InternalEObject)algebraicmove).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ChessDSLPackage.ANY_MOVE__ALGEBRAICMOVE, null, msgs);
+      if (newAlgebraicmove != null)
+        msgs = ((InternalEObject)newAlgebraicmove).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ChessDSLPackage.ANY_MOVE__ALGEBRAICMOVE, null, msgs);
+      msgs = basicSetAlgebraicmove(newAlgebraicmove, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ChessDSLPackage.ANY_MOVE__ALGEBRAICMOVE, newAlgebraicmove, newAlgebraicmove));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
       case ChessDSLPackage.ANY_MOVE__MOVE:
         return basicSetMove(null, msgs);
+      case ChessDSLPackage.ANY_MOVE__ALGEBRAICMOVE:
+        return basicSetAlgebraicmove(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -175,6 +239,8 @@ public class AnyMoveImpl extends MinimalEObjectImpl.Container implements AnyMove
         return getMove();
       case ChessDSLPackage.ANY_MOVE__REMARKS:
         return getRemarks();
+      case ChessDSLPackage.ANY_MOVE__ALGEBRAICMOVE:
+        return getAlgebraicmove();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -197,6 +263,9 @@ public class AnyMoveImpl extends MinimalEObjectImpl.Container implements AnyMove
         getRemarks().clear();
         getRemarks().addAll((Collection<? extends Remark>)newValue);
         return;
+      case ChessDSLPackage.ANY_MOVE__ALGEBRAICMOVE:
+        setAlgebraicmove((SANMove)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -217,6 +286,9 @@ public class AnyMoveImpl extends MinimalEObjectImpl.Container implements AnyMove
       case ChessDSLPackage.ANY_MOVE__REMARKS:
         getRemarks().clear();
         return;
+      case ChessDSLPackage.ANY_MOVE__ALGEBRAICMOVE:
+        setAlgebraicmove((SANMove)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -235,6 +307,8 @@ public class AnyMoveImpl extends MinimalEObjectImpl.Container implements AnyMove
         return move != null;
       case ChessDSLPackage.ANY_MOVE__REMARKS:
         return remarks != null && !remarks.isEmpty();
+      case ChessDSLPackage.ANY_MOVE__ALGEBRAICMOVE:
+        return algebraicmove != null;
     }
     return super.eIsSet(featureID);
   }
