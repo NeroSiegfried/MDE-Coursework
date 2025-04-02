@@ -227,51 +227,19 @@ enum Remark:
  * SanMove and Related Implementations in this segment
  */
  
- SANMove returns SANMove:
-    {SANMove}
-    ( castle=SANCastle | normal=SANNormal )
+SANMove returns SANMove:
+    SAN_TOKEN
 ;
 
-SANCastle returns SANCastle:
-    {SANCastle}
-    ( "O-O-O"  side = "Queenside"  )|
-    ( "O-O"  side = "Kingside" )
-;
-
-SANNormal returns SANNormal:
-    {SANNormal}
-    piece=SANPiece? disamb=SANDisambiguation? capture=SANCapture? target=Square promotion=SANPromotion? check=SANCheckMarker?
-    remark=SANRemark?
-;
-
-SANPiece:
-    {SANPiece}
-    ('K' | 'Q' | 'R' | 'B' | 'N')
-;
-
-SANDisambiguation hidden():
-    {SANDisambiguation}
-    (LETTER | RANKDIGIT)+
-;
-
-SANPromotion returns SANPromotion:
-    {SANPromotion}
-    '=' ('Q' | 'R' | 'B' | 'N')
-;
-
-SANCheckMarker returns SANCheckMarker:
-    {SANCheckMarker}
-    ('+' | '#')+
-;
-
-SANCapture:
-	{SANCapture}
-	'x'
-;
-
-SANRemark returns SANRemark:
-	{SANRemark}
-	('!'|'?')+
+terminal SAN_TOKEN:
+    (('K'|'Q'|'R'|'B'|'N')?                  // Optional piece letter; if missing, it's a pawn.
+     (LETTER | RANKDIGIT)*                   // Optional disambiguation.
+     ('x')?                                  // Optional capture indicator.
+     LETTER RANKDIGIT                        // Target square.
+     ('=' ('Q'|'R'|'B'|'N'))?                // Optional promotion.
+     ('+'|'#')*                              // Optional check or mate markers.
+     ('!'|'?')*                              // Optional remarks.
+    )
 ;
 
 terminal LETTER: ('a'..'h'|'A'..'H');
