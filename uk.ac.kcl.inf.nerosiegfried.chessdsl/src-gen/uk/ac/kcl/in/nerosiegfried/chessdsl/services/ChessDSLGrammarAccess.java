@@ -944,26 +944,30 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.Escaped_SANMove");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cSANMoveAction_0 = (Action)cGroup.eContents().get(0);
-		private final RuleCall cSAN_TOKENTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Assignment cTokenAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTokenSAN_TOKENTerminalRuleCall_1_0 = (RuleCall)cTokenAssignment_1.eContents().get(0);
 		
 		///**
 		// * SanMove and Related Implementations in this segment
 		// */
 		//Escaped_SANMove returns SANMove:
 		//    {SANMove}
-		//    SAN_TOKEN
+		//    token = SAN_TOKEN
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{SANMove}
-		//SAN_TOKEN
+		//token = SAN_TOKEN
 		public Group getGroup() { return cGroup; }
 		
 		//{SANMove}
 		public Action getSANMoveAction_0() { return cSANMoveAction_0; }
 		
+		//token = SAN_TOKEN
+		public Assignment getTokenAssignment_1() { return cTokenAssignment_1; }
+		
 		//SAN_TOKEN
-		public RuleCall getSAN_TOKENTerminalRuleCall_1() { return cSAN_TOKENTerminalRuleCall_1; }
+		public RuleCall getTokenSAN_TOKENTerminalRuleCall_1_0() { return cTokenSAN_TOKENTerminalRuleCall_1_0; }
 	}
 	public class ConclusionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.Conclusion");
@@ -1972,7 +1976,7 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	// */
 	//Escaped_SANMove returns SANMove:
 	//    {SANMove}
-	//    SAN_TOKEN
+	//    token = SAN_TOKEN
 	//;
 	public Escaped_SANMoveElements getEscaped_SANMoveAccess() {
 		return pEscaped_SANMove;
@@ -1997,7 +2001,7 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return tSAN_TOKEN;
 	}
 	
-	//terminal LETTER: ('a'..'h'|'A'..'H');
+	//terminal LETTER: ('a'..'h');
 	public TerminalRule getLETTERRule() {
 		return tLETTER;
 	}

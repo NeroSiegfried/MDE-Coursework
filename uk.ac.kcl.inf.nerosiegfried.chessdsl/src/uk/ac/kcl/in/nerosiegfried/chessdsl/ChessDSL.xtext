@@ -230,13 +230,9 @@ enum Remark:
  * SanMove and Related Implementations in this segment
  */
  
- /**
-  * Introduced an AlgebraicBlock so I don't have to parse every individual move
-  */
- 
 Escaped_SANMove returns SANMove:
 	{SANMove}
-	SAN_TOKEN
+	token = SAN_TOKEN
 ;
  
 terminal SAN_TOKEN:
@@ -251,7 +247,7 @@ terminal SAN_TOKEN:
     )
 ;
 
-terminal LETTER: ('a'..'h'|'A'..'H');
+terminal LETTER: ('a'..'h');
 terminal RANKDIGIT: ('1'..'8');
 terminal ESCAPE: ('@') ;
  

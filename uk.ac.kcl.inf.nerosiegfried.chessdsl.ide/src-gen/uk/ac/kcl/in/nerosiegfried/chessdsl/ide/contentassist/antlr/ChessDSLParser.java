@@ -131,6 +131,7 @@ public class ChessDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEnPassantAccess().getSquareAssignment_2(), "rule__EnPassant__SquareAssignment_2");
 			builder.put(grammarAccess.getPromotionAccess().getMoveAssignment_0(), "rule__Promotion__MoveAssignment_0");
 			builder.put(grammarAccess.getPromotionAccess().getPieceAssignment_2(), "rule__Promotion__PieceAssignment_2");
+			builder.put(grammarAccess.getEscaped_SANMoveAccess().getTokenAssignment_1(), "rule__Escaped_SANMove__TokenAssignment_1");
 			builder.put(grammarAccess.getConclusionAccess().getMethodAssignment_0(), "rule__Conclusion__MethodAssignment_0");
 			builder.put(grammarAccess.getConclusionAccess().getResultAssignment_1(), "rule__Conclusion__ResultAssignment_1");
 			builder.put(grammarAccess.getMethodAccess().getWinAssignment_0(), "rule__Method__WinAssignment_0");

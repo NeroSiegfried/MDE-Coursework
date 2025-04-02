@@ -888,6 +888,17 @@ public class ChessDSLPackageImpl extends EPackageImpl implements ChessDSLPackage
    * @generated
    */
   @Override
+  public EAttribute getSANMove_Token()
+  {
+    return (EAttribute)sanMoveEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getConclusion()
   {
     return conclusionEClass;
@@ -1342,6 +1353,7 @@ public class ChessDSLPackageImpl extends EPackageImpl implements ChessDSLPackage
     createEAttribute(promotionEClass, PROMOTION__PIECE);
 
     sanMoveEClass = createEClass(SAN_MOVE);
+    createEAttribute(sanMoveEClass, SAN_MOVE__TOKEN);
 
     conclusionEClass = createEClass(CONCLUSION);
     createEReference(conclusionEClass, CONCLUSION__METHOD);
@@ -1493,6 +1505,7 @@ public class ChessDSLPackageImpl extends EPackageImpl implements ChessDSLPackage
     initEAttribute(getPromotion_Piece(), this.getPiece(), "piece", null, 0, 1, Promotion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(sanMoveEClass, SANMove.class, "SANMove", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSANMove_Token(), ecorePackage.getEString(), "token", null, 0, 1, SANMove.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(conclusionEClass, Conclusion.class, "Conclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getConclusion_Method(), this.getMethod(), null, "method", null, 0, 1, Conclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

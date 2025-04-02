@@ -670,13 +670,22 @@ public interface ChessDSLPackage extends EPackage
   int SAN_MOVE = 16;
 
   /**
+   * The feature id for the '<em><b>Token</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SAN_MOVE__TOKEN = 0;
+
+  /**
    * The number of structural features of the '<em>SAN Move</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SAN_MOVE_FEATURE_COUNT = 0;
+  int SAN_MOVE_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ConclusionImpl <em>Conclusion</em>}' class.
@@ -1623,6 +1632,17 @@ public interface ChessDSLPackage extends EPackage
   EClass getSANMove();
 
   /**
+   * Returns the meta object for the attribute '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove#getToken <em>Token</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Token</em>'.
+   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove#getToken()
+   * @see #getSANMove()
+   * @generated
+   */
+  EAttribute getSANMove_Token();
+
+  /**
    * Returns the meta object for class '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Conclusion <em>Conclusion</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2427,6 +2447,14 @@ public interface ChessDSLPackage extends EPackage
      * @generated
      */
     EClass SAN_MOVE = eINSTANCE.getSANMove();
+
+    /**
+     * The meta object literal for the '<em><b>Token</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SAN_MOVE__TOKEN = eINSTANCE.getSANMove_Token();
 
     /**
      * The meta object literal for the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.impl.ConclusionImpl <em>Conclusion</em>}' class.

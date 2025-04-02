@@ -1464,10 +1464,24 @@ ruleEscaped_SANMove returns [EObject current=null]
 					$current);
 			}
 		)
-		this_SAN_TOKEN_1=RULE_SAN_TOKEN
-		{
-			newLeafNode(this_SAN_TOKEN_1, grammarAccess.getEscaped_SANMoveAccess().getSAN_TOKENTerminalRuleCall_1());
-		}
+		(
+			(
+				lv_token_1_0=RULE_SAN_TOKEN
+				{
+					newLeafNode(lv_token_1_0, grammarAccess.getEscaped_SANMoveAccess().getTokenSAN_TOKENTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEscaped_SANMoveRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"token",
+						lv_token_1_0,
+						"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.SAN_TOKEN");
+				}
+			)
+		)
 	)
 ;
 
@@ -2420,7 +2434,7 @@ RULE_MOVENUMBER : ('0'..'9')+ '.';
 
 RULE_SAN_TOKEN : RULE_ESCAPE ('K'|'Q'|'R'|'B'|'N')? (RULE_LETTER|RULE_RANKDIGIT)* 'x'? RULE_SQUARETERMINAL ('=' ('Q'|'R'|'B'|'N'))? ('+'|'#')* ('!'|'?')*;
 
-fragment RULE_LETTER : ('a'..'h'|'A'..'H');
+fragment RULE_LETTER : 'a'..'h';
 
 fragment RULE_RANKDIGIT : '1'..'8';
 

@@ -90,7 +90,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//Promotion/move"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ChessDSL.ecore#//Promotion/piece"/>
     </genClasses>
-    <genClasses ecoreClass="ChessDSL.ecore#//SANMove"/>
+    <genClasses ecoreClass="ChessDSL.ecore#//SANMove">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ChessDSL.ecore#//SANMove/token"/>
+    </genClasses>
     <genClasses ecoreClass="ChessDSL.ecore#//Conclusion">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//Conclusion/method"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//Conclusion/result"/>

@@ -3788,9 +3788,9 @@ rule__Escaped_SANMove__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEscaped_SANMoveAccess().getSAN_TOKENTerminalRuleCall_1()); }
-	RULE_SAN_TOKEN
-	{ after(grammarAccess.getEscaped_SANMoveAccess().getSAN_TOKENTerminalRuleCall_1()); }
+	{ before(grammarAccess.getEscaped_SANMoveAccess().getTokenAssignment_1()); }
+	(rule__Escaped_SANMove__TokenAssignment_1)
+	{ after(grammarAccess.getEscaped_SANMoveAccess().getTokenAssignment_1()); }
 )
 ;
 finally {
@@ -5459,6 +5459,21 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__Escaped_SANMove__TokenAssignment_1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getEscaped_SANMoveAccess().getTokenSAN_TOKENTerminalRuleCall_1_0()); }
+		RULE_SAN_TOKEN
+		{ after(grammarAccess.getEscaped_SANMoveAccess().getTokenSAN_TOKENTerminalRuleCall_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__Conclusion__MethodAssignment_0
 	@init {
 		int stackSize = keepStackSize();
@@ -5756,7 +5771,7 @@ RULE_MOVENUMBER : ('0'..'9')+ '.';
 
 RULE_SAN_TOKEN : RULE_ESCAPE ('K'|'Q'|'R'|'B'|'N')? (RULE_LETTER|RULE_RANKDIGIT)* 'x'? RULE_SQUARETERMINAL ('=' ('Q'|'R'|'B'|'N'))? ('+'|'#')* ('!'|'?')*;
 
-fragment RULE_LETTER : ('a'..'h'|'A'..'H');
+fragment RULE_LETTER : 'a'..'h';
 
 fragment RULE_RANKDIGIT : '1'..'8';
 

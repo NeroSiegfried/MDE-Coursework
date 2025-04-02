@@ -91,7 +91,9 @@
     <eLiterals name="Check" value="5" literal="Check"/>
     <eLiterals name="Checkmate" value="6" literal="Checkmate"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SANMove"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SANMove">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="token" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Conclusion">
     <eStructuralFeatures xsi:type="ecore:EReference" name="method" eType="#//Method"
         containment="true"/>

@@ -42,22 +42,9 @@ public class ChessDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (ruleCall.getRule() == grammarAccess.getSAN_TOKENRule())
-			return getSAN_TOKENToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
-	/**
-	 * terminal SAN_TOKEN:
-	 * 	 ESCAPE
-	 *      (('K'|'Q'|'R'|'B'|'N')?                       (LETTER | RANKDIGIT)*                        ('x')?                                       SQUARETERMINAL                             ('=' ('Q'|'R'|'B'|'N'))?                     ('+'|'#')*                                   ('!'|'?')*                                  )
-	 * ;
-	 */
-	protected String getSAN_TOKENToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "@";
-	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {

@@ -324,11 +324,17 @@ public class ChessDSLSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Escaped_SANMove returns SANMove
 	 *
 	 * Constraint:
-	 *     {SANMove}
+	 *     token=SAN_TOKEN
 	 * </pre>
 	 */
 	protected void sequence_Escaped_SANMove(ISerializationContext context, SANMove semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ChessDSLPackage.Literals.SAN_MOVE__TOKEN) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ChessDSLPackage.Literals.SAN_MOVE__TOKEN));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEscaped_SANMoveAccess().getTokenSAN_TOKENTerminalRuleCall_1_0(), semanticObject.getToken());
+		feeder.finish();
 	}
 	
 	

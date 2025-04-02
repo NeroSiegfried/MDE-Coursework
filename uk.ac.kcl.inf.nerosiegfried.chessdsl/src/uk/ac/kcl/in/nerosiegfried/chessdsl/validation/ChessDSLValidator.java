@@ -31,6 +31,8 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.xtext.validation.Check;
 
@@ -130,13 +132,174 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             }
         }
     }
+    
+    
+ // --- New Helper: Convert an algebraic (SAN) move into a DSLMove ---
+    // This is a very simplified conversion. In a full implementation you would analyze disambiguation, etc.
+    private AnyMove convertSANtoDSL(SANMove san, Color side, BoardState board) {
+    	// Get the token text from the SAN move node.
+        String token = san.getToken();
+        AnyMove move = ChessDSLFactory.eINSTANCE.createAnyMove();
+        if (token == null || token.isEmpty()) {
+            error("Empty algebraic move", san, null);
+            Dummy dummy = ChessDSLFactory.eINSTANCE.createDummy();
+            move.setMove(dummy);
+            return move;
+            //return dummy;
+        }
+        
+        //Strip off escape character
+        //Hopefully will take this out of the grammar soon
+        if (token.startsWith("@")) {
+            token = token.substring(1);
+        }
+        
+        // Check for castling first.
+        if (token.equals("O-O") || token.equals("O-O-O")) {
+            Castle castle = ChessDSLFactory.eINSTANCE.createCastle();
+            castle.setSide(token.equals("O-O-O") ? "Queenside" : "Kingside");
+            move.setMove(castle);
+            //return castle;
+        }
+        
+        // Define a regex to break the move into parts.
+        // This regex covers:
+        //  - Optional piece letter (K, Q, R, B, N). If absent, it is a pawn.
+        //  - Optional disambiguation characters (either file letter and/or rank digit).
+        //  - Optional capture indicator "x"
+        //  - Mandatory target square (e.g. e4)
+        //  - Optional promotion (e.g. "=Q")
+        //  - Optional check/mate markers (ignored here)
+        String regex = "^(?:(K|Q|R|B|N))?([a-h]|[1-8])?([a-h]|[1-8])?(x)?([a-h][1-8])?(?:=(Q|R|B|N))?([+#]*)([!\\?]+)?$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(token);
+        if (!matcher.matches()) {
+            error("Invalid algebraic notation: " + token, san, null);
+            Dummy dummy = ChessDSLFactory.eINSTANCE.createDummy();
+            move.setMove(dummy);
+            return move;
+            //return dummy;
+        }
+        // Extract parts:
+        String pieceLetter = matcher.group(1); // may be null (pawn)
+        String disamb1 = matcher.group(2); // optional disambiguation (file or rank)
+        String disamb2 = matcher.group(3); // optional disambiguation (file or rank)
+        String captureIndicator = matcher.group(4); // "x" if present
+        String target = matcher.group(5); // e.g. "f3"
+        String promo = matcher.group(6);  // e.g. "Q" if promotion
+        // Group 7 (check/mate markers) is ignored.
+        String remark = matcher.group(8); // e.g. "?!"
 
+        Piece movingPiece = (pieceLetter != null) ? Piece.valueOf(pieceLetter) : Piece.PAWN;
+        String disamb = "";
+        if (disamb1 != null) disamb += disamb1;
+        if (disamb2 != null) disamb += disamb2;
+        boolean isCapture = (captureIndicator != null);
+        
+        // Now, scan the board for pieces of type 'movingPiece' and color 'side'
+        // that can legally move to the target square.
+        List<String> candidates = new ArrayList<>();
+        for (String sq : board.boardMap.keySet()) {
+            PieceInfo pi = board.boardMap.get(sq);
+            if (pi.color == side && pi.type == movingPiece) {
+                // Use your isMovePatternLegal() helper (assumed available) to check if a piece on square 'sq'
+                // can move to 'target' given the rules for piece 'movingPiece'
+                if (isMovePatternLegal(board, sq, target, movingPiece, side, isCapture)) {
+                    candidates.add(sq);
+                }
+            }
+        }
+        // If disambiguation info is provided, filter the candidates.
+        if (!disamb.isEmpty()) {
+            List<String> filtered = new ArrayList<>();
+            for (String cand : candidates) {
+                boolean match = true;
+                // Check each character of the disambiguation:
+                for (char c : disamb.toCharArray()) {
+                    if (Character.isLetter(c)) {
+                        if (cand.charAt(0) != c) {
+                            match = false;
+                            break;
+                        }
+                    } else if (Character.isDigit(c)) {
+                        if (cand.charAt(1) != c) {
+                            match = false;
+                            break;
+                        }
+                    }
+                }
+                if (match) {
+                    filtered.add(cand);
+                }
+            }
+            candidates = filtered;
+        }
+        if (candidates.isEmpty()) {
+            error("No candidate piece found for move: " + token, san, null);
+            Dummy dummy = ChessDSLFactory.eINSTANCE.createDummy();
+            move.setMove(dummy);
+            return move;
+            //return dummy;
+        }
+        if (candidates.size() > 1) {
+            error("Ambiguous move: " + token, san, null);
+            // For validation, it is an error. In case of ambiguity, pick the first candidate.
+        }
+        String fromSquare = candidates.get(0);
+
+        // Now, create a Move (or Promotion if applicable)
+        Move bmove = ChessDSLFactory.eINSTANCE.createMove();
+        bmove.setPiece(movingPiece);
+        bmove.setFrom(createSquare(fromSquare));
+        bmove.setTo(createSquare(target));
+        move.setMove(bmove);
+        if (promo != null) {
+            Promotion promotion = ChessDSLFactory.eINSTANCE.createPromotion();
+            promotion.setPiece(Piece.valueOf(promo));
+            promotion.setMove(bmove);
+            move.setMove(promotion);
+            //return promotion;
+        }
+        
+        
+        if (remark != null) {
+        	move.getRemarks().add(translateAlgebraicRemark(remark, move));
+        }
+        
+        return move;
+    }
+    
+    private Remark translateAlgebraicRemark(String r, AnyMove move) {
+    	if(r.startsWith("!!"))
+    		return Remark.EXCELLENT;
+    	else if(r.startsWith("?!"))
+    		return Remark.RISKY;
+    	else if(r.startsWith("!?"))
+    		return Remark.DUBIOUS;
+    	else if(r.startsWith("?"))
+    		return Remark.BAD;
+    	else if(r.startsWith("!"))
+    		return Remark.GOOD;
+    	else
+    		error("Remark" + r + "cannot be identified", move, null);
+    	//will never run
+    	return Remark.GOOD;
+    }
+    
+    // Helper to create a Square instance from a string.
+    private Square createSquare(String sq) {
+        Square square = ChessDSLFactory.eINSTANCE.createSquare();
+        square.setSquare(sq);
+        return square;
+    }
+    
+    
     @Check
     public void checkGame(Game game) {
         if(game == null) return;
 
         BoardState board = new BoardState();
-        // fill board
+        // fill board from initial state, or use fresh board
         if(game.getInitial() != null && game.getInitial().getPositions() != null) {
             for(Placement p : game.getInitial().getPositions().getPlacement()) {
                 board.place(p.getSquare().getSquare(),
@@ -147,9 +310,9 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             board.initFreshBoard();
         }
 
-        // ensure 2 kings
+        // ensure exactly two kings
         if(!hasTwoKings(board)) {
-            error("Board must have exactly 1 white king and 1 black king", game, null);
+            error("Board must have exactly 1 white king and 1 black king", game.getInitial(), null);
         }
 
         boolean isGameOver = false;
@@ -164,17 +327,25 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
                 return;
             }
             // White
-            if(!"...".equals(mp.getWhiteMove())) {
-                AnyMove wm = mp.getWhiteMove();
-                if(wm != null && wm.getMove() != null) {
-                    boolean legal = validateMove(board, wm.getMove(), Color.WHITE, mp, lastMove);
+            AnyMove whiteAny = mp.getWhiteMove();
+            DSLMove whiteMove = null;
+            if(whiteAny != null) {
+            	if(whiteAny != null) {
+            		if(whiteAny.getMove() != null) {
+            			whiteMove = whiteAny.getMove();
+            		} else if(whiteAny.getAlgebraicmove() != null) {
+            			whiteMove = convertSANtoDSL(whiteAny.getAlgebraicmove(), Color.WHITE, board).getMove();
+            		}
+            	}
+                if(whiteMove != null) {
+                    boolean legal = validateMove(board, whiteMove, Color.WHITE, mp, lastMove);
                     if(!legal) return; 
                     // check if we just ended in checkmate
                     if(isCheckmate(board, Color.BLACK)) {
                         isGameOver = true;
                     }
                     // update lastMove
-                    lastMove = buildLastMoveInfo(board, wm.getMove(), Color.WHITE);
+                    lastMove = buildLastMoveInfo(board, whiteMove, Color.WHITE);
                 }
             } else {
             	if (skipWhiteFirstMove) {
@@ -185,6 +356,15 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             	}
             }
             // Black
+            AnyMove blackAny = mp.getBlackMove();
+            DSLMove blackMove = null;
+            if(blackAny != null) {
+            	if(blackAny.getMove() != null) {
+            		blackMove = blackAny.getMove();
+            	} else if(blackAny.getAlgebraicmove() != null) {
+            		blackMove = convertSANtoDSL(blackAny.getAlgebraicmove(), Color.BLACK, board).getMove();
+            	}
+            }
             if(mp.getBlackMove() != null && mp.getBlackMove().getMove() != null) {
                 if(isGameOver) {
                     error("Moves continue after checkmate/game over (black side)", mp.getBlackMove(), null);

@@ -10,6 +10,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>SAN Move</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove#getToken <em>Token</em>}</li>
+ * </ul>
  *
  * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.ChessDSLPackage#getSANMove()
  * @model
@@ -17,4 +23,26 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface SANMove extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Token</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Token</em>' attribute.
+   * @see #setToken(String)
+   * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.ChessDSLPackage#getSANMove_Token()
+   * @model
+   * @generated
+   */
+  String getToken();
+
+  /**
+   * Sets the value of the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.SANMove#getToken <em>Token</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Token</em>' attribute.
+   * @see #getToken()
+   * @generated
+   */
+  void setToken(String value);
+
 } // SANMove

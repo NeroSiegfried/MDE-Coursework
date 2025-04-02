@@ -22,16 +22,16 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalChessDSLParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_SAN_TOKEN", "RULE_STRING", "RULE_MOVENUMBER", "RULE_ID", "RULE_SQUARETERMINAL", "RULE_ESCAPE", "RULE_LETTER", "RULE_RANKDIGIT", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'fresh'", "'='", "'on'", "'...'", "'Kingside'", "'Queenside'", "'draw'", "'Good'", "'Bad'", "'Excellent'", "'Risky'", "'Dubious'", "'Check'", "'Checkmate'", "'White'", "'Black'", "'King'", "'Queen'", "'Rook'", "'Bishop'", "'Knight'", "'Pawn'", "'Game'", "'Moves:'", "'end'", "'Players:'", "':'", "'InitialState'", "'custom'", "'Positions:'", "'{'", "'}'", "'('", "')'", "'dummy'", "'moves'", "'->'", "'from'", "'to'", "'Capture('", "'and'", "'captures'", "'Castle('", "'castles'", "'the'", "'Promotion('", "'ran'", "'out'", "'of'", "'time'", "'resigned'", "'checkmated'", "'ended'", "'game'", "'in'", "'a'", "'stalemate'", "'repeated'", "'position'", "'three'", "'times'", "'played'", "'fifty'", "'without'", "'capture'", "'agreed'", "'wins'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_MOVENUMBER", "RULE_ID", "RULE_SAN_TOKEN", "RULE_SQUARETERMINAL", "RULE_ESCAPE", "RULE_LETTER", "RULE_RANKDIGIT", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'fresh'", "'='", "'on'", "'...'", "'Kingside'", "'Queenside'", "'draw'", "'Good'", "'Bad'", "'Excellent'", "'Risky'", "'Dubious'", "'Check'", "'Checkmate'", "'White'", "'Black'", "'King'", "'Queen'", "'Rook'", "'Bishop'", "'Knight'", "'Pawn'", "'Game'", "'Moves:'", "'end'", "'Players:'", "':'", "'InitialState'", "'custom'", "'Positions:'", "'{'", "'}'", "'('", "')'", "'dummy'", "'moves'", "'->'", "'from'", "'to'", "'Capture('", "'and'", "'captures'", "'Castle('", "'castles'", "'the'", "'Promotion('", "'ran'", "'out'", "'of'", "'time'", "'resigned'", "'checkmated'", "'ended'", "'game'", "'in'", "'a'", "'stalemate'", "'repeated'", "'position'", "'three'", "'times'", "'played'", "'fifty'", "'without'", "'capture'", "'agreed'", "'wins'"
     };
     public static final int T__50=50;
-    public static final int RULE_SAN_TOKEN=4;
+    public static final int RULE_SAN_TOKEN=7;
     public static final int T__19=19;
     public static final int T__59=59;
     public static final int T__17=17;
     public static final int T__18=18;
     public static final int T__55=55;
-    public static final int RULE_MOVENUMBER=6;
+    public static final int RULE_MOVENUMBER=5;
     public static final int T__56=56;
     public static final int RULE_RANKDIGIT=11;
     public static final int T__57=57;
@@ -43,7 +43,7 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
     public static final int RULE_ESCAPE=9;
     public static final int T__60=60;
     public static final int T__61=61;
-    public static final int RULE_ID=7;
+    public static final int RULE_ID=6;
     public static final int T__26=26;
     public static final int T__27=27;
     public static final int T__28=28;
@@ -67,7 +67,7 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
     public static final int T__70=70;
     public static final int T__71=71;
     public static final int T__72=72;
-    public static final int RULE_STRING=5;
+    public static final int RULE_STRING=4;
     public static final int RULE_SL_COMMENT=14;
     public static final int T__37=37;
     public static final int T__38=38;
@@ -2832,7 +2832,7 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==RULE_SAN_TOKEN||LA3_0==RULE_ID||(LA3_0>=33 && LA3_0<=38)||(LA3_0>=51 && LA3_0<=52)||(LA3_0>=59 && LA3_0<=60)) ) {
+            if ( ((LA3_0>=RULE_ID && LA3_0<=RULE_SAN_TOKEN)||(LA3_0>=33 && LA3_0<=38)||(LA3_0>=51 && LA3_0<=52)||(LA3_0>=59 && LA3_0<=60)) ) {
                 alt3=1;
             }
             else if ( (LA3_0==20) ) {
@@ -3827,11 +3827,11 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
                 {
                 int LA14_2 = input.LA(2);
 
-                if ( (LA14_2==63||(LA14_2>=67 && LA14_2<=68)) ) {
-                    alt14=1;
-                }
-                else if ( (LA14_2==57) ) {
+                if ( (LA14_2==57) ) {
                     alt14=2;
+                }
+                else if ( (LA14_2==63||(LA14_2>=67 && LA14_2<=68)) ) {
+                    alt14=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -4001,6 +4001,11 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
             case 32:
                 {
                 switch ( input.LA(2) ) {
+                case 63:
+                    {
+                    alt15=1;
+                    }
+                    break;
                 case 68:
                     {
                     alt15=3;
@@ -4009,11 +4014,6 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
                 case 67:
                     {
                     alt15=2;
-                    }
-                    break;
-                case 63:
-                    {
-                    alt15=1;
                     }
                     break;
                 default:
@@ -7574,7 +7574,7 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
             int alt30=2;
             int LA30_0 = input.LA(1);
 
-            if ( (LA30_0==RULE_SAN_TOKEN||LA30_0==RULE_ID||(LA30_0>=33 && LA30_0<=38)||(LA30_0>=51 && LA30_0<=52)||(LA30_0>=59 && LA30_0<=60)) ) {
+            if ( ((LA30_0>=RULE_ID && LA30_0<=RULE_SAN_TOKEN)||(LA30_0>=33 && LA30_0<=38)||(LA30_0>=51 && LA30_0<=52)||(LA30_0>=59 && LA30_0<=60)) ) {
                 alt30=1;
             }
             switch (alt30) {
@@ -12059,21 +12059,31 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Escaped_SANMove__Group__1__Impl"
-    // InternalChessDSL.g:3785:1: rule__Escaped_SANMove__Group__1__Impl : ( RULE_SAN_TOKEN ) ;
+    // InternalChessDSL.g:3785:1: rule__Escaped_SANMove__Group__1__Impl : ( ( rule__Escaped_SANMove__TokenAssignment_1 ) ) ;
     public final void rule__Escaped_SANMove__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:3789:1: ( ( RULE_SAN_TOKEN ) )
-            // InternalChessDSL.g:3790:1: ( RULE_SAN_TOKEN )
+            // InternalChessDSL.g:3789:1: ( ( ( rule__Escaped_SANMove__TokenAssignment_1 ) ) )
+            // InternalChessDSL.g:3790:1: ( ( rule__Escaped_SANMove__TokenAssignment_1 ) )
             {
-            // InternalChessDSL.g:3790:1: ( RULE_SAN_TOKEN )
-            // InternalChessDSL.g:3791:2: RULE_SAN_TOKEN
+            // InternalChessDSL.g:3790:1: ( ( rule__Escaped_SANMove__TokenAssignment_1 ) )
+            // InternalChessDSL.g:3791:2: ( rule__Escaped_SANMove__TokenAssignment_1 )
             {
-             before(grammarAccess.getEscaped_SANMoveAccess().getSAN_TOKENTerminalRuleCall_1()); 
-            match(input,RULE_SAN_TOKEN,FOLLOW_2); 
-             after(grammarAccess.getEscaped_SANMoveAccess().getSAN_TOKENTerminalRuleCall_1()); 
+             before(grammarAccess.getEscaped_SANMoveAccess().getTokenAssignment_1()); 
+            // InternalChessDSL.g:3792:2: ( rule__Escaped_SANMove__TokenAssignment_1 )
+            // InternalChessDSL.g:3792:3: rule__Escaped_SANMove__TokenAssignment_1
+            {
+            pushFollow(FOLLOW_2);
+            rule__Escaped_SANMove__TokenAssignment_1();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getEscaped_SANMoveAccess().getTokenAssignment_1()); 
 
             }
 
@@ -16772,18 +16782,55 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
     // $ANTLR end "rule__Promotion__PieceAssignment_2"
 
 
+    // $ANTLR start "rule__Escaped_SANMove__TokenAssignment_1"
+    // InternalChessDSL.g:5462:1: rule__Escaped_SANMove__TokenAssignment_1 : ( RULE_SAN_TOKEN ) ;
+    public final void rule__Escaped_SANMove__TokenAssignment_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalChessDSL.g:5466:1: ( ( RULE_SAN_TOKEN ) )
+            // InternalChessDSL.g:5467:2: ( RULE_SAN_TOKEN )
+            {
+            // InternalChessDSL.g:5467:2: ( RULE_SAN_TOKEN )
+            // InternalChessDSL.g:5468:3: RULE_SAN_TOKEN
+            {
+             before(grammarAccess.getEscaped_SANMoveAccess().getTokenSAN_TOKENTerminalRuleCall_1_0()); 
+            match(input,RULE_SAN_TOKEN,FOLLOW_2); 
+             after(grammarAccess.getEscaped_SANMoveAccess().getTokenSAN_TOKENTerminalRuleCall_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Escaped_SANMove__TokenAssignment_1"
+
+
     // $ANTLR start "rule__Conclusion__MethodAssignment_0"
-    // InternalChessDSL.g:5462:1: rule__Conclusion__MethodAssignment_0 : ( ruleMethod ) ;
+    // InternalChessDSL.g:5477:1: rule__Conclusion__MethodAssignment_0 : ( ruleMethod ) ;
     public final void rule__Conclusion__MethodAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5466:1: ( ( ruleMethod ) )
-            // InternalChessDSL.g:5467:2: ( ruleMethod )
+            // InternalChessDSL.g:5481:1: ( ( ruleMethod ) )
+            // InternalChessDSL.g:5482:2: ( ruleMethod )
             {
-            // InternalChessDSL.g:5467:2: ( ruleMethod )
-            // InternalChessDSL.g:5468:3: ruleMethod
+            // InternalChessDSL.g:5482:2: ( ruleMethod )
+            // InternalChessDSL.g:5483:3: ruleMethod
             {
              before(grammarAccess.getConclusionAccess().getMethodMethodParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -16814,17 +16861,17 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Conclusion__ResultAssignment_1"
-    // InternalChessDSL.g:5477:1: rule__Conclusion__ResultAssignment_1 : ( ruleResult ) ;
+    // InternalChessDSL.g:5492:1: rule__Conclusion__ResultAssignment_1 : ( ruleResult ) ;
     public final void rule__Conclusion__ResultAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5481:1: ( ( ruleResult ) )
-            // InternalChessDSL.g:5482:2: ( ruleResult )
+            // InternalChessDSL.g:5496:1: ( ( ruleResult ) )
+            // InternalChessDSL.g:5497:2: ( ruleResult )
             {
-            // InternalChessDSL.g:5482:2: ( ruleResult )
-            // InternalChessDSL.g:5483:3: ruleResult
+            // InternalChessDSL.g:5497:2: ( ruleResult )
+            // InternalChessDSL.g:5498:3: ruleResult
             {
              before(grammarAccess.getConclusionAccess().getResultResultParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -16855,17 +16902,17 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Method__WinAssignment_0"
-    // InternalChessDSL.g:5492:1: rule__Method__WinAssignment_0 : ( ruleWin ) ;
+    // InternalChessDSL.g:5507:1: rule__Method__WinAssignment_0 : ( ruleWin ) ;
     public final void rule__Method__WinAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5496:1: ( ( ruleWin ) )
-            // InternalChessDSL.g:5497:2: ( ruleWin )
+            // InternalChessDSL.g:5511:1: ( ( ruleWin ) )
+            // InternalChessDSL.g:5512:2: ( ruleWin )
             {
-            // InternalChessDSL.g:5497:2: ( ruleWin )
-            // InternalChessDSL.g:5498:3: ruleWin
+            // InternalChessDSL.g:5512:2: ( ruleWin )
+            // InternalChessDSL.g:5513:3: ruleWin
             {
              before(grammarAccess.getMethodAccess().getWinWinParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -16896,17 +16943,17 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Method__DrawAssignment_1"
-    // InternalChessDSL.g:5507:1: rule__Method__DrawAssignment_1 : ( ruleDraw ) ;
+    // InternalChessDSL.g:5522:1: rule__Method__DrawAssignment_1 : ( ruleDraw ) ;
     public final void rule__Method__DrawAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5511:1: ( ( ruleDraw ) )
-            // InternalChessDSL.g:5512:2: ( ruleDraw )
+            // InternalChessDSL.g:5526:1: ( ( ruleDraw ) )
+            // InternalChessDSL.g:5527:2: ( ruleDraw )
             {
-            // InternalChessDSL.g:5512:2: ( ruleDraw )
-            // InternalChessDSL.g:5513:3: ruleDraw
+            // InternalChessDSL.g:5527:2: ( ruleDraw )
+            // InternalChessDSL.g:5528:3: ruleDraw
             {
              before(grammarAccess.getMethodAccess().getDrawDrawParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -16937,17 +16984,17 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Win__TimeAssignment_0"
-    // InternalChessDSL.g:5522:1: rule__Win__TimeAssignment_0 : ( ruleTimeUp ) ;
+    // InternalChessDSL.g:5537:1: rule__Win__TimeAssignment_0 : ( ruleTimeUp ) ;
     public final void rule__Win__TimeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5526:1: ( ( ruleTimeUp ) )
-            // InternalChessDSL.g:5527:2: ( ruleTimeUp )
+            // InternalChessDSL.g:5541:1: ( ( ruleTimeUp ) )
+            // InternalChessDSL.g:5542:2: ( ruleTimeUp )
             {
-            // InternalChessDSL.g:5527:2: ( ruleTimeUp )
-            // InternalChessDSL.g:5528:3: ruleTimeUp
+            // InternalChessDSL.g:5542:2: ( ruleTimeUp )
+            // InternalChessDSL.g:5543:3: ruleTimeUp
             {
              before(grammarAccess.getWinAccess().getTimeTimeUpParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -16978,17 +17025,17 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Win__ResignAssignment_1"
-    // InternalChessDSL.g:5537:1: rule__Win__ResignAssignment_1 : ( ruleResign ) ;
+    // InternalChessDSL.g:5552:1: rule__Win__ResignAssignment_1 : ( ruleResign ) ;
     public final void rule__Win__ResignAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5541:1: ( ( ruleResign ) )
-            // InternalChessDSL.g:5542:2: ( ruleResign )
+            // InternalChessDSL.g:5556:1: ( ( ruleResign ) )
+            // InternalChessDSL.g:5557:2: ( ruleResign )
             {
-            // InternalChessDSL.g:5542:2: ( ruleResign )
-            // InternalChessDSL.g:5543:3: ruleResign
+            // InternalChessDSL.g:5557:2: ( ruleResign )
+            // InternalChessDSL.g:5558:3: ruleResign
             {
              before(grammarAccess.getWinAccess().getResignResignParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -17019,17 +17066,17 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Win__MateAssignment_2"
-    // InternalChessDSL.g:5552:1: rule__Win__MateAssignment_2 : ( ruleCheckmate ) ;
+    // InternalChessDSL.g:5567:1: rule__Win__MateAssignment_2 : ( ruleCheckmate ) ;
     public final void rule__Win__MateAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5556:1: ( ( ruleCheckmate ) )
-            // InternalChessDSL.g:5557:2: ( ruleCheckmate )
+            // InternalChessDSL.g:5571:1: ( ( ruleCheckmate ) )
+            // InternalChessDSL.g:5572:2: ( ruleCheckmate )
             {
-            // InternalChessDSL.g:5557:2: ( ruleCheckmate )
-            // InternalChessDSL.g:5558:3: ruleCheckmate
+            // InternalChessDSL.g:5572:2: ( ruleCheckmate )
+            // InternalChessDSL.g:5573:3: ruleCheckmate
             {
              before(grammarAccess.getWinAccess().getMateCheckmateParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -17060,17 +17107,17 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__TimeUp__PlayerAssignment_0"
-    // InternalChessDSL.g:5567:1: rule__TimeUp__PlayerAssignment_0 : ( rulePlayerOrColor ) ;
+    // InternalChessDSL.g:5582:1: rule__TimeUp__PlayerAssignment_0 : ( rulePlayerOrColor ) ;
     public final void rule__TimeUp__PlayerAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5571:1: ( ( rulePlayerOrColor ) )
-            // InternalChessDSL.g:5572:2: ( rulePlayerOrColor )
+            // InternalChessDSL.g:5586:1: ( ( rulePlayerOrColor ) )
+            // InternalChessDSL.g:5587:2: ( rulePlayerOrColor )
             {
-            // InternalChessDSL.g:5572:2: ( rulePlayerOrColor )
-            // InternalChessDSL.g:5573:3: rulePlayerOrColor
+            // InternalChessDSL.g:5587:2: ( rulePlayerOrColor )
+            // InternalChessDSL.g:5588:3: rulePlayerOrColor
             {
              before(grammarAccess.getTimeUpAccess().getPlayerPlayerOrColorParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -17101,17 +17148,17 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Resign__PlayerAssignment_0"
-    // InternalChessDSL.g:5582:1: rule__Resign__PlayerAssignment_0 : ( rulePlayerOrColor ) ;
+    // InternalChessDSL.g:5597:1: rule__Resign__PlayerAssignment_0 : ( rulePlayerOrColor ) ;
     public final void rule__Resign__PlayerAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5586:1: ( ( rulePlayerOrColor ) )
-            // InternalChessDSL.g:5587:2: ( rulePlayerOrColor )
+            // InternalChessDSL.g:5601:1: ( ( rulePlayerOrColor ) )
+            // InternalChessDSL.g:5602:2: ( rulePlayerOrColor )
             {
-            // InternalChessDSL.g:5587:2: ( rulePlayerOrColor )
-            // InternalChessDSL.g:5588:3: rulePlayerOrColor
+            // InternalChessDSL.g:5602:2: ( rulePlayerOrColor )
+            // InternalChessDSL.g:5603:3: rulePlayerOrColor
             {
              before(grammarAccess.getResignAccess().getPlayerPlayerOrColorParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -17142,17 +17189,17 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Checkmate__Player1Assignment_0"
-    // InternalChessDSL.g:5597:1: rule__Checkmate__Player1Assignment_0 : ( rulePlayerOrColor ) ;
+    // InternalChessDSL.g:5612:1: rule__Checkmate__Player1Assignment_0 : ( rulePlayerOrColor ) ;
     public final void rule__Checkmate__Player1Assignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5601:1: ( ( rulePlayerOrColor ) )
-            // InternalChessDSL.g:5602:2: ( rulePlayerOrColor )
+            // InternalChessDSL.g:5616:1: ( ( rulePlayerOrColor ) )
+            // InternalChessDSL.g:5617:2: ( rulePlayerOrColor )
             {
-            // InternalChessDSL.g:5602:2: ( rulePlayerOrColor )
-            // InternalChessDSL.g:5603:3: rulePlayerOrColor
+            // InternalChessDSL.g:5617:2: ( rulePlayerOrColor )
+            // InternalChessDSL.g:5618:3: rulePlayerOrColor
             {
              before(grammarAccess.getCheckmateAccess().getPlayer1PlayerOrColorParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -17183,17 +17230,17 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Checkmate__Player2Assignment_2"
-    // InternalChessDSL.g:5612:1: rule__Checkmate__Player2Assignment_2 : ( rulePlayerOrColor ) ;
+    // InternalChessDSL.g:5627:1: rule__Checkmate__Player2Assignment_2 : ( rulePlayerOrColor ) ;
     public final void rule__Checkmate__Player2Assignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5616:1: ( ( rulePlayerOrColor ) )
-            // InternalChessDSL.g:5617:2: ( rulePlayerOrColor )
+            // InternalChessDSL.g:5631:1: ( ( rulePlayerOrColor ) )
+            // InternalChessDSL.g:5632:2: ( rulePlayerOrColor )
             {
-            // InternalChessDSL.g:5617:2: ( rulePlayerOrColor )
-            // InternalChessDSL.g:5618:3: rulePlayerOrColor
+            // InternalChessDSL.g:5632:2: ( rulePlayerOrColor )
+            // InternalChessDSL.g:5633:3: rulePlayerOrColor
             {
              before(grammarAccess.getCheckmateAccess().getPlayer2PlayerOrColorParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -17224,17 +17271,17 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Draw__Player1Assignment_0"
-    // InternalChessDSL.g:5627:1: rule__Draw__Player1Assignment_0 : ( rulePlayerOrColor ) ;
+    // InternalChessDSL.g:5642:1: rule__Draw__Player1Assignment_0 : ( rulePlayerOrColor ) ;
     public final void rule__Draw__Player1Assignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5631:1: ( ( rulePlayerOrColor ) )
-            // InternalChessDSL.g:5632:2: ( rulePlayerOrColor )
+            // InternalChessDSL.g:5646:1: ( ( rulePlayerOrColor ) )
+            // InternalChessDSL.g:5647:2: ( rulePlayerOrColor )
             {
-            // InternalChessDSL.g:5632:2: ( rulePlayerOrColor )
-            // InternalChessDSL.g:5633:3: rulePlayerOrColor
+            // InternalChessDSL.g:5647:2: ( rulePlayerOrColor )
+            // InternalChessDSL.g:5648:3: rulePlayerOrColor
             {
              before(grammarAccess.getDrawAccess().getPlayer1PlayerOrColorParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -17265,17 +17312,17 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Draw__Player2Assignment_2"
-    // InternalChessDSL.g:5642:1: rule__Draw__Player2Assignment_2 : ( rulePlayerOrColor ) ;
+    // InternalChessDSL.g:5657:1: rule__Draw__Player2Assignment_2 : ( rulePlayerOrColor ) ;
     public final void rule__Draw__Player2Assignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5646:1: ( ( rulePlayerOrColor ) )
-            // InternalChessDSL.g:5647:2: ( rulePlayerOrColor )
+            // InternalChessDSL.g:5661:1: ( ( rulePlayerOrColor ) )
+            // InternalChessDSL.g:5662:2: ( rulePlayerOrColor )
             {
-            // InternalChessDSL.g:5647:2: ( rulePlayerOrColor )
-            // InternalChessDSL.g:5648:3: rulePlayerOrColor
+            // InternalChessDSL.g:5662:2: ( rulePlayerOrColor )
+            // InternalChessDSL.g:5663:3: rulePlayerOrColor
             {
              before(grammarAccess.getDrawAccess().getPlayer2PlayerOrColorParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -17306,21 +17353,21 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Draw__ResultAssignment_3"
-    // InternalChessDSL.g:5657:1: rule__Draw__ResultAssignment_3 : ( ( rule__Draw__ResultAlternatives_3_0 ) ) ;
+    // InternalChessDSL.g:5672:1: rule__Draw__ResultAssignment_3 : ( ( rule__Draw__ResultAlternatives_3_0 ) ) ;
     public final void rule__Draw__ResultAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5661:1: ( ( ( rule__Draw__ResultAlternatives_3_0 ) ) )
-            // InternalChessDSL.g:5662:2: ( ( rule__Draw__ResultAlternatives_3_0 ) )
+            // InternalChessDSL.g:5676:1: ( ( ( rule__Draw__ResultAlternatives_3_0 ) ) )
+            // InternalChessDSL.g:5677:2: ( ( rule__Draw__ResultAlternatives_3_0 ) )
             {
-            // InternalChessDSL.g:5662:2: ( ( rule__Draw__ResultAlternatives_3_0 ) )
-            // InternalChessDSL.g:5663:3: ( rule__Draw__ResultAlternatives_3_0 )
+            // InternalChessDSL.g:5677:2: ( ( rule__Draw__ResultAlternatives_3_0 ) )
+            // InternalChessDSL.g:5678:3: ( rule__Draw__ResultAlternatives_3_0 )
             {
              before(grammarAccess.getDrawAccess().getResultAlternatives_3_0()); 
-            // InternalChessDSL.g:5664:3: ( rule__Draw__ResultAlternatives_3_0 )
-            // InternalChessDSL.g:5664:4: rule__Draw__ResultAlternatives_3_0
+            // InternalChessDSL.g:5679:3: ( rule__Draw__ResultAlternatives_3_0 )
+            // InternalChessDSL.g:5679:4: rule__Draw__ResultAlternatives_3_0
             {
             pushFollow(FOLLOW_2);
             rule__Draw__ResultAlternatives_3_0();
@@ -17353,21 +17400,21 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Result__PlayerAssignment_0_0_0"
-    // InternalChessDSL.g:5672:1: rule__Result__PlayerAssignment_0_0_0 : ( ( RULE_ID ) ) ;
+    // InternalChessDSL.g:5687:1: rule__Result__PlayerAssignment_0_0_0 : ( ( RULE_ID ) ) ;
     public final void rule__Result__PlayerAssignment_0_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5676:1: ( ( ( RULE_ID ) ) )
-            // InternalChessDSL.g:5677:2: ( ( RULE_ID ) )
+            // InternalChessDSL.g:5691:1: ( ( ( RULE_ID ) ) )
+            // InternalChessDSL.g:5692:2: ( ( RULE_ID ) )
             {
-            // InternalChessDSL.g:5677:2: ( ( RULE_ID ) )
-            // InternalChessDSL.g:5678:3: ( RULE_ID )
+            // InternalChessDSL.g:5692:2: ( ( RULE_ID ) )
+            // InternalChessDSL.g:5693:3: ( RULE_ID )
             {
              before(grammarAccess.getResultAccess().getPlayerPlayerCrossReference_0_0_0_0()); 
-            // InternalChessDSL.g:5679:3: ( RULE_ID )
-            // InternalChessDSL.g:5680:4: RULE_ID
+            // InternalChessDSL.g:5694:3: ( RULE_ID )
+            // InternalChessDSL.g:5695:4: RULE_ID
             {
              before(grammarAccess.getResultAccess().getPlayerPlayerIDTerminalRuleCall_0_0_0_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -17398,17 +17445,17 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Result__ColorAssignment_0_0_1"
-    // InternalChessDSL.g:5691:1: rule__Result__ColorAssignment_0_0_1 : ( ruleColor ) ;
+    // InternalChessDSL.g:5706:1: rule__Result__ColorAssignment_0_0_1 : ( ruleColor ) ;
     public final void rule__Result__ColorAssignment_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5695:1: ( ( ruleColor ) )
-            // InternalChessDSL.g:5696:2: ( ruleColor )
+            // InternalChessDSL.g:5710:1: ( ( ruleColor ) )
+            // InternalChessDSL.g:5711:2: ( ruleColor )
             {
-            // InternalChessDSL.g:5696:2: ( ruleColor )
-            // InternalChessDSL.g:5697:3: ruleColor
+            // InternalChessDSL.g:5711:2: ( ruleColor )
+            // InternalChessDSL.g:5712:3: ruleColor
             {
              before(grammarAccess.getResultAccess().getColorColorEnumRuleCall_0_0_1_0()); 
             pushFollow(FOLLOW_2);
@@ -17439,21 +17486,21 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__PlayerOrColor__PlayerAssignment_0"
-    // InternalChessDSL.g:5706:1: rule__PlayerOrColor__PlayerAssignment_0 : ( ( RULE_ID ) ) ;
+    // InternalChessDSL.g:5721:1: rule__PlayerOrColor__PlayerAssignment_0 : ( ( RULE_ID ) ) ;
     public final void rule__PlayerOrColor__PlayerAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5710:1: ( ( ( RULE_ID ) ) )
-            // InternalChessDSL.g:5711:2: ( ( RULE_ID ) )
+            // InternalChessDSL.g:5725:1: ( ( ( RULE_ID ) ) )
+            // InternalChessDSL.g:5726:2: ( ( RULE_ID ) )
             {
-            // InternalChessDSL.g:5711:2: ( ( RULE_ID ) )
-            // InternalChessDSL.g:5712:3: ( RULE_ID )
+            // InternalChessDSL.g:5726:2: ( ( RULE_ID ) )
+            // InternalChessDSL.g:5727:3: ( RULE_ID )
             {
              before(grammarAccess.getPlayerOrColorAccess().getPlayerPlayerCrossReference_0_0()); 
-            // InternalChessDSL.g:5713:3: ( RULE_ID )
-            // InternalChessDSL.g:5714:4: RULE_ID
+            // InternalChessDSL.g:5728:3: ( RULE_ID )
+            // InternalChessDSL.g:5729:4: RULE_ID
             {
              before(grammarAccess.getPlayerOrColorAccess().getPlayerPlayerIDTerminalRuleCall_0_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -17484,17 +17531,17 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__PlayerOrColor__ColorAssignment_1"
-    // InternalChessDSL.g:5725:1: rule__PlayerOrColor__ColorAssignment_1 : ( ruleColor ) ;
+    // InternalChessDSL.g:5740:1: rule__PlayerOrColor__ColorAssignment_1 : ( ruleColor ) ;
     public final void rule__PlayerOrColor__ColorAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5729:1: ( ( ruleColor ) )
-            // InternalChessDSL.g:5730:2: ( ruleColor )
+            // InternalChessDSL.g:5744:1: ( ( ruleColor ) )
+            // InternalChessDSL.g:5745:2: ( ruleColor )
             {
-            // InternalChessDSL.g:5730:2: ( ruleColor )
-            // InternalChessDSL.g:5731:3: ruleColor
+            // InternalChessDSL.g:5745:2: ( ruleColor )
+            // InternalChessDSL.g:5746:3: ruleColor
             {
              before(grammarAccess.getPlayerOrColorAccess().getColorColorEnumRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -17525,17 +17572,17 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Square__SquareAssignment"
-    // InternalChessDSL.g:5740:1: rule__Square__SquareAssignment : ( RULE_SQUARETERMINAL ) ;
+    // InternalChessDSL.g:5755:1: rule__Square__SquareAssignment : ( RULE_SQUARETERMINAL ) ;
     public final void rule__Square__SquareAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalChessDSL.g:5744:1: ( ( RULE_SQUARETERMINAL ) )
-            // InternalChessDSL.g:5745:2: ( RULE_SQUARETERMINAL )
+            // InternalChessDSL.g:5759:1: ( ( RULE_SQUARETERMINAL ) )
+            // InternalChessDSL.g:5760:2: ( RULE_SQUARETERMINAL )
             {
-            // InternalChessDSL.g:5745:2: ( RULE_SQUARETERMINAL )
-            // InternalChessDSL.g:5746:3: RULE_SQUARETERMINAL
+            // InternalChessDSL.g:5760:2: ( RULE_SQUARETERMINAL )
+            // InternalChessDSL.g:5761:3: RULE_SQUARETERMINAL
             {
              before(grammarAccess.getSquareAccess().getSquareSQUARETERMINALTerminalRuleCall_0()); 
             match(input,RULE_SQUARETERMINAL,FOLLOW_2); 
@@ -17567,10 +17614,10 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
     protected DFA8 dfa8 = new DFA8(this);
     protected DFA13 dfa13 = new DFA13(this);
     static final String dfa_1s = "\53\uffff";
-    static final String dfa_2s = "\21\uffff\2\26\14\uffff\6\50\2\uffff\1\50\3\uffff";
-    static final String dfa_3s = "\2\41\6\61\2\uffff\2\10\1\65\1\67\2\10\1\62\2\4\1\41\1\72\1\41\1\uffff\1\25\1\uffff\6\62\6\4\2\62\1\4\3\uffff";
-    static final String dfa_4s = "\1\74\1\46\6\66\2\uffff\2\10\1\65\1\67\2\10\1\62\2\76\1\46\1\74\1\46\1\uffff\1\26\1\uffff\6\62\6\76\2\62\1\76\3\uffff";
-    static final String dfa_5s = "\10\uffff\1\3\1\6\14\uffff\1\1\1\uffff\1\5\17\uffff\1\2\1\4\1\1";
+    static final String dfa_2s = "\21\uffff\2\24\16\uffff\6\52\1\uffff\1\52\2\uffff";
+    static final String dfa_3s = "\2\41\6\61\2\uffff\2\10\1\65\1\67\2\10\1\62\2\5\2\uffff\1\25\1\41\1\72\1\41\10\62\6\5\1\uffff\1\5\2\uffff";
+    static final String dfa_4s = "\1\74\1\46\6\66\2\uffff\2\10\1\65\1\67\2\10\1\62\2\76\2\uffff\1\26\1\46\1\74\1\46\10\62\6\76\1\uffff\1\76\2\uffff";
+    static final String dfa_5s = "\10\uffff\1\3\1\6\11\uffff\1\5\1\1\22\uffff\1\1\1\uffff\1\4\1\2";
     static final String dfa_6s = "\53\uffff}>";
     static final String[] dfa_7s = {
             "\1\2\1\3\1\4\1\5\1\6\1\7\14\uffff\1\11\1\1\6\uffff\2\10",
@@ -17590,30 +17637,30 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
             "\1\20",
             "\1\21",
             "\1\22",
-            "\1\26\1\uffff\2\26\31\uffff\6\26\2\uffff\1\26\7\uffff\1\26\1\uffff\2\26\3\uffff\1\23\1\24\1\25\1\27\1\26\1\uffff\1\30",
-            "\1\26\1\uffff\2\26\31\uffff\6\26\2\uffff\1\26\7\uffff\1\26\1\uffff\2\26\3\uffff\1\23\1\24\1\25\1\27\1\26\1\uffff\1\30",
-            "\1\31\1\32\1\33\1\34\1\35\1\36",
-            "\1\25\1\uffff\1\10",
-            "\1\37\1\40\1\41\1\42\1\43\1\44",
+            "\3\24\31\uffff\6\24\2\uffff\1\24\7\uffff\1\24\1\uffff\2\24\3\uffff\1\26\1\27\1\30\1\25\1\24\1\uffff\1\23",
+            "\3\24\31\uffff\6\24\2\uffff\1\24\7\uffff\1\24\1\uffff\2\24\3\uffff\1\26\1\27\1\30\1\25\1\24\1\uffff\1\23",
             "",
-            "\1\45\1\46",
             "",
+            "\1\31\1\32",
+            "\1\33\1\34\1\35\1\36\1\37\1\40",
+            "\1\30\1\uffff\1\10",
+            "\1\41\1\42\1\43\1\44\1\45\1\46",
             "\1\47",
             "\1\47",
-            "\1\47",
-            "\1\47",
-            "\1\47",
-            "\1\47",
-            "\1\50\1\uffff\2\50\13\uffff\1\51\15\uffff\6\50\2\uffff\1\50\7\uffff\1\50\1\uffff\2\50\6\uffff\2\50\1\uffff\1\30",
-            "\1\50\1\uffff\2\50\13\uffff\1\51\15\uffff\6\50\2\uffff\1\50\7\uffff\1\50\1\uffff\2\50\6\uffff\2\50\1\uffff\1\30",
-            "\1\50\1\uffff\2\50\13\uffff\1\51\15\uffff\6\50\2\uffff\1\50\7\uffff\1\50\1\uffff\2\50\6\uffff\2\50\1\uffff\1\30",
-            "\1\50\1\uffff\2\50\13\uffff\1\51\15\uffff\6\50\2\uffff\1\50\7\uffff\1\50\1\uffff\2\50\6\uffff\2\50\1\uffff\1\30",
-            "\1\50\1\uffff\2\50\13\uffff\1\51\15\uffff\6\50\2\uffff\1\50\7\uffff\1\50\1\uffff\2\50\6\uffff\2\50\1\uffff\1\30",
-            "\1\50\1\uffff\2\50\13\uffff\1\51\15\uffff\6\50\2\uffff\1\50\7\uffff\1\50\1\uffff\2\50\6\uffff\2\50\1\uffff\1\30",
-            "\1\52",
-            "\1\52",
-            "\1\50\1\uffff\2\50\13\uffff\1\51\15\uffff\6\50\2\uffff\1\50\7\uffff\1\50\1\uffff\2\50\6\uffff\2\50\1\uffff\1\30",
+            "\1\50",
+            "\1\50",
+            "\1\50",
+            "\1\50",
+            "\1\50",
+            "\1\50",
+            "\3\52\13\uffff\1\51\15\uffff\6\52\2\uffff\1\52\7\uffff\1\52\1\uffff\2\52\6\uffff\2\52\1\uffff\1\23",
+            "\3\52\13\uffff\1\51\15\uffff\6\52\2\uffff\1\52\7\uffff\1\52\1\uffff\2\52\6\uffff\2\52\1\uffff\1\23",
+            "\3\52\13\uffff\1\51\15\uffff\6\52\2\uffff\1\52\7\uffff\1\52\1\uffff\2\52\6\uffff\2\52\1\uffff\1\23",
+            "\3\52\13\uffff\1\51\15\uffff\6\52\2\uffff\1\52\7\uffff\1\52\1\uffff\2\52\6\uffff\2\52\1\uffff\1\23",
+            "\3\52\13\uffff\1\51\15\uffff\6\52\2\uffff\1\52\7\uffff\1\52\1\uffff\2\52\6\uffff\2\52\1\uffff\1\23",
+            "\3\52\13\uffff\1\51\15\uffff\6\52\2\uffff\1\52\7\uffff\1\52\1\uffff\2\52\6\uffff\2\52\1\uffff\1\23",
             "",
+            "\3\52\13\uffff\1\51\15\uffff\6\52\2\uffff\1\52\7\uffff\1\52\1\uffff\2\52\6\uffff\2\52\1\uffff\1\23",
             "",
             ""
     };
@@ -17699,7 +17746,7 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
     static final String dfa_14s = "\23\uffff";
     static final String dfa_15s = "\2\41\6\61\2\10\1\65\1\67\2\10\1\62\2\70\2\uffff";
     static final String dfa_16s = "\1\64\1\46\6\66\2\10\1\65\1\67\2\10\1\62\2\76\2\uffff";
-    static final String dfa_17s = "\21\uffff\1\2\1\1";
+    static final String dfa_17s = "\21\uffff\1\1\1\2";
     static final String dfa_18s = "\23\uffff}>";
     static final String[] dfa_19s = {
             "\1\2\1\3\1\4\1\5\1\6\1\7\15\uffff\1\1",
@@ -17717,8 +17764,8 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
             "\1\16",
             "\1\17",
             "\1\20",
-            "\3\21\3\uffff\1\22",
-            "\3\21\3\uffff\1\22",
+            "\3\22\3\uffff\1\21",
+            "\3\22\3\uffff\1\21",
             "",
             ""
     };
@@ -17751,24 +17798,24 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000150000000000L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000020000000040L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000042L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000180800080L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000180000080L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000180000082L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000020000000020L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000180800040L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000180000040L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000180000042L});
     public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000080000000000L});
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000100000000000L});
     public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000200000020000L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000400000000000L});
     public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000800000000000L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0001000180000080L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0001000180000040L});
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x00000000000C0000L});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000007E00000000L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x1818007E00100090L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x1818007E00000090L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x1818007E001000C0L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x1818007E000000C0L});
     public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0002000000000000L});
     public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x000400007F000000L});
     public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x000000007F000002L});
@@ -17786,7 +17833,7 @@ public class InternalChessDSLParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x1000000000000000L});
     public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000000080000L});
     public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x4000000000000000L});
-    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000000080L});
     public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x8000000000000000L});
     public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000001L});
     public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
