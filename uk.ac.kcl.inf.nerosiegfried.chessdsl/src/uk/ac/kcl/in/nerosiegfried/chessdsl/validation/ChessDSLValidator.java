@@ -330,13 +330,14 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             AnyMove whiteAny = mp.getWhiteMove();
             DSLMove whiteMove = null;
             if(whiteAny != null) {
-            	if(whiteAny != null) {
-            		if(whiteAny.getMove() != null) {
-            			whiteMove = whiteAny.getMove();
-            		} else if(whiteAny.getAlgebraicmove() != null) {
-            			whiteMove = convertSANtoDSL(whiteAny.getAlgebraicmove(), Color.WHITE, board).getMove();
-            		}
-            	}
+
+        		if(whiteAny.getMove() != null) {
+        			whiteMove = whiteAny.getMove();
+        		} else if(whiteAny.getAlgebraicmove() != null) {
+        			whiteAny = convertSANtoDSL(whiteAny.getAlgebraicmove(), Color.WHITE, board);
+        			whiteMove = whiteAny.getMove();
+        		}
+        	
                 if(whiteMove != null) {
                     boolean legal = validateMove(board, whiteMove, Color.WHITE, mp, lastMove);
                     if(!legal) return; 
@@ -362,20 +363,21 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             	if(blackAny.getMove() != null) {
             		blackMove = blackAny.getMove();
             	} else if(blackAny.getAlgebraicmove() != null) {
-            		blackMove = convertSANtoDSL(blackAny.getAlgebraicmove(), Color.BLACK, board).getMove();
+            		blackAny = convertSANtoDSL(blackAny.getAlgebraicmove(), Color.BLACK, board);
+            		blackMove = blackAny.getMove();
             	}
             }
-            if(mp.getBlackMove() != null && mp.getBlackMove().getMove() != null) {
+            if(blackAny != null && blackMove != null) {
                 if(isGameOver) {
-                    error("Moves continue after checkmate/game over (black side)", mp.getBlackMove(), null);
+                    error("Moves continue after checkmate/game over (black side)", blackAny, null);
                     return;
                 }
-                boolean legal = validateMove(board, mp.getBlackMove().getMove(), Color.BLACK, mp, lastMove);
+                boolean legal = validateMove(board, blackMove, Color.BLACK, mp, lastMove);
                 if(!legal) return;
                 if(isCheckmate(board, Color.WHITE)) {
                     isGameOver = true;
                 }
-                lastMove = buildLastMoveInfo(board, mp.getBlackMove().getMove(), Color.BLACK);
+                lastMove = buildLastMoveInfo(board, blackMove, Color.BLACK);
             }
         }
     }
