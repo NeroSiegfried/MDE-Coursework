@@ -537,15 +537,11 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         if(token.startsWith("@")) token=token.substring(1);
 
         // 4a) castling
-        if(token.equals("O-O") || token.equals("O-O-O")) {
+        if(token.startsWith("O-O")) {
             return validateSAN_Castling(any, token, board, side, mp);
         }
 
         // 4b) parse standard piece moves
-        //  e.g. Qxe5, exd4, e4, Nf3, e8=Q, e.g. "Qxe5??"
-        // The user has a grammar that ensures the token is either "O-O...", or else
-        // it has piece letter, optional "x", target, etc. 
-        // We'll do a regex approach:
         String regex = "^(?:(K|Q|R|B|N))?([a-h]|[1-8])?([a-h]|[1-8])?(x)?([a-h][1-8])(?:=(Q|R|B|N))?([+#]*)([!\\?]+)?$";
         Matcher matcher = Pattern.compile(regex).matcher(token);
         if(!matcher.matches()) {
@@ -559,9 +555,9 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         String disamb2 = matcher.group(3);
         boolean isCapture = (matcher.group(4)!=null);
         String targetSq = matcher.group(5);
-        String promotion = matcher.group(6);
-        String checkMarkers = matcher.group(7); // e.g. +, #, or multiple
-        String remarksStr = matcher.group(8);   // e.g. "?!"
+        String promotion = matcher.group(6); // e.g. "Q","R","B","N"
+        String checkMarkers = matcher.group(7); 
+        String remarksStr = matcher.group(8);
 
         Piece movingPiece = pieceFromSANLetter(pieceLetter);
         String disamb = "";
@@ -573,7 +569,6 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         for(String sq: board.boardMap.keySet()) {
             PieceInfo pi = board.boardMap.get(sq);
             if(pi.color==side && pi.type==movingPiece) {
-                // check if it can move/capture to target
                 if(isMovePatternLegal(board, sq, targetSq, movingPiece, side, isCapture)) {
                     candidates.add(sq);
                 }
@@ -606,7 +601,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         String fromSquare = candidates.get(0);
 
         // apply the logic
-        // 1) If it's a capture by a pawn, check occupant or en passant, etc.
+        // (A) If it's a capture by a pawn, check occupant or en passant
         if(isCapture) {
             if(movingPiece==Piece.PAWN) {
                 if(board.isOccupied(targetSq)) {
@@ -616,18 +611,15 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
                         error("Cannot capture your own piece on " + targetSq, san, null);
                         return false;
                     }
-                    // check pattern
                     if(!isMovePatternLegal(board, fromSquare, targetSq, Piece.PAWN, side, true)) {
                         error("Illegal pawn capture pattern", san, null);
                         return false;
                     }
-                    // check if occupant is consistent with any implied note
                 } else {
                     // en passant
-                    // occupant is on same file, rank behind
                     int fileVal = targetSq.charAt(0);
                     int rankVal = targetSq.charAt(1)-'0';
-                    int victimRank = (side==Color.WHITE)? rankVal-1 : rankVal+1;
+                    int victimRank = (side==Color.WHITE)? (rankVal-1) : (rankVal+1);
                     String victimSq = ""+(char)(fileVal)+(victimRank);
                     if(!board.isOccupied(victimSq)) {
                         error("No occupant for en passant at " + victimSq, san, null);
@@ -683,7 +675,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             int fileVal = targetSq.charAt(0);
             int rankVal = targetSq.charAt(1)-'0';
             int victimRank = (side==Color.WHITE)? rankVal-1 : rankVal+1;
-            String victimSq = ""+(char)(fileVal)+(victimRank);
+            String victimSq = ""+(char)fileVal+victimRank;
             board.removePiece(victimSq);
         } else {
             // normal occupant removal if any
@@ -696,8 +688,9 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
 
         // if promotion
         if(promotion!=null) {
+            // FIX: we do not do substring(1). The group is e.g. "Q", "R", etc.
             board.removePiece(targetSq);
-            Piece newPiece = pieceFromSANLetter(promotion.substring(1));
+            Piece newPiece = pieceFromSANLetter(promotion); // no substring(1)
             board.place(targetSq, side, newPiece);
         }
 
@@ -707,34 +700,29 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             return false;
         }
 
-        // if remarks => check if "Check" or "Checkmate" is correct
-        // We do not store them in the AST the same way, but we can parse them from remarksStr or checkMarkers.
-        // For demonstration, let's do a simple approach:
-        List<Remark> remarks = new ArrayList<>();
-        // if checkMarkers has '#' => that's checkmate
-        // if it has '+' => that's check
-        // if remarksStr might be "!" or "??" => we can convert to Good, Bad, etc. 
-        // We'll do an example:
+        // parse leftover check markers / remarks
+        List<Remark> gleaned = new ArrayList<>();
         if(checkMarkers!=null && !checkMarkers.isEmpty()) {
+            // if it has '#', => checkmate
+            // if it has '+', => check
             if(checkMarkers.contains("#")) {
-                remarks.add(Remark.CHECKMATE);
+                gleaned.add(Remark.CHECKMATE); // fix uppercase
             } else if(checkMarkers.contains("+")) {
-                remarks.add(Remark.CHECK);
+                gleaned.add(Remark.CHECK);
             }
         }
         if(remarksStr!=null && !remarksStr.isEmpty()) {
-            // e.g. "??", "!?", "?!", "!!"
-            // do a naive approach
-            if(remarksStr.contains("!!")) remarks.add(Remark.EXCELLENT);
-            else if(remarksStr.contains("?!")) remarks.add(Remark.RISKY);
-            else if(remarksStr.contains("!?")) remarks.add(Remark.DUBIOUS);
-            else if(remarksStr.contains("?"))  remarks.add(Remark.BAD);
-            else if(remarksStr.contains("!"))  remarks.add(Remark.GOOD);
+            // naive approach
+            if(remarksStr.contains("!!")) gleaned.add(Remark.EXCELLENT);
+            else if(remarksStr.contains("?!")) gleaned.add(Remark.RISKY);
+            else if(remarksStr.contains("!?")) gleaned.add(Remark.DUBIOUS);
+            else if(remarksStr.contains("?"))  gleaned.add(Remark.BAD);
+            else if(remarksStr.contains("!"))  gleaned.add(Remark.GOOD);
         }
-        // Now check the remarks
-        if(remarks.contains(Remark.CHECKMATE) && !isCheckmate(board, oppositeColor(side))) {
+        // verify check or checkmate
+        if(gleaned.contains(Remark.CHECKMATE) && !isCheckmate(board, oppositeColor(side))) {
             error("Move claims checkmate but it's not mate", san, null);
-        } else if(remarks.contains(Remark.CHECK) && !isInCheck(board, oppositeColor(side))) {
+        } else if(gleaned.contains(Remark.CHECK) && !isInCheck(board, oppositeColor(side))) {
             error("Move claims check but it's not check", san, null);
         }
 
@@ -758,67 +746,159 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         }
     }
 
-    /** Validate castling from a SAN token "O-O" or "O-O-O". */
-	private boolean validateSAN_Castling(AnyMove any, String token, BoardState board, Color side,
-			MovePair mp /* , LastMoveInfo lastMove */) {
-		// If the token is "O-O" => Kingside, or "O-O-O" => Queenside
-		Castle dummyCastle = ChessDSLFactory.eINSTANCE.createCastle();
-		boolean isQueenside = token.equals("O-O-O");
-		dummyCastle.setSide(isQueenside ? "Queenside" : "Kingside");
+    /****
+     * Validate castling SAN moves *entirely* within this method, so errors highlight the SAN node.
+     * E.g.: "O-O", "O-O-O", plus leftover check or remark markers like "+?!"
+     ****/
+    private boolean validateSAN_Castling(AnyMove any, String token, BoardState board, Color side, MovePair mp) {
+        // The SAN node itself for error highlighting
+        SANMove san = any.getAlgebraicmove();
 
-		// If there might be leftover symbols after the castling marker, handle them
-		// e.g. "O-O+?!"
-		String leftover = null;
-		if (isQueenside && token.length() > 5) {
-			// "O-O-O".length == 5. If more than 5, we have leftover
-			leftover = token.substring(5);
-		} else if (!isQueenside && token.length() > 3) {
-			leftover = token.substring(3);
-		}
+        // Distinguish O-O from O-O-O
+        boolean isQueenside = token.startsWith("O-O-O"); 
+        // The leftover substring, if any
+        String leftover = null;
+        if (isQueenside && token.length() > 5) {
+            leftover = token.substring(5);
+        } else if (!isQueenside && token.length() > 3) {
+            leftover = token.substring(3);
+        }
+        if (leftover != null) {
+            leftover = leftover.trim();
+        }
 
-		// If we do have leftover, parse possible check markers or remarks
-		if (leftover != null && !leftover.isEmpty()) {
-			// For example, leftover might be "+?!" or "#"
-			String leftoverRegex = "^([+#]+)?([!\\?]+)?$";
-			Matcher m = Pattern.compile(leftoverRegex).matcher(leftover);
-			if (!m.matches()) {
-				error("Invalid leftover remarks after castling: '" + leftover + "'", any, null);
-				return false;
-			}
-			String checkMarkers = m.group(1); // e.g. "+"
-			String remarkChars = m.group(2); // e.g. "?!"
-			// If checkMarkers has '#', that implies checkmate
-			// If checkMarkers has '+', that implies check
-			// If remarkChars might be "??" => etc.
-			// For demonstration, store them in any.getRemarks() or just do quick checks
-			List<Remark> remarks = new ArrayList<>();
-			if (checkMarkers != null) {
-				if (checkMarkers.contains("#")) {
-					remarks.add(Remark.CHECKMATE);
-				} else if (checkMarkers.contains("+")) {
-					remarks.add(Remark.CHECK);
-				}
-			}
-			if (remarkChars != null) {
-				// interpret "!" => GOOD, "??" => BAD, etc.
-				// for demonstration:
-				if (remarkChars.contains("!!"))
-					remarks.add(Remark.EXCELLENT);
-				else if (remarkChars.contains("?!"))
-					remarks.add(Remark.RISKY);
-				else if (remarkChars.contains("!?"))
-					remarks.add(Remark.DUBIOUS);
-				else if (remarkChars.contains("?"))
-					remarks.add(Remark.BAD);
-				else if (remarkChars.contains("!"))
-					remarks.add(Remark.GOOD);
-			}
-			any.getRemarks().addAll(remarks);
-		}
+        // Parse leftover markers & remarks (e.g. "+", "#", "?!", etc.)
+        List<Remark> gleanedRemarks = new ArrayList<>();
+        if (leftover != null && !leftover.isEmpty()) {
+            // leftoverRegex allows optional check/mate signs plus optional "?!"
+            String leftoverRegex = "^([+#]+)?([!\\?]+)?$";
+            Matcher m = Pattern.compile(leftoverRegex).matcher(leftover);
+            if (!m.matches()) {
+                error("Invalid leftover remarks after castling: '" + leftover + "'", san, null);
+                return false;
+            }
+            String checkMarkers = m.group(1); // e.g. "#", "++", "+#", etc.
+            String remarkChars  = m.group(2); // e.g. "!?","??","!!"
 
-		// Now call validateCastle with the correct arguments
-		return validateCastle(dummyCastle, any, board, side, mp /* , lastMove */);
-	}
+            if (checkMarkers != null) {
+                if (checkMarkers.contains("#")) {
+                    gleanedRemarks.add(Remark.CHECKMATE);
+                } else if (checkMarkers.contains("+")) {
+                    gleanedRemarks.add(Remark.CHECK);
+                }
+            }
+            if (remarkChars != null) {
+                if (remarkChars.contains("!!")) gleanedRemarks.add(Remark.EXCELLENT);
+                else if (remarkChars.contains("?!")) gleanedRemarks.add(Remark.RISKY);
+                else if (remarkChars.contains("!?")) gleanedRemarks.add(Remark.DUBIOUS);
+                else if (remarkChars.contains("?"))  gleanedRemarks.add(Remark.BAD);
+                else if (remarkChars.contains("!"))  gleanedRemarks.add(Remark.GOOD);
+            }
+        }
+
+        // Now do occupant/path checks EXACTLY like DSL's validateCastle but referencing SAN for errors
+        // 1) Figure out squares
+        String kingSq  = (side==Color.WHITE)? "e1":"e8";
+        String rookSq  = (side==Color.WHITE)
+                         ? (isQueenside ? "a1" : "h1")
+                         : (isQueenside ? "a8" : "h8");
+
+        // occupant checks
+        PieceInfo k = board.getPieceAt(kingSq);
+        PieceInfo r = board.getPieceAt(rookSq);
+        if (k == null || k.type != Piece.KING || k.color != side) {
+            error("No king found for castling at " + kingSq, san, null);
+            return false;
+        }
+        if (r == null || r.type != Piece.ROOK || r.color != side) {
+            error("No rook found for castling at " + rookSq, san, null);
+            return false;
+        }
+        if (k.hasMoved || r.hasMoved) {
+            error("King or rook has already moved; cannot castle", san, null);
+            return false;
+        }
+
+        // Cannot castle if in check
+        if (isInCheck(board, side)) {
+            error("Cannot castle while in check", san, null);
+            return false;
+        }
+
+        // 2) The squares the king passes through
+        String pass1, pass2, kingDest, rookDest;
+        if (side == Color.WHITE) {
+            if (!isQueenside) {
+                // O-O => white kingside
+                pass1="f1"; pass2="g1"; kingDest="g1"; rookDest="f1";
+            } else {
+                // O-O-O => white queenside
+                pass1="d1"; pass2="c1"; kingDest="c1"; rookDest="d1";
+            }
+        } else {
+            // side == Color.BLACK
+            if (!isQueenside) {
+                // O-O => black kingside
+                pass1="f8"; pass2="g8"; kingDest="g8"; rookDest="f8";
+            } else {
+                // O-O-O => black queenside
+                pass1="d8"; pass2="c8"; kingDest="c8"; rookDest="d8";
+            }
+        }
+
+        // Must be empty squares
+        if (board.isOccupied(pass1) || board.isOccupied(pass2)) {
+            error("Path is blocked for castling between " + pass1 + " and " + pass2, san, null);
+            return false;
+        }
+
+        // Check passing squares for check
+        board.removePiece(kingSq);
+        board.place(pass1, side, Piece.KING);
+        if (isInCheck(board, side)) {
+            // revert
+            board.removePiece(pass1);
+            board.place(kingSq, side, Piece.KING);
+            error("King passes through check square (" + pass1 + ")", san, null);
+            return false;
+        }
+        board.removePiece(pass1);
+        board.place(pass2, side, Piece.KING);
+        if (isInCheck(board, side)) {
+            board.removePiece(pass2);
+            board.place(kingSq, side, Piece.KING);
+            error("King passes through check square (" + pass2 + ")", san, null);
+            return false;
+        }
+        // revert fully
+        board.removePiece(pass2);
+        board.place(kingSq, side, Piece.KING);
+
+        // 3) Actually perform the castling on the board
+        board.removePiece(kingSq);
+        board.removePiece(rookSq);
+        // new occupant objects
+        PieceInfo newK = new PieceInfo(side, Piece.KING);
+        newK.hasMoved=true;
+        PieceInfo newR = new PieceInfo(side, Piece.ROOK);
+        newR.hasMoved=true;
+        // place them
+        board.place(kingDest, side, Piece.KING);
+        board.place(rookDest, side, Piece.ROOK);
+
+        // final check
+        if (isInCheck(board, side)) {
+            error("Castling ends with king still in check", san, null);
+            return false;
+        }
+
+        // 4) Attach gleaned remarks to the AnyMove, then see if "Check" or "Checkmate" is correct
+        any.getRemarks().addAll(gleanedRemarks);
+        // If gleanedRemarks includes Check => must confirm opposite color is in check, etc.
+        // That happens automatically if you do "Check" remarks validation in your isCheckmate or isInCheck code
+
+        return true;
+    }
 
     // 5) Additional Helper for Building lastMove Info from an AnyMove
     private LastMoveInfo buildLastMoveInfoFromAny(AnyMove any, Color side, BoardState board) {
@@ -827,13 +907,8 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             DSLMove dsl = any.getMove();
             return buildLastMoveInfo(board, dsl, side);
         } 
-        // If it's SAN, we can't do from->to from the AST, but we do a minimal approach:
-        // We have to re-parse the token. Or we simply skip tracking last move if we want. 
-        // We'll do a partial approach for demonstration:
+        // If it's SAN, we skip or do a minimal approach
         if(any.getAlgebraicmove()!=null) {
-            SANMove san = any.getAlgebraicmove();
-            // We won't do a big parse again. We'll skip or do a minimal approach
-            // Just returning null or a dummy is enough for en-passant demonstration
             return null;
         }
         return null;
@@ -861,9 +936,6 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
 
     private boolean isMovePatternLegal(BoardState board, String from, String to,
                                        Piece p, Color side, boolean isCapture) {
-        // same simplified checks (rooks must have path clear, bishops diagonal, etc.)
-        // Reuse the logic you had. 
-        // For brevity, the same code from your partial is used:
         if(p==Piece.KNIGHT) {
             return isKnightMove(from, to);
         } else if(p==Piece.KING) {
@@ -880,7 +952,6 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             }
             return false;
         } else if(p==Piece.PAWN) {
-            // partial logic from your code
             int fFrom = from.charAt(0)-'a';
             int rFrom = from.charAt(1)-'0';
             int fTo = to.charAt(0)-'a';
@@ -894,12 +965,11 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
                 if(rankDiff==1) return true;
                 if(rankDiff==2) {
                     if(side==Color.WHITE && rFrom==2) {
-                        // check path
-                        String midSq = from.charAt(0) + "3";
+                        String midSq = from.charAt(0)+"3";
                         if(board.isOccupied(midSq)) return false;
                         return true;
                     } else if(side==Color.BLACK && rFrom==7) {
-                        String midSq = from.charAt(0) + "6";
+                        String midSq = from.charAt(0)+"6";
                         if(board.isOccupied(midSq)) return false;
                         return true;
                     }
@@ -914,8 +984,8 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         return (from.charAt(0)==to.charAt(0) || from.charAt(1)==to.charAt(1));
     }
     private boolean isDiagonal(String from, String to) {
-        int c1 = from.charAt(0), r1=from.charAt(1);
-        int c2 = to.charAt(0), r2=to.charAt(1);
+        int c1=from.charAt(0), r1=from.charAt(1);
+        int c2=to.charAt(0), r2=to.charAt(1);
         return Math.abs(c2-c1)==Math.abs(r2-r1);
     }
     private boolean pathClear(BoardState board, String from, String to) {
@@ -957,7 +1027,6 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         for(String sq: board.boardMap.keySet()) {
             PieceInfo pi = board.boardMap.get(sq);
             if(pi.color!=side) {
-                // see if pi can capture kingSq
                 if(pi.type==Piece.KNIGHT) {
                     if(isKnightMove(sq, kingSq)) return true;
                 } else if(pi.type==Piece.KING) {
@@ -965,8 +1034,6 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
                 } else if(pi.type==Piece.PAWN) {
                     if(isPawnAttacking(pi.color, sq, kingSq)) return true;
                 } else {
-                    // R,B,Q
-                    // we check isMovePatternLegal with isCapture=true
                     if(isMovePatternLegal(board, sq, kingSq, pi.type, pi.color, true)) {
                         if(pathClear(board, sq, kingSq)) return true;
                     }
