@@ -40,10 +40,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MovePair">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="moveNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="color1" eType="#//PlayerOrColor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="color1" eType="#//PlayerOrColor"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="whiteMove" eType="#//AnyMove"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="color2" eType="#//PlayerOrColor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="color2" eType="#//PlayerOrColor"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="blackMove" eType="#//AnyMove"
         containment="true"/>
   </eClassifiers>

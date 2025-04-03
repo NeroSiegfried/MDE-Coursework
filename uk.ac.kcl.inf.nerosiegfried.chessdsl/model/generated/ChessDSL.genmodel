@@ -57,9 +57,9 @@
     </genClasses>
     <genClasses ecoreClass="ChessDSL.ecore#//MovePair">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ChessDSL.ecore#//MovePair/moveNumber"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//MovePair/color1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//MovePair/color1"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//MovePair/whiteMove"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//MovePair/color2"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//MovePair/color2"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ChessDSL.ecore#//MovePair/blackMove"/>
     </genClasses>
     <genClasses ecoreClass="ChessDSL.ecore#//AnyMove">

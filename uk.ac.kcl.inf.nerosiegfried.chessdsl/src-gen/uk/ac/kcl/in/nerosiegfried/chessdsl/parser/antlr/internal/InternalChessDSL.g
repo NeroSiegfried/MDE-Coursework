@@ -571,13 +571,19 @@ ruleMovePair returns [EObject current=null]
 				(
 					(
 						{
-							if ($current==null) {
-								$current = createModelElement(grammarAccess.getMovePairRule());
-							}
+							newCompositeNode(grammarAccess.getMovePairAccess().getColor1PlayerOrColorParserRuleCall_1_0_0_0());
 						}
-						otherlv_1=RULE_ID
+						lv_color1_1_0=rulePlayerOrColor
 						{
-							newLeafNode(otherlv_1, grammarAccess.getMovePairAccess().getColor1PlayerOrColorCrossReference_1_0_0_0());
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getMovePairRule());
+							}
+							set(
+								$current,
+								"color1",
+								lv_color1_1_0,
+								"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.PlayerOrColor");
+							afterParserOrEnumRuleCall();
 						}
 					)
 				)?
@@ -611,13 +617,19 @@ ruleMovePair returns [EObject current=null]
 			(
 				(
 					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getMovePairRule());
-						}
+						newCompositeNode(grammarAccess.getMovePairAccess().getColor2PlayerOrColorParserRuleCall_2_0_0());
 					}
-					otherlv_4=RULE_ID
+					lv_color2_4_0=rulePlayerOrColor
 					{
-						newLeafNode(otherlv_4, grammarAccess.getMovePairAccess().getColor2PlayerOrColorCrossReference_2_0_0());
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getMovePairRule());
+						}
+						set(
+							$current,
+							"color2",
+							lv_color2_4_0,
+							"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.PlayerOrColor");
+						afterParserOrEnumRuleCall();
 					}
 				)
 			)?

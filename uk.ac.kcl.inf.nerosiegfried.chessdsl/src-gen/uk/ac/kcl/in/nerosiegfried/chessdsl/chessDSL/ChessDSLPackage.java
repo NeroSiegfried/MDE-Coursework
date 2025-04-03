@@ -337,7 +337,7 @@ public interface ChessDSLPackage extends EPackage
   int MOVE_PAIR__MOVE_NUMBER = 0;
 
   /**
-   * The feature id for the '<em><b>Color1</b></em>' reference.
+   * The feature id for the '<em><b>Color1</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -355,7 +355,7 @@ public interface ChessDSLPackage extends EPackage
   int MOVE_PAIR__WHITE_MOVE = 2;
 
   /**
-   * The feature id for the '<em><b>Color2</b></em>' reference.
+   * The feature id for the '<em><b>Color2</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -1344,10 +1344,10 @@ public interface ChessDSLPackage extends EPackage
   EAttribute getMovePair_MoveNumber();
 
   /**
-   * Returns the meta object for the reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.MovePair#getColor1 <em>Color1</em>}'.
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.MovePair#getColor1 <em>Color1</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Color1</em>'.
+   * @return the meta object for the containment reference '<em>Color1</em>'.
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.MovePair#getColor1()
    * @see #getMovePair()
    * @generated
@@ -1366,10 +1366,10 @@ public interface ChessDSLPackage extends EPackage
   EReference getMovePair_WhiteMove();
 
   /**
-   * Returns the meta object for the reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.MovePair#getColor2 <em>Color2</em>}'.
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.MovePair#getColor2 <em>Color2</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Color2</em>'.
+   * @return the meta object for the containment reference '<em>Color2</em>'.
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.MovePair#getColor2()
    * @see #getMovePair()
    * @generated
@@ -2215,7 +2215,7 @@ public interface ChessDSLPackage extends EPackage
     EAttribute MOVE_PAIR__MOVE_NUMBER = eINSTANCE.getMovePair_MoveNumber();
 
     /**
-     * The meta object literal for the '<em><b>Color1</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Color1</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -2231,7 +2231,7 @@ public interface ChessDSLPackage extends EPackage
     EReference MOVE_PAIR__WHITE_MOVE = eINSTANCE.getMovePair_WhiteMove();
 
     /**
-     * The meta object literal for the '<em><b>Color2</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Color2</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated

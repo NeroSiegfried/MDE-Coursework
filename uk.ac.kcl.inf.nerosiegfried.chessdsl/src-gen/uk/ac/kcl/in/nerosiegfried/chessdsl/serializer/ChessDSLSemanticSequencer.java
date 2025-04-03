@@ -406,7 +406,7 @@ public class ChessDSLSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     MovePair returns MovePair
 	 *
 	 * Constraint:
-	 *     (moveNumber=MOVENUMBER (color1=[PlayerOrColor|ID]? whiteMove=AnyMove)? (color2=[PlayerOrColor|ID]? blackMove=AnyMove)?)
+	 *     (moveNumber=MOVENUMBER (color1=PlayerOrColor? whiteMove=AnyMove)? (color2=PlayerOrColor? blackMove=AnyMove)?)
 	 * </pre>
 	 */
 	protected void sequence_MovePair(ISerializationContext context, MovePair semanticObject) {

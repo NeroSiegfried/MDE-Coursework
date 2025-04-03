@@ -13,7 +13,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalChessDSLLexer extends Lexer {
     public static final int T__50=50;
-    public static final int RULE_SAN_TOKEN=7;
+    public static final int RULE_SAN_TOKEN=6;
     public static final int T__19=19;
     public static final int T__59=59;
     public static final int T__17=17;
@@ -31,7 +31,7 @@ public class InternalChessDSLLexer extends Lexer {
     public static final int RULE_ESCAPE=9;
     public static final int T__60=60;
     public static final int T__61=61;
-    public static final int RULE_ID=6;
+    public static final int RULE_ID=7;
     public static final int T__26=26;
     public static final int T__27=27;
     public static final int T__28=28;
@@ -1512,10 +1512,10 @@ public class InternalChessDSLLexer extends Lexer {
         try {
             int _type = RULE_MOVENUMBER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalChessDSL.g:5770:17: ( ( '0' .. '9' )+ '.' )
-            // InternalChessDSL.g:5770:19: ( '0' .. '9' )+ '.'
+            // InternalChessDSL.g:5762:17: ( ( '0' .. '9' )+ '.' )
+            // InternalChessDSL.g:5762:19: ( '0' .. '9' )+ '.'
             {
-            // InternalChessDSL.g:5770:19: ( '0' .. '9' )+
+            // InternalChessDSL.g:5762:19: ( '0' .. '9' )+
             int cnt1=0;
             loop1:
             do {
@@ -1529,7 +1529,7 @@ public class InternalChessDSLLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalChessDSL.g:5770:20: '0' .. '9'
+            	    // InternalChessDSL.g:5762:20: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1562,11 +1562,11 @@ public class InternalChessDSLLexer extends Lexer {
         try {
             int _type = RULE_SAN_TOKEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalChessDSL.g:5772:16: ( RULE_ESCAPE ( 'O-O' ( '-O' )? | ( 'K' | 'Q' | 'R' | 'B' | 'N' )? ( RULE_LETTER | RULE_RANKDIGIT )* ( 'x' )? RULE_SQUARETERMINAL ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )? ( '+' | '#' )* ( '!' | '?' )* ) )
-            // InternalChessDSL.g:5772:18: RULE_ESCAPE ( 'O-O' ( '-O' )? | ( 'K' | 'Q' | 'R' | 'B' | 'N' )? ( RULE_LETTER | RULE_RANKDIGIT )* ( 'x' )? RULE_SQUARETERMINAL ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )? ( '+' | '#' )* ( '!' | '?' )* )
+            // InternalChessDSL.g:5764:16: ( RULE_ESCAPE ( 'O-O' ( '-O' )? | ( 'K' | 'Q' | 'R' | 'B' | 'N' )? ( RULE_LETTER | RULE_RANKDIGIT )* ( 'x' )? RULE_SQUARETERMINAL ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )? ( '+' | '#' )* ( '!' | '?' )* ) )
+            // InternalChessDSL.g:5764:18: RULE_ESCAPE ( 'O-O' ( '-O' )? | ( 'K' | 'Q' | 'R' | 'B' | 'N' )? ( RULE_LETTER | RULE_RANKDIGIT )* ( 'x' )? RULE_SQUARETERMINAL ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )? ( '+' | '#' )* ( '!' | '?' )* )
             {
             mRULE_ESCAPE(); 
-            // InternalChessDSL.g:5772:30: ( 'O-O' ( '-O' )? | ( 'K' | 'Q' | 'R' | 'B' | 'N' )? ( RULE_LETTER | RULE_RANKDIGIT )* ( 'x' )? RULE_SQUARETERMINAL ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )? ( '+' | '#' )* ( '!' | '?' )* )
+            // InternalChessDSL.g:5764:30: ( 'O-O' ( '-O' )? | ( 'K' | 'Q' | 'R' | 'B' | 'N' )? ( RULE_LETTER | RULE_RANKDIGIT )* ( 'x' )? RULE_SQUARETERMINAL ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )? ( '+' | '#' )* ( '!' | '?' )* )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -1584,11 +1584,11 @@ public class InternalChessDSLLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // InternalChessDSL.g:5772:31: 'O-O' ( '-O' )?
+                    // InternalChessDSL.g:5764:31: 'O-O' ( '-O' )?
                     {
                     match("O-O"); 
 
-                    // InternalChessDSL.g:5772:37: ( '-O' )?
+                    // InternalChessDSL.g:5764:37: ( '-O' )?
                     int alt2=2;
                     int LA2_0 = input.LA(1);
 
@@ -1597,7 +1597,7 @@ public class InternalChessDSLLexer extends Lexer {
                     }
                     switch (alt2) {
                         case 1 :
-                            // InternalChessDSL.g:5772:37: '-O'
+                            // InternalChessDSL.g:5764:37: '-O'
                             {
                             match("-O"); 
 
@@ -1611,9 +1611,9 @@ public class InternalChessDSLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:5772:43: ( 'K' | 'Q' | 'R' | 'B' | 'N' )? ( RULE_LETTER | RULE_RANKDIGIT )* ( 'x' )? RULE_SQUARETERMINAL ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )? ( '+' | '#' )* ( '!' | '?' )*
+                    // InternalChessDSL.g:5764:43: ( 'K' | 'Q' | 'R' | 'B' | 'N' )? ( RULE_LETTER | RULE_RANKDIGIT )* ( 'x' )? RULE_SQUARETERMINAL ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )? ( '+' | '#' )* ( '!' | '?' )*
                     {
-                    // InternalChessDSL.g:5772:43: ( 'K' | 'Q' | 'R' | 'B' | 'N' )?
+                    // InternalChessDSL.g:5764:43: ( 'K' | 'Q' | 'R' | 'B' | 'N' )?
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -1639,7 +1639,7 @@ public class InternalChessDSLLexer extends Lexer {
 
                     }
 
-                    // InternalChessDSL.g:5772:66: ( RULE_LETTER | RULE_RANKDIGIT )*
+                    // InternalChessDSL.g:5764:66: ( RULE_LETTER | RULE_RANKDIGIT )*
                     loop4:
                     do {
                         int alt4=2;
@@ -1690,7 +1690,7 @@ public class InternalChessDSLLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalChessDSL.g:5772:96: ( 'x' )?
+                    // InternalChessDSL.g:5764:96: ( 'x' )?
                     int alt5=2;
                     int LA5_0 = input.LA(1);
 
@@ -1699,7 +1699,7 @@ public class InternalChessDSLLexer extends Lexer {
                     }
                     switch (alt5) {
                         case 1 :
-                            // InternalChessDSL.g:5772:96: 'x'
+                            // InternalChessDSL.g:5764:96: 'x'
                             {
                             match('x'); 
 
@@ -1709,7 +1709,7 @@ public class InternalChessDSLLexer extends Lexer {
                     }
 
                     mRULE_SQUARETERMINAL(); 
-                    // InternalChessDSL.g:5772:121: ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )?
+                    // InternalChessDSL.g:5764:121: ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1718,7 +1718,7 @@ public class InternalChessDSLLexer extends Lexer {
                     }
                     switch (alt6) {
                         case 1 :
-                            // InternalChessDSL.g:5772:122: '=' ( 'Q' | 'R' | 'B' | 'N' )
+                            // InternalChessDSL.g:5764:122: '=' ( 'Q' | 'R' | 'B' | 'N' )
                             {
                             match('='); 
                             if ( input.LA(1)=='B'||input.LA(1)=='N'||(input.LA(1)>='Q' && input.LA(1)<='R') ) {
@@ -1736,7 +1736,7 @@ public class InternalChessDSLLexer extends Lexer {
 
                     }
 
-                    // InternalChessDSL.g:5772:146: ( '+' | '#' )*
+                    // InternalChessDSL.g:5764:146: ( '+' | '#' )*
                     loop7:
                     do {
                         int alt7=2;
@@ -1769,7 +1769,7 @@ public class InternalChessDSLLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalChessDSL.g:5772:157: ( '!' | '?' )*
+                    // InternalChessDSL.g:5764:157: ( '!' | '?' )*
                     loop8:
                     do {
                         int alt8=2;
@@ -1822,8 +1822,8 @@ public class InternalChessDSLLexer extends Lexer {
     // $ANTLR start "RULE_LETTER"
     public final void mRULE_LETTER() throws RecognitionException {
         try {
-            // InternalChessDSL.g:5774:22: ( 'a' .. 'h' )
-            // InternalChessDSL.g:5774:24: 'a' .. 'h'
+            // InternalChessDSL.g:5766:22: ( 'a' .. 'h' )
+            // InternalChessDSL.g:5766:24: 'a' .. 'h'
             {
             matchRange('a','h'); 
 
@@ -1838,8 +1838,8 @@ public class InternalChessDSLLexer extends Lexer {
     // $ANTLR start "RULE_RANKDIGIT"
     public final void mRULE_RANKDIGIT() throws RecognitionException {
         try {
-            // InternalChessDSL.g:5776:25: ( '1' .. '8' )
-            // InternalChessDSL.g:5776:27: '1' .. '8'
+            // InternalChessDSL.g:5768:25: ( '1' .. '8' )
+            // InternalChessDSL.g:5768:27: '1' .. '8'
             {
             matchRange('1','8'); 
 
@@ -1854,8 +1854,8 @@ public class InternalChessDSLLexer extends Lexer {
     // $ANTLR start "RULE_ESCAPE"
     public final void mRULE_ESCAPE() throws RecognitionException {
         try {
-            // InternalChessDSL.g:5778:22: ( '@' )
-            // InternalChessDSL.g:5778:24: '@'
+            // InternalChessDSL.g:5770:22: ( '@' )
+            // InternalChessDSL.g:5770:24: '@'
             {
             match('@'); 
 
@@ -1872,8 +1872,8 @@ public class InternalChessDSLLexer extends Lexer {
         try {
             int _type = RULE_SQUARETERMINAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalChessDSL.g:5780:21: ( RULE_LETTER RULE_RANKDIGIT )
-            // InternalChessDSL.g:5780:23: RULE_LETTER RULE_RANKDIGIT
+            // InternalChessDSL.g:5772:21: ( RULE_LETTER RULE_RANKDIGIT )
+            // InternalChessDSL.g:5772:23: RULE_LETTER RULE_RANKDIGIT
             {
             mRULE_LETTER(); 
             mRULE_RANKDIGIT(); 
@@ -1893,10 +1893,10 @@ public class InternalChessDSLLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalChessDSL.g:5782:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalChessDSL.g:5782:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalChessDSL.g:5774:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalChessDSL.g:5774:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalChessDSL.g:5782:11: ( '^' )?
+            // InternalChessDSL.g:5774:11: ( '^' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1905,7 +1905,7 @@ public class InternalChessDSLLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalChessDSL.g:5782:11: '^'
+                    // InternalChessDSL.g:5774:11: '^'
                     {
                     match('^'); 
 
@@ -1923,7 +1923,7 @@ public class InternalChessDSLLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalChessDSL.g:5782:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalChessDSL.g:5774:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop11:
             do {
                 int alt11=2;
@@ -1972,10 +1972,10 @@ public class InternalChessDSLLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalChessDSL.g:5784:10: ( ( '0' .. '9' )+ )
-            // InternalChessDSL.g:5784:12: ( '0' .. '9' )+
+            // InternalChessDSL.g:5776:10: ( ( '0' .. '9' )+ )
+            // InternalChessDSL.g:5776:12: ( '0' .. '9' )+
             {
-            // InternalChessDSL.g:5784:12: ( '0' .. '9' )+
+            // InternalChessDSL.g:5776:12: ( '0' .. '9' )+
             int cnt12=0;
             loop12:
             do {
@@ -1989,7 +1989,7 @@ public class InternalChessDSLLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // InternalChessDSL.g:5784:13: '0' .. '9'
+            	    // InternalChessDSL.g:5776:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -2021,10 +2021,10 @@ public class InternalChessDSLLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalChessDSL.g:5786:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalChessDSL.g:5786:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalChessDSL.g:5778:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalChessDSL.g:5778:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalChessDSL.g:5786:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalChessDSL.g:5778:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2042,10 +2042,10 @@ public class InternalChessDSLLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalChessDSL.g:5786:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalChessDSL.g:5778:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalChessDSL.g:5786:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalChessDSL.g:5778:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop13:
                     do {
                         int alt13=3;
@@ -2061,7 +2061,7 @@ public class InternalChessDSLLexer extends Lexer {
 
                         switch (alt13) {
                     	case 1 :
-                    	    // InternalChessDSL.g:5786:21: '\\\\' .
+                    	    // InternalChessDSL.g:5778:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2069,7 +2069,7 @@ public class InternalChessDSLLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalChessDSL.g:5786:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalChessDSL.g:5778:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2094,10 +2094,10 @@ public class InternalChessDSLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:5786:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalChessDSL.g:5778:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalChessDSL.g:5786:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalChessDSL.g:5778:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop14:
                     do {
                         int alt14=3;
@@ -2113,7 +2113,7 @@ public class InternalChessDSLLexer extends Lexer {
 
                         switch (alt14) {
                     	case 1 :
-                    	    // InternalChessDSL.g:5786:54: '\\\\' .
+                    	    // InternalChessDSL.g:5778:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2121,7 +2121,7 @@ public class InternalChessDSLLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalChessDSL.g:5786:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalChessDSL.g:5778:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2164,12 +2164,12 @@ public class InternalChessDSLLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalChessDSL.g:5788:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalChessDSL.g:5788:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalChessDSL.g:5780:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalChessDSL.g:5780:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalChessDSL.g:5788:24: ( options {greedy=false; } : . )*
+            // InternalChessDSL.g:5780:24: ( options {greedy=false; } : . )*
             loop16:
             do {
                 int alt16=2;
@@ -2194,7 +2194,7 @@ public class InternalChessDSLLexer extends Lexer {
 
                 switch (alt16) {
             	case 1 :
-            	    // InternalChessDSL.g:5788:52: .
+            	    // InternalChessDSL.g:5780:52: .
             	    {
             	    matchAny(); 
 
@@ -2224,12 +2224,12 @@ public class InternalChessDSLLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalChessDSL.g:5790:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalChessDSL.g:5790:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalChessDSL.g:5782:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalChessDSL.g:5782:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalChessDSL.g:5790:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalChessDSL.g:5782:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop17:
             do {
                 int alt17=2;
@@ -2242,7 +2242,7 @@ public class InternalChessDSLLexer extends Lexer {
 
                 switch (alt17) {
             	case 1 :
-            	    // InternalChessDSL.g:5790:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalChessDSL.g:5782:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2262,7 +2262,7 @@ public class InternalChessDSLLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalChessDSL.g:5790:40: ( ( '\\r' )? '\\n' )?
+            // InternalChessDSL.g:5782:40: ( ( '\\r' )? '\\n' )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -2271,9 +2271,9 @@ public class InternalChessDSLLexer extends Lexer {
             }
             switch (alt19) {
                 case 1 :
-                    // InternalChessDSL.g:5790:41: ( '\\r' )? '\\n'
+                    // InternalChessDSL.g:5782:41: ( '\\r' )? '\\n'
                     {
-                    // InternalChessDSL.g:5790:41: ( '\\r' )?
+                    // InternalChessDSL.g:5782:41: ( '\\r' )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -2282,7 +2282,7 @@ public class InternalChessDSLLexer extends Lexer {
                     }
                     switch (alt18) {
                         case 1 :
-                            // InternalChessDSL.g:5790:41: '\\r'
+                            // InternalChessDSL.g:5782:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2314,10 +2314,10 @@ public class InternalChessDSLLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalChessDSL.g:5792:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalChessDSL.g:5792:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalChessDSL.g:5784:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalChessDSL.g:5784:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalChessDSL.g:5792:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalChessDSL.g:5784:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt20=0;
             loop20:
             do {
@@ -2371,8 +2371,8 @@ public class InternalChessDSLLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalChessDSL.g:5794:16: ( . )
-            // InternalChessDSL.g:5794:18: .
+            // InternalChessDSL.g:5786:16: ( . )
+            // InternalChessDSL.g:5786:18: .
             {
             matchAny(); 
 

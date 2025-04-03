@@ -22,10 +22,10 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalChessDSLParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_MOVENUMBER", "RULE_ID", "RULE_SAN_TOKEN", "RULE_SQUARETERMINAL", "RULE_ESCAPE", "RULE_LETTER", "RULE_RANKDIGIT", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'Game'", "'Players:'", "'Moves:'", "'end'", "':'", "'InitialState'", "'fresh'", "'custom'", "'Positions:'", "'{'", "'}'", "'='", "'on'", "'...'", "'('", "')'", "'dummy'", "'moves'", "'->'", "'from'", "'to'", "'Capture('", "'and'", "'captures'", "'Castle('", "'Kingside'", "'Queenside'", "'castles'", "'the'", "'Promotion('", "'ran'", "'out'", "'of'", "'time'", "'resigned'", "'checkmated'", "'ended'", "'game'", "'in'", "'a'", "'stalemate'", "'repeated'", "'position'", "'three'", "'times'", "'played'", "'fifty'", "'without'", "'capture'", "'agreed'", "'draw'", "'wins'", "'Good'", "'Bad'", "'Excellent'", "'Risky'", "'Dubious'", "'Check'", "'Checkmate'", "'White'", "'Black'", "'King'", "'Queen'", "'Rook'", "'Bishop'", "'Knight'", "'Pawn'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_MOVENUMBER", "RULE_SAN_TOKEN", "RULE_ID", "RULE_SQUARETERMINAL", "RULE_ESCAPE", "RULE_LETTER", "RULE_RANKDIGIT", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'Game'", "'Players:'", "'Moves:'", "'end'", "':'", "'InitialState'", "'fresh'", "'custom'", "'Positions:'", "'{'", "'}'", "'='", "'on'", "'...'", "'('", "')'", "'dummy'", "'moves'", "'->'", "'from'", "'to'", "'Capture('", "'and'", "'captures'", "'Castle('", "'Kingside'", "'Queenside'", "'castles'", "'the'", "'Promotion('", "'ran'", "'out'", "'of'", "'time'", "'resigned'", "'checkmated'", "'ended'", "'game'", "'in'", "'a'", "'stalemate'", "'repeated'", "'position'", "'three'", "'times'", "'played'", "'fifty'", "'without'", "'capture'", "'agreed'", "'draw'", "'wins'", "'Good'", "'Bad'", "'Excellent'", "'Risky'", "'Dubious'", "'Check'", "'Checkmate'", "'White'", "'Black'", "'King'", "'Queen'", "'Rook'", "'Bishop'", "'Knight'", "'Pawn'"
     };
     public static final int T__50=50;
-    public static final int RULE_SAN_TOKEN=7;
+    public static final int RULE_SAN_TOKEN=6;
     public static final int T__19=19;
     public static final int T__59=59;
     public static final int T__17=17;
@@ -43,7 +43,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
     public static final int RULE_ESCAPE=9;
     public static final int T__60=60;
     public static final int T__61=61;
-    public static final int RULE_ID=6;
+    public static final int RULE_ID=7;
     public static final int T__26=26;
     public static final int T__27=27;
     public static final int T__28=28;
@@ -1393,15 +1393,17 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMovePair"
-    // InternalChessDSL.g:543:1: ruleMovePair returns [EObject current=null] : ( ( (lv_moveNumber_0_0= RULE_MOVENUMBER ) ) ( ( ( (otherlv_1= RULE_ID ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) ) | otherlv_3= '...' ) ( ( (otherlv_4= RULE_ID ) )? ( (lv_blackMove_5_0= ruleAnyMove ) ) )? ) ;
+    // InternalChessDSL.g:543:1: ruleMovePair returns [EObject current=null] : ( ( (lv_moveNumber_0_0= RULE_MOVENUMBER ) ) ( ( ( (lv_color1_1_0= rulePlayerOrColor ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) ) | otherlv_3= '...' ) ( ( (lv_color2_4_0= rulePlayerOrColor ) )? ( (lv_blackMove_5_0= ruleAnyMove ) ) )? ) ;
     public final EObject ruleMovePair() throws RecognitionException {
         EObject current = null;
 
         Token lv_moveNumber_0_0=null;
-        Token otherlv_1=null;
         Token otherlv_3=null;
-        Token otherlv_4=null;
+        EObject lv_color1_1_0 = null;
+
         EObject lv_whiteMove_2_0 = null;
+
+        EObject lv_color2_4_0 = null;
 
         EObject lv_blackMove_5_0 = null;
 
@@ -1410,11 +1412,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:549:2: ( ( ( (lv_moveNumber_0_0= RULE_MOVENUMBER ) ) ( ( ( (otherlv_1= RULE_ID ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) ) | otherlv_3= '...' ) ( ( (otherlv_4= RULE_ID ) )? ( (lv_blackMove_5_0= ruleAnyMove ) ) )? ) )
-            // InternalChessDSL.g:550:2: ( ( (lv_moveNumber_0_0= RULE_MOVENUMBER ) ) ( ( ( (otherlv_1= RULE_ID ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) ) | otherlv_3= '...' ) ( ( (otherlv_4= RULE_ID ) )? ( (lv_blackMove_5_0= ruleAnyMove ) ) )? )
+            // InternalChessDSL.g:549:2: ( ( ( (lv_moveNumber_0_0= RULE_MOVENUMBER ) ) ( ( ( (lv_color1_1_0= rulePlayerOrColor ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) ) | otherlv_3= '...' ) ( ( (lv_color2_4_0= rulePlayerOrColor ) )? ( (lv_blackMove_5_0= ruleAnyMove ) ) )? ) )
+            // InternalChessDSL.g:550:2: ( ( (lv_moveNumber_0_0= RULE_MOVENUMBER ) ) ( ( ( (lv_color1_1_0= rulePlayerOrColor ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) ) | otherlv_3= '...' ) ( ( (lv_color2_4_0= rulePlayerOrColor ) )? ( (lv_blackMove_5_0= ruleAnyMove ) ) )? )
             {
-            // InternalChessDSL.g:550:2: ( ( (lv_moveNumber_0_0= RULE_MOVENUMBER ) ) ( ( ( (otherlv_1= RULE_ID ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) ) | otherlv_3= '...' ) ( ( (otherlv_4= RULE_ID ) )? ( (lv_blackMove_5_0= ruleAnyMove ) ) )? )
-            // InternalChessDSL.g:551:3: ( (lv_moveNumber_0_0= RULE_MOVENUMBER ) ) ( ( ( (otherlv_1= RULE_ID ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) ) | otherlv_3= '...' ) ( ( (otherlv_4= RULE_ID ) )? ( (lv_blackMove_5_0= ruleAnyMove ) ) )?
+            // InternalChessDSL.g:550:2: ( ( (lv_moveNumber_0_0= RULE_MOVENUMBER ) ) ( ( ( (lv_color1_1_0= rulePlayerOrColor ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) ) | otherlv_3= '...' ) ( ( (lv_color2_4_0= rulePlayerOrColor ) )? ( (lv_blackMove_5_0= ruleAnyMove ) ) )? )
+            // InternalChessDSL.g:551:3: ( (lv_moveNumber_0_0= RULE_MOVENUMBER ) ) ( ( ( (lv_color1_1_0= rulePlayerOrColor ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) ) | otherlv_3= '...' ) ( ( (lv_color2_4_0= rulePlayerOrColor ) )? ( (lv_blackMove_5_0= ruleAnyMove ) ) )?
             {
             // InternalChessDSL.g:551:3: ( (lv_moveNumber_0_0= RULE_MOVENUMBER ) )
             // InternalChessDSL.g:552:4: (lv_moveNumber_0_0= RULE_MOVENUMBER )
@@ -1442,11 +1444,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalChessDSL.g:569:3: ( ( ( (otherlv_1= RULE_ID ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) ) | otherlv_3= '...' )
+            // InternalChessDSL.g:569:3: ( ( ( (lv_color1_1_0= rulePlayerOrColor ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) ) | otherlv_3= '...' )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( ((LA10_0>=RULE_ID && LA10_0<=RULE_SAN_TOKEN)||(LA10_0>=33 && LA10_0<=34)||LA10_0==41||LA10_0==44||(LA10_0>=78 && LA10_0<=83)) ) {
+            if ( ((LA10_0>=RULE_SAN_TOKEN && LA10_0<=RULE_ID)||(LA10_0>=33 && LA10_0<=34)||LA10_0==41||LA10_0==44||(LA10_0>=76 && LA10_0<=83)) ) {
                 alt10=1;
             }
             else if ( (LA10_0==30) ) {
@@ -1460,33 +1462,43 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalChessDSL.g:570:4: ( ( (otherlv_1= RULE_ID ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) )
+                    // InternalChessDSL.g:570:4: ( ( (lv_color1_1_0= rulePlayerOrColor ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) )
                     {
-                    // InternalChessDSL.g:570:4: ( ( (otherlv_1= RULE_ID ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) )
-                    // InternalChessDSL.g:571:5: ( (otherlv_1= RULE_ID ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) )
+                    // InternalChessDSL.g:570:4: ( ( (lv_color1_1_0= rulePlayerOrColor ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) ) )
+                    // InternalChessDSL.g:571:5: ( (lv_color1_1_0= rulePlayerOrColor ) )? ( (lv_whiteMove_2_0= ruleAnyMove ) )
                     {
-                    // InternalChessDSL.g:571:5: ( (otherlv_1= RULE_ID ) )?
+                    // InternalChessDSL.g:571:5: ( (lv_color1_1_0= rulePlayerOrColor ) )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
-                    if ( (LA9_0==RULE_ID) ) {
+                    if ( (LA9_0==RULE_ID||(LA9_0>=76 && LA9_0<=77)) ) {
                         alt9=1;
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalChessDSL.g:572:6: (otherlv_1= RULE_ID )
+                            // InternalChessDSL.g:572:6: (lv_color1_1_0= rulePlayerOrColor )
                             {
-                            // InternalChessDSL.g:572:6: (otherlv_1= RULE_ID )
-                            // InternalChessDSL.g:573:7: otherlv_1= RULE_ID
+                            // InternalChessDSL.g:572:6: (lv_color1_1_0= rulePlayerOrColor )
+                            // InternalChessDSL.g:573:7: lv_color1_1_0= rulePlayerOrColor
                             {
+
+                            							newCompositeNode(grammarAccess.getMovePairAccess().getColor1PlayerOrColorParserRuleCall_1_0_0_0());
+                            						
+                            pushFollow(FOLLOW_19);
+                            lv_color1_1_0=rulePlayerOrColor();
+
+                            state._fsp--;
+
 
                             							if (current==null) {
-                            								current = createModelElement(grammarAccess.getMovePairRule());
+                            								current = createModelElementForParent(grammarAccess.getMovePairRule());
                             							}
-                            						
-                            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_19); 
-
-                            							newLeafNode(otherlv_1, grammarAccess.getMovePairAccess().getColor1PlayerOrColorCrossReference_1_0_0_0());
+                            							set(
+                            								current,
+                            								"color1",
+                            								lv_color1_1_0,
+                            								"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.PlayerOrColor");
+                            							afterParserOrEnumRuleCall();
                             						
 
                             }
@@ -1497,11 +1509,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalChessDSL.g:584:5: ( (lv_whiteMove_2_0= ruleAnyMove ) )
-                    // InternalChessDSL.g:585:6: (lv_whiteMove_2_0= ruleAnyMove )
+                    // InternalChessDSL.g:590:5: ( (lv_whiteMove_2_0= ruleAnyMove ) )
+                    // InternalChessDSL.g:591:6: (lv_whiteMove_2_0= ruleAnyMove )
                     {
-                    // InternalChessDSL.g:585:6: (lv_whiteMove_2_0= ruleAnyMove )
-                    // InternalChessDSL.g:586:7: lv_whiteMove_2_0= ruleAnyMove
+                    // InternalChessDSL.g:591:6: (lv_whiteMove_2_0= ruleAnyMove )
+                    // InternalChessDSL.g:592:7: lv_whiteMove_2_0= ruleAnyMove
                     {
 
                     							newCompositeNode(grammarAccess.getMovePairAccess().getWhiteMoveAnyMoveParserRuleCall_1_0_1_0());
@@ -1535,7 +1547,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:605:4: otherlv_3= '...'
+                    // InternalChessDSL.g:611:4: otherlv_3= '...'
                     {
                     otherlv_3=(Token)match(input,30,FOLLOW_20); 
 
@@ -1547,39 +1559,49 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalChessDSL.g:610:3: ( ( (otherlv_4= RULE_ID ) )? ( (lv_blackMove_5_0= ruleAnyMove ) ) )?
+            // InternalChessDSL.g:616:3: ( ( (lv_color2_4_0= rulePlayerOrColor ) )? ( (lv_blackMove_5_0= ruleAnyMove ) ) )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
-            if ( ((LA12_0>=RULE_ID && LA12_0<=RULE_SAN_TOKEN)||(LA12_0>=33 && LA12_0<=34)||LA12_0==41||LA12_0==44||(LA12_0>=78 && LA12_0<=83)) ) {
+            if ( ((LA12_0>=RULE_SAN_TOKEN && LA12_0<=RULE_ID)||(LA12_0>=33 && LA12_0<=34)||LA12_0==41||LA12_0==44||(LA12_0>=76 && LA12_0<=83)) ) {
                 alt12=1;
             }
             switch (alt12) {
                 case 1 :
-                    // InternalChessDSL.g:611:4: ( (otherlv_4= RULE_ID ) )? ( (lv_blackMove_5_0= ruleAnyMove ) )
+                    // InternalChessDSL.g:617:4: ( (lv_color2_4_0= rulePlayerOrColor ) )? ( (lv_blackMove_5_0= ruleAnyMove ) )
                     {
-                    // InternalChessDSL.g:611:4: ( (otherlv_4= RULE_ID ) )?
+                    // InternalChessDSL.g:617:4: ( (lv_color2_4_0= rulePlayerOrColor ) )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
-                    if ( (LA11_0==RULE_ID) ) {
+                    if ( (LA11_0==RULE_ID||(LA11_0>=76 && LA11_0<=77)) ) {
                         alt11=1;
                     }
                     switch (alt11) {
                         case 1 :
-                            // InternalChessDSL.g:612:5: (otherlv_4= RULE_ID )
+                            // InternalChessDSL.g:618:5: (lv_color2_4_0= rulePlayerOrColor )
                             {
-                            // InternalChessDSL.g:612:5: (otherlv_4= RULE_ID )
-                            // InternalChessDSL.g:613:6: otherlv_4= RULE_ID
+                            // InternalChessDSL.g:618:5: (lv_color2_4_0= rulePlayerOrColor )
+                            // InternalChessDSL.g:619:6: lv_color2_4_0= rulePlayerOrColor
                             {
+
+                            						newCompositeNode(grammarAccess.getMovePairAccess().getColor2PlayerOrColorParserRuleCall_2_0_0());
+                            					
+                            pushFollow(FOLLOW_19);
+                            lv_color2_4_0=rulePlayerOrColor();
+
+                            state._fsp--;
+
 
                             						if (current==null) {
-                            							current = createModelElement(grammarAccess.getMovePairRule());
+                            							current = createModelElementForParent(grammarAccess.getMovePairRule());
                             						}
-                            					
-                            otherlv_4=(Token)match(input,RULE_ID,FOLLOW_19); 
-
-                            						newLeafNode(otherlv_4, grammarAccess.getMovePairAccess().getColor2PlayerOrColorCrossReference_2_0_0());
+                            						set(
+                            							current,
+                            							"color2",
+                            							lv_color2_4_0,
+                            							"uk.ac.kcl.in.nerosiegfried.chessdsl.ChessDSL.PlayerOrColor");
+                            						afterParserOrEnumRuleCall();
                             					
 
                             }
@@ -1590,11 +1612,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalChessDSL.g:624:4: ( (lv_blackMove_5_0= ruleAnyMove ) )
-                    // InternalChessDSL.g:625:5: (lv_blackMove_5_0= ruleAnyMove )
+                    // InternalChessDSL.g:636:4: ( (lv_blackMove_5_0= ruleAnyMove ) )
+                    // InternalChessDSL.g:637:5: (lv_blackMove_5_0= ruleAnyMove )
                     {
-                    // InternalChessDSL.g:625:5: (lv_blackMove_5_0= ruleAnyMove )
-                    // InternalChessDSL.g:626:6: lv_blackMove_5_0= ruleAnyMove
+                    // InternalChessDSL.g:637:5: (lv_blackMove_5_0= ruleAnyMove )
+                    // InternalChessDSL.g:638:6: lv_blackMove_5_0= ruleAnyMove
                     {
 
                     						newCompositeNode(grammarAccess.getMovePairAccess().getBlackMoveAnyMoveParserRuleCall_2_1_0());
@@ -1650,7 +1672,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAnyMove"
-    // InternalChessDSL.g:648:1: entryRuleAnyMove returns [EObject current=null] : iv_ruleAnyMove= ruleAnyMove EOF ;
+    // InternalChessDSL.g:660:1: entryRuleAnyMove returns [EObject current=null] : iv_ruleAnyMove= ruleAnyMove EOF ;
     public final EObject entryRuleAnyMove() throws RecognitionException {
         EObject current = null;
 
@@ -1658,8 +1680,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:648:48: (iv_ruleAnyMove= ruleAnyMove EOF )
-            // InternalChessDSL.g:649:2: iv_ruleAnyMove= ruleAnyMove EOF
+            // InternalChessDSL.g:660:48: (iv_ruleAnyMove= ruleAnyMove EOF )
+            // InternalChessDSL.g:661:2: iv_ruleAnyMove= ruleAnyMove EOF
             {
              newCompositeNode(grammarAccess.getAnyMoveRule()); 
             pushFollow(FOLLOW_1);
@@ -1686,7 +1708,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAnyMove"
-    // InternalChessDSL.g:655:1: ruleAnyMove returns [EObject current=null] : ( ( (lv_algebraicmove_0_0= ruleEscaped_SANMove ) ) | ( ( (lv_move_1_0= ruleDSLMove ) ) (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )? ) ) ;
+    // InternalChessDSL.g:667:1: ruleAnyMove returns [EObject current=null] : ( ( (lv_algebraicmove_0_0= ruleEscaped_SANMove ) ) | ( ( (lv_move_1_0= ruleDSLMove ) ) (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )? ) ) ;
     public final EObject ruleAnyMove() throws RecognitionException {
         EObject current = null;
 
@@ -1703,10 +1725,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:661:2: ( ( ( (lv_algebraicmove_0_0= ruleEscaped_SANMove ) ) | ( ( (lv_move_1_0= ruleDSLMove ) ) (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )? ) ) )
-            // InternalChessDSL.g:662:2: ( ( (lv_algebraicmove_0_0= ruleEscaped_SANMove ) ) | ( ( (lv_move_1_0= ruleDSLMove ) ) (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )? ) )
+            // InternalChessDSL.g:673:2: ( ( ( (lv_algebraicmove_0_0= ruleEscaped_SANMove ) ) | ( ( (lv_move_1_0= ruleDSLMove ) ) (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )? ) ) )
+            // InternalChessDSL.g:674:2: ( ( (lv_algebraicmove_0_0= ruleEscaped_SANMove ) ) | ( ( (lv_move_1_0= ruleDSLMove ) ) (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )? ) )
             {
-            // InternalChessDSL.g:662:2: ( ( (lv_algebraicmove_0_0= ruleEscaped_SANMove ) ) | ( ( (lv_move_1_0= ruleDSLMove ) ) (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )? ) )
+            // InternalChessDSL.g:674:2: ( ( (lv_algebraicmove_0_0= ruleEscaped_SANMove ) ) | ( ( (lv_move_1_0= ruleDSLMove ) ) (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )? ) )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -1724,13 +1746,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalChessDSL.g:663:3: ( (lv_algebraicmove_0_0= ruleEscaped_SANMove ) )
+                    // InternalChessDSL.g:675:3: ( (lv_algebraicmove_0_0= ruleEscaped_SANMove ) )
                     {
-                    // InternalChessDSL.g:663:3: ( (lv_algebraicmove_0_0= ruleEscaped_SANMove ) )
-                    // InternalChessDSL.g:664:4: (lv_algebraicmove_0_0= ruleEscaped_SANMove )
+                    // InternalChessDSL.g:675:3: ( (lv_algebraicmove_0_0= ruleEscaped_SANMove ) )
+                    // InternalChessDSL.g:676:4: (lv_algebraicmove_0_0= ruleEscaped_SANMove )
                     {
-                    // InternalChessDSL.g:664:4: (lv_algebraicmove_0_0= ruleEscaped_SANMove )
-                    // InternalChessDSL.g:665:5: lv_algebraicmove_0_0= ruleEscaped_SANMove
+                    // InternalChessDSL.g:676:4: (lv_algebraicmove_0_0= ruleEscaped_SANMove )
+                    // InternalChessDSL.g:677:5: lv_algebraicmove_0_0= ruleEscaped_SANMove
                     {
 
                     					newCompositeNode(grammarAccess.getAnyMoveAccess().getAlgebraicmoveEscaped_SANMoveParserRuleCall_0_0());
@@ -1761,16 +1783,16 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:683:3: ( ( (lv_move_1_0= ruleDSLMove ) ) (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )? )
+                    // InternalChessDSL.g:695:3: ( ( (lv_move_1_0= ruleDSLMove ) ) (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )? )
                     {
-                    // InternalChessDSL.g:683:3: ( ( (lv_move_1_0= ruleDSLMove ) ) (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )? )
-                    // InternalChessDSL.g:684:4: ( (lv_move_1_0= ruleDSLMove ) ) (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )?
+                    // InternalChessDSL.g:695:3: ( ( (lv_move_1_0= ruleDSLMove ) ) (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )? )
+                    // InternalChessDSL.g:696:4: ( (lv_move_1_0= ruleDSLMove ) ) (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )?
                     {
-                    // InternalChessDSL.g:684:4: ( (lv_move_1_0= ruleDSLMove ) )
-                    // InternalChessDSL.g:685:5: (lv_move_1_0= ruleDSLMove )
+                    // InternalChessDSL.g:696:4: ( (lv_move_1_0= ruleDSLMove ) )
+                    // InternalChessDSL.g:697:5: (lv_move_1_0= ruleDSLMove )
                     {
-                    // InternalChessDSL.g:685:5: (lv_move_1_0= ruleDSLMove )
-                    // InternalChessDSL.g:686:6: lv_move_1_0= ruleDSLMove
+                    // InternalChessDSL.g:697:5: (lv_move_1_0= ruleDSLMove )
+                    // InternalChessDSL.g:698:6: lv_move_1_0= ruleDSLMove
                     {
 
                     						newCompositeNode(grammarAccess.getAnyMoveAccess().getMoveDSLMoveParserRuleCall_1_0_0());
@@ -1797,7 +1819,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalChessDSL.g:703:4: (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )?
+                    // InternalChessDSL.g:715:4: (otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -1806,13 +1828,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt14) {
                         case 1 :
-                            // InternalChessDSL.g:704:5: otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')'
+                            // InternalChessDSL.g:716:5: otherlv_2= '(' ( (lv_remarks_3_0= ruleRemark ) )* otherlv_4= ')'
                             {
                             otherlv_2=(Token)match(input,31,FOLLOW_22); 
 
                             					newLeafNode(otherlv_2, grammarAccess.getAnyMoveAccess().getLeftParenthesisKeyword_1_1_0());
                             				
-                            // InternalChessDSL.g:708:5: ( (lv_remarks_3_0= ruleRemark ) )*
+                            // InternalChessDSL.g:720:5: ( (lv_remarks_3_0= ruleRemark ) )*
                             loop13:
                             do {
                                 int alt13=2;
@@ -1825,10 +1847,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
                                 switch (alt13) {
                             	case 1 :
-                            	    // InternalChessDSL.g:709:6: (lv_remarks_3_0= ruleRemark )
+                            	    // InternalChessDSL.g:721:6: (lv_remarks_3_0= ruleRemark )
                             	    {
-                            	    // InternalChessDSL.g:709:6: (lv_remarks_3_0= ruleRemark )
-                            	    // InternalChessDSL.g:710:7: lv_remarks_3_0= ruleRemark
+                            	    // InternalChessDSL.g:721:6: (lv_remarks_3_0= ruleRemark )
+                            	    // InternalChessDSL.g:722:7: lv_remarks_3_0= ruleRemark
                             	    {
 
                             	    							newCompositeNode(grammarAccess.getAnyMoveAccess().getRemarksRemarkEnumRuleCall_1_1_1_0());
@@ -1900,7 +1922,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDSLMove"
-    // InternalChessDSL.g:737:1: entryRuleDSLMove returns [EObject current=null] : iv_ruleDSLMove= ruleDSLMove EOF ;
+    // InternalChessDSL.g:749:1: entryRuleDSLMove returns [EObject current=null] : iv_ruleDSLMove= ruleDSLMove EOF ;
     public final EObject entryRuleDSLMove() throws RecognitionException {
         EObject current = null;
 
@@ -1908,8 +1930,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:737:48: (iv_ruleDSLMove= ruleDSLMove EOF )
-            // InternalChessDSL.g:738:2: iv_ruleDSLMove= ruleDSLMove EOF
+            // InternalChessDSL.g:749:48: (iv_ruleDSLMove= ruleDSLMove EOF )
+            // InternalChessDSL.g:750:2: iv_ruleDSLMove= ruleDSLMove EOF
             {
              newCompositeNode(grammarAccess.getDSLMoveRule()); 
             pushFollow(FOLLOW_1);
@@ -1936,7 +1958,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDSLMove"
-    // InternalChessDSL.g:744:1: ruleDSLMove returns [EObject current=null] : (this_Move_0= ruleMove | this_Capture_1= ruleCapture | this_Castle_2= ruleCastle | this_EnPassant_3= ruleEnPassant | this_Promotion_4= rulePromotion | this_Dummy_5= ruleDummy ) ;
+    // InternalChessDSL.g:756:1: ruleDSLMove returns [EObject current=null] : (this_Move_0= ruleMove | this_Capture_1= ruleCapture | this_Castle_2= ruleCastle | this_EnPassant_3= ruleEnPassant | this_Promotion_4= rulePromotion | this_Dummy_5= ruleDummy ) ;
     public final EObject ruleDSLMove() throws RecognitionException {
         EObject current = null;
 
@@ -1957,15 +1979,15 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:750:2: ( (this_Move_0= ruleMove | this_Capture_1= ruleCapture | this_Castle_2= ruleCastle | this_EnPassant_3= ruleEnPassant | this_Promotion_4= rulePromotion | this_Dummy_5= ruleDummy ) )
-            // InternalChessDSL.g:751:2: (this_Move_0= ruleMove | this_Capture_1= ruleCapture | this_Castle_2= ruleCastle | this_EnPassant_3= ruleEnPassant | this_Promotion_4= rulePromotion | this_Dummy_5= ruleDummy )
+            // InternalChessDSL.g:762:2: ( (this_Move_0= ruleMove | this_Capture_1= ruleCapture | this_Castle_2= ruleCastle | this_EnPassant_3= ruleEnPassant | this_Promotion_4= rulePromotion | this_Dummy_5= ruleDummy ) )
+            // InternalChessDSL.g:763:2: (this_Move_0= ruleMove | this_Capture_1= ruleCapture | this_Castle_2= ruleCastle | this_EnPassant_3= ruleEnPassant | this_Promotion_4= rulePromotion | this_Dummy_5= ruleDummy )
             {
-            // InternalChessDSL.g:751:2: (this_Move_0= ruleMove | this_Capture_1= ruleCapture | this_Castle_2= ruleCastle | this_EnPassant_3= ruleEnPassant | this_Promotion_4= rulePromotion | this_Dummy_5= ruleDummy )
+            // InternalChessDSL.g:763:2: (this_Move_0= ruleMove | this_Capture_1= ruleCapture | this_Castle_2= ruleCastle | this_EnPassant_3= ruleEnPassant | this_Promotion_4= rulePromotion | this_Dummy_5= ruleDummy )
             int alt16=6;
             alt16 = dfa16.predict(input);
             switch (alt16) {
                 case 1 :
-                    // InternalChessDSL.g:752:3: this_Move_0= ruleMove
+                    // InternalChessDSL.g:764:3: this_Move_0= ruleMove
                     {
 
                     			newCompositeNode(grammarAccess.getDSLMoveAccess().getMoveParserRuleCall_0());
@@ -1983,7 +2005,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:761:3: this_Capture_1= ruleCapture
+                    // InternalChessDSL.g:773:3: this_Capture_1= ruleCapture
                     {
 
                     			newCompositeNode(grammarAccess.getDSLMoveAccess().getCaptureParserRuleCall_1());
@@ -2001,7 +2023,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalChessDSL.g:770:3: this_Castle_2= ruleCastle
+                    // InternalChessDSL.g:782:3: this_Castle_2= ruleCastle
                     {
 
                     			newCompositeNode(grammarAccess.getDSLMoveAccess().getCastleParserRuleCall_2());
@@ -2019,7 +2041,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalChessDSL.g:779:3: this_EnPassant_3= ruleEnPassant
+                    // InternalChessDSL.g:791:3: this_EnPassant_3= ruleEnPassant
                     {
 
                     			newCompositeNode(grammarAccess.getDSLMoveAccess().getEnPassantParserRuleCall_3());
@@ -2037,7 +2059,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalChessDSL.g:788:3: this_Promotion_4= rulePromotion
+                    // InternalChessDSL.g:800:3: this_Promotion_4= rulePromotion
                     {
 
                     			newCompositeNode(grammarAccess.getDSLMoveAccess().getPromotionParserRuleCall_4());
@@ -2055,7 +2077,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // InternalChessDSL.g:797:3: this_Dummy_5= ruleDummy
+                    // InternalChessDSL.g:809:3: this_Dummy_5= ruleDummy
                     {
 
                     			newCompositeNode(grammarAccess.getDSLMoveAccess().getDummyParserRuleCall_5());
@@ -2095,7 +2117,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDummy"
-    // InternalChessDSL.g:809:1: entryRuleDummy returns [EObject current=null] : iv_ruleDummy= ruleDummy EOF ;
+    // InternalChessDSL.g:821:1: entryRuleDummy returns [EObject current=null] : iv_ruleDummy= ruleDummy EOF ;
     public final EObject entryRuleDummy() throws RecognitionException {
         EObject current = null;
 
@@ -2103,8 +2125,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:809:46: (iv_ruleDummy= ruleDummy EOF )
-            // InternalChessDSL.g:810:2: iv_ruleDummy= ruleDummy EOF
+            // InternalChessDSL.g:821:46: (iv_ruleDummy= ruleDummy EOF )
+            // InternalChessDSL.g:822:2: iv_ruleDummy= ruleDummy EOF
             {
              newCompositeNode(grammarAccess.getDummyRule()); 
             pushFollow(FOLLOW_1);
@@ -2131,7 +2153,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDummy"
-    // InternalChessDSL.g:816:1: ruleDummy returns [EObject current=null] : ( () otherlv_1= 'dummy' ) ;
+    // InternalChessDSL.g:828:1: ruleDummy returns [EObject current=null] : ( () otherlv_1= 'dummy' ) ;
     public final EObject ruleDummy() throws RecognitionException {
         EObject current = null;
 
@@ -2141,14 +2163,14 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:822:2: ( ( () otherlv_1= 'dummy' ) )
-            // InternalChessDSL.g:823:2: ( () otherlv_1= 'dummy' )
+            // InternalChessDSL.g:834:2: ( ( () otherlv_1= 'dummy' ) )
+            // InternalChessDSL.g:835:2: ( () otherlv_1= 'dummy' )
             {
-            // InternalChessDSL.g:823:2: ( () otherlv_1= 'dummy' )
-            // InternalChessDSL.g:824:3: () otherlv_1= 'dummy'
+            // InternalChessDSL.g:835:2: ( () otherlv_1= 'dummy' )
+            // InternalChessDSL.g:836:3: () otherlv_1= 'dummy'
             {
-            // InternalChessDSL.g:824:3: ()
-            // InternalChessDSL.g:825:4: 
+            // InternalChessDSL.g:836:3: ()
+            // InternalChessDSL.g:837:4: 
             {
 
             				current = forceCreateModelElement(
@@ -2185,7 +2207,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleMove"
-    // InternalChessDSL.g:839:1: entryRuleMove returns [EObject current=null] : iv_ruleMove= ruleMove EOF ;
+    // InternalChessDSL.g:851:1: entryRuleMove returns [EObject current=null] : iv_ruleMove= ruleMove EOF ;
     public final EObject entryRuleMove() throws RecognitionException {
         EObject current = null;
 
@@ -2193,8 +2215,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:839:45: (iv_ruleMove= ruleMove EOF )
-            // InternalChessDSL.g:840:2: iv_ruleMove= ruleMove EOF
+            // InternalChessDSL.g:851:45: (iv_ruleMove= ruleMove EOF )
+            // InternalChessDSL.g:852:2: iv_ruleMove= ruleMove EOF
             {
              newCompositeNode(grammarAccess.getMoveRule()); 
             pushFollow(FOLLOW_1);
@@ -2221,7 +2243,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMove"
-    // InternalChessDSL.g:846:1: ruleMove returns [EObject current=null] : ( (otherlv_0= 'moves' )? ( (lv_piece_1_0= rulePiece ) ) ( (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' ) | (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) ) ) ) ;
+    // InternalChessDSL.g:858:1: ruleMove returns [EObject current=null] : ( (otherlv_0= 'moves' )? ( (lv_piece_1_0= rulePiece ) ) ( (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' ) | (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) ) ) ) ;
     public final EObject ruleMove() throws RecognitionException {
         EObject current = null;
 
@@ -2246,13 +2268,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:852:2: ( ( (otherlv_0= 'moves' )? ( (lv_piece_1_0= rulePiece ) ) ( (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' ) | (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) ) ) ) )
-            // InternalChessDSL.g:853:2: ( (otherlv_0= 'moves' )? ( (lv_piece_1_0= rulePiece ) ) ( (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' ) | (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) ) ) )
+            // InternalChessDSL.g:864:2: ( ( (otherlv_0= 'moves' )? ( (lv_piece_1_0= rulePiece ) ) ( (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' ) | (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) ) ) ) )
+            // InternalChessDSL.g:865:2: ( (otherlv_0= 'moves' )? ( (lv_piece_1_0= rulePiece ) ) ( (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' ) | (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) ) ) )
             {
-            // InternalChessDSL.g:853:2: ( (otherlv_0= 'moves' )? ( (lv_piece_1_0= rulePiece ) ) ( (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' ) | (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) ) ) )
-            // InternalChessDSL.g:854:3: (otherlv_0= 'moves' )? ( (lv_piece_1_0= rulePiece ) ) ( (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' ) | (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) ) )
+            // InternalChessDSL.g:865:2: ( (otherlv_0= 'moves' )? ( (lv_piece_1_0= rulePiece ) ) ( (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' ) | (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) ) ) )
+            // InternalChessDSL.g:866:3: (otherlv_0= 'moves' )? ( (lv_piece_1_0= rulePiece ) ) ( (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' ) | (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) ) )
             {
-            // InternalChessDSL.g:854:3: (otherlv_0= 'moves' )?
+            // InternalChessDSL.g:866:3: (otherlv_0= 'moves' )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -2261,7 +2283,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
             }
             switch (alt17) {
                 case 1 :
-                    // InternalChessDSL.g:855:4: otherlv_0= 'moves'
+                    // InternalChessDSL.g:867:4: otherlv_0= 'moves'
                     {
                     otherlv_0=(Token)match(input,34,FOLLOW_17); 
 
@@ -2273,11 +2295,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalChessDSL.g:860:3: ( (lv_piece_1_0= rulePiece ) )
-            // InternalChessDSL.g:861:4: (lv_piece_1_0= rulePiece )
+            // InternalChessDSL.g:872:3: ( (lv_piece_1_0= rulePiece ) )
+            // InternalChessDSL.g:873:4: (lv_piece_1_0= rulePiece )
             {
-            // InternalChessDSL.g:861:4: (lv_piece_1_0= rulePiece )
-            // InternalChessDSL.g:862:5: lv_piece_1_0= rulePiece
+            // InternalChessDSL.g:873:4: (lv_piece_1_0= rulePiece )
+            // InternalChessDSL.g:874:5: lv_piece_1_0= rulePiece
             {
 
             					newCompositeNode(grammarAccess.getMoveAccess().getPiecePieceEnumRuleCall_1_0());
@@ -2304,7 +2326,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalChessDSL.g:879:3: ( (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' ) | (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) ) )
+            // InternalChessDSL.g:891:3: ( (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' ) | (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) ) )
             int alt18=2;
             int LA18_0 = input.LA(1);
 
@@ -2322,20 +2344,20 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
             }
             switch (alt18) {
                 case 1 :
-                    // InternalChessDSL.g:880:4: (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' )
+                    // InternalChessDSL.g:892:4: (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' )
                     {
-                    // InternalChessDSL.g:880:4: (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' )
-                    // InternalChessDSL.g:881:5: otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')'
+                    // InternalChessDSL.g:892:4: (otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')' )
+                    // InternalChessDSL.g:893:5: otherlv_2= '(' ( (lv_from_3_0= ruleSquare ) ) otherlv_4= '->' ( (lv_to_5_0= ruleSquare ) ) otherlv_6= ')'
                     {
                     otherlv_2=(Token)match(input,31,FOLLOW_16); 
 
                     					newLeafNode(otherlv_2, grammarAccess.getMoveAccess().getLeftParenthesisKeyword_2_0_0());
                     				
-                    // InternalChessDSL.g:885:5: ( (lv_from_3_0= ruleSquare ) )
-                    // InternalChessDSL.g:886:6: (lv_from_3_0= ruleSquare )
+                    // InternalChessDSL.g:897:5: ( (lv_from_3_0= ruleSquare ) )
+                    // InternalChessDSL.g:898:6: (lv_from_3_0= ruleSquare )
                     {
-                    // InternalChessDSL.g:886:6: (lv_from_3_0= ruleSquare )
-                    // InternalChessDSL.g:887:7: lv_from_3_0= ruleSquare
+                    // InternalChessDSL.g:898:6: (lv_from_3_0= ruleSquare )
+                    // InternalChessDSL.g:899:7: lv_from_3_0= ruleSquare
                     {
 
                     							newCompositeNode(grammarAccess.getMoveAccess().getFromSquareParserRuleCall_2_0_1_0());
@@ -2366,11 +2388,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
                     					newLeafNode(otherlv_4, grammarAccess.getMoveAccess().getHyphenMinusGreaterThanSignKeyword_2_0_2());
                     				
-                    // InternalChessDSL.g:908:5: ( (lv_to_5_0= ruleSquare ) )
-                    // InternalChessDSL.g:909:6: (lv_to_5_0= ruleSquare )
+                    // InternalChessDSL.g:920:5: ( (lv_to_5_0= ruleSquare ) )
+                    // InternalChessDSL.g:921:6: (lv_to_5_0= ruleSquare )
                     {
-                    // InternalChessDSL.g:909:6: (lv_to_5_0= ruleSquare )
-                    // InternalChessDSL.g:910:7: lv_to_5_0= ruleSquare
+                    // InternalChessDSL.g:921:6: (lv_to_5_0= ruleSquare )
+                    // InternalChessDSL.g:922:7: lv_to_5_0= ruleSquare
                     {
 
                     							newCompositeNode(grammarAccess.getMoveAccess().getToSquareParserRuleCall_2_0_3_0());
@@ -2408,20 +2430,20 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:933:4: (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) )
+                    // InternalChessDSL.g:945:4: (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) )
                     {
-                    // InternalChessDSL.g:933:4: (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) )
-                    // InternalChessDSL.g:934:5: otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) )
+                    // InternalChessDSL.g:945:4: (otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) ) )
+                    // InternalChessDSL.g:946:5: otherlv_7= 'from' ( (lv_from_8_0= ruleSquare ) ) otherlv_9= 'to' ( (lv_to_10_0= ruleSquare ) )
                     {
                     otherlv_7=(Token)match(input,36,FOLLOW_16); 
 
                     					newLeafNode(otherlv_7, grammarAccess.getMoveAccess().getFromKeyword_2_1_0());
                     				
-                    // InternalChessDSL.g:938:5: ( (lv_from_8_0= ruleSquare ) )
-                    // InternalChessDSL.g:939:6: (lv_from_8_0= ruleSquare )
+                    // InternalChessDSL.g:950:5: ( (lv_from_8_0= ruleSquare ) )
+                    // InternalChessDSL.g:951:6: (lv_from_8_0= ruleSquare )
                     {
-                    // InternalChessDSL.g:939:6: (lv_from_8_0= ruleSquare )
-                    // InternalChessDSL.g:940:7: lv_from_8_0= ruleSquare
+                    // InternalChessDSL.g:951:6: (lv_from_8_0= ruleSquare )
+                    // InternalChessDSL.g:952:7: lv_from_8_0= ruleSquare
                     {
 
                     							newCompositeNode(grammarAccess.getMoveAccess().getFromSquareParserRuleCall_2_1_1_0());
@@ -2452,11 +2474,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
                     					newLeafNode(otherlv_9, grammarAccess.getMoveAccess().getToKeyword_2_1_2());
                     				
-                    // InternalChessDSL.g:961:5: ( (lv_to_10_0= ruleSquare ) )
-                    // InternalChessDSL.g:962:6: (lv_to_10_0= ruleSquare )
+                    // InternalChessDSL.g:973:5: ( (lv_to_10_0= ruleSquare ) )
+                    // InternalChessDSL.g:974:6: (lv_to_10_0= ruleSquare )
                     {
-                    // InternalChessDSL.g:962:6: (lv_to_10_0= ruleSquare )
-                    // InternalChessDSL.g:963:7: lv_to_10_0= ruleSquare
+                    // InternalChessDSL.g:974:6: (lv_to_10_0= ruleSquare )
+                    // InternalChessDSL.g:975:7: lv_to_10_0= ruleSquare
                     {
 
                     							newCompositeNode(grammarAccess.getMoveAccess().getToSquareParserRuleCall_2_1_3_0());
@@ -2515,7 +2537,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleCapture"
-    // InternalChessDSL.g:986:1: entryRuleCapture returns [EObject current=null] : iv_ruleCapture= ruleCapture EOF ;
+    // InternalChessDSL.g:998:1: entryRuleCapture returns [EObject current=null] : iv_ruleCapture= ruleCapture EOF ;
     public final EObject entryRuleCapture() throws RecognitionException {
         EObject current = null;
 
@@ -2523,8 +2545,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:986:48: (iv_ruleCapture= ruleCapture EOF )
-            // InternalChessDSL.g:987:2: iv_ruleCapture= ruleCapture EOF
+            // InternalChessDSL.g:998:48: (iv_ruleCapture= ruleCapture EOF )
+            // InternalChessDSL.g:999:2: iv_ruleCapture= ruleCapture EOF
             {
              newCompositeNode(grammarAccess.getCaptureRule()); 
             pushFollow(FOLLOW_1);
@@ -2551,7 +2573,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCapture"
-    // InternalChessDSL.g:993:1: ruleCapture returns [EObject current=null] : ( ( (lv_move_0_0= ruleMove ) ) ( (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' ) | ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) ) ) ) ;
+    // InternalChessDSL.g:1005:1: ruleCapture returns [EObject current=null] : ( ( (lv_move_0_0= ruleMove ) ) ( (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' ) | ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) ) ) ) ;
     public final EObject ruleCapture() throws RecognitionException {
         EObject current = null;
 
@@ -2570,17 +2592,17 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:999:2: ( ( ( (lv_move_0_0= ruleMove ) ) ( (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' ) | ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) ) ) ) )
-            // InternalChessDSL.g:1000:2: ( ( (lv_move_0_0= ruleMove ) ) ( (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' ) | ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) ) ) )
+            // InternalChessDSL.g:1011:2: ( ( ( (lv_move_0_0= ruleMove ) ) ( (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' ) | ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) ) ) ) )
+            // InternalChessDSL.g:1012:2: ( ( (lv_move_0_0= ruleMove ) ) ( (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' ) | ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) ) ) )
             {
-            // InternalChessDSL.g:1000:2: ( ( (lv_move_0_0= ruleMove ) ) ( (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' ) | ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) ) ) )
-            // InternalChessDSL.g:1001:3: ( (lv_move_0_0= ruleMove ) ) ( (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' ) | ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) ) )
+            // InternalChessDSL.g:1012:2: ( ( (lv_move_0_0= ruleMove ) ) ( (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' ) | ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) ) ) )
+            // InternalChessDSL.g:1013:3: ( (lv_move_0_0= ruleMove ) ) ( (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' ) | ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) ) )
             {
-            // InternalChessDSL.g:1001:3: ( (lv_move_0_0= ruleMove ) )
-            // InternalChessDSL.g:1002:4: (lv_move_0_0= ruleMove )
+            // InternalChessDSL.g:1013:3: ( (lv_move_0_0= ruleMove ) )
+            // InternalChessDSL.g:1014:4: (lv_move_0_0= ruleMove )
             {
-            // InternalChessDSL.g:1002:4: (lv_move_0_0= ruleMove )
-            // InternalChessDSL.g:1003:5: lv_move_0_0= ruleMove
+            // InternalChessDSL.g:1014:4: (lv_move_0_0= ruleMove )
+            // InternalChessDSL.g:1015:5: lv_move_0_0= ruleMove
             {
 
             					newCompositeNode(grammarAccess.getCaptureAccess().getMoveMoveParserRuleCall_0_0());
@@ -2607,7 +2629,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalChessDSL.g:1020:3: ( (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' ) | ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) ) )
+            // InternalChessDSL.g:1032:3: ( (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' ) | ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) ) )
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -2625,20 +2647,20 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
             }
             switch (alt20) {
                 case 1 :
-                    // InternalChessDSL.g:1021:4: (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' )
+                    // InternalChessDSL.g:1033:4: (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' )
                     {
-                    // InternalChessDSL.g:1021:4: (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' )
-                    // InternalChessDSL.g:1022:5: otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')'
+                    // InternalChessDSL.g:1033:4: (otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')' )
+                    // InternalChessDSL.g:1034:5: otherlv_1= 'Capture(' ( (lv_capture_2_0= rulePiece ) ) otherlv_3= ')'
                     {
                     otherlv_1=(Token)match(input,38,FOLLOW_17); 
 
                     					newLeafNode(otherlv_1, grammarAccess.getCaptureAccess().getCaptureKeyword_1_0_0());
                     				
-                    // InternalChessDSL.g:1026:5: ( (lv_capture_2_0= rulePiece ) )
-                    // InternalChessDSL.g:1027:6: (lv_capture_2_0= rulePiece )
+                    // InternalChessDSL.g:1038:5: ( (lv_capture_2_0= rulePiece ) )
+                    // InternalChessDSL.g:1039:6: (lv_capture_2_0= rulePiece )
                     {
-                    // InternalChessDSL.g:1027:6: (lv_capture_2_0= rulePiece )
-                    // InternalChessDSL.g:1028:7: lv_capture_2_0= rulePiece
+                    // InternalChessDSL.g:1039:6: (lv_capture_2_0= rulePiece )
+                    // InternalChessDSL.g:1040:7: lv_capture_2_0= rulePiece
                     {
 
                     							newCompositeNode(grammarAccess.getCaptureAccess().getCapturePieceEnumRuleCall_1_0_1_0());
@@ -2676,12 +2698,12 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:1051:4: ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) )
+                    // InternalChessDSL.g:1063:4: ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) )
                     {
-                    // InternalChessDSL.g:1051:4: ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) )
-                    // InternalChessDSL.g:1052:5: (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) )
+                    // InternalChessDSL.g:1063:4: ( (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) ) )
+                    // InternalChessDSL.g:1064:5: (otherlv_4= 'and' )? otherlv_5= 'captures' ( (lv_capture_6_0= rulePiece ) )
                     {
-                    // InternalChessDSL.g:1052:5: (otherlv_4= 'and' )?
+                    // InternalChessDSL.g:1064:5: (otherlv_4= 'and' )?
                     int alt19=2;
                     int LA19_0 = input.LA(1);
 
@@ -2690,7 +2712,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt19) {
                         case 1 :
-                            // InternalChessDSL.g:1053:6: otherlv_4= 'and'
+                            // InternalChessDSL.g:1065:6: otherlv_4= 'and'
                             {
                             otherlv_4=(Token)match(input,39,FOLLOW_28); 
 
@@ -2706,11 +2728,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
                     					newLeafNode(otherlv_5, grammarAccess.getCaptureAccess().getCapturesKeyword_1_1_1());
                     				
-                    // InternalChessDSL.g:1062:5: ( (lv_capture_6_0= rulePiece ) )
-                    // InternalChessDSL.g:1063:6: (lv_capture_6_0= rulePiece )
+                    // InternalChessDSL.g:1074:5: ( (lv_capture_6_0= rulePiece ) )
+                    // InternalChessDSL.g:1075:6: (lv_capture_6_0= rulePiece )
                     {
-                    // InternalChessDSL.g:1063:6: (lv_capture_6_0= rulePiece )
-                    // InternalChessDSL.g:1064:7: lv_capture_6_0= rulePiece
+                    // InternalChessDSL.g:1075:6: (lv_capture_6_0= rulePiece )
+                    // InternalChessDSL.g:1076:7: lv_capture_6_0= rulePiece
                     {
 
                     							newCompositeNode(grammarAccess.getCaptureAccess().getCapturePieceEnumRuleCall_1_1_2_0());
@@ -2769,7 +2791,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleCastle"
-    // InternalChessDSL.g:1087:1: entryRuleCastle returns [EObject current=null] : iv_ruleCastle= ruleCastle EOF ;
+    // InternalChessDSL.g:1099:1: entryRuleCastle returns [EObject current=null] : iv_ruleCastle= ruleCastle EOF ;
     public final EObject entryRuleCastle() throws RecognitionException {
         EObject current = null;
 
@@ -2777,8 +2799,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:1087:47: (iv_ruleCastle= ruleCastle EOF )
-            // InternalChessDSL.g:1088:2: iv_ruleCastle= ruleCastle EOF
+            // InternalChessDSL.g:1099:47: (iv_ruleCastle= ruleCastle EOF )
+            // InternalChessDSL.g:1100:2: iv_ruleCastle= ruleCastle EOF
             {
              newCompositeNode(grammarAccess.getCastleRule()); 
             pushFollow(FOLLOW_1);
@@ -2805,7 +2827,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCastle"
-    // InternalChessDSL.g:1094:1: ruleCastle returns [EObject current=null] : ( (otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')' ) | (otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) ) ) | ( ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')' ) | ( ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) ) ) ) ;
+    // InternalChessDSL.g:1106:1: ruleCastle returns [EObject current=null] : ( (otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')' ) | (otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) ) ) | ( ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')' ) | ( ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) ) ) ) ;
     public final EObject ruleCastle() throws RecognitionException {
         EObject current = null;
 
@@ -2835,30 +2857,30 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:1100:2: ( ( (otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')' ) | (otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) ) ) | ( ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')' ) | ( ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) ) ) ) )
-            // InternalChessDSL.g:1101:2: ( (otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')' ) | (otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) ) ) | ( ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')' ) | ( ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) ) ) )
+            // InternalChessDSL.g:1112:2: ( ( (otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')' ) | (otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) ) ) | ( ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')' ) | ( ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) ) ) ) )
+            // InternalChessDSL.g:1113:2: ( (otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')' ) | (otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) ) ) | ( ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')' ) | ( ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) ) ) )
             {
-            // InternalChessDSL.g:1101:2: ( (otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')' ) | (otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) ) ) | ( ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')' ) | ( ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) ) ) )
+            // InternalChessDSL.g:1113:2: ( (otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')' ) | (otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) ) ) | ( ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')' ) | ( ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) ) ) )
             int alt26=4;
             alt26 = dfa26.predict(input);
             switch (alt26) {
                 case 1 :
-                    // InternalChessDSL.g:1102:3: (otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')' )
+                    // InternalChessDSL.g:1114:3: (otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')' )
                     {
-                    // InternalChessDSL.g:1102:3: (otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')' )
-                    // InternalChessDSL.g:1103:4: otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')'
+                    // InternalChessDSL.g:1114:3: (otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')' )
+                    // InternalChessDSL.g:1115:4: otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')'
                     {
                     otherlv_0=(Token)match(input,41,FOLLOW_29); 
 
                     				newLeafNode(otherlv_0, grammarAccess.getCastleAccess().getCastleKeyword_0_0());
                     			
-                    // InternalChessDSL.g:1107:4: ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) )
-                    // InternalChessDSL.g:1108:5: ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) )
+                    // InternalChessDSL.g:1119:4: ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) )
+                    // InternalChessDSL.g:1120:5: ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) )
                     {
-                    // InternalChessDSL.g:1108:5: ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) )
-                    // InternalChessDSL.g:1109:6: (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' )
+                    // InternalChessDSL.g:1120:5: ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) )
+                    // InternalChessDSL.g:1121:6: (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' )
                     {
-                    // InternalChessDSL.g:1109:6: (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' )
+                    // InternalChessDSL.g:1121:6: (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' )
                     int alt21=2;
                     int LA21_0 = input.LA(1);
 
@@ -2876,7 +2898,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt21) {
                         case 1 :
-                            // InternalChessDSL.g:1110:7: lv_side_1_1= 'Kingside'
+                            // InternalChessDSL.g:1122:7: lv_side_1_1= 'Kingside'
                             {
                             lv_side_1_1=(Token)match(input,42,FOLLOW_25); 
 
@@ -2892,7 +2914,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalChessDSL.g:1121:7: lv_side_1_2= 'Queenside'
+                            // InternalChessDSL.g:1133:7: lv_side_1_2= 'Queenside'
                             {
                             lv_side_1_2=(Token)match(input,43,FOLLOW_25); 
 
@@ -2927,16 +2949,16 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:1140:3: (otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) ) )
+                    // InternalChessDSL.g:1152:3: (otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) ) )
                     {
-                    // InternalChessDSL.g:1140:3: (otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) ) )
-                    // InternalChessDSL.g:1141:4: otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) )
+                    // InternalChessDSL.g:1152:3: (otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) ) )
+                    // InternalChessDSL.g:1153:4: otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) )
                     {
                     otherlv_3=(Token)match(input,44,FOLLOW_30); 
 
                     				newLeafNode(otherlv_3, grammarAccess.getCastleAccess().getCastlesKeyword_1_0());
                     			
-                    // InternalChessDSL.g:1145:4: (otherlv_4= 'on' otherlv_5= 'the' )?
+                    // InternalChessDSL.g:1157:4: (otherlv_4= 'on' otherlv_5= 'the' )?
                     int alt22=2;
                     int LA22_0 = input.LA(1);
 
@@ -2945,7 +2967,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt22) {
                         case 1 :
-                            // InternalChessDSL.g:1146:5: otherlv_4= 'on' otherlv_5= 'the'
+                            // InternalChessDSL.g:1158:5: otherlv_4= 'on' otherlv_5= 'the'
                             {
                             otherlv_4=(Token)match(input,29,FOLLOW_31); 
 
@@ -2961,13 +2983,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalChessDSL.g:1155:4: ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) )
-                    // InternalChessDSL.g:1156:5: ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) )
+                    // InternalChessDSL.g:1167:4: ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) )
+                    // InternalChessDSL.g:1168:5: ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) )
                     {
-                    // InternalChessDSL.g:1156:5: ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) )
-                    // InternalChessDSL.g:1157:6: (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' )
+                    // InternalChessDSL.g:1168:5: ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) )
+                    // InternalChessDSL.g:1169:6: (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' )
                     {
-                    // InternalChessDSL.g:1157:6: (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' )
+                    // InternalChessDSL.g:1169:6: (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' )
                     int alt23=2;
                     int LA23_0 = input.LA(1);
 
@@ -2985,7 +3007,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt23) {
                         case 1 :
-                            // InternalChessDSL.g:1158:7: lv_side_6_1= 'Kingside'
+                            // InternalChessDSL.g:1170:7: lv_side_6_1= 'Kingside'
                             {
                             lv_side_6_1=(Token)match(input,42,FOLLOW_2); 
 
@@ -3001,7 +3023,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalChessDSL.g:1169:7: lv_side_6_2= 'Queenside'
+                            // InternalChessDSL.g:1181:7: lv_side_6_2= 'Queenside'
                             {
                             lv_side_6_2=(Token)match(input,43,FOLLOW_2); 
 
@@ -3032,16 +3054,16 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalChessDSL.g:1184:3: ( ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')' )
+                    // InternalChessDSL.g:1196:3: ( ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')' )
                     {
-                    // InternalChessDSL.g:1184:3: ( ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')' )
-                    // InternalChessDSL.g:1185:4: ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')'
+                    // InternalChessDSL.g:1196:3: ( ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')' )
+                    // InternalChessDSL.g:1197:4: ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')'
                     {
-                    // InternalChessDSL.g:1185:4: ( (lv_move_7_0= ruleMove ) )
-                    // InternalChessDSL.g:1186:5: (lv_move_7_0= ruleMove )
+                    // InternalChessDSL.g:1197:4: ( (lv_move_7_0= ruleMove ) )
+                    // InternalChessDSL.g:1198:5: (lv_move_7_0= ruleMove )
                     {
-                    // InternalChessDSL.g:1186:5: (lv_move_7_0= ruleMove )
-                    // InternalChessDSL.g:1187:6: lv_move_7_0= ruleMove
+                    // InternalChessDSL.g:1198:5: (lv_move_7_0= ruleMove )
+                    // InternalChessDSL.g:1199:6: lv_move_7_0= ruleMove
                     {
 
                     						newCompositeNode(grammarAccess.getCastleAccess().getMoveMoveParserRuleCall_2_0_0());
@@ -3072,13 +3094,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_8, grammarAccess.getCastleAccess().getCastleKeyword_2_1());
                     			
-                    // InternalChessDSL.g:1208:4: ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) )
-                    // InternalChessDSL.g:1209:5: ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) )
+                    // InternalChessDSL.g:1220:4: ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) )
+                    // InternalChessDSL.g:1221:5: ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) )
                     {
-                    // InternalChessDSL.g:1209:5: ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) )
-                    // InternalChessDSL.g:1210:6: (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' )
+                    // InternalChessDSL.g:1221:5: ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) )
+                    // InternalChessDSL.g:1222:6: (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' )
                     {
-                    // InternalChessDSL.g:1210:6: (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' )
+                    // InternalChessDSL.g:1222:6: (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' )
                     int alt24=2;
                     int LA24_0 = input.LA(1);
 
@@ -3096,7 +3118,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt24) {
                         case 1 :
-                            // InternalChessDSL.g:1211:7: lv_side_9_1= 'Kingside'
+                            // InternalChessDSL.g:1223:7: lv_side_9_1= 'Kingside'
                             {
                             lv_side_9_1=(Token)match(input,42,FOLLOW_25); 
 
@@ -3112,7 +3134,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalChessDSL.g:1222:7: lv_side_9_2= 'Queenside'
+                            // InternalChessDSL.g:1234:7: lv_side_9_2= 'Queenside'
                             {
                             lv_side_9_2=(Token)match(input,43,FOLLOW_25); 
 
@@ -3147,16 +3169,16 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalChessDSL.g:1241:3: ( ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) ) )
+                    // InternalChessDSL.g:1253:3: ( ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) ) )
                     {
-                    // InternalChessDSL.g:1241:3: ( ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) ) )
-                    // InternalChessDSL.g:1242:4: ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) )
+                    // InternalChessDSL.g:1253:3: ( ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) ) )
+                    // InternalChessDSL.g:1254:4: ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) )
                     {
-                    // InternalChessDSL.g:1242:4: ( (lv_move_11_0= ruleMove ) )
-                    // InternalChessDSL.g:1243:5: (lv_move_11_0= ruleMove )
+                    // InternalChessDSL.g:1254:4: ( (lv_move_11_0= ruleMove ) )
+                    // InternalChessDSL.g:1255:5: (lv_move_11_0= ruleMove )
                     {
-                    // InternalChessDSL.g:1243:5: (lv_move_11_0= ruleMove )
-                    // InternalChessDSL.g:1244:6: lv_move_11_0= ruleMove
+                    // InternalChessDSL.g:1255:5: (lv_move_11_0= ruleMove )
+                    // InternalChessDSL.g:1256:6: lv_move_11_0= ruleMove
                     {
 
                     						newCompositeNode(grammarAccess.getCastleAccess().getMoveMoveParserRuleCall_3_0_0());
@@ -3191,13 +3213,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_13, grammarAccess.getCastleAccess().getCastlesKeyword_3_2());
                     			
-                    // InternalChessDSL.g:1269:4: ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) )
-                    // InternalChessDSL.g:1270:5: ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) )
+                    // InternalChessDSL.g:1281:4: ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) )
+                    // InternalChessDSL.g:1282:5: ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) )
                     {
-                    // InternalChessDSL.g:1270:5: ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) )
-                    // InternalChessDSL.g:1271:6: (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' )
+                    // InternalChessDSL.g:1282:5: ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) )
+                    // InternalChessDSL.g:1283:6: (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' )
                     {
-                    // InternalChessDSL.g:1271:6: (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' )
+                    // InternalChessDSL.g:1283:6: (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' )
                     int alt25=2;
                     int LA25_0 = input.LA(1);
 
@@ -3215,7 +3237,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt25) {
                         case 1 :
-                            // InternalChessDSL.g:1272:7: lv_side_14_1= 'Kingside'
+                            // InternalChessDSL.g:1284:7: lv_side_14_1= 'Kingside'
                             {
                             lv_side_14_1=(Token)match(input,42,FOLLOW_2); 
 
@@ -3231,7 +3253,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalChessDSL.g:1283:7: lv_side_14_2= 'Queenside'
+                            // InternalChessDSL.g:1295:7: lv_side_14_2= 'Queenside'
                             {
                             lv_side_14_2=(Token)match(input,43,FOLLOW_2); 
 
@@ -3284,7 +3306,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEnPassant"
-    // InternalChessDSL.g:1301:1: entryRuleEnPassant returns [EObject current=null] : iv_ruleEnPassant= ruleEnPassant EOF ;
+    // InternalChessDSL.g:1313:1: entryRuleEnPassant returns [EObject current=null] : iv_ruleEnPassant= ruleEnPassant EOF ;
     public final EObject entryRuleEnPassant() throws RecognitionException {
         EObject current = null;
 
@@ -3292,8 +3314,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:1301:50: (iv_ruleEnPassant= ruleEnPassant EOF )
-            // InternalChessDSL.g:1302:2: iv_ruleEnPassant= ruleEnPassant EOF
+            // InternalChessDSL.g:1313:50: (iv_ruleEnPassant= ruleEnPassant EOF )
+            // InternalChessDSL.g:1314:2: iv_ruleEnPassant= ruleEnPassant EOF
             {
              newCompositeNode(grammarAccess.getEnPassantRule()); 
             pushFollow(FOLLOW_1);
@@ -3320,7 +3342,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEnPassant"
-    // InternalChessDSL.g:1308:1: ruleEnPassant returns [EObject current=null] : ( ( (lv_capture_0_0= ruleCapture ) ) otherlv_1= 'on' ( (lv_square_2_0= ruleSquare ) ) ) ;
+    // InternalChessDSL.g:1320:1: ruleEnPassant returns [EObject current=null] : ( ( (lv_capture_0_0= ruleCapture ) ) otherlv_1= 'on' ( (lv_square_2_0= ruleSquare ) ) ) ;
     public final EObject ruleEnPassant() throws RecognitionException {
         EObject current = null;
 
@@ -3334,17 +3356,17 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:1314:2: ( ( ( (lv_capture_0_0= ruleCapture ) ) otherlv_1= 'on' ( (lv_square_2_0= ruleSquare ) ) ) )
-            // InternalChessDSL.g:1315:2: ( ( (lv_capture_0_0= ruleCapture ) ) otherlv_1= 'on' ( (lv_square_2_0= ruleSquare ) ) )
+            // InternalChessDSL.g:1326:2: ( ( ( (lv_capture_0_0= ruleCapture ) ) otherlv_1= 'on' ( (lv_square_2_0= ruleSquare ) ) ) )
+            // InternalChessDSL.g:1327:2: ( ( (lv_capture_0_0= ruleCapture ) ) otherlv_1= 'on' ( (lv_square_2_0= ruleSquare ) ) )
             {
-            // InternalChessDSL.g:1315:2: ( ( (lv_capture_0_0= ruleCapture ) ) otherlv_1= 'on' ( (lv_square_2_0= ruleSquare ) ) )
-            // InternalChessDSL.g:1316:3: ( (lv_capture_0_0= ruleCapture ) ) otherlv_1= 'on' ( (lv_square_2_0= ruleSquare ) )
+            // InternalChessDSL.g:1327:2: ( ( (lv_capture_0_0= ruleCapture ) ) otherlv_1= 'on' ( (lv_square_2_0= ruleSquare ) ) )
+            // InternalChessDSL.g:1328:3: ( (lv_capture_0_0= ruleCapture ) ) otherlv_1= 'on' ( (lv_square_2_0= ruleSquare ) )
             {
-            // InternalChessDSL.g:1316:3: ( (lv_capture_0_0= ruleCapture ) )
-            // InternalChessDSL.g:1317:4: (lv_capture_0_0= ruleCapture )
+            // InternalChessDSL.g:1328:3: ( (lv_capture_0_0= ruleCapture ) )
+            // InternalChessDSL.g:1329:4: (lv_capture_0_0= ruleCapture )
             {
-            // InternalChessDSL.g:1317:4: (lv_capture_0_0= ruleCapture )
-            // InternalChessDSL.g:1318:5: lv_capture_0_0= ruleCapture
+            // InternalChessDSL.g:1329:4: (lv_capture_0_0= ruleCapture )
+            // InternalChessDSL.g:1330:5: lv_capture_0_0= ruleCapture
             {
 
             					newCompositeNode(grammarAccess.getEnPassantAccess().getCaptureCaptureParserRuleCall_0_0());
@@ -3375,11 +3397,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getEnPassantAccess().getOnKeyword_1());
             		
-            // InternalChessDSL.g:1339:3: ( (lv_square_2_0= ruleSquare ) )
-            // InternalChessDSL.g:1340:4: (lv_square_2_0= ruleSquare )
+            // InternalChessDSL.g:1351:3: ( (lv_square_2_0= ruleSquare ) )
+            // InternalChessDSL.g:1352:4: (lv_square_2_0= ruleSquare )
             {
-            // InternalChessDSL.g:1340:4: (lv_square_2_0= ruleSquare )
-            // InternalChessDSL.g:1341:5: lv_square_2_0= ruleSquare
+            // InternalChessDSL.g:1352:4: (lv_square_2_0= ruleSquare )
+            // InternalChessDSL.g:1353:5: lv_square_2_0= ruleSquare
             {
 
             					newCompositeNode(grammarAccess.getEnPassantAccess().getSquareSquareParserRuleCall_2_0());
@@ -3429,7 +3451,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRulePromotion"
-    // InternalChessDSL.g:1362:1: entryRulePromotion returns [EObject current=null] : iv_rulePromotion= rulePromotion EOF ;
+    // InternalChessDSL.g:1374:1: entryRulePromotion returns [EObject current=null] : iv_rulePromotion= rulePromotion EOF ;
     public final EObject entryRulePromotion() throws RecognitionException {
         EObject current = null;
 
@@ -3437,8 +3459,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:1362:50: (iv_rulePromotion= rulePromotion EOF )
-            // InternalChessDSL.g:1363:2: iv_rulePromotion= rulePromotion EOF
+            // InternalChessDSL.g:1374:50: (iv_rulePromotion= rulePromotion EOF )
+            // InternalChessDSL.g:1375:2: iv_rulePromotion= rulePromotion EOF
             {
              newCompositeNode(grammarAccess.getPromotionRule()); 
             pushFollow(FOLLOW_1);
@@ -3465,7 +3487,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePromotion"
-    // InternalChessDSL.g:1369:1: rulePromotion returns [EObject current=null] : ( ( ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) ) ) otherlv_1= 'Promotion(' ( (lv_piece_2_0= rulePiece ) ) otherlv_3= ')' ) ;
+    // InternalChessDSL.g:1381:1: rulePromotion returns [EObject current=null] : ( ( ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) ) ) otherlv_1= 'Promotion(' ( (lv_piece_2_0= rulePiece ) ) otherlv_3= ')' ) ;
     public final EObject rulePromotion() throws RecognitionException {
         EObject current = null;
 
@@ -3482,24 +3504,24 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:1375:2: ( ( ( ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) ) ) otherlv_1= 'Promotion(' ( (lv_piece_2_0= rulePiece ) ) otherlv_3= ')' ) )
-            // InternalChessDSL.g:1376:2: ( ( ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) ) ) otherlv_1= 'Promotion(' ( (lv_piece_2_0= rulePiece ) ) otherlv_3= ')' )
+            // InternalChessDSL.g:1387:2: ( ( ( ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) ) ) otherlv_1= 'Promotion(' ( (lv_piece_2_0= rulePiece ) ) otherlv_3= ')' ) )
+            // InternalChessDSL.g:1388:2: ( ( ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) ) ) otherlv_1= 'Promotion(' ( (lv_piece_2_0= rulePiece ) ) otherlv_3= ')' )
             {
-            // InternalChessDSL.g:1376:2: ( ( ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) ) ) otherlv_1= 'Promotion(' ( (lv_piece_2_0= rulePiece ) ) otherlv_3= ')' )
-            // InternalChessDSL.g:1377:3: ( ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) ) ) otherlv_1= 'Promotion(' ( (lv_piece_2_0= rulePiece ) ) otherlv_3= ')'
+            // InternalChessDSL.g:1388:2: ( ( ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) ) ) otherlv_1= 'Promotion(' ( (lv_piece_2_0= rulePiece ) ) otherlv_3= ')' )
+            // InternalChessDSL.g:1389:3: ( ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) ) ) otherlv_1= 'Promotion(' ( (lv_piece_2_0= rulePiece ) ) otherlv_3= ')'
             {
-            // InternalChessDSL.g:1377:3: ( ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) ) )
-            // InternalChessDSL.g:1378:4: ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) )
+            // InternalChessDSL.g:1389:3: ( ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) ) )
+            // InternalChessDSL.g:1390:4: ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) )
             {
-            // InternalChessDSL.g:1378:4: ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) )
-            // InternalChessDSL.g:1379:5: (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture )
+            // InternalChessDSL.g:1390:4: ( (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture ) )
+            // InternalChessDSL.g:1391:5: (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture )
             {
-            // InternalChessDSL.g:1379:5: (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture )
+            // InternalChessDSL.g:1391:5: (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture )
             int alt27=2;
             alt27 = dfa27.predict(input);
             switch (alt27) {
                 case 1 :
-                    // InternalChessDSL.g:1380:6: lv_move_0_1= ruleMove
+                    // InternalChessDSL.g:1392:6: lv_move_0_1= ruleMove
                     {
 
                     						newCompositeNode(grammarAccess.getPromotionAccess().getMoveMoveParserRuleCall_0_0_0());
@@ -3524,7 +3546,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:1396:6: lv_move_0_2= ruleCapture
+                    // InternalChessDSL.g:1408:6: lv_move_0_2= ruleCapture
                     {
 
                     						newCompositeNode(grammarAccess.getPromotionAccess().getMoveCaptureParserRuleCall_0_0_1());
@@ -3561,11 +3583,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getPromotionAccess().getPromotionKeyword_1());
             		
-            // InternalChessDSL.g:1418:3: ( (lv_piece_2_0= rulePiece ) )
-            // InternalChessDSL.g:1419:4: (lv_piece_2_0= rulePiece )
+            // InternalChessDSL.g:1430:3: ( (lv_piece_2_0= rulePiece ) )
+            // InternalChessDSL.g:1431:4: (lv_piece_2_0= rulePiece )
             {
-            // InternalChessDSL.g:1419:4: (lv_piece_2_0= rulePiece )
-            // InternalChessDSL.g:1420:5: lv_piece_2_0= rulePiece
+            // InternalChessDSL.g:1431:4: (lv_piece_2_0= rulePiece )
+            // InternalChessDSL.g:1432:5: lv_piece_2_0= rulePiece
             {
 
             					newCompositeNode(grammarAccess.getPromotionAccess().getPiecePieceEnumRuleCall_2_0());
@@ -3619,7 +3641,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEscaped_SANMove"
-    // InternalChessDSL.g:1445:1: entryRuleEscaped_SANMove returns [EObject current=null] : iv_ruleEscaped_SANMove= ruleEscaped_SANMove EOF ;
+    // InternalChessDSL.g:1457:1: entryRuleEscaped_SANMove returns [EObject current=null] : iv_ruleEscaped_SANMove= ruleEscaped_SANMove EOF ;
     public final EObject entryRuleEscaped_SANMove() throws RecognitionException {
         EObject current = null;
 
@@ -3627,8 +3649,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:1445:56: (iv_ruleEscaped_SANMove= ruleEscaped_SANMove EOF )
-            // InternalChessDSL.g:1446:2: iv_ruleEscaped_SANMove= ruleEscaped_SANMove EOF
+            // InternalChessDSL.g:1457:56: (iv_ruleEscaped_SANMove= ruleEscaped_SANMove EOF )
+            // InternalChessDSL.g:1458:2: iv_ruleEscaped_SANMove= ruleEscaped_SANMove EOF
             {
              newCompositeNode(grammarAccess.getEscaped_SANMoveRule()); 
             pushFollow(FOLLOW_1);
@@ -3655,7 +3677,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEscaped_SANMove"
-    // InternalChessDSL.g:1452:1: ruleEscaped_SANMove returns [EObject current=null] : ( () ( (lv_token_1_0= RULE_SAN_TOKEN ) ) ) ;
+    // InternalChessDSL.g:1464:1: ruleEscaped_SANMove returns [EObject current=null] : ( () ( (lv_token_1_0= RULE_SAN_TOKEN ) ) ) ;
     public final EObject ruleEscaped_SANMove() throws RecognitionException {
         EObject current = null;
 
@@ -3665,14 +3687,14 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:1458:2: ( ( () ( (lv_token_1_0= RULE_SAN_TOKEN ) ) ) )
-            // InternalChessDSL.g:1459:2: ( () ( (lv_token_1_0= RULE_SAN_TOKEN ) ) )
+            // InternalChessDSL.g:1470:2: ( ( () ( (lv_token_1_0= RULE_SAN_TOKEN ) ) ) )
+            // InternalChessDSL.g:1471:2: ( () ( (lv_token_1_0= RULE_SAN_TOKEN ) ) )
             {
-            // InternalChessDSL.g:1459:2: ( () ( (lv_token_1_0= RULE_SAN_TOKEN ) ) )
-            // InternalChessDSL.g:1460:3: () ( (lv_token_1_0= RULE_SAN_TOKEN ) )
+            // InternalChessDSL.g:1471:2: ( () ( (lv_token_1_0= RULE_SAN_TOKEN ) ) )
+            // InternalChessDSL.g:1472:3: () ( (lv_token_1_0= RULE_SAN_TOKEN ) )
             {
-            // InternalChessDSL.g:1460:3: ()
-            // InternalChessDSL.g:1461:4: 
+            // InternalChessDSL.g:1472:3: ()
+            // InternalChessDSL.g:1473:4: 
             {
 
             				current = forceCreateModelElement(
@@ -3682,11 +3704,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalChessDSL.g:1467:3: ( (lv_token_1_0= RULE_SAN_TOKEN ) )
-            // InternalChessDSL.g:1468:4: (lv_token_1_0= RULE_SAN_TOKEN )
+            // InternalChessDSL.g:1479:3: ( (lv_token_1_0= RULE_SAN_TOKEN ) )
+            // InternalChessDSL.g:1480:4: (lv_token_1_0= RULE_SAN_TOKEN )
             {
-            // InternalChessDSL.g:1468:4: (lv_token_1_0= RULE_SAN_TOKEN )
-            // InternalChessDSL.g:1469:5: lv_token_1_0= RULE_SAN_TOKEN
+            // InternalChessDSL.g:1480:4: (lv_token_1_0= RULE_SAN_TOKEN )
+            // InternalChessDSL.g:1481:5: lv_token_1_0= RULE_SAN_TOKEN
             {
             lv_token_1_0=(Token)match(input,RULE_SAN_TOKEN,FOLLOW_2); 
 
@@ -3731,7 +3753,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleConclusion"
-    // InternalChessDSL.g:1489:1: entryRuleConclusion returns [EObject current=null] : iv_ruleConclusion= ruleConclusion EOF ;
+    // InternalChessDSL.g:1501:1: entryRuleConclusion returns [EObject current=null] : iv_ruleConclusion= ruleConclusion EOF ;
     public final EObject entryRuleConclusion() throws RecognitionException {
         EObject current = null;
 
@@ -3739,8 +3761,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:1489:51: (iv_ruleConclusion= ruleConclusion EOF )
-            // InternalChessDSL.g:1490:2: iv_ruleConclusion= ruleConclusion EOF
+            // InternalChessDSL.g:1501:51: (iv_ruleConclusion= ruleConclusion EOF )
+            // InternalChessDSL.g:1502:2: iv_ruleConclusion= ruleConclusion EOF
             {
              newCompositeNode(grammarAccess.getConclusionRule()); 
             pushFollow(FOLLOW_1);
@@ -3767,7 +3789,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleConclusion"
-    // InternalChessDSL.g:1496:1: ruleConclusion returns [EObject current=null] : ( ( (lv_method_0_0= ruleMethod ) )? ( (lv_result_1_0= ruleResult ) ) ) ;
+    // InternalChessDSL.g:1508:1: ruleConclusion returns [EObject current=null] : ( ( (lv_method_0_0= ruleMethod ) )? ( (lv_result_1_0= ruleResult ) ) ) ;
     public final EObject ruleConclusion() throws RecognitionException {
         EObject current = null;
 
@@ -3780,13 +3802,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:1502:2: ( ( ( (lv_method_0_0= ruleMethod ) )? ( (lv_result_1_0= ruleResult ) ) ) )
-            // InternalChessDSL.g:1503:2: ( ( (lv_method_0_0= ruleMethod ) )? ( (lv_result_1_0= ruleResult ) ) )
+            // InternalChessDSL.g:1514:2: ( ( ( (lv_method_0_0= ruleMethod ) )? ( (lv_result_1_0= ruleResult ) ) ) )
+            // InternalChessDSL.g:1515:2: ( ( (lv_method_0_0= ruleMethod ) )? ( (lv_result_1_0= ruleResult ) ) )
             {
-            // InternalChessDSL.g:1503:2: ( ( (lv_method_0_0= ruleMethod ) )? ( (lv_result_1_0= ruleResult ) ) )
-            // InternalChessDSL.g:1504:3: ( (lv_method_0_0= ruleMethod ) )? ( (lv_result_1_0= ruleResult ) )
+            // InternalChessDSL.g:1515:2: ( ( (lv_method_0_0= ruleMethod ) )? ( (lv_result_1_0= ruleResult ) ) )
+            // InternalChessDSL.g:1516:3: ( (lv_method_0_0= ruleMethod ) )? ( (lv_result_1_0= ruleResult ) )
             {
-            // InternalChessDSL.g:1504:3: ( (lv_method_0_0= ruleMethod ) )?
+            // InternalChessDSL.g:1516:3: ( (lv_method_0_0= ruleMethod ) )?
             int alt28=2;
             switch ( input.LA(1) ) {
                 case RULE_ID:
@@ -3820,10 +3842,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt28) {
                 case 1 :
-                    // InternalChessDSL.g:1505:4: (lv_method_0_0= ruleMethod )
+                    // InternalChessDSL.g:1517:4: (lv_method_0_0= ruleMethod )
                     {
-                    // InternalChessDSL.g:1505:4: (lv_method_0_0= ruleMethod )
-                    // InternalChessDSL.g:1506:5: lv_method_0_0= ruleMethod
+                    // InternalChessDSL.g:1517:4: (lv_method_0_0= ruleMethod )
+                    // InternalChessDSL.g:1518:5: lv_method_0_0= ruleMethod
                     {
 
                     					newCompositeNode(grammarAccess.getConclusionAccess().getMethodMethodParserRuleCall_0_0());
@@ -3853,11 +3875,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalChessDSL.g:1523:3: ( (lv_result_1_0= ruleResult ) )
-            // InternalChessDSL.g:1524:4: (lv_result_1_0= ruleResult )
+            // InternalChessDSL.g:1535:3: ( (lv_result_1_0= ruleResult ) )
+            // InternalChessDSL.g:1536:4: (lv_result_1_0= ruleResult )
             {
-            // InternalChessDSL.g:1524:4: (lv_result_1_0= ruleResult )
-            // InternalChessDSL.g:1525:5: lv_result_1_0= ruleResult
+            // InternalChessDSL.g:1536:4: (lv_result_1_0= ruleResult )
+            // InternalChessDSL.g:1537:5: lv_result_1_0= ruleResult
             {
 
             					newCompositeNode(grammarAccess.getConclusionAccess().getResultResultParserRuleCall_1_0());
@@ -3907,7 +3929,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleMethod"
-    // InternalChessDSL.g:1546:1: entryRuleMethod returns [EObject current=null] : iv_ruleMethod= ruleMethod EOF ;
+    // InternalChessDSL.g:1558:1: entryRuleMethod returns [EObject current=null] : iv_ruleMethod= ruleMethod EOF ;
     public final EObject entryRuleMethod() throws RecognitionException {
         EObject current = null;
 
@@ -3915,8 +3937,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:1546:47: (iv_ruleMethod= ruleMethod EOF )
-            // InternalChessDSL.g:1547:2: iv_ruleMethod= ruleMethod EOF
+            // InternalChessDSL.g:1558:47: (iv_ruleMethod= ruleMethod EOF )
+            // InternalChessDSL.g:1559:2: iv_ruleMethod= ruleMethod EOF
             {
              newCompositeNode(grammarAccess.getMethodRule()); 
             pushFollow(FOLLOW_1);
@@ -3943,7 +3965,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMethod"
-    // InternalChessDSL.g:1553:1: ruleMethod returns [EObject current=null] : ( ( (lv_win_0_0= ruleWin ) ) | ( (lv_draw_1_0= ruleDraw ) ) ) ;
+    // InternalChessDSL.g:1565:1: ruleMethod returns [EObject current=null] : ( ( (lv_win_0_0= ruleWin ) ) | ( (lv_draw_1_0= ruleDraw ) ) ) ;
     public final EObject ruleMethod() throws RecognitionException {
         EObject current = null;
 
@@ -3956,21 +3978,21 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:1559:2: ( ( ( (lv_win_0_0= ruleWin ) ) | ( (lv_draw_1_0= ruleDraw ) ) ) )
-            // InternalChessDSL.g:1560:2: ( ( (lv_win_0_0= ruleWin ) ) | ( (lv_draw_1_0= ruleDraw ) ) )
+            // InternalChessDSL.g:1571:2: ( ( ( (lv_win_0_0= ruleWin ) ) | ( (lv_draw_1_0= ruleDraw ) ) ) )
+            // InternalChessDSL.g:1572:2: ( ( (lv_win_0_0= ruleWin ) ) | ( (lv_draw_1_0= ruleDraw ) ) )
             {
-            // InternalChessDSL.g:1560:2: ( ( (lv_win_0_0= ruleWin ) ) | ( (lv_draw_1_0= ruleDraw ) ) )
+            // InternalChessDSL.g:1572:2: ( ( (lv_win_0_0= ruleWin ) ) | ( (lv_draw_1_0= ruleDraw ) ) )
             int alt29=2;
             switch ( input.LA(1) ) {
             case RULE_ID:
                 {
                 int LA29_1 = input.LA(2);
 
-                if ( (LA29_1==47||(LA29_1>=51 && LA29_1<=52)) ) {
-                    alt29=1;
-                }
-                else if ( (LA29_1==39) ) {
+                if ( (LA29_1==39) ) {
                     alt29=2;
+                }
+                else if ( (LA29_1==47||(LA29_1>=51 && LA29_1<=52)) ) {
+                    alt29=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -3984,11 +4006,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                 {
                 int LA29_2 = input.LA(2);
 
-                if ( (LA29_2==47||(LA29_2>=51 && LA29_2<=52)) ) {
-                    alt29=1;
-                }
-                else if ( (LA29_2==39) ) {
+                if ( (LA29_2==39) ) {
                     alt29=2;
+                }
+                else if ( (LA29_2==47||(LA29_2>=51 && LA29_2<=52)) ) {
+                    alt29=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -4002,11 +4024,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                 {
                 int LA29_3 = input.LA(2);
 
-                if ( (LA29_3==39) ) {
-                    alt29=2;
-                }
-                else if ( (LA29_3==47||(LA29_3>=51 && LA29_3<=52)) ) {
+                if ( (LA29_3==47||(LA29_3>=51 && LA29_3<=52)) ) {
                     alt29=1;
+                }
+                else if ( (LA29_3==39) ) {
+                    alt29=2;
                 }
                 else {
                     NoViableAltException nvae =
@@ -4025,13 +4047,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt29) {
                 case 1 :
-                    // InternalChessDSL.g:1561:3: ( (lv_win_0_0= ruleWin ) )
+                    // InternalChessDSL.g:1573:3: ( (lv_win_0_0= ruleWin ) )
                     {
-                    // InternalChessDSL.g:1561:3: ( (lv_win_0_0= ruleWin ) )
-                    // InternalChessDSL.g:1562:4: (lv_win_0_0= ruleWin )
+                    // InternalChessDSL.g:1573:3: ( (lv_win_0_0= ruleWin ) )
+                    // InternalChessDSL.g:1574:4: (lv_win_0_0= ruleWin )
                     {
-                    // InternalChessDSL.g:1562:4: (lv_win_0_0= ruleWin )
-                    // InternalChessDSL.g:1563:5: lv_win_0_0= ruleWin
+                    // InternalChessDSL.g:1574:4: (lv_win_0_0= ruleWin )
+                    // InternalChessDSL.g:1575:5: lv_win_0_0= ruleWin
                     {
 
                     					newCompositeNode(grammarAccess.getMethodAccess().getWinWinParserRuleCall_0_0());
@@ -4062,13 +4084,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:1581:3: ( (lv_draw_1_0= ruleDraw ) )
+                    // InternalChessDSL.g:1593:3: ( (lv_draw_1_0= ruleDraw ) )
                     {
-                    // InternalChessDSL.g:1581:3: ( (lv_draw_1_0= ruleDraw ) )
-                    // InternalChessDSL.g:1582:4: (lv_draw_1_0= ruleDraw )
+                    // InternalChessDSL.g:1593:3: ( (lv_draw_1_0= ruleDraw ) )
+                    // InternalChessDSL.g:1594:4: (lv_draw_1_0= ruleDraw )
                     {
-                    // InternalChessDSL.g:1582:4: (lv_draw_1_0= ruleDraw )
-                    // InternalChessDSL.g:1583:5: lv_draw_1_0= ruleDraw
+                    // InternalChessDSL.g:1594:4: (lv_draw_1_0= ruleDraw )
+                    // InternalChessDSL.g:1595:5: lv_draw_1_0= ruleDraw
                     {
 
                     					newCompositeNode(grammarAccess.getMethodAccess().getDrawDrawParserRuleCall_1_0());
@@ -4121,7 +4143,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleWin"
-    // InternalChessDSL.g:1604:1: entryRuleWin returns [EObject current=null] : iv_ruleWin= ruleWin EOF ;
+    // InternalChessDSL.g:1616:1: entryRuleWin returns [EObject current=null] : iv_ruleWin= ruleWin EOF ;
     public final EObject entryRuleWin() throws RecognitionException {
         EObject current = null;
 
@@ -4129,8 +4151,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:1604:44: (iv_ruleWin= ruleWin EOF )
-            // InternalChessDSL.g:1605:2: iv_ruleWin= ruleWin EOF
+            // InternalChessDSL.g:1616:44: (iv_ruleWin= ruleWin EOF )
+            // InternalChessDSL.g:1617:2: iv_ruleWin= ruleWin EOF
             {
              newCompositeNode(grammarAccess.getWinRule()); 
             pushFollow(FOLLOW_1);
@@ -4157,7 +4179,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleWin"
-    // InternalChessDSL.g:1611:1: ruleWin returns [EObject current=null] : ( ( (lv_time_0_0= ruleTimeUp ) ) | ( (lv_resign_1_0= ruleResign ) ) | ( (lv_mate_2_0= ruleCheckmate ) ) ) ;
+    // InternalChessDSL.g:1623:1: ruleWin returns [EObject current=null] : ( ( (lv_time_0_0= ruleTimeUp ) ) | ( (lv_resign_1_0= ruleResign ) ) | ( (lv_mate_2_0= ruleCheckmate ) ) ) ;
     public final EObject ruleWin() throws RecognitionException {
         EObject current = null;
 
@@ -4172,10 +4194,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:1617:2: ( ( ( (lv_time_0_0= ruleTimeUp ) ) | ( (lv_resign_1_0= ruleResign ) ) | ( (lv_mate_2_0= ruleCheckmate ) ) ) )
-            // InternalChessDSL.g:1618:2: ( ( (lv_time_0_0= ruleTimeUp ) ) | ( (lv_resign_1_0= ruleResign ) ) | ( (lv_mate_2_0= ruleCheckmate ) ) )
+            // InternalChessDSL.g:1629:2: ( ( ( (lv_time_0_0= ruleTimeUp ) ) | ( (lv_resign_1_0= ruleResign ) ) | ( (lv_mate_2_0= ruleCheckmate ) ) ) )
+            // InternalChessDSL.g:1630:2: ( ( (lv_time_0_0= ruleTimeUp ) ) | ( (lv_resign_1_0= ruleResign ) ) | ( (lv_mate_2_0= ruleCheckmate ) ) )
             {
-            // InternalChessDSL.g:1618:2: ( ( (lv_time_0_0= ruleTimeUp ) ) | ( (lv_resign_1_0= ruleResign ) ) | ( (lv_mate_2_0= ruleCheckmate ) ) )
+            // InternalChessDSL.g:1630:2: ( ( (lv_time_0_0= ruleTimeUp ) ) | ( (lv_resign_1_0= ruleResign ) ) | ( (lv_mate_2_0= ruleCheckmate ) ) )
             int alt30=3;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -4186,14 +4208,14 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     alt30=2;
                     }
                     break;
-                case 52:
-                    {
-                    alt30=3;
-                    }
-                    break;
                 case 47:
                     {
                     alt30=1;
+                    }
+                    break;
+                case 52:
+                    {
+                    alt30=3;
                     }
                     break;
                 default:
@@ -4213,14 +4235,14 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     alt30=2;
                     }
                     break;
-                case 52:
-                    {
-                    alt30=3;
-                    }
-                    break;
                 case 47:
                     {
                     alt30=1;
+                    }
+                    break;
+                case 52:
+                    {
+                    alt30=3;
                     }
                     break;
                 default:
@@ -4240,14 +4262,14 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     alt30=2;
                     }
                     break;
-                case 52:
-                    {
-                    alt30=3;
-                    }
-                    break;
                 case 47:
                     {
                     alt30=1;
+                    }
+                    break;
+                case 52:
+                    {
+                    alt30=3;
                     }
                     break;
                 default:
@@ -4268,13 +4290,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt30) {
                 case 1 :
-                    // InternalChessDSL.g:1619:3: ( (lv_time_0_0= ruleTimeUp ) )
+                    // InternalChessDSL.g:1631:3: ( (lv_time_0_0= ruleTimeUp ) )
                     {
-                    // InternalChessDSL.g:1619:3: ( (lv_time_0_0= ruleTimeUp ) )
-                    // InternalChessDSL.g:1620:4: (lv_time_0_0= ruleTimeUp )
+                    // InternalChessDSL.g:1631:3: ( (lv_time_0_0= ruleTimeUp ) )
+                    // InternalChessDSL.g:1632:4: (lv_time_0_0= ruleTimeUp )
                     {
-                    // InternalChessDSL.g:1620:4: (lv_time_0_0= ruleTimeUp )
-                    // InternalChessDSL.g:1621:5: lv_time_0_0= ruleTimeUp
+                    // InternalChessDSL.g:1632:4: (lv_time_0_0= ruleTimeUp )
+                    // InternalChessDSL.g:1633:5: lv_time_0_0= ruleTimeUp
                     {
 
                     					newCompositeNode(grammarAccess.getWinAccess().getTimeTimeUpParserRuleCall_0_0());
@@ -4305,13 +4327,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:1639:3: ( (lv_resign_1_0= ruleResign ) )
+                    // InternalChessDSL.g:1651:3: ( (lv_resign_1_0= ruleResign ) )
                     {
-                    // InternalChessDSL.g:1639:3: ( (lv_resign_1_0= ruleResign ) )
-                    // InternalChessDSL.g:1640:4: (lv_resign_1_0= ruleResign )
+                    // InternalChessDSL.g:1651:3: ( (lv_resign_1_0= ruleResign ) )
+                    // InternalChessDSL.g:1652:4: (lv_resign_1_0= ruleResign )
                     {
-                    // InternalChessDSL.g:1640:4: (lv_resign_1_0= ruleResign )
-                    // InternalChessDSL.g:1641:5: lv_resign_1_0= ruleResign
+                    // InternalChessDSL.g:1652:4: (lv_resign_1_0= ruleResign )
+                    // InternalChessDSL.g:1653:5: lv_resign_1_0= ruleResign
                     {
 
                     					newCompositeNode(grammarAccess.getWinAccess().getResignResignParserRuleCall_1_0());
@@ -4342,13 +4364,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalChessDSL.g:1659:3: ( (lv_mate_2_0= ruleCheckmate ) )
+                    // InternalChessDSL.g:1671:3: ( (lv_mate_2_0= ruleCheckmate ) )
                     {
-                    // InternalChessDSL.g:1659:3: ( (lv_mate_2_0= ruleCheckmate ) )
-                    // InternalChessDSL.g:1660:4: (lv_mate_2_0= ruleCheckmate )
+                    // InternalChessDSL.g:1671:3: ( (lv_mate_2_0= ruleCheckmate ) )
+                    // InternalChessDSL.g:1672:4: (lv_mate_2_0= ruleCheckmate )
                     {
-                    // InternalChessDSL.g:1660:4: (lv_mate_2_0= ruleCheckmate )
-                    // InternalChessDSL.g:1661:5: lv_mate_2_0= ruleCheckmate
+                    // InternalChessDSL.g:1672:4: (lv_mate_2_0= ruleCheckmate )
+                    // InternalChessDSL.g:1673:5: lv_mate_2_0= ruleCheckmate
                     {
 
                     					newCompositeNode(grammarAccess.getWinAccess().getMateCheckmateParserRuleCall_2_0());
@@ -4401,7 +4423,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTimeUp"
-    // InternalChessDSL.g:1682:1: entryRuleTimeUp returns [EObject current=null] : iv_ruleTimeUp= ruleTimeUp EOF ;
+    // InternalChessDSL.g:1694:1: entryRuleTimeUp returns [EObject current=null] : iv_ruleTimeUp= ruleTimeUp EOF ;
     public final EObject entryRuleTimeUp() throws RecognitionException {
         EObject current = null;
 
@@ -4409,8 +4431,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:1682:47: (iv_ruleTimeUp= ruleTimeUp EOF )
-            // InternalChessDSL.g:1683:2: iv_ruleTimeUp= ruleTimeUp EOF
+            // InternalChessDSL.g:1694:47: (iv_ruleTimeUp= ruleTimeUp EOF )
+            // InternalChessDSL.g:1695:2: iv_ruleTimeUp= ruleTimeUp EOF
             {
              newCompositeNode(grammarAccess.getTimeUpRule()); 
             pushFollow(FOLLOW_1);
@@ -4437,7 +4459,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTimeUp"
-    // InternalChessDSL.g:1689:1: ruleTimeUp returns [EObject current=null] : ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'ran' otherlv_2= 'out' otherlv_3= 'of' otherlv_4= 'time' ) ;
+    // InternalChessDSL.g:1701:1: ruleTimeUp returns [EObject current=null] : ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'ran' otherlv_2= 'out' otherlv_3= 'of' otherlv_4= 'time' ) ;
     public final EObject ruleTimeUp() throws RecognitionException {
         EObject current = null;
 
@@ -4452,17 +4474,17 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:1695:2: ( ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'ran' otherlv_2= 'out' otherlv_3= 'of' otherlv_4= 'time' ) )
-            // InternalChessDSL.g:1696:2: ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'ran' otherlv_2= 'out' otherlv_3= 'of' otherlv_4= 'time' )
+            // InternalChessDSL.g:1707:2: ( ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'ran' otherlv_2= 'out' otherlv_3= 'of' otherlv_4= 'time' ) )
+            // InternalChessDSL.g:1708:2: ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'ran' otherlv_2= 'out' otherlv_3= 'of' otherlv_4= 'time' )
             {
-            // InternalChessDSL.g:1696:2: ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'ran' otherlv_2= 'out' otherlv_3= 'of' otherlv_4= 'time' )
-            // InternalChessDSL.g:1697:3: ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'ran' otherlv_2= 'out' otherlv_3= 'of' otherlv_4= 'time'
+            // InternalChessDSL.g:1708:2: ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'ran' otherlv_2= 'out' otherlv_3= 'of' otherlv_4= 'time' )
+            // InternalChessDSL.g:1709:3: ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'ran' otherlv_2= 'out' otherlv_3= 'of' otherlv_4= 'time'
             {
-            // InternalChessDSL.g:1697:3: ( (lv_player_0_0= rulePlayerOrColor ) )
-            // InternalChessDSL.g:1698:4: (lv_player_0_0= rulePlayerOrColor )
+            // InternalChessDSL.g:1709:3: ( (lv_player_0_0= rulePlayerOrColor ) )
+            // InternalChessDSL.g:1710:4: (lv_player_0_0= rulePlayerOrColor )
             {
-            // InternalChessDSL.g:1698:4: (lv_player_0_0= rulePlayerOrColor )
-            // InternalChessDSL.g:1699:5: lv_player_0_0= rulePlayerOrColor
+            // InternalChessDSL.g:1710:4: (lv_player_0_0= rulePlayerOrColor )
+            // InternalChessDSL.g:1711:5: lv_player_0_0= rulePlayerOrColor
             {
 
             					newCompositeNode(grammarAccess.getTimeUpAccess().getPlayerPlayerOrColorParserRuleCall_0_0());
@@ -4528,7 +4550,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleResign"
-    // InternalChessDSL.g:1736:1: entryRuleResign returns [EObject current=null] : iv_ruleResign= ruleResign EOF ;
+    // InternalChessDSL.g:1748:1: entryRuleResign returns [EObject current=null] : iv_ruleResign= ruleResign EOF ;
     public final EObject entryRuleResign() throws RecognitionException {
         EObject current = null;
 
@@ -4536,8 +4558,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:1736:47: (iv_ruleResign= ruleResign EOF )
-            // InternalChessDSL.g:1737:2: iv_ruleResign= ruleResign EOF
+            // InternalChessDSL.g:1748:47: (iv_ruleResign= ruleResign EOF )
+            // InternalChessDSL.g:1749:2: iv_ruleResign= ruleResign EOF
             {
              newCompositeNode(grammarAccess.getResignRule()); 
             pushFollow(FOLLOW_1);
@@ -4564,7 +4586,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleResign"
-    // InternalChessDSL.g:1743:1: ruleResign returns [EObject current=null] : ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'resigned' ) ;
+    // InternalChessDSL.g:1755:1: ruleResign returns [EObject current=null] : ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'resigned' ) ;
     public final EObject ruleResign() throws RecognitionException {
         EObject current = null;
 
@@ -4576,17 +4598,17 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:1749:2: ( ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'resigned' ) )
-            // InternalChessDSL.g:1750:2: ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'resigned' )
+            // InternalChessDSL.g:1761:2: ( ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'resigned' ) )
+            // InternalChessDSL.g:1762:2: ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'resigned' )
             {
-            // InternalChessDSL.g:1750:2: ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'resigned' )
-            // InternalChessDSL.g:1751:3: ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'resigned'
+            // InternalChessDSL.g:1762:2: ( ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'resigned' )
+            // InternalChessDSL.g:1763:3: ( (lv_player_0_0= rulePlayerOrColor ) ) otherlv_1= 'resigned'
             {
-            // InternalChessDSL.g:1751:3: ( (lv_player_0_0= rulePlayerOrColor ) )
-            // InternalChessDSL.g:1752:4: (lv_player_0_0= rulePlayerOrColor )
+            // InternalChessDSL.g:1763:3: ( (lv_player_0_0= rulePlayerOrColor ) )
+            // InternalChessDSL.g:1764:4: (lv_player_0_0= rulePlayerOrColor )
             {
-            // InternalChessDSL.g:1752:4: (lv_player_0_0= rulePlayerOrColor )
-            // InternalChessDSL.g:1753:5: lv_player_0_0= rulePlayerOrColor
+            // InternalChessDSL.g:1764:4: (lv_player_0_0= rulePlayerOrColor )
+            // InternalChessDSL.g:1765:5: lv_player_0_0= rulePlayerOrColor
             {
 
             					newCompositeNode(grammarAccess.getResignAccess().getPlayerPlayerOrColorParserRuleCall_0_0());
@@ -4640,7 +4662,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleCheckmate"
-    // InternalChessDSL.g:1778:1: entryRuleCheckmate returns [EObject current=null] : iv_ruleCheckmate= ruleCheckmate EOF ;
+    // InternalChessDSL.g:1790:1: entryRuleCheckmate returns [EObject current=null] : iv_ruleCheckmate= ruleCheckmate EOF ;
     public final EObject entryRuleCheckmate() throws RecognitionException {
         EObject current = null;
 
@@ -4648,8 +4670,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:1778:50: (iv_ruleCheckmate= ruleCheckmate EOF )
-            // InternalChessDSL.g:1779:2: iv_ruleCheckmate= ruleCheckmate EOF
+            // InternalChessDSL.g:1790:50: (iv_ruleCheckmate= ruleCheckmate EOF )
+            // InternalChessDSL.g:1791:2: iv_ruleCheckmate= ruleCheckmate EOF
             {
              newCompositeNode(grammarAccess.getCheckmateRule()); 
             pushFollow(FOLLOW_1);
@@ -4676,7 +4698,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCheckmate"
-    // InternalChessDSL.g:1785:1: ruleCheckmate returns [EObject current=null] : ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'checkmated' ( (lv_player2_2_0= rulePlayerOrColor ) ) ) ;
+    // InternalChessDSL.g:1797:1: ruleCheckmate returns [EObject current=null] : ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'checkmated' ( (lv_player2_2_0= rulePlayerOrColor ) ) ) ;
     public final EObject ruleCheckmate() throws RecognitionException {
         EObject current = null;
 
@@ -4690,17 +4712,17 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:1791:2: ( ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'checkmated' ( (lv_player2_2_0= rulePlayerOrColor ) ) ) )
-            // InternalChessDSL.g:1792:2: ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'checkmated' ( (lv_player2_2_0= rulePlayerOrColor ) ) )
+            // InternalChessDSL.g:1803:2: ( ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'checkmated' ( (lv_player2_2_0= rulePlayerOrColor ) ) ) )
+            // InternalChessDSL.g:1804:2: ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'checkmated' ( (lv_player2_2_0= rulePlayerOrColor ) ) )
             {
-            // InternalChessDSL.g:1792:2: ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'checkmated' ( (lv_player2_2_0= rulePlayerOrColor ) ) )
-            // InternalChessDSL.g:1793:3: ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'checkmated' ( (lv_player2_2_0= rulePlayerOrColor ) )
+            // InternalChessDSL.g:1804:2: ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'checkmated' ( (lv_player2_2_0= rulePlayerOrColor ) ) )
+            // InternalChessDSL.g:1805:3: ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'checkmated' ( (lv_player2_2_0= rulePlayerOrColor ) )
             {
-            // InternalChessDSL.g:1793:3: ( (lv_player1_0_0= rulePlayerOrColor ) )
-            // InternalChessDSL.g:1794:4: (lv_player1_0_0= rulePlayerOrColor )
+            // InternalChessDSL.g:1805:3: ( (lv_player1_0_0= rulePlayerOrColor ) )
+            // InternalChessDSL.g:1806:4: (lv_player1_0_0= rulePlayerOrColor )
             {
-            // InternalChessDSL.g:1794:4: (lv_player1_0_0= rulePlayerOrColor )
-            // InternalChessDSL.g:1795:5: lv_player1_0_0= rulePlayerOrColor
+            // InternalChessDSL.g:1806:4: (lv_player1_0_0= rulePlayerOrColor )
+            // InternalChessDSL.g:1807:5: lv_player1_0_0= rulePlayerOrColor
             {
 
             					newCompositeNode(grammarAccess.getCheckmateAccess().getPlayer1PlayerOrColorParserRuleCall_0_0());
@@ -4731,11 +4753,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getCheckmateAccess().getCheckmatedKeyword_1());
             		
-            // InternalChessDSL.g:1816:3: ( (lv_player2_2_0= rulePlayerOrColor ) )
-            // InternalChessDSL.g:1817:4: (lv_player2_2_0= rulePlayerOrColor )
+            // InternalChessDSL.g:1828:3: ( (lv_player2_2_0= rulePlayerOrColor ) )
+            // InternalChessDSL.g:1829:4: (lv_player2_2_0= rulePlayerOrColor )
             {
-            // InternalChessDSL.g:1817:4: (lv_player2_2_0= rulePlayerOrColor )
-            // InternalChessDSL.g:1818:5: lv_player2_2_0= rulePlayerOrColor
+            // InternalChessDSL.g:1829:4: (lv_player2_2_0= rulePlayerOrColor )
+            // InternalChessDSL.g:1830:5: lv_player2_2_0= rulePlayerOrColor
             {
 
             					newCompositeNode(grammarAccess.getCheckmateAccess().getPlayer2PlayerOrColorParserRuleCall_2_0());
@@ -4785,7 +4807,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDraw"
-    // InternalChessDSL.g:1839:1: entryRuleDraw returns [EObject current=null] : iv_ruleDraw= ruleDraw EOF ;
+    // InternalChessDSL.g:1851:1: entryRuleDraw returns [EObject current=null] : iv_ruleDraw= ruleDraw EOF ;
     public final EObject entryRuleDraw() throws RecognitionException {
         EObject current = null;
 
@@ -4793,8 +4815,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:1839:45: (iv_ruleDraw= ruleDraw EOF )
-            // InternalChessDSL.g:1840:2: iv_ruleDraw= ruleDraw EOF
+            // InternalChessDSL.g:1851:45: (iv_ruleDraw= ruleDraw EOF )
+            // InternalChessDSL.g:1852:2: iv_ruleDraw= ruleDraw EOF
             {
              newCompositeNode(grammarAccess.getDrawRule()); 
             pushFollow(FOLLOW_1);
@@ -4821,7 +4843,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDraw"
-    // InternalChessDSL.g:1846:1: ruleDraw returns [EObject current=null] : ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'and' ( (lv_player2_2_0= rulePlayerOrColor ) ) ( ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) ) ) ) ;
+    // InternalChessDSL.g:1858:1: ruleDraw returns [EObject current=null] : ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'and' ( (lv_player2_2_0= rulePlayerOrColor ) ) ( ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) ) ) ) ;
     public final EObject ruleDraw() throws RecognitionException {
         EObject current = null;
 
@@ -4843,17 +4865,17 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:1852:2: ( ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'and' ( (lv_player2_2_0= rulePlayerOrColor ) ) ( ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) ) ) ) )
-            // InternalChessDSL.g:1853:2: ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'and' ( (lv_player2_2_0= rulePlayerOrColor ) ) ( ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) ) ) )
+            // InternalChessDSL.g:1864:2: ( ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'and' ( (lv_player2_2_0= rulePlayerOrColor ) ) ( ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) ) ) ) )
+            // InternalChessDSL.g:1865:2: ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'and' ( (lv_player2_2_0= rulePlayerOrColor ) ) ( ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) ) ) )
             {
-            // InternalChessDSL.g:1853:2: ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'and' ( (lv_player2_2_0= rulePlayerOrColor ) ) ( ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) ) ) )
-            // InternalChessDSL.g:1854:3: ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'and' ( (lv_player2_2_0= rulePlayerOrColor ) ) ( ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) ) )
+            // InternalChessDSL.g:1865:2: ( ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'and' ( (lv_player2_2_0= rulePlayerOrColor ) ) ( ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) ) ) )
+            // InternalChessDSL.g:1866:3: ( (lv_player1_0_0= rulePlayerOrColor ) ) otherlv_1= 'and' ( (lv_player2_2_0= rulePlayerOrColor ) ) ( ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) ) )
             {
-            // InternalChessDSL.g:1854:3: ( (lv_player1_0_0= rulePlayerOrColor ) )
-            // InternalChessDSL.g:1855:4: (lv_player1_0_0= rulePlayerOrColor )
+            // InternalChessDSL.g:1866:3: ( (lv_player1_0_0= rulePlayerOrColor ) )
+            // InternalChessDSL.g:1867:4: (lv_player1_0_0= rulePlayerOrColor )
             {
-            // InternalChessDSL.g:1855:4: (lv_player1_0_0= rulePlayerOrColor )
-            // InternalChessDSL.g:1856:5: lv_player1_0_0= rulePlayerOrColor
+            // InternalChessDSL.g:1867:4: (lv_player1_0_0= rulePlayerOrColor )
+            // InternalChessDSL.g:1868:5: lv_player1_0_0= rulePlayerOrColor
             {
 
             					newCompositeNode(grammarAccess.getDrawAccess().getPlayer1PlayerOrColorParserRuleCall_0_0());
@@ -4884,11 +4906,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getDrawAccess().getAndKeyword_1());
             		
-            // InternalChessDSL.g:1877:3: ( (lv_player2_2_0= rulePlayerOrColor ) )
-            // InternalChessDSL.g:1878:4: (lv_player2_2_0= rulePlayerOrColor )
+            // InternalChessDSL.g:1889:3: ( (lv_player2_2_0= rulePlayerOrColor ) )
+            // InternalChessDSL.g:1890:4: (lv_player2_2_0= rulePlayerOrColor )
             {
-            // InternalChessDSL.g:1878:4: (lv_player2_2_0= rulePlayerOrColor )
-            // InternalChessDSL.g:1879:5: lv_player2_2_0= rulePlayerOrColor
+            // InternalChessDSL.g:1890:4: (lv_player2_2_0= rulePlayerOrColor )
+            // InternalChessDSL.g:1891:5: lv_player2_2_0= rulePlayerOrColor
             {
 
             					newCompositeNode(grammarAccess.getDrawAccess().getPlayer2PlayerOrColorParserRuleCall_2_0());
@@ -4915,13 +4937,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalChessDSL.g:1896:3: ( ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) ) )
-            // InternalChessDSL.g:1897:4: ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) )
+            // InternalChessDSL.g:1908:3: ( ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) ) )
+            // InternalChessDSL.g:1909:4: ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) )
             {
-            // InternalChessDSL.g:1897:4: ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) )
-            // InternalChessDSL.g:1898:5: (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree )
+            // InternalChessDSL.g:1909:4: ( (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree ) )
+            // InternalChessDSL.g:1910:5: (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree )
             {
-            // InternalChessDSL.g:1898:5: (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree )
+            // InternalChessDSL.g:1910:5: (lv_result_3_1= ruleStalemate | lv_result_3_2= ruleThreefold | lv_result_3_3= ruleFifty | lv_result_3_4= ruleAgree )
             int alt31=4;
             switch ( input.LA(1) ) {
             case 53:
@@ -4953,7 +4975,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt31) {
                 case 1 :
-                    // InternalChessDSL.g:1899:6: lv_result_3_1= ruleStalemate
+                    // InternalChessDSL.g:1911:6: lv_result_3_1= ruleStalemate
                     {
 
                     						newCompositeNode(grammarAccess.getDrawAccess().getResultStalemateParserRuleCall_3_0_0());
@@ -4978,7 +5000,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:1915:6: lv_result_3_2= ruleThreefold
+                    // InternalChessDSL.g:1927:6: lv_result_3_2= ruleThreefold
                     {
 
                     						newCompositeNode(grammarAccess.getDrawAccess().getResultThreefoldParserRuleCall_3_0_1());
@@ -5003,7 +5025,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalChessDSL.g:1931:6: lv_result_3_3= ruleFifty
+                    // InternalChessDSL.g:1943:6: lv_result_3_3= ruleFifty
                     {
 
                     						newCompositeNode(grammarAccess.getDrawAccess().getResultFiftyParserRuleCall_3_0_2());
@@ -5028,7 +5050,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalChessDSL.g:1947:6: lv_result_3_4= ruleAgree
+                    // InternalChessDSL.g:1959:6: lv_result_3_4= ruleAgree
                     {
 
                     						newCompositeNode(grammarAccess.getDrawAccess().getResultAgreeParserRuleCall_3_0_3());
@@ -5084,7 +5106,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleStalemate"
-    // InternalChessDSL.g:1969:1: entryRuleStalemate returns [EObject current=null] : iv_ruleStalemate= ruleStalemate EOF ;
+    // InternalChessDSL.g:1981:1: entryRuleStalemate returns [EObject current=null] : iv_ruleStalemate= ruleStalemate EOF ;
     public final EObject entryRuleStalemate() throws RecognitionException {
         EObject current = null;
 
@@ -5092,8 +5114,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:1969:50: (iv_ruleStalemate= ruleStalemate EOF )
-            // InternalChessDSL.g:1970:2: iv_ruleStalemate= ruleStalemate EOF
+            // InternalChessDSL.g:1981:50: (iv_ruleStalemate= ruleStalemate EOF )
+            // InternalChessDSL.g:1982:2: iv_ruleStalemate= ruleStalemate EOF
             {
              newCompositeNode(grammarAccess.getStalemateRule()); 
             pushFollow(FOLLOW_1);
@@ -5120,7 +5142,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStalemate"
-    // InternalChessDSL.g:1976:1: ruleStalemate returns [EObject current=null] : (otherlv_0= 'ended' otherlv_1= 'the' otherlv_2= 'game' otherlv_3= 'in' otherlv_4= 'a' otherlv_5= 'stalemate' ) ;
+    // InternalChessDSL.g:1988:1: ruleStalemate returns [EObject current=null] : (otherlv_0= 'ended' otherlv_1= 'the' otherlv_2= 'game' otherlv_3= 'in' otherlv_4= 'a' otherlv_5= 'stalemate' ) ;
     public final EObject ruleStalemate() throws RecognitionException {
         EObject current = null;
 
@@ -5135,11 +5157,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:1982:2: ( (otherlv_0= 'ended' otherlv_1= 'the' otherlv_2= 'game' otherlv_3= 'in' otherlv_4= 'a' otherlv_5= 'stalemate' ) )
-            // InternalChessDSL.g:1983:2: (otherlv_0= 'ended' otherlv_1= 'the' otherlv_2= 'game' otherlv_3= 'in' otherlv_4= 'a' otherlv_5= 'stalemate' )
+            // InternalChessDSL.g:1994:2: ( (otherlv_0= 'ended' otherlv_1= 'the' otherlv_2= 'game' otherlv_3= 'in' otherlv_4= 'a' otherlv_5= 'stalemate' ) )
+            // InternalChessDSL.g:1995:2: (otherlv_0= 'ended' otherlv_1= 'the' otherlv_2= 'game' otherlv_3= 'in' otherlv_4= 'a' otherlv_5= 'stalemate' )
             {
-            // InternalChessDSL.g:1983:2: (otherlv_0= 'ended' otherlv_1= 'the' otherlv_2= 'game' otherlv_3= 'in' otherlv_4= 'a' otherlv_5= 'stalemate' )
-            // InternalChessDSL.g:1984:3: otherlv_0= 'ended' otherlv_1= 'the' otherlv_2= 'game' otherlv_3= 'in' otherlv_4= 'a' otherlv_5= 'stalemate'
+            // InternalChessDSL.g:1995:2: (otherlv_0= 'ended' otherlv_1= 'the' otherlv_2= 'game' otherlv_3= 'in' otherlv_4= 'a' otherlv_5= 'stalemate' )
+            // InternalChessDSL.g:1996:3: otherlv_0= 'ended' otherlv_1= 'the' otherlv_2= 'game' otherlv_3= 'in' otherlv_4= 'a' otherlv_5= 'stalemate'
             {
             otherlv_0=(Token)match(input,53,FOLLOW_31); 
 
@@ -5188,7 +5210,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleThreefold"
-    // InternalChessDSL.g:2012:1: entryRuleThreefold returns [EObject current=null] : iv_ruleThreefold= ruleThreefold EOF ;
+    // InternalChessDSL.g:2024:1: entryRuleThreefold returns [EObject current=null] : iv_ruleThreefold= ruleThreefold EOF ;
     public final EObject entryRuleThreefold() throws RecognitionException {
         EObject current = null;
 
@@ -5196,8 +5218,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:2012:50: (iv_ruleThreefold= ruleThreefold EOF )
-            // InternalChessDSL.g:2013:2: iv_ruleThreefold= ruleThreefold EOF
+            // InternalChessDSL.g:2024:50: (iv_ruleThreefold= ruleThreefold EOF )
+            // InternalChessDSL.g:2025:2: iv_ruleThreefold= ruleThreefold EOF
             {
              newCompositeNode(grammarAccess.getThreefoldRule()); 
             pushFollow(FOLLOW_1);
@@ -5224,7 +5246,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleThreefold"
-    // InternalChessDSL.g:2019:1: ruleThreefold returns [EObject current=null] : (otherlv_0= 'repeated' otherlv_1= 'a' otherlv_2= 'position' otherlv_3= 'three' otherlv_4= 'times' ) ;
+    // InternalChessDSL.g:2031:1: ruleThreefold returns [EObject current=null] : (otherlv_0= 'repeated' otherlv_1= 'a' otherlv_2= 'position' otherlv_3= 'three' otherlv_4= 'times' ) ;
     public final EObject ruleThreefold() throws RecognitionException {
         EObject current = null;
 
@@ -5238,11 +5260,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:2025:2: ( (otherlv_0= 'repeated' otherlv_1= 'a' otherlv_2= 'position' otherlv_3= 'three' otherlv_4= 'times' ) )
-            // InternalChessDSL.g:2026:2: (otherlv_0= 'repeated' otherlv_1= 'a' otherlv_2= 'position' otherlv_3= 'three' otherlv_4= 'times' )
+            // InternalChessDSL.g:2037:2: ( (otherlv_0= 'repeated' otherlv_1= 'a' otherlv_2= 'position' otherlv_3= 'three' otherlv_4= 'times' ) )
+            // InternalChessDSL.g:2038:2: (otherlv_0= 'repeated' otherlv_1= 'a' otherlv_2= 'position' otherlv_3= 'three' otherlv_4= 'times' )
             {
-            // InternalChessDSL.g:2026:2: (otherlv_0= 'repeated' otherlv_1= 'a' otherlv_2= 'position' otherlv_3= 'three' otherlv_4= 'times' )
-            // InternalChessDSL.g:2027:3: otherlv_0= 'repeated' otherlv_1= 'a' otherlv_2= 'position' otherlv_3= 'three' otherlv_4= 'times'
+            // InternalChessDSL.g:2038:2: (otherlv_0= 'repeated' otherlv_1= 'a' otherlv_2= 'position' otherlv_3= 'three' otherlv_4= 'times' )
+            // InternalChessDSL.g:2039:3: otherlv_0= 'repeated' otherlv_1= 'a' otherlv_2= 'position' otherlv_3= 'three' otherlv_4= 'times'
             {
             otherlv_0=(Token)match(input,58,FOLLOW_48); 
 
@@ -5287,7 +5309,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleFifty"
-    // InternalChessDSL.g:2051:1: entryRuleFifty returns [EObject current=null] : iv_ruleFifty= ruleFifty EOF ;
+    // InternalChessDSL.g:2063:1: entryRuleFifty returns [EObject current=null] : iv_ruleFifty= ruleFifty EOF ;
     public final EObject entryRuleFifty() throws RecognitionException {
         EObject current = null;
 
@@ -5295,8 +5317,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:2051:46: (iv_ruleFifty= ruleFifty EOF )
-            // InternalChessDSL.g:2052:2: iv_ruleFifty= ruleFifty EOF
+            // InternalChessDSL.g:2063:46: (iv_ruleFifty= ruleFifty EOF )
+            // InternalChessDSL.g:2064:2: iv_ruleFifty= ruleFifty EOF
             {
              newCompositeNode(grammarAccess.getFiftyRule()); 
             pushFollow(FOLLOW_1);
@@ -5323,7 +5345,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFifty"
-    // InternalChessDSL.g:2058:1: ruleFifty returns [EObject current=null] : (otherlv_0= 'played' otherlv_1= 'fifty' otherlv_2= 'moves' otherlv_3= 'without' otherlv_4= 'a' otherlv_5= 'capture' ) ;
+    // InternalChessDSL.g:2070:1: ruleFifty returns [EObject current=null] : (otherlv_0= 'played' otherlv_1= 'fifty' otherlv_2= 'moves' otherlv_3= 'without' otherlv_4= 'a' otherlv_5= 'capture' ) ;
     public final EObject ruleFifty() throws RecognitionException {
         EObject current = null;
 
@@ -5338,11 +5360,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:2064:2: ( (otherlv_0= 'played' otherlv_1= 'fifty' otherlv_2= 'moves' otherlv_3= 'without' otherlv_4= 'a' otherlv_5= 'capture' ) )
-            // InternalChessDSL.g:2065:2: (otherlv_0= 'played' otherlv_1= 'fifty' otherlv_2= 'moves' otherlv_3= 'without' otherlv_4= 'a' otherlv_5= 'capture' )
+            // InternalChessDSL.g:2076:2: ( (otherlv_0= 'played' otherlv_1= 'fifty' otherlv_2= 'moves' otherlv_3= 'without' otherlv_4= 'a' otherlv_5= 'capture' ) )
+            // InternalChessDSL.g:2077:2: (otherlv_0= 'played' otherlv_1= 'fifty' otherlv_2= 'moves' otherlv_3= 'without' otherlv_4= 'a' otherlv_5= 'capture' )
             {
-            // InternalChessDSL.g:2065:2: (otherlv_0= 'played' otherlv_1= 'fifty' otherlv_2= 'moves' otherlv_3= 'without' otherlv_4= 'a' otherlv_5= 'capture' )
-            // InternalChessDSL.g:2066:3: otherlv_0= 'played' otherlv_1= 'fifty' otherlv_2= 'moves' otherlv_3= 'without' otherlv_4= 'a' otherlv_5= 'capture'
+            // InternalChessDSL.g:2077:2: (otherlv_0= 'played' otherlv_1= 'fifty' otherlv_2= 'moves' otherlv_3= 'without' otherlv_4= 'a' otherlv_5= 'capture' )
+            // InternalChessDSL.g:2078:3: otherlv_0= 'played' otherlv_1= 'fifty' otherlv_2= 'moves' otherlv_3= 'without' otherlv_4= 'a' otherlv_5= 'capture'
             {
             otherlv_0=(Token)match(input,62,FOLLOW_53); 
 
@@ -5391,7 +5413,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAgree"
-    // InternalChessDSL.g:2094:1: entryRuleAgree returns [EObject current=null] : iv_ruleAgree= ruleAgree EOF ;
+    // InternalChessDSL.g:2106:1: entryRuleAgree returns [EObject current=null] : iv_ruleAgree= ruleAgree EOF ;
     public final EObject entryRuleAgree() throws RecognitionException {
         EObject current = null;
 
@@ -5399,8 +5421,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:2094:46: (iv_ruleAgree= ruleAgree EOF )
-            // InternalChessDSL.g:2095:2: iv_ruleAgree= ruleAgree EOF
+            // InternalChessDSL.g:2106:46: (iv_ruleAgree= ruleAgree EOF )
+            // InternalChessDSL.g:2107:2: iv_ruleAgree= ruleAgree EOF
             {
              newCompositeNode(grammarAccess.getAgreeRule()); 
             pushFollow(FOLLOW_1);
@@ -5427,7 +5449,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAgree"
-    // InternalChessDSL.g:2101:1: ruleAgree returns [EObject current=null] : (otherlv_0= 'agreed' otherlv_1= 'to' otherlv_2= 'a' otherlv_3= 'draw' ) ;
+    // InternalChessDSL.g:2113:1: ruleAgree returns [EObject current=null] : (otherlv_0= 'agreed' otherlv_1= 'to' otherlv_2= 'a' otherlv_3= 'draw' ) ;
     public final EObject ruleAgree() throws RecognitionException {
         EObject current = null;
 
@@ -5440,11 +5462,11 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:2107:2: ( (otherlv_0= 'agreed' otherlv_1= 'to' otherlv_2= 'a' otherlv_3= 'draw' ) )
-            // InternalChessDSL.g:2108:2: (otherlv_0= 'agreed' otherlv_1= 'to' otherlv_2= 'a' otherlv_3= 'draw' )
+            // InternalChessDSL.g:2119:2: ( (otherlv_0= 'agreed' otherlv_1= 'to' otherlv_2= 'a' otherlv_3= 'draw' ) )
+            // InternalChessDSL.g:2120:2: (otherlv_0= 'agreed' otherlv_1= 'to' otherlv_2= 'a' otherlv_3= 'draw' )
             {
-            // InternalChessDSL.g:2108:2: (otherlv_0= 'agreed' otherlv_1= 'to' otherlv_2= 'a' otherlv_3= 'draw' )
-            // InternalChessDSL.g:2109:3: otherlv_0= 'agreed' otherlv_1= 'to' otherlv_2= 'a' otherlv_3= 'draw'
+            // InternalChessDSL.g:2120:2: (otherlv_0= 'agreed' otherlv_1= 'to' otherlv_2= 'a' otherlv_3= 'draw' )
+            // InternalChessDSL.g:2121:3: otherlv_0= 'agreed' otherlv_1= 'to' otherlv_2= 'a' otherlv_3= 'draw'
             {
             otherlv_0=(Token)match(input,66,FOLLOW_26); 
 
@@ -5485,7 +5507,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleResult"
-    // InternalChessDSL.g:2129:1: entryRuleResult returns [EObject current=null] : iv_ruleResult= ruleResult EOF ;
+    // InternalChessDSL.g:2141:1: entryRuleResult returns [EObject current=null] : iv_ruleResult= ruleResult EOF ;
     public final EObject entryRuleResult() throws RecognitionException {
         EObject current = null;
 
@@ -5493,8 +5515,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:2129:47: (iv_ruleResult= ruleResult EOF )
-            // InternalChessDSL.g:2130:2: iv_ruleResult= ruleResult EOF
+            // InternalChessDSL.g:2141:47: (iv_ruleResult= ruleResult EOF )
+            // InternalChessDSL.g:2142:2: iv_ruleResult= ruleResult EOF
             {
              newCompositeNode(grammarAccess.getResultRule()); 
             pushFollow(FOLLOW_1);
@@ -5521,7 +5543,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleResult"
-    // InternalChessDSL.g:2136:1: ruleResult returns [EObject current=null] : ( ( ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) otherlv_2= 'wins' ) | otherlv_3= 'draw' ) ;
+    // InternalChessDSL.g:2148:1: ruleResult returns [EObject current=null] : ( ( ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) otherlv_2= 'wins' ) | otherlv_3= 'draw' ) ;
     public final EObject ruleResult() throws RecognitionException {
         EObject current = null;
 
@@ -5535,10 +5557,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:2142:2: ( ( ( ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) otherlv_2= 'wins' ) | otherlv_3= 'draw' ) )
-            // InternalChessDSL.g:2143:2: ( ( ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) otherlv_2= 'wins' ) | otherlv_3= 'draw' )
+            // InternalChessDSL.g:2154:2: ( ( ( ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) otherlv_2= 'wins' ) | otherlv_3= 'draw' ) )
+            // InternalChessDSL.g:2155:2: ( ( ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) otherlv_2= 'wins' ) | otherlv_3= 'draw' )
             {
-            // InternalChessDSL.g:2143:2: ( ( ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) otherlv_2= 'wins' ) | otherlv_3= 'draw' )
+            // InternalChessDSL.g:2155:2: ( ( ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) otherlv_2= 'wins' ) | otherlv_3= 'draw' )
             int alt33=2;
             int LA33_0 = input.LA(1);
 
@@ -5556,12 +5578,12 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
             }
             switch (alt33) {
                 case 1 :
-                    // InternalChessDSL.g:2144:3: ( ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) otherlv_2= 'wins' )
+                    // InternalChessDSL.g:2156:3: ( ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) otherlv_2= 'wins' )
                     {
-                    // InternalChessDSL.g:2144:3: ( ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) otherlv_2= 'wins' )
-                    // InternalChessDSL.g:2145:4: ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) otherlv_2= 'wins'
+                    // InternalChessDSL.g:2156:3: ( ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) otherlv_2= 'wins' )
+                    // InternalChessDSL.g:2157:4: ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) otherlv_2= 'wins'
                     {
-                    // InternalChessDSL.g:2145:4: ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) )
+                    // InternalChessDSL.g:2157:4: ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) )
                     int alt32=2;
                     int LA32_0 = input.LA(1);
 
@@ -5579,13 +5601,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt32) {
                         case 1 :
-                            // InternalChessDSL.g:2146:5: ( (otherlv_0= RULE_ID ) )
+                            // InternalChessDSL.g:2158:5: ( (otherlv_0= RULE_ID ) )
                             {
-                            // InternalChessDSL.g:2146:5: ( (otherlv_0= RULE_ID ) )
-                            // InternalChessDSL.g:2147:6: (otherlv_0= RULE_ID )
+                            // InternalChessDSL.g:2158:5: ( (otherlv_0= RULE_ID ) )
+                            // InternalChessDSL.g:2159:6: (otherlv_0= RULE_ID )
                             {
-                            // InternalChessDSL.g:2147:6: (otherlv_0= RULE_ID )
-                            // InternalChessDSL.g:2148:7: otherlv_0= RULE_ID
+                            // InternalChessDSL.g:2159:6: (otherlv_0= RULE_ID )
+                            // InternalChessDSL.g:2160:7: otherlv_0= RULE_ID
                             {
 
                             							if (current==null) {
@@ -5606,13 +5628,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalChessDSL.g:2160:5: ( (lv_color_1_0= ruleColor ) )
+                            // InternalChessDSL.g:2172:5: ( (lv_color_1_0= ruleColor ) )
                             {
-                            // InternalChessDSL.g:2160:5: ( (lv_color_1_0= ruleColor ) )
-                            // InternalChessDSL.g:2161:6: (lv_color_1_0= ruleColor )
+                            // InternalChessDSL.g:2172:5: ( (lv_color_1_0= ruleColor ) )
+                            // InternalChessDSL.g:2173:6: (lv_color_1_0= ruleColor )
                             {
-                            // InternalChessDSL.g:2161:6: (lv_color_1_0= ruleColor )
-                            // InternalChessDSL.g:2162:7: lv_color_1_0= ruleColor
+                            // InternalChessDSL.g:2173:6: (lv_color_1_0= ruleColor )
+                            // InternalChessDSL.g:2174:7: lv_color_1_0= ruleColor
                             {
 
                             							newCompositeNode(grammarAccess.getResultAccess().getColorColorEnumRuleCall_0_0_1_0());
@@ -5656,7 +5678,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:2186:3: otherlv_3= 'draw'
+                    // InternalChessDSL.g:2198:3: otherlv_3= 'draw'
                     {
                     otherlv_3=(Token)match(input,67,FOLLOW_2); 
 
@@ -5688,7 +5710,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRulePlayerOrColor"
-    // InternalChessDSL.g:2194:1: entryRulePlayerOrColor returns [EObject current=null] : iv_rulePlayerOrColor= rulePlayerOrColor EOF ;
+    // InternalChessDSL.g:2206:1: entryRulePlayerOrColor returns [EObject current=null] : iv_rulePlayerOrColor= rulePlayerOrColor EOF ;
     public final EObject entryRulePlayerOrColor() throws RecognitionException {
         EObject current = null;
 
@@ -5696,8 +5718,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:2194:54: (iv_rulePlayerOrColor= rulePlayerOrColor EOF )
-            // InternalChessDSL.g:2195:2: iv_rulePlayerOrColor= rulePlayerOrColor EOF
+            // InternalChessDSL.g:2206:54: (iv_rulePlayerOrColor= rulePlayerOrColor EOF )
+            // InternalChessDSL.g:2207:2: iv_rulePlayerOrColor= rulePlayerOrColor EOF
             {
              newCompositeNode(grammarAccess.getPlayerOrColorRule()); 
             pushFollow(FOLLOW_1);
@@ -5724,7 +5746,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePlayerOrColor"
-    // InternalChessDSL.g:2201:1: rulePlayerOrColor returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) ;
+    // InternalChessDSL.g:2213:1: rulePlayerOrColor returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) ;
     public final EObject rulePlayerOrColor() throws RecognitionException {
         EObject current = null;
 
@@ -5736,10 +5758,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:2207:2: ( ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) )
-            // InternalChessDSL.g:2208:2: ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) )
+            // InternalChessDSL.g:2219:2: ( ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) ) )
+            // InternalChessDSL.g:2220:2: ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) )
             {
-            // InternalChessDSL.g:2208:2: ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) )
+            // InternalChessDSL.g:2220:2: ( ( (otherlv_0= RULE_ID ) ) | ( (lv_color_1_0= ruleColor ) ) )
             int alt34=2;
             int LA34_0 = input.LA(1);
 
@@ -5757,13 +5779,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
             }
             switch (alt34) {
                 case 1 :
-                    // InternalChessDSL.g:2209:3: ( (otherlv_0= RULE_ID ) )
+                    // InternalChessDSL.g:2221:3: ( (otherlv_0= RULE_ID ) )
                     {
-                    // InternalChessDSL.g:2209:3: ( (otherlv_0= RULE_ID ) )
-                    // InternalChessDSL.g:2210:4: (otherlv_0= RULE_ID )
+                    // InternalChessDSL.g:2221:3: ( (otherlv_0= RULE_ID ) )
+                    // InternalChessDSL.g:2222:4: (otherlv_0= RULE_ID )
                     {
-                    // InternalChessDSL.g:2210:4: (otherlv_0= RULE_ID )
-                    // InternalChessDSL.g:2211:5: otherlv_0= RULE_ID
+                    // InternalChessDSL.g:2222:4: (otherlv_0= RULE_ID )
+                    // InternalChessDSL.g:2223:5: otherlv_0= RULE_ID
                     {
 
                     					if (current==null) {
@@ -5784,13 +5806,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:2223:3: ( (lv_color_1_0= ruleColor ) )
+                    // InternalChessDSL.g:2235:3: ( (lv_color_1_0= ruleColor ) )
                     {
-                    // InternalChessDSL.g:2223:3: ( (lv_color_1_0= ruleColor ) )
-                    // InternalChessDSL.g:2224:4: (lv_color_1_0= ruleColor )
+                    // InternalChessDSL.g:2235:3: ( (lv_color_1_0= ruleColor ) )
+                    // InternalChessDSL.g:2236:4: (lv_color_1_0= ruleColor )
                     {
-                    // InternalChessDSL.g:2224:4: (lv_color_1_0= ruleColor )
-                    // InternalChessDSL.g:2225:5: lv_color_1_0= ruleColor
+                    // InternalChessDSL.g:2236:4: (lv_color_1_0= ruleColor )
+                    // InternalChessDSL.g:2237:5: lv_color_1_0= ruleColor
                     {
 
                     					newCompositeNode(grammarAccess.getPlayerOrColorAccess().getColorColorEnumRuleCall_1_0());
@@ -5843,7 +5865,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSquare"
-    // InternalChessDSL.g:2246:1: entryRuleSquare returns [EObject current=null] : iv_ruleSquare= ruleSquare EOF ;
+    // InternalChessDSL.g:2258:1: entryRuleSquare returns [EObject current=null] : iv_ruleSquare= ruleSquare EOF ;
     public final EObject entryRuleSquare() throws RecognitionException {
         EObject current = null;
 
@@ -5851,8 +5873,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalChessDSL.g:2246:47: (iv_ruleSquare= ruleSquare EOF )
-            // InternalChessDSL.g:2247:2: iv_ruleSquare= ruleSquare EOF
+            // InternalChessDSL.g:2258:47: (iv_ruleSquare= ruleSquare EOF )
+            // InternalChessDSL.g:2259:2: iv_ruleSquare= ruleSquare EOF
             {
              newCompositeNode(grammarAccess.getSquareRule()); 
             pushFollow(FOLLOW_1);
@@ -5879,7 +5901,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSquare"
-    // InternalChessDSL.g:2253:1: ruleSquare returns [EObject current=null] : ( (lv_square_0_0= RULE_SQUARETERMINAL ) ) ;
+    // InternalChessDSL.g:2265:1: ruleSquare returns [EObject current=null] : ( (lv_square_0_0= RULE_SQUARETERMINAL ) ) ;
     public final EObject ruleSquare() throws RecognitionException {
         EObject current = null;
 
@@ -5889,14 +5911,14 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:2259:2: ( ( (lv_square_0_0= RULE_SQUARETERMINAL ) ) )
-            // InternalChessDSL.g:2260:2: ( (lv_square_0_0= RULE_SQUARETERMINAL ) )
+            // InternalChessDSL.g:2271:2: ( ( (lv_square_0_0= RULE_SQUARETERMINAL ) ) )
+            // InternalChessDSL.g:2272:2: ( (lv_square_0_0= RULE_SQUARETERMINAL ) )
             {
-            // InternalChessDSL.g:2260:2: ( (lv_square_0_0= RULE_SQUARETERMINAL ) )
-            // InternalChessDSL.g:2261:3: (lv_square_0_0= RULE_SQUARETERMINAL )
+            // InternalChessDSL.g:2272:2: ( (lv_square_0_0= RULE_SQUARETERMINAL ) )
+            // InternalChessDSL.g:2273:3: (lv_square_0_0= RULE_SQUARETERMINAL )
             {
-            // InternalChessDSL.g:2261:3: (lv_square_0_0= RULE_SQUARETERMINAL )
-            // InternalChessDSL.g:2262:4: lv_square_0_0= RULE_SQUARETERMINAL
+            // InternalChessDSL.g:2273:3: (lv_square_0_0= RULE_SQUARETERMINAL )
+            // InternalChessDSL.g:2274:4: lv_square_0_0= RULE_SQUARETERMINAL
             {
             lv_square_0_0=(Token)match(input,RULE_SQUARETERMINAL,FOLLOW_2); 
 
@@ -5938,7 +5960,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRemark"
-    // InternalChessDSL.g:2281:1: ruleRemark returns [Enumerator current=null] : ( (enumLiteral_0= 'Good' ) | (enumLiteral_1= 'Bad' ) | (enumLiteral_2= 'Excellent' ) | (enumLiteral_3= 'Risky' ) | (enumLiteral_4= 'Dubious' ) | (enumLiteral_5= 'Check' ) | (enumLiteral_6= 'Checkmate' ) ) ;
+    // InternalChessDSL.g:2293:1: ruleRemark returns [Enumerator current=null] : ( (enumLiteral_0= 'Good' ) | (enumLiteral_1= 'Bad' ) | (enumLiteral_2= 'Excellent' ) | (enumLiteral_3= 'Risky' ) | (enumLiteral_4= 'Dubious' ) | (enumLiteral_5= 'Check' ) | (enumLiteral_6= 'Checkmate' ) ) ;
     public final Enumerator ruleRemark() throws RecognitionException {
         Enumerator current = null;
 
@@ -5954,10 +5976,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:2287:2: ( ( (enumLiteral_0= 'Good' ) | (enumLiteral_1= 'Bad' ) | (enumLiteral_2= 'Excellent' ) | (enumLiteral_3= 'Risky' ) | (enumLiteral_4= 'Dubious' ) | (enumLiteral_5= 'Check' ) | (enumLiteral_6= 'Checkmate' ) ) )
-            // InternalChessDSL.g:2288:2: ( (enumLiteral_0= 'Good' ) | (enumLiteral_1= 'Bad' ) | (enumLiteral_2= 'Excellent' ) | (enumLiteral_3= 'Risky' ) | (enumLiteral_4= 'Dubious' ) | (enumLiteral_5= 'Check' ) | (enumLiteral_6= 'Checkmate' ) )
+            // InternalChessDSL.g:2299:2: ( ( (enumLiteral_0= 'Good' ) | (enumLiteral_1= 'Bad' ) | (enumLiteral_2= 'Excellent' ) | (enumLiteral_3= 'Risky' ) | (enumLiteral_4= 'Dubious' ) | (enumLiteral_5= 'Check' ) | (enumLiteral_6= 'Checkmate' ) ) )
+            // InternalChessDSL.g:2300:2: ( (enumLiteral_0= 'Good' ) | (enumLiteral_1= 'Bad' ) | (enumLiteral_2= 'Excellent' ) | (enumLiteral_3= 'Risky' ) | (enumLiteral_4= 'Dubious' ) | (enumLiteral_5= 'Check' ) | (enumLiteral_6= 'Checkmate' ) )
             {
-            // InternalChessDSL.g:2288:2: ( (enumLiteral_0= 'Good' ) | (enumLiteral_1= 'Bad' ) | (enumLiteral_2= 'Excellent' ) | (enumLiteral_3= 'Risky' ) | (enumLiteral_4= 'Dubious' ) | (enumLiteral_5= 'Check' ) | (enumLiteral_6= 'Checkmate' ) )
+            // InternalChessDSL.g:2300:2: ( (enumLiteral_0= 'Good' ) | (enumLiteral_1= 'Bad' ) | (enumLiteral_2= 'Excellent' ) | (enumLiteral_3= 'Risky' ) | (enumLiteral_4= 'Dubious' ) | (enumLiteral_5= 'Check' ) | (enumLiteral_6= 'Checkmate' ) )
             int alt35=7;
             switch ( input.LA(1) ) {
             case 69:
@@ -6004,10 +6026,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt35) {
                 case 1 :
-                    // InternalChessDSL.g:2289:3: (enumLiteral_0= 'Good' )
+                    // InternalChessDSL.g:2301:3: (enumLiteral_0= 'Good' )
                     {
-                    // InternalChessDSL.g:2289:3: (enumLiteral_0= 'Good' )
-                    // InternalChessDSL.g:2290:4: enumLiteral_0= 'Good'
+                    // InternalChessDSL.g:2301:3: (enumLiteral_0= 'Good' )
+                    // InternalChessDSL.g:2302:4: enumLiteral_0= 'Good'
                     {
                     enumLiteral_0=(Token)match(input,69,FOLLOW_2); 
 
@@ -6021,10 +6043,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:2297:3: (enumLiteral_1= 'Bad' )
+                    // InternalChessDSL.g:2309:3: (enumLiteral_1= 'Bad' )
                     {
-                    // InternalChessDSL.g:2297:3: (enumLiteral_1= 'Bad' )
-                    // InternalChessDSL.g:2298:4: enumLiteral_1= 'Bad'
+                    // InternalChessDSL.g:2309:3: (enumLiteral_1= 'Bad' )
+                    // InternalChessDSL.g:2310:4: enumLiteral_1= 'Bad'
                     {
                     enumLiteral_1=(Token)match(input,70,FOLLOW_2); 
 
@@ -6038,10 +6060,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalChessDSL.g:2305:3: (enumLiteral_2= 'Excellent' )
+                    // InternalChessDSL.g:2317:3: (enumLiteral_2= 'Excellent' )
                     {
-                    // InternalChessDSL.g:2305:3: (enumLiteral_2= 'Excellent' )
-                    // InternalChessDSL.g:2306:4: enumLiteral_2= 'Excellent'
+                    // InternalChessDSL.g:2317:3: (enumLiteral_2= 'Excellent' )
+                    // InternalChessDSL.g:2318:4: enumLiteral_2= 'Excellent'
                     {
                     enumLiteral_2=(Token)match(input,71,FOLLOW_2); 
 
@@ -6055,10 +6077,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalChessDSL.g:2313:3: (enumLiteral_3= 'Risky' )
+                    // InternalChessDSL.g:2325:3: (enumLiteral_3= 'Risky' )
                     {
-                    // InternalChessDSL.g:2313:3: (enumLiteral_3= 'Risky' )
-                    // InternalChessDSL.g:2314:4: enumLiteral_3= 'Risky'
+                    // InternalChessDSL.g:2325:3: (enumLiteral_3= 'Risky' )
+                    // InternalChessDSL.g:2326:4: enumLiteral_3= 'Risky'
                     {
                     enumLiteral_3=(Token)match(input,72,FOLLOW_2); 
 
@@ -6072,10 +6094,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalChessDSL.g:2321:3: (enumLiteral_4= 'Dubious' )
+                    // InternalChessDSL.g:2333:3: (enumLiteral_4= 'Dubious' )
                     {
-                    // InternalChessDSL.g:2321:3: (enumLiteral_4= 'Dubious' )
-                    // InternalChessDSL.g:2322:4: enumLiteral_4= 'Dubious'
+                    // InternalChessDSL.g:2333:3: (enumLiteral_4= 'Dubious' )
+                    // InternalChessDSL.g:2334:4: enumLiteral_4= 'Dubious'
                     {
                     enumLiteral_4=(Token)match(input,73,FOLLOW_2); 
 
@@ -6089,10 +6111,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // InternalChessDSL.g:2329:3: (enumLiteral_5= 'Check' )
+                    // InternalChessDSL.g:2341:3: (enumLiteral_5= 'Check' )
                     {
-                    // InternalChessDSL.g:2329:3: (enumLiteral_5= 'Check' )
-                    // InternalChessDSL.g:2330:4: enumLiteral_5= 'Check'
+                    // InternalChessDSL.g:2341:3: (enumLiteral_5= 'Check' )
+                    // InternalChessDSL.g:2342:4: enumLiteral_5= 'Check'
                     {
                     enumLiteral_5=(Token)match(input,74,FOLLOW_2); 
 
@@ -6106,10 +6128,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // InternalChessDSL.g:2337:3: (enumLiteral_6= 'Checkmate' )
+                    // InternalChessDSL.g:2349:3: (enumLiteral_6= 'Checkmate' )
                     {
-                    // InternalChessDSL.g:2337:3: (enumLiteral_6= 'Checkmate' )
-                    // InternalChessDSL.g:2338:4: enumLiteral_6= 'Checkmate'
+                    // InternalChessDSL.g:2349:3: (enumLiteral_6= 'Checkmate' )
+                    // InternalChessDSL.g:2350:4: enumLiteral_6= 'Checkmate'
                     {
                     enumLiteral_6=(Token)match(input,75,FOLLOW_2); 
 
@@ -6145,7 +6167,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleColor"
-    // InternalChessDSL.g:2348:1: ruleColor returns [Enumerator current=null] : ( (enumLiteral_0= 'White' ) | (enumLiteral_1= 'Black' ) ) ;
+    // InternalChessDSL.g:2360:1: ruleColor returns [Enumerator current=null] : ( (enumLiteral_0= 'White' ) | (enumLiteral_1= 'Black' ) ) ;
     public final Enumerator ruleColor() throws RecognitionException {
         Enumerator current = null;
 
@@ -6156,10 +6178,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:2354:2: ( ( (enumLiteral_0= 'White' ) | (enumLiteral_1= 'Black' ) ) )
-            // InternalChessDSL.g:2355:2: ( (enumLiteral_0= 'White' ) | (enumLiteral_1= 'Black' ) )
+            // InternalChessDSL.g:2366:2: ( ( (enumLiteral_0= 'White' ) | (enumLiteral_1= 'Black' ) ) )
+            // InternalChessDSL.g:2367:2: ( (enumLiteral_0= 'White' ) | (enumLiteral_1= 'Black' ) )
             {
-            // InternalChessDSL.g:2355:2: ( (enumLiteral_0= 'White' ) | (enumLiteral_1= 'Black' ) )
+            // InternalChessDSL.g:2367:2: ( (enumLiteral_0= 'White' ) | (enumLiteral_1= 'Black' ) )
             int alt36=2;
             int LA36_0 = input.LA(1);
 
@@ -6177,10 +6199,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
             }
             switch (alt36) {
                 case 1 :
-                    // InternalChessDSL.g:2356:3: (enumLiteral_0= 'White' )
+                    // InternalChessDSL.g:2368:3: (enumLiteral_0= 'White' )
                     {
-                    // InternalChessDSL.g:2356:3: (enumLiteral_0= 'White' )
-                    // InternalChessDSL.g:2357:4: enumLiteral_0= 'White'
+                    // InternalChessDSL.g:2368:3: (enumLiteral_0= 'White' )
+                    // InternalChessDSL.g:2369:4: enumLiteral_0= 'White'
                     {
                     enumLiteral_0=(Token)match(input,76,FOLLOW_2); 
 
@@ -6194,10 +6216,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:2364:3: (enumLiteral_1= 'Black' )
+                    // InternalChessDSL.g:2376:3: (enumLiteral_1= 'Black' )
                     {
-                    // InternalChessDSL.g:2364:3: (enumLiteral_1= 'Black' )
-                    // InternalChessDSL.g:2365:4: enumLiteral_1= 'Black'
+                    // InternalChessDSL.g:2376:3: (enumLiteral_1= 'Black' )
+                    // InternalChessDSL.g:2377:4: enumLiteral_1= 'Black'
                     {
                     enumLiteral_1=(Token)match(input,77,FOLLOW_2); 
 
@@ -6233,7 +6255,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePiece"
-    // InternalChessDSL.g:2375:1: rulePiece returns [Enumerator current=null] : ( (enumLiteral_0= 'King' ) | (enumLiteral_1= 'Queen' ) | (enumLiteral_2= 'Rook' ) | (enumLiteral_3= 'Bishop' ) | (enumLiteral_4= 'Knight' ) | (enumLiteral_5= 'Pawn' ) ) ;
+    // InternalChessDSL.g:2387:1: rulePiece returns [Enumerator current=null] : ( (enumLiteral_0= 'King' ) | (enumLiteral_1= 'Queen' ) | (enumLiteral_2= 'Rook' ) | (enumLiteral_3= 'Bishop' ) | (enumLiteral_4= 'Knight' ) | (enumLiteral_5= 'Pawn' ) ) ;
     public final Enumerator rulePiece() throws RecognitionException {
         Enumerator current = null;
 
@@ -6248,10 +6270,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalChessDSL.g:2381:2: ( ( (enumLiteral_0= 'King' ) | (enumLiteral_1= 'Queen' ) | (enumLiteral_2= 'Rook' ) | (enumLiteral_3= 'Bishop' ) | (enumLiteral_4= 'Knight' ) | (enumLiteral_5= 'Pawn' ) ) )
-            // InternalChessDSL.g:2382:2: ( (enumLiteral_0= 'King' ) | (enumLiteral_1= 'Queen' ) | (enumLiteral_2= 'Rook' ) | (enumLiteral_3= 'Bishop' ) | (enumLiteral_4= 'Knight' ) | (enumLiteral_5= 'Pawn' ) )
+            // InternalChessDSL.g:2393:2: ( ( (enumLiteral_0= 'King' ) | (enumLiteral_1= 'Queen' ) | (enumLiteral_2= 'Rook' ) | (enumLiteral_3= 'Bishop' ) | (enumLiteral_4= 'Knight' ) | (enumLiteral_5= 'Pawn' ) ) )
+            // InternalChessDSL.g:2394:2: ( (enumLiteral_0= 'King' ) | (enumLiteral_1= 'Queen' ) | (enumLiteral_2= 'Rook' ) | (enumLiteral_3= 'Bishop' ) | (enumLiteral_4= 'Knight' ) | (enumLiteral_5= 'Pawn' ) )
             {
-            // InternalChessDSL.g:2382:2: ( (enumLiteral_0= 'King' ) | (enumLiteral_1= 'Queen' ) | (enumLiteral_2= 'Rook' ) | (enumLiteral_3= 'Bishop' ) | (enumLiteral_4= 'Knight' ) | (enumLiteral_5= 'Pawn' ) )
+            // InternalChessDSL.g:2394:2: ( (enumLiteral_0= 'King' ) | (enumLiteral_1= 'Queen' ) | (enumLiteral_2= 'Rook' ) | (enumLiteral_3= 'Bishop' ) | (enumLiteral_4= 'Knight' ) | (enumLiteral_5= 'Pawn' ) )
             int alt37=6;
             switch ( input.LA(1) ) {
             case 78:
@@ -6293,10 +6315,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt37) {
                 case 1 :
-                    // InternalChessDSL.g:2383:3: (enumLiteral_0= 'King' )
+                    // InternalChessDSL.g:2395:3: (enumLiteral_0= 'King' )
                     {
-                    // InternalChessDSL.g:2383:3: (enumLiteral_0= 'King' )
-                    // InternalChessDSL.g:2384:4: enumLiteral_0= 'King'
+                    // InternalChessDSL.g:2395:3: (enumLiteral_0= 'King' )
+                    // InternalChessDSL.g:2396:4: enumLiteral_0= 'King'
                     {
                     enumLiteral_0=(Token)match(input,78,FOLLOW_2); 
 
@@ -6310,10 +6332,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalChessDSL.g:2391:3: (enumLiteral_1= 'Queen' )
+                    // InternalChessDSL.g:2403:3: (enumLiteral_1= 'Queen' )
                     {
-                    // InternalChessDSL.g:2391:3: (enumLiteral_1= 'Queen' )
-                    // InternalChessDSL.g:2392:4: enumLiteral_1= 'Queen'
+                    // InternalChessDSL.g:2403:3: (enumLiteral_1= 'Queen' )
+                    // InternalChessDSL.g:2404:4: enumLiteral_1= 'Queen'
                     {
                     enumLiteral_1=(Token)match(input,79,FOLLOW_2); 
 
@@ -6327,10 +6349,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalChessDSL.g:2399:3: (enumLiteral_2= 'Rook' )
+                    // InternalChessDSL.g:2411:3: (enumLiteral_2= 'Rook' )
                     {
-                    // InternalChessDSL.g:2399:3: (enumLiteral_2= 'Rook' )
-                    // InternalChessDSL.g:2400:4: enumLiteral_2= 'Rook'
+                    // InternalChessDSL.g:2411:3: (enumLiteral_2= 'Rook' )
+                    // InternalChessDSL.g:2412:4: enumLiteral_2= 'Rook'
                     {
                     enumLiteral_2=(Token)match(input,80,FOLLOW_2); 
 
@@ -6344,10 +6366,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalChessDSL.g:2407:3: (enumLiteral_3= 'Bishop' )
+                    // InternalChessDSL.g:2419:3: (enumLiteral_3= 'Bishop' )
                     {
-                    // InternalChessDSL.g:2407:3: (enumLiteral_3= 'Bishop' )
-                    // InternalChessDSL.g:2408:4: enumLiteral_3= 'Bishop'
+                    // InternalChessDSL.g:2419:3: (enumLiteral_3= 'Bishop' )
+                    // InternalChessDSL.g:2420:4: enumLiteral_3= 'Bishop'
                     {
                     enumLiteral_3=(Token)match(input,81,FOLLOW_2); 
 
@@ -6361,10 +6383,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalChessDSL.g:2415:3: (enumLiteral_4= 'Knight' )
+                    // InternalChessDSL.g:2427:3: (enumLiteral_4= 'Knight' )
                     {
-                    // InternalChessDSL.g:2415:3: (enumLiteral_4= 'Knight' )
-                    // InternalChessDSL.g:2416:4: enumLiteral_4= 'Knight'
+                    // InternalChessDSL.g:2427:3: (enumLiteral_4= 'Knight' )
+                    // InternalChessDSL.g:2428:4: enumLiteral_4= 'Knight'
                     {
                     enumLiteral_4=(Token)match(input,82,FOLLOW_2); 
 
@@ -6378,10 +6400,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // InternalChessDSL.g:2423:3: (enumLiteral_5= 'Pawn' )
+                    // InternalChessDSL.g:2435:3: (enumLiteral_5= 'Pawn' )
                     {
-                    // InternalChessDSL.g:2423:3: (enumLiteral_5= 'Pawn' )
-                    // InternalChessDSL.g:2424:4: enumLiteral_5= 'Pawn'
+                    // InternalChessDSL.g:2435:3: (enumLiteral_5= 'Pawn' )
+                    // InternalChessDSL.g:2436:4: enumLiteral_5= 'Pawn'
                     {
                     enumLiteral_5=(Token)match(input,83,FOLLOW_2); 
 
@@ -6422,10 +6444,10 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
     protected DFA26 dfa26 = new DFA26(this);
     protected DFA27 dfa27 = new DFA27(this);
     static final String dfa_1s = "\53\uffff";
-    static final String dfa_2s = "\21\uffff\2\26\14\uffff\6\51\2\uffff\1\51\3\uffff";
-    static final String dfa_3s = "\1\41\1\116\6\37\2\uffff\2\10\1\43\1\45\2\10\1\40\2\5\1\116\1\50\1\116\1\uffff\1\52\1\uffff\6\40\6\5\2\40\1\5\3\uffff";
-    static final String dfa_4s = "\2\123\6\44\2\uffff\2\10\1\43\1\45\2\10\1\40\3\123\1\54\1\123\1\uffff\1\53\1\uffff\6\40\6\123\2\40\1\123\3\uffff";
-    static final String dfa_5s = "\10\uffff\1\3\1\6\14\uffff\1\1\1\uffff\1\5\17\uffff\1\4\1\2\1\1";
+    static final String dfa_2s = "\21\uffff\2\27\14\uffff\6\50\2\uffff\1\50\3\uffff";
+    static final String dfa_3s = "\1\41\1\116\6\37\2\uffff\2\10\1\43\1\45\2\10\1\40\2\5\1\50\1\uffff\2\116\1\uffff\1\52\6\40\6\5\2\40\1\5\3\uffff";
+    static final String dfa_4s = "\2\123\6\44\2\uffff\2\10\1\43\1\45\2\10\1\40\2\123\1\54\1\uffff\2\123\1\uffff\1\53\6\40\6\123\2\40\1\123\3\uffff";
+    static final String dfa_5s = "\10\uffff\1\3\1\6\12\uffff\1\5\2\uffff\1\1\20\uffff\1\2\1\4\1\1";
     static final String dfa_6s = "\53\uffff}>";
     static final String[] dfa_7s = {
             "\1\11\1\1\6\uffff\1\10\2\uffff\1\10\41\uffff\1\2\1\3\1\4\1\5\1\6\1\7",
@@ -6445,29 +6467,29 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
             "\1\20",
             "\1\21",
             "\1\22",
-            "\3\26\14\uffff\1\26\12\uffff\1\26\1\uffff\2\26\3\uffff\1\23\1\24\1\25\1\27\2\uffff\1\26\1\uffff\1\30\37\uffff\6\26",
-            "\3\26\14\uffff\1\26\12\uffff\1\26\1\uffff\2\26\3\uffff\1\23\1\24\1\25\1\27\2\uffff\1\26\1\uffff\1\30\37\uffff\6\26",
+            "\3\27\14\uffff\1\27\12\uffff\1\27\1\uffff\2\27\3\uffff\1\25\1\23\1\26\1\30\2\uffff\1\27\1\uffff\1\24\35\uffff\10\27",
+            "\3\27\14\uffff\1\27\12\uffff\1\27\1\uffff\2\27\3\uffff\1\25\1\23\1\26\1\30\2\uffff\1\27\1\uffff\1\24\35\uffff\10\27",
+            "\1\26\3\uffff\1\10",
+            "",
             "\1\31\1\32\1\33\1\34\1\35\1\36",
-            "\1\25\3\uffff\1\10",
             "\1\37\1\40\1\41\1\42\1\43\1\44",
             "",
             "\1\45\1\46",
-            "",
             "\1\47",
             "\1\47",
             "\1\47",
             "\1\47",
             "\1\47",
             "\1\47",
-            "\3\51\14\uffff\1\51\10\uffff\1\50\1\uffff\1\51\1\uffff\2\51\6\uffff\1\51\2\uffff\1\51\1\uffff\1\30\37\uffff\6\51",
-            "\3\51\14\uffff\1\51\10\uffff\1\50\1\uffff\1\51\1\uffff\2\51\6\uffff\1\51\2\uffff\1\51\1\uffff\1\30\37\uffff\6\51",
-            "\3\51\14\uffff\1\51\10\uffff\1\50\1\uffff\1\51\1\uffff\2\51\6\uffff\1\51\2\uffff\1\51\1\uffff\1\30\37\uffff\6\51",
-            "\3\51\14\uffff\1\51\10\uffff\1\50\1\uffff\1\51\1\uffff\2\51\6\uffff\1\51\2\uffff\1\51\1\uffff\1\30\37\uffff\6\51",
-            "\3\51\14\uffff\1\51\10\uffff\1\50\1\uffff\1\51\1\uffff\2\51\6\uffff\1\51\2\uffff\1\51\1\uffff\1\30\37\uffff\6\51",
-            "\3\51\14\uffff\1\51\10\uffff\1\50\1\uffff\1\51\1\uffff\2\51\6\uffff\1\51\2\uffff\1\51\1\uffff\1\30\37\uffff\6\51",
+            "\3\50\14\uffff\1\50\10\uffff\1\51\1\uffff\1\50\1\uffff\2\50\6\uffff\1\50\2\uffff\1\50\1\uffff\1\24\35\uffff\10\50",
+            "\3\50\14\uffff\1\50\10\uffff\1\51\1\uffff\1\50\1\uffff\2\50\6\uffff\1\50\2\uffff\1\50\1\uffff\1\24\35\uffff\10\50",
+            "\3\50\14\uffff\1\50\10\uffff\1\51\1\uffff\1\50\1\uffff\2\50\6\uffff\1\50\2\uffff\1\50\1\uffff\1\24\35\uffff\10\50",
+            "\3\50\14\uffff\1\50\10\uffff\1\51\1\uffff\1\50\1\uffff\2\50\6\uffff\1\50\2\uffff\1\50\1\uffff\1\24\35\uffff\10\50",
+            "\3\50\14\uffff\1\50\10\uffff\1\51\1\uffff\1\50\1\uffff\2\50\6\uffff\1\50\2\uffff\1\50\1\uffff\1\24\35\uffff\10\50",
+            "\3\50\14\uffff\1\50\10\uffff\1\51\1\uffff\1\50\1\uffff\2\50\6\uffff\1\50\2\uffff\1\50\1\uffff\1\24\35\uffff\10\50",
             "\1\52",
             "\1\52",
-            "\3\51\14\uffff\1\51\10\uffff\1\50\1\uffff\1\51\1\uffff\2\51\6\uffff\1\51\2\uffff\1\51\1\uffff\1\30\37\uffff\6\51",
+            "\3\50\14\uffff\1\50\10\uffff\1\51\1\uffff\1\50\1\uffff\2\50\6\uffff\1\50\2\uffff\1\50\1\uffff\1\24\35\uffff\10\50",
             "",
             "",
             ""
@@ -6495,7 +6517,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
             this.transition = dfa_7;
         }
         public String getDescription() {
-            return "751:2: (this_Move_0= ruleMove | this_Capture_1= ruleCapture | this_Castle_2= ruleCastle | this_EnPassant_3= ruleEnPassant | this_Promotion_4= rulePromotion | this_Dummy_5= ruleDummy )";
+            return "763:2: (this_Move_0= ruleMove | this_Capture_1= ruleCapture | this_Castle_2= ruleCastle | this_EnPassant_3= ruleEnPassant | this_Promotion_4= rulePromotion | this_Dummy_5= ruleDummy )";
         }
     }
     static final String dfa_8s = "\25\uffff";
@@ -6548,13 +6570,13 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
             this.transition = dfa_13;
         }
         public String getDescription() {
-            return "1101:2: ( (otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')' ) | (otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) ) ) | ( ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')' ) | ( ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) ) ) )";
+            return "1113:2: ( (otherlv_0= 'Castle(' ( ( (lv_side_1_1= 'Kingside' | lv_side_1_2= 'Queenside' ) ) ) otherlv_2= ')' ) | (otherlv_3= 'castles' (otherlv_4= 'on' otherlv_5= 'the' )? ( ( (lv_side_6_1= 'Kingside' | lv_side_6_2= 'Queenside' ) ) ) ) | ( ( (lv_move_7_0= ruleMove ) ) otherlv_8= 'Castle(' ( ( (lv_side_9_1= 'Kingside' | lv_side_9_2= 'Queenside' ) ) ) otherlv_10= ')' ) | ( ( (lv_move_11_0= ruleMove ) ) otherlv_12= 'and' otherlv_13= 'castles' ( ( (lv_side_14_1= 'Kingside' | lv_side_14_2= 'Queenside' ) ) ) ) )";
         }
     }
     static final String dfa_14s = "\23\uffff";
     static final String dfa_15s = "\1\42\1\116\6\37\2\10\1\43\1\45\2\10\1\40\2\46\2\uffff";
     static final String dfa_16s = "\2\123\6\44\2\10\1\43\1\45\2\10\1\40\2\56\2\uffff";
-    static final String dfa_17s = "\21\uffff\1\1\1\2";
+    static final String dfa_17s = "\21\uffff\1\2\1\1";
     static final String dfa_18s = "\23\uffff}>";
     static final String[] dfa_19s = {
             "\1\1\53\uffff\1\2\1\3\1\4\1\5\1\6\1\7",
@@ -6572,8 +6594,8 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
             "\1\16",
             "\1\17",
             "\1\20",
-            "\3\22\5\uffff\1\21",
-            "\3\22\5\uffff\1\21",
+            "\3\21\5\uffff\1\22",
+            "\3\21\5\uffff\1\22",
             "",
             ""
     };
@@ -6599,7 +6621,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
             this.transition = dfa_19;
         }
         public String getDescription() {
-            return "1379:5: (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture )";
+            return "1391:5: (lv_move_0_1= ruleMove | lv_move_0_2= ruleCapture )";
         }
     }
  
@@ -6612,7 +6634,7 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000480000L,0x0000000000003000L});
     public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000080000L});
     public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000100020L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000042L,0x0000000000003008L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000082L,0x0000000000003008L});
     public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000200000L});
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000001800002L});
     public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000002000000L});
@@ -6621,9 +6643,9 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000030000000L});
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000000L,0x00000000000FC000L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x00001206400000C0L,0x00000000000FC000L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x00001206000000C0L,0x00000000000FC000L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x00001206000000C2L,0x00000000000FC000L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x00001206400000C0L,0x00000000000FF000L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x00001206000000C0L,0x00000000000FF000L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x00001206000000C2L,0x00000000000FF000L});
     public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000080000002L});
     public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000100000000L,0x0000000000000FE0L});
     public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000001080000000L});
@@ -6640,14 +6662,14 @@ public class InternalChessDSLParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000100000000000L});
     public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000020000000L});
     public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000400000000000L});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000000000000040L,0x0000000000003008L});
+    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000000000000080L,0x0000000000003008L});
     public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000800000000000L});
     public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0001000000000000L});
     public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0002000000000000L});
     public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0004000000000000L});
     public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0008000000000000L});
     public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0010000000000000L});
-    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000000000000040L,0x0000000000003000L});
+    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000000000000080L,0x0000000000003000L});
     public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x4420000000000000L,0x0000000000000004L});
     public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0040000000000000L});
     public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0080000000000000L});

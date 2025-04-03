@@ -50,22 +50,22 @@ public interface MovePair extends EObject
   void setMoveNumber(String value);
 
   /**
-   * Returns the value of the '<em><b>Color1</b></em>' reference.
+   * Returns the value of the '<em><b>Color1</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Color1</em>' reference.
+   * @return the value of the '<em>Color1</em>' containment reference.
    * @see #setColor1(PlayerOrColor)
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.ChessDSLPackage#getMovePair_Color1()
-   * @model
+   * @model containment="true"
    * @generated
    */
   PlayerOrColor getColor1();
 
   /**
-   * Sets the value of the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.MovePair#getColor1 <em>Color1</em>}' reference.
+   * Sets the value of the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.MovePair#getColor1 <em>Color1</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Color1</em>' reference.
+   * @param value the new value of the '<em>Color1</em>' containment reference.
    * @see #getColor1()
    * @generated
    */
@@ -94,22 +94,22 @@ public interface MovePair extends EObject
   void setWhiteMove(AnyMove value);
 
   /**
-   * Returns the value of the '<em><b>Color2</b></em>' reference.
+   * Returns the value of the '<em><b>Color2</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Color2</em>' reference.
+   * @return the value of the '<em>Color2</em>' containment reference.
    * @see #setColor2(PlayerOrColor)
    * @see uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.ChessDSLPackage#getMovePair_Color2()
-   * @model
+   * @model containment="true"
    * @generated
    */
   PlayerOrColor getColor2();
 
   /**
-   * Sets the value of the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.MovePair#getColor2 <em>Color2</em>}' reference.
+   * Sets the value of the '{@link uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.MovePair#getColor2 <em>Color2</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Color2</em>' reference.
+   * @param value the new value of the '<em>Color2</em>' containment reference.
    * @see #getColor2()
    * @generated
    */

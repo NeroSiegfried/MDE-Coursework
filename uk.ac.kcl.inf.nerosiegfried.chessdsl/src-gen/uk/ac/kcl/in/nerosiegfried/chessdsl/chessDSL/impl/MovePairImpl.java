@@ -57,7 +57,7 @@ public class MovePairImpl extends MinimalEObjectImpl.Container implements MovePa
   protected String moveNumber = MOVE_NUMBER_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getColor1() <em>Color1</em>}' reference.
+   * The cached value of the '{@link #getColor1() <em>Color1</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getColor1()
@@ -77,7 +77,7 @@ public class MovePairImpl extends MinimalEObjectImpl.Container implements MovePa
   protected AnyMove whiteMove;
 
   /**
-   * The cached value of the '{@link #getColor2() <em>Color2</em>}' reference.
+   * The cached value of the '{@link #getColor2() <em>Color2</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getColor2()
@@ -150,16 +150,6 @@ public class MovePairImpl extends MinimalEObjectImpl.Container implements MovePa
   @Override
   public PlayerOrColor getColor1()
   {
-    if (color1 != null && color1.eIsProxy())
-    {
-      InternalEObject oldColor1 = (InternalEObject)color1;
-      color1 = (PlayerOrColor)eResolveProxy(oldColor1);
-      if (color1 != oldColor1)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ChessDSLPackage.MOVE_PAIR__COLOR1, oldColor1, color1));
-      }
-    }
     return color1;
   }
 
@@ -168,9 +158,16 @@ public class MovePairImpl extends MinimalEObjectImpl.Container implements MovePa
    * <!-- end-user-doc -->
    * @generated
    */
-  public PlayerOrColor basicGetColor1()
+  public NotificationChain basicSetColor1(PlayerOrColor newColor1, NotificationChain msgs)
   {
-    return color1;
+    PlayerOrColor oldColor1 = color1;
+    color1 = newColor1;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ChessDSLPackage.MOVE_PAIR__COLOR1, oldColor1, newColor1);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -181,10 +178,18 @@ public class MovePairImpl extends MinimalEObjectImpl.Container implements MovePa
   @Override
   public void setColor1(PlayerOrColor newColor1)
   {
-    PlayerOrColor oldColor1 = color1;
-    color1 = newColor1;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ChessDSLPackage.MOVE_PAIR__COLOR1, oldColor1, color1));
+    if (newColor1 != color1)
+    {
+      NotificationChain msgs = null;
+      if (color1 != null)
+        msgs = ((InternalEObject)color1).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ChessDSLPackage.MOVE_PAIR__COLOR1, null, msgs);
+      if (newColor1 != null)
+        msgs = ((InternalEObject)newColor1).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ChessDSLPackage.MOVE_PAIR__COLOR1, null, msgs);
+      msgs = basicSetColor1(newColor1, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ChessDSLPackage.MOVE_PAIR__COLOR1, newColor1, newColor1));
   }
 
   /**
@@ -245,16 +250,6 @@ public class MovePairImpl extends MinimalEObjectImpl.Container implements MovePa
   @Override
   public PlayerOrColor getColor2()
   {
-    if (color2 != null && color2.eIsProxy())
-    {
-      InternalEObject oldColor2 = (InternalEObject)color2;
-      color2 = (PlayerOrColor)eResolveProxy(oldColor2);
-      if (color2 != oldColor2)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ChessDSLPackage.MOVE_PAIR__COLOR2, oldColor2, color2));
-      }
-    }
     return color2;
   }
 
@@ -263,9 +258,16 @@ public class MovePairImpl extends MinimalEObjectImpl.Container implements MovePa
    * <!-- end-user-doc -->
    * @generated
    */
-  public PlayerOrColor basicGetColor2()
+  public NotificationChain basicSetColor2(PlayerOrColor newColor2, NotificationChain msgs)
   {
-    return color2;
+    PlayerOrColor oldColor2 = color2;
+    color2 = newColor2;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ChessDSLPackage.MOVE_PAIR__COLOR2, oldColor2, newColor2);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -276,10 +278,18 @@ public class MovePairImpl extends MinimalEObjectImpl.Container implements MovePa
   @Override
   public void setColor2(PlayerOrColor newColor2)
   {
-    PlayerOrColor oldColor2 = color2;
-    color2 = newColor2;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ChessDSLPackage.MOVE_PAIR__COLOR2, oldColor2, color2));
+    if (newColor2 != color2)
+    {
+      NotificationChain msgs = null;
+      if (color2 != null)
+        msgs = ((InternalEObject)color2).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ChessDSLPackage.MOVE_PAIR__COLOR2, null, msgs);
+      if (newColor2 != null)
+        msgs = ((InternalEObject)newColor2).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ChessDSLPackage.MOVE_PAIR__COLOR2, null, msgs);
+      msgs = basicSetColor2(newColor2, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ChessDSLPackage.MOVE_PAIR__COLOR2, newColor2, newColor2));
   }
 
   /**
@@ -342,8 +352,12 @@ public class MovePairImpl extends MinimalEObjectImpl.Container implements MovePa
   {
     switch (featureID)
     {
+      case ChessDSLPackage.MOVE_PAIR__COLOR1:
+        return basicSetColor1(null, msgs);
       case ChessDSLPackage.MOVE_PAIR__WHITE_MOVE:
         return basicSetWhiteMove(null, msgs);
+      case ChessDSLPackage.MOVE_PAIR__COLOR2:
+        return basicSetColor2(null, msgs);
       case ChessDSLPackage.MOVE_PAIR__BLACK_MOVE:
         return basicSetBlackMove(null, msgs);
     }
@@ -363,13 +377,11 @@ public class MovePairImpl extends MinimalEObjectImpl.Container implements MovePa
       case ChessDSLPackage.MOVE_PAIR__MOVE_NUMBER:
         return getMoveNumber();
       case ChessDSLPackage.MOVE_PAIR__COLOR1:
-        if (resolve) return getColor1();
-        return basicGetColor1();
+        return getColor1();
       case ChessDSLPackage.MOVE_PAIR__WHITE_MOVE:
         return getWhiteMove();
       case ChessDSLPackage.MOVE_PAIR__COLOR2:
-        if (resolve) return getColor2();
-        return basicGetColor2();
+        return getColor2();
       case ChessDSLPackage.MOVE_PAIR__BLACK_MOVE:
         return getBlackMove();
     }

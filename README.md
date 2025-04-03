@@ -115,6 +115,6 @@ Don't know how this works
 
 ## To-Do List
 - [X] Refine Validation
-- [ ] Extend Generation
+- [X] Extend Generation
 - [ ] Integrate Tests into Project
 - [ ] Test Coverage

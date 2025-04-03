@@ -5082,13 +5082,9 @@ rule__MovePair__Color1Assignment_1_0_0
 	}
 :
 	(
-		{ before(grammarAccess.getMovePairAccess().getColor1PlayerOrColorCrossReference_1_0_0_0()); }
-		(
-			{ before(grammarAccess.getMovePairAccess().getColor1PlayerOrColorIDTerminalRuleCall_1_0_0_0_1()); }
-			RULE_ID
-			{ after(grammarAccess.getMovePairAccess().getColor1PlayerOrColorIDTerminalRuleCall_1_0_0_0_1()); }
-		)
-		{ after(grammarAccess.getMovePairAccess().getColor1PlayerOrColorCrossReference_1_0_0_0()); }
+		{ before(grammarAccess.getMovePairAccess().getColor1PlayerOrColorParserRuleCall_1_0_0_0()); }
+		rulePlayerOrColor
+		{ after(grammarAccess.getMovePairAccess().getColor1PlayerOrColorParserRuleCall_1_0_0_0()); }
 	)
 ;
 finally {
@@ -5116,13 +5112,9 @@ rule__MovePair__Color2Assignment_2_0
 	}
 :
 	(
-		{ before(grammarAccess.getMovePairAccess().getColor2PlayerOrColorCrossReference_2_0_0()); }
-		(
-			{ before(grammarAccess.getMovePairAccess().getColor2PlayerOrColorIDTerminalRuleCall_2_0_0_1()); }
-			RULE_ID
-			{ after(grammarAccess.getMovePairAccess().getColor2PlayerOrColorIDTerminalRuleCall_2_0_0_1()); }
-		)
-		{ after(grammarAccess.getMovePairAccess().getColor2PlayerOrColorCrossReference_2_0_0()); }
+		{ before(grammarAccess.getMovePairAccess().getColor2PlayerOrColorParserRuleCall_2_0_0()); }
+		rulePlayerOrColor
+		{ after(grammarAccess.getMovePairAccess().getColor2PlayerOrColorParserRuleCall_2_0_0()); }
 	)
 ;
 finally {

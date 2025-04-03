@@ -94,9 +94,9 @@ MovePair:
 
 	moveNumber=MOVENUMBER
 
-	(((color1=[PlayerOrColor])? whiteMove=AnyMove )| "...")
+	(((color1=PlayerOrColor)? whiteMove=AnyMove )| "...")
 
-	((color2=[PlayerOrColor])? blackMove=AnyMove)?
+	((color2=PlayerOrColor)? blackMove=AnyMove)?
 
 ;
 

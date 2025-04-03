@@ -327,15 +327,13 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
 		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
 		private final Assignment cColor1Assignment_1_0_0 = (Assignment)cGroup_1_0.eContents().get(0);
-		private final CrossReference cColor1PlayerOrColorCrossReference_1_0_0_0 = (CrossReference)cColor1Assignment_1_0_0.eContents().get(0);
-		private final RuleCall cColor1PlayerOrColorIDTerminalRuleCall_1_0_0_0_1 = (RuleCall)cColor1PlayerOrColorCrossReference_1_0_0_0.eContents().get(1);
+		private final RuleCall cColor1PlayerOrColorParserRuleCall_1_0_0_0 = (RuleCall)cColor1Assignment_1_0_0.eContents().get(0);
 		private final Assignment cWhiteMoveAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
 		private final RuleCall cWhiteMoveAnyMoveParserRuleCall_1_0_1_0 = (RuleCall)cWhiteMoveAssignment_1_0_1.eContents().get(0);
 		private final Keyword cFullStopFullStopFullStopKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Assignment cColor2Assignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
-		private final CrossReference cColor2PlayerOrColorCrossReference_2_0_0 = (CrossReference)cColor2Assignment_2_0.eContents().get(0);
-		private final RuleCall cColor2PlayerOrColorIDTerminalRuleCall_2_0_0_1 = (RuleCall)cColor2PlayerOrColorCrossReference_2_0_0.eContents().get(1);
+		private final RuleCall cColor2PlayerOrColorParserRuleCall_2_0_0 = (RuleCall)cColor2Assignment_2_0.eContents().get(0);
 		private final Assignment cBlackMoveAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cBlackMoveAnyMoveParserRuleCall_2_1_0 = (RuleCall)cBlackMoveAssignment_2_1.eContents().get(0);
 		
@@ -344,8 +342,8 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//    //or from where the records start. blackMove is optional depending on
 		//    //where the records end or how the game itself ends
 		//    moveNumber=MOVENUMBER
-		//    (((color1=[PlayerOrColor])? whiteMove=AnyMove )| "...")
-		//    ((color2=[PlayerOrColor])? blackMove=AnyMove)?
+		//    (((color1=PlayerOrColor)? whiteMove=AnyMove )| "...")
+		//    ((color2=PlayerOrColor)? blackMove=AnyMove)?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -353,8 +351,8 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		////or from where the records start. blackMove is optional depending on
 		////where the records end or how the game itself ends
 		//moveNumber=MOVENUMBER
-		//(((color1=[PlayerOrColor])? whiteMove=AnyMove )| "...")
-		//((color2=[PlayerOrColor])? blackMove=AnyMove)?
+		//(((color1=PlayerOrColor)? whiteMove=AnyMove )| "...")
+		//((color2=PlayerOrColor)? blackMove=AnyMove)?
 		public Group getGroup() { return cGroup; }
 		
 		////whiteMove can also be '...' when Black plays first in the position
@@ -366,20 +364,17 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//MOVENUMBER
 		public RuleCall getMoveNumberMOVENUMBERTerminalRuleCall_0_0() { return cMoveNumberMOVENUMBERTerminalRuleCall_0_0; }
 		
-		//(((color1=[PlayerOrColor])? whiteMove=AnyMove )| "...")
+		//(((color1=PlayerOrColor)? whiteMove=AnyMove )| "...")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
-		//((color1=[PlayerOrColor])? whiteMove=AnyMove )
+		//((color1=PlayerOrColor)? whiteMove=AnyMove )
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
-		//(color1=[PlayerOrColor])?
+		//(color1=PlayerOrColor)?
 		public Assignment getColor1Assignment_1_0_0() { return cColor1Assignment_1_0_0; }
 		
-		//[PlayerOrColor]
-		public CrossReference getColor1PlayerOrColorCrossReference_1_0_0_0() { return cColor1PlayerOrColorCrossReference_1_0_0_0; }
-		
-		//ID
-		public RuleCall getColor1PlayerOrColorIDTerminalRuleCall_1_0_0_0_1() { return cColor1PlayerOrColorIDTerminalRuleCall_1_0_0_0_1; }
+		//PlayerOrColor
+		public RuleCall getColor1PlayerOrColorParserRuleCall_1_0_0_0() { return cColor1PlayerOrColorParserRuleCall_1_0_0_0; }
 		
 		//whiteMove=AnyMove
 		public Assignment getWhiteMoveAssignment_1_0_1() { return cWhiteMoveAssignment_1_0_1; }
@@ -390,17 +385,14 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//"..."
 		public Keyword getFullStopFullStopFullStopKeyword_1_1() { return cFullStopFullStopFullStopKeyword_1_1; }
 		
-		//((color2=[PlayerOrColor])? blackMove=AnyMove)?
+		//((color2=PlayerOrColor)? blackMove=AnyMove)?
 		public Group getGroup_2() { return cGroup_2; }
 		
-		//(color2=[PlayerOrColor])?
+		//(color2=PlayerOrColor)?
 		public Assignment getColor2Assignment_2_0() { return cColor2Assignment_2_0; }
 		
-		//[PlayerOrColor]
-		public CrossReference getColor2PlayerOrColorCrossReference_2_0_0() { return cColor2PlayerOrColorCrossReference_2_0_0; }
-		
-		//ID
-		public RuleCall getColor2PlayerOrColorIDTerminalRuleCall_2_0_0_1() { return cColor2PlayerOrColorIDTerminalRuleCall_2_0_0_1; }
+		//PlayerOrColor
+		public RuleCall getColor2PlayerOrColorParserRuleCall_2_0_0() { return cColor2PlayerOrColorParserRuleCall_2_0_0; }
 		
 		//blackMove=AnyMove
 		public Assignment getBlackMoveAssignment_2_1() { return cBlackMoveAssignment_2_1; }
@@ -1828,8 +1820,8 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	//    //or from where the records start. blackMove is optional depending on
 	//    //where the records end or how the game itself ends
 	//    moveNumber=MOVENUMBER
-	//    (((color1=[PlayerOrColor])? whiteMove=AnyMove )| "...")
-	//    ((color2=[PlayerOrColor])? blackMove=AnyMove)?
+	//    (((color1=PlayerOrColor)? whiteMove=AnyMove )| "...")
+	//    ((color2=PlayerOrColor)? blackMove=AnyMove)?
 	//;
 	public MovePairElements getMovePairAccess() {
 		return pMovePair;
