@@ -14,13 +14,26 @@ import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.*;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.validation.ChessDSLValidator.BoardState;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.validation.ChessDSLValidator.PieceInfo;
 
+/**
+ * Generator that outputs:
+ *  - A standard algebraic notation file: <filename>_algebraic.txt
+ *  - A concise DSL file: <filename>_concise.txt
+ *  - A verbose DSL file: <filename>_verbose.txt
+ * 
+ * Also appends remarks in parentheses for the concise/verbose outputs.
+ * Also appends a final score line if the Conclusion indicates it.
+ */
 public class ChessDSLGenerator extends AbstractGenerator {
 
-    // --- Nested classes for board modeling ---
+    // ----------------------------------------------------------------
+    //  Board modeling from your code snippet
+    // ----------------------------------------------------------------
+
     static class PieceInfo {
         public Color color;
         public Piece type;
         public boolean hasMoved;
+
         public PieceInfo(Color c, Piece t) {
             color = c;
             type = t;
@@ -83,7 +96,8 @@ public class ChessDSLGenerator extends AbstractGenerator {
                 boardMap.put(to, pi);
             }
         }
-
+        
+        // Shallow copy for sim checks
         public BoardState cloneBoard() {
             BoardState copy = new BoardState();
             for (String sq : boardMap.keySet()) {
@@ -96,11 +110,16 @@ public class ChessDSLGenerator extends AbstractGenerator {
         }
     }
 
-    // -----------------------------------------------------------------
-    //               Algebraic Notation Helpers
-    // -----------------------------------------------------------------
+    // ----------------------------------------------------------------
+    //  Utility methods for path checking, opposite color, etc.
+    // ----------------------------------------------------------------
+
+    private Color opposite(Color c) {
+        return (c == Color.WHITE) ? Color.BLACK : Color.WHITE;
+    }
+
     private boolean sameFileOrRank(String from, String to) {
-        return (from.charAt(0) == to.charAt(0)) || (from.charAt(1) == to.charAt(1));
+        return (from.charAt(0) == to.charAt(0) || from.charAt(1) == to.charAt(1));
     }
 
     private boolean isDiagonal(String from, String to) {
@@ -110,126 +129,56 @@ public class ChessDSLGenerator extends AbstractGenerator {
     }
 
     private boolean pathClear(BoardState board, String from, String to) {
-        if (from.equals(to))
-            return false;
+        if (from.equals(to)) return false;
         int c1 = from.charAt(0), r1 = from.charAt(1);
-        int c2 = to.charAt(0), r2 = to.charAt(1);
-        int dc = Integer.compare(c2, c1);
-        int dr = Integer.compare(r2, r1);
-        int x = c1 + dc, y = r1 + dr;
-        while (x != c2 || y != r2) {
-            String sq = "" + (char) x + (char) y;
-            if (board.isOccupied(sq))
-                return false;
-            x += dc;
-            y += dr;
+        int c2 = to.charAt(0),   r2 = to.charAt(1);
+        int dc = Integer.compare(c2,c1);
+        int dr = Integer.compare(r2,r1);
+        int x = c1+dc, y=r1+dr;
+        while(x!=c2 || y!=r2) {
+            String sq = ""+(char)x+(char)y;
+            if(board.isOccupied(sq)) return false;
+            x+=dc; y+=dr;
         }
         return true;
     }
 
-    private boolean isMovePatternLegal(BoardState board, String from, String to, Piece p, Color side, boolean isCapture) {
-        if (p == Piece.KNIGHT) {
-            int c1 = from.charAt(0), r1 = from.charAt(1);
-            int c2 = to.charAt(0), r2 = to.charAt(1);
-            int dc = Math.abs(c2 - c1), dr = Math.abs(r2 - r1);
-            return (dc == 2 && dr == 1) || (dc == 1 && dr == 2);
-        } else if (p == Piece.KING) {
-            int c1 = from.charAt(0), r1 = from.charAt(1);
-            int c2 = to.charAt(0), r2 = to.charAt(1);
-            return (Math.abs(c2 - c1) <= 1) && (Math.abs(r2 - r1) <= 1);
-        } else if (p == Piece.ROOK) {
-            if (!sameFileOrRank(from, to))
-                return false;
-            return pathClear(board, from, to);
-        } else if (p == Piece.BISHOP) {
-            if (!isDiagonal(from, to))
-                return false;
-            return pathClear(board, from, to);
-        } else if (p == Piece.QUEEN) {
-            if (isDiagonal(from, to) || sameFileOrRank(from, to)) {
-                return pathClear(board, from, to);
-            }
-            return false;
-        } else if (p == Piece.PAWN) {
-            int fFrom = from.charAt(0) - 'a';
-            int rFrom = from.charAt(1) - '0';
-            int fTo = to.charAt(0) - 'a';
-            int rTo = to.charAt(1) - '0';
-            int fileDiff = Math.abs(fTo - fFrom);
-            int rankDiff = (side == Color.WHITE) ? rTo - rFrom : rFrom - rTo;
-            if (isCapture) {
-                return fileDiff == 1 && rankDiff == 1;
-            } else {
-                if (fileDiff != 0)
-                    return false;
-                if (rankDiff == 1)
-                    return true;
-                if (rankDiff == 2 && ((side == Color.WHITE && rFrom == 2) || (side == Color.BLACK && rFrom == 7))) {
-                    char intermediate = (side == Color.WHITE)
-                            ? (char) ((rFrom + 1) + '0')
-                            : (char) ((rFrom - 1) + '0');
-                    String interSq = "" + from.charAt(0) + intermediate;
-                    return !board.isOccupied(interSq);
-                }
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean isKnightMove(String from, String to) {
-        int c1 = from.charAt(0), r1 = from.charAt(1);
-        int c2 = to.charAt(0), r2 = to.charAt(1);
-        int dc = Math.abs(c2 - c1), dr = Math.abs(r2 - r1);
-        return (dc == 2 && dr == 1) || (dc == 1 && dr == 2);
-    }
-
-    private boolean isKingAdjacent(String from, String to) {
-        int c1 = from.charAt(0), r1 = from.charAt(1);
-        int c2 = to.charAt(0), r2 = to.charAt(1);
-        return Math.abs(c2 - c1) <= 1 && Math.abs(r2 - r1) <= 1;
-    }
-
-    private boolean isPawnAttacking(Color pawnColor, String from, String to) {
-        int fileFrom = from.charAt(0);
-        int rankFrom = from.charAt(1);
-        int fileTo = to.charAt(0);
-        int rankTo = to.charAt(1);
-        int fileDiff = Math.abs(fileTo - fileFrom);
-        int rankDiff = (pawnColor == Color.WHITE) ? rankTo - rankFrom : rankFrom - rankTo;
-        return fileDiff == 1 && rankDiff == 1;
-    }
+    // For the purpose of generating algebraic notation suffixes
+    // we assume you have in your validator the isInCheck, isCheckmate, etc.
+    // We can either place stubs or replicate minimal logic.
+    // We'll replicate minimal logic here for clarity.
 
     private boolean isInCheck(BoardState board, Color side) {
+        // Finds side's King square
         String kingSquare = null;
-        for (String sq : board.boardMap.keySet()) {
+        for(String sq: board.boardMap.keySet()) {
             PieceInfo pi = board.boardMap.get(sq);
-            if (pi.color == side && pi.type == Piece.KING) {
-                kingSquare = sq;
-                break;
+            if(pi.color==side && pi.type==Piece.KING) {
+                kingSquare = sq; break;
             }
         }
-        if (kingSquare == null)
-            return false;
+        if(kingSquare==null) return false;
+
         return anyEnemyCanCapture(board, side, kingSquare);
     }
 
+    // Minimal approach: check if any enemy piece can capture kingSq
     private boolean anyEnemyCanCapture(BoardState board, Color side, String kingSq) {
         for (String sq : board.boardMap.keySet()) {
-            PieceInfo enemy = board.boardMap.get(sq);
-            if (enemy.color != side) {
-                if (enemy.type == Piece.KNIGHT) {
-                    if (isKnightMove(sq, kingSq))
-                        return true;
-                } else if (enemy.type == Piece.KING) {
-                    if (isKingAdjacent(sq, kingSq))
-                        return true;
-                } else if (enemy.type == Piece.PAWN) {
-                    if (isPawnAttacking(enemy.color, sq, kingSq))
-                        return true;
+            PieceInfo pi = board.boardMap.get(sq);
+            if (pi.color != side) {
+                if (pi.type == Piece.KNIGHT) {
+                    if (isKnightMove(sq, kingSq)) return true;
+                } else if (pi.type == Piece.KING) {
+                    if (isKingAdjacent(sq, kingSq)) return true;
+                } else if (pi.type == Piece.PAWN) {
+                    if (isPawnAttacking(pi.color, sq, kingSq)) return true;
                 } else {
-                    if (isMovePatternLegal(board, sq, kingSq, enemy.type, side, false) && pathClear(board, sq, kingSq))
+                    // Rook/Bishop/Queen
+                    if (isMovePatternLegal(board, sq, kingSq, pi.type, pi.color, true) 
+                        && pathClear(board, sq, kingSq)) {
                         return true;
+                    }
                 }
             }
         }
@@ -237,25 +186,27 @@ public class ChessDSLGenerator extends AbstractGenerator {
     }
 
     private boolean isCheckmate(BoardState board, Color side) {
-        if (!isInCheck(board, side))
-            return false;
-        for (String sq : board.boardMap.keySet()) {
+        // If not in check, not mate
+        if(!isInCheck(board, side)) return false;
+        // Try each piece, attempt possible moves
+        for(String sq: board.boardMap.keySet()) {
             PieceInfo pi = board.boardMap.get(sq);
-            if (pi.color == side) {
-                for (String to : board.boardMap.keySet()) {
-                    if (!sq.equals(to)) {
-                        if (isMovePatternLegal(board, sq, to, pi.type, side, true)) {
-                            PieceInfo occupant = board.get(sq);
-                            PieceInfo existing = board.get(to);
-                            if (existing == null || existing.color != side) {
-                                BoardState sim = board.cloneBoard();
-                                sim.remove(sq);
-                                sim.remove(to);
-                                pi.hasMoved = true;
-                                sim.boardMap.put(to, pi);
-                                if (!isInCheck(sim, side)) {
-                                    return false;
-                                }
+            if(pi.color==side) {
+                // generate naive squares
+                for(String to: board.boardMap.keySet()) {
+                    if(!sq.equals(to)) {
+                        // see if occupant is friend or foe
+                        PieceInfo occupant = board.get(to);
+                        boolean isCapture = (occupant!=null && occupant.color!=side);
+                        if(isMovePatternLegal(board, sq, to, pi.type, side, isCapture)) {
+                            // simulate
+                            BoardState sim = board.cloneBoard();
+                            sim.remove(sq);
+                            sim.remove(to);
+                            pi.hasMoved=true;
+                            sim.boardMap.put(to, pi);
+                            if(!isInCheck(sim, side)) {
+                                return false;
                             }
                         }
                     }
@@ -265,47 +216,83 @@ public class ChessDSLGenerator extends AbstractGenerator {
         return true;
     }
 
-    // Disambiguation for algebraic
-    private String disambiguate(BoardState board, String from, String to, Color side, Piece p) {
-        if (p == Piece.PAWN) return "";
-        List<String> samePieces = new ArrayList<>();
-        for (String sq : board.boardMap.keySet()) {
-            PieceInfo pi = board.boardMap.get(sq);
-            if (pi.type == p && pi.color == side) {
-                if (isMovePatternLegal(board, sq, to, p, side, true)
-                    || isMovePatternLegal(board, sq, to, p, side, false)) {
-                    samePieces.add(sq);
-                }
-            }
-        }
-        if (samePieces.size() <= 1) return "";
-        // if more than 1 => figure out partial
-        if (!from.isEmpty()) {
-            String fromFile = from.substring(0, 1);
-            String fromRank = from.substring(1);
-            boolean sameFile = false;
-            boolean sameRank = false;
-            for (String loc : samePieces) {
-                if (!loc.equals(from)) {
-                    if (loc.charAt(0) == from.charAt(0)) sameFile = true;
-                    if (loc.charAt(1) == from.charAt(1)) sameRank = true;
-                }
-            }
-            if (!sameFile) return fromFile;
-            else if (!sameRank) return fromRank;
-            else return from; // fallback
-        }
-        return "";
+    // Knight & King adjacency & Pawn attacking, needed for isInCheck
+    private boolean isKnightMove(String from, String to) {
+        int c1=from.charAt(0), r1=from.charAt(1);
+        int c2=to.charAt(0),   r2=to.charAt(1);
+        int dc=Math.abs(c2-c1), dr=Math.abs(r2-r1);
+        return (dc==2 && dr==1)||(dc==1 && dr==2);
+    }
+    private boolean isKingAdjacent(String from, String to) {
+        int c1=from.charAt(0), r1=from.charAt(1);
+        int c2=to.charAt(0),   r2=to.charAt(1);
+        return (Math.abs(c2-c1)<=1 && Math.abs(r2-r1)<=1);
+    }
+    private boolean isPawnAttacking(Color color, String from, String to) {
+        int fileFrom = from.charAt(0);
+        int rankFrom = from.charAt(1);
+        int fileTo   = to.charAt(0);
+        int rankTo   = to.charAt(1);
+        int fileDiff = Math.abs(fileTo-fileFrom);
+        int rankDiff = (color==Color.WHITE)? (rankTo-rankFrom) : (rankFrom-rankTo);
+        return (fileDiff==1 && rankDiff==1);
     }
 
+    // Movement patterns for generating suffix
+    private boolean isMovePatternLegal(BoardState board, String from, String to, Piece p, Color side, boolean isCapture) {
+        // see your snippet
+        if (p == Piece.KNIGHT) {
+            return isKnightMove(from, to);
+        } else if (p == Piece.KING) {
+            return isKingAdjacent(from, to);
+        } else if (p == Piece.ROOK) {
+            if(!sameFileOrRank(from, to)) return false;
+            return pathClear(board, from, to);
+        } else if (p == Piece.BISHOP) {
+            if(!isDiagonal(from, to)) return false;
+            return pathClear(board, from, to);
+        } else if (p == Piece.QUEEN) {
+            if(isDiagonal(from, to) || sameFileOrRank(from, to)) {
+                return pathClear(board, from, to);
+            }
+            return false;
+        } else if (p == Piece.PAWN) {
+            int fFrom = from.charAt(0)-'a';
+            int rFrom = from.charAt(1)-'0';
+            int fTo   = to.charAt(0)-'a';
+            int rTo   = to.charAt(1)-'0';
+            int fileDiff = Math.abs(fTo-fFrom);
+            int rankDiff = (side==Color.WHITE)? (rTo-rFrom) : (rFrom-rTo);
+            if(isCapture) {
+                return (fileDiff==1 && rankDiff==1);
+            } else {
+                if(fileDiff!=0) return false;
+                if(rankDiff==1) return true;
+                if(rankDiff==2 && ((side==Color.WHITE && rFrom==2) 
+                                || (side==Color.BLACK && rFrom==7))) {
+                    char interRank = (side==Color.WHITE)? (char)(rFrom+1+'0') : (char)(rFrom-1+'0');
+                    String sq = ""+ (char)(fFrom+'a') + interRank;
+                    return !board.isOccupied(sq);
+                }
+                return false;
+            }
+        }
+        return false;
+    }
+
+    // ----------------------------------------------------------------
+    // 1) Algebraic Notation Generation from your snippet
+    // ----------------------------------------------------------------
+
+    // Gather remarks from an eContainer
     private List<Remark> getRemarks(DSLMove move) {
         if (move.eContainer() instanceof AnyMove) {
-            AnyMove a = (AnyMove) move.eContainer();
-            return a.getRemarks();
+            return ((AnyMove)move.eContainer()).getRemarks();
         }
         return new ArrayList<>();
     }
 
+    // For the letter
     private String pieceLetter(Piece p) {
         switch (p) {
             case KING:   return "K";
@@ -317,310 +304,352 @@ public class ChessDSLGenerator extends AbstractGenerator {
         }
     }
 
-    // Convert DSL -> Algebraic
-    private String toAlgebraic(DSLMove move, Color side, BoardState board) {
-        List<Remark> remarks = getRemarks(move);
-        if (move instanceof Move) {
-            return convertBasic((Move) move, side, board, remarks);
-        } else if (move instanceof Capture) {
-            return convertCapture((Capture) move, side, board, remarks);
-        } else if (move instanceof Castle) {
-            return convertCastle((Castle) move, side, board, remarks);
-        } else if (move instanceof EnPassant) {
-            return convertEnPassant((EnPassant) move, side, board, remarks);
-        } else if (move instanceof Promotion) {
-            return convertPromotion((Promotion) move, side, board, remarks);
-        } else if (move instanceof Dummy) {
-            return "dummy";
+    private String translateRemarkSymbol(Remark r) {
+        // for algebraic
+        switch(r) {
+            case GOOD:      return "!";
+            case BAD:       return "?";
+            case EXCELLENT: return "!!";
+            case RISKY:     return "!?";
+            case DUBIOUS:   return "?!";
+            default: return "";
         }
-        return "";
-    }
-
-    // Convert DSL -> Concise DSL
-    //  e.g. Pawn(e2->e4), Knight(e3->g4), Pawn(e5->e6)Capture(Pawn), etc.
-    private String toConcise(DSLMove move, Color side, BoardState board) {
-        if (move instanceof Move) {
-            return conciseBasic((Move) move);
-        } else if (move instanceof Capture) {
-            return conciseCapture((Capture) move);
-        } else if (move instanceof Castle) {
-            Castle cs = (Castle) move;
-            return "Castle(" + cs.getSide() + ")";
-        } else if (move instanceof EnPassant) {
-            EnPassant ep = (EnPassant) move;
-            // "Pawn(e5->f6) EnPassant on f5" or shorter
-            return conciseEnPassant(ep);
-        } else if (move instanceof Promotion) {
-            return concisePromotion((Promotion) move);
-        } else if (move instanceof Dummy) {
-            return "dummy";
-        }
-        return "";
-    }
-
-    // Convert DSL -> Verbose DSL
-    //  e.g. "Pawn from e2 to e4", "Knight from b1 to c3", "Pawn from e5 to f6 and captures Pawn", etc.
-    private String toVerbose(DSLMove move, Color side, BoardState board) {
-        if (move instanceof Move) {
-            return verboseBasic((Move) move);
-        } else if (move instanceof Capture) {
-            return verboseCapture((Capture) move);
-        } else if (move instanceof Castle) {
-            Castle cs = (Castle) move;
-            return "castles on the " + cs.getSide();
-        } else if (move instanceof EnPassant) {
-            EnPassant ep = (EnPassant) move;
-            return verboseEnPassant(ep);
-        } else if (move instanceof Promotion) {
-            return verbosePromotion((Promotion) move);
-        } else if (move instanceof Dummy) {
-            return "dummy";
-        }
-        return "";
-    }
-
-    // ----------------------------------------------------------------
-    //  Implementing the "Concise" helper
-    // ----------------------------------------------------------------
-    private String conciseBasic(Move mv) {
-        // e.g. Pawn(e2->e4)
-        String pieceStr = mv.getPiece().toString();   // e.g. Pawn, Knight...
-        String from = mv.getFrom().getSquare();       // e2
-        String to   = mv.getTo().getSquare();         // e4
-        return pieceStr + "(" + from + "->" + to + ")";
-    }
-
-    private String conciseCapture(Capture cap) {
-        // e.g. Pawn(e5->f6)Capture(Pawn)
-        Move base = cap.getMove();
-        String basic = conciseBasic(base); // e.g. Pawn(e5->f6)
-        String victim = cap.getCapture().toString(); // e.g. "Pawn"
-        return basic + "Capture(" + victim + ")";
-    }
-
-    private String conciseEnPassant(EnPassant ep) {
-        // e.g. "Pawn(e5->f6)EnPassant on f5"
-        Capture cap = ep.getCapture();
-        String basic = conciseBasic(cap.getMove());
-        String victimSq = ep.getSquare().getSquare();
-        return basic + "EnPassant on " + victimSq;
-    }
-
-    private String concisePromotion(Promotion pm) {
-        // e.g. "Pawn(e7->e8)Promotion(Queen)"
-        DSLMove base = pm.getMove();
-        String str = null;
-        if (base instanceof Move) {
-            str = conciseBasic((Move)base);
-        } else {
-            str = conciseCapture((Capture)base);
-        }
-        return str + "Promotion(" + pm.getPiece().toString() + ")";
-    }
-
-    // ----------------------------------------------------------------
-    //  Implementing the "Verbose" helper
-    // ----------------------------------------------------------------
-    private String verboseBasic(Move mv) {
-        // "Pawn from e2 to e4"
-        String pieceStr = mv.getPiece().toString(); // e.g. "Pawn"
-        String from = mv.getFrom().getSquare();     // "e2"
-        String to   = mv.getTo().getSquare();       // "e4"
-        return pieceStr + " from " + from + " to " + to;
-    }
-
-    private String verboseCapture(Capture cap) {
-        // e.g. "Pawn from e5 to f6 and captures Pawn"
-        Move base = cap.getMove();
-        String pieceStr = base.getPiece().toString();
-        String from = base.getFrom().getSquare();
-        String to   = base.getTo().getSquare();
-        String victim = cap.getCapture().toString();
-        return pieceStr + " from " + from + " to " + to + " and captures " + victim;
-    }
-
-    private String verboseEnPassant(EnPassant ep) {
-        // "Pawn from e5 to f6 and captures Pawn en passant on e5"
-        Move base = ep.getCapture().getMove();
-        String pieceStr = base.getPiece().toString();
-        String from = base.getFrom().getSquare();
-        String to   = base.getTo().getSquare();
-        String victimSq = ep.getSquare().getSquare();
-        return pieceStr + " from " + from + " to " + to 
-               + " and captures en passant on " + victimSq;
-    }
-
-    private String verbosePromotion(Promotion pm) {
-        // "Pawn from e7 to e8 Promotion(Queen)"
-        DSLMove base = pm.getMove();
-        String baseStr;
-        if (base instanceof Move) {
-            Move mv = (Move) base;
-            baseStr = mv.getPiece().toString() + " from " + mv.getFrom().getSquare() 
-                      + " to " + mv.getTo().getSquare();
-        } else {
-            Capture cap = (Capture) base;
-            baseStr = cap.getMove().getPiece().toString() 
-                      + " from " + cap.getMove().getFrom().getSquare() 
-                      + " to " + cap.getMove().getTo().getSquare() 
-                      + " and captures " + cap.getCapture().toString();
-        }
-        return baseStr + " Promotion(" + pm.getPiece().toString() + ")";
-    }
-
-
-    // ----------------------------------------------------------------
-    //  Algebraic Implementations
-    // ----------------------------------------------------------------
-    private String convertBasic(Move mv, Color side, BoardState board, List<Remark> remarks) {
-        Piece p = mv.getPiece();
-        String from = mv.getFrom().getSquare();
-        String to   = mv.getTo().getSquare();
-        BoardState simBoard = board.cloneBoard();
-        applyMove(simBoard, mv, side);
-        boolean isCheck = isInCheck(simBoard, opposite(side));
-        boolean isMate  = (isCheck && isCheckmate(simBoard, opposite(side)));
-        String disamb = (p == Piece.PAWN) ? "" : disambiguate(board, from, to, side, p);
-        String letter = (p == Piece.PAWN)? "" : pieceLetter(p);
-        String baseNotation = letter + disamb + to;
-        String suffix = combineSuffixes(isCheck, isMate, remarks);
-        return baseNotation + suffix;
-    }
-
-    private String convertCapture(Capture cap, Color side, BoardState board, List<Remark> remarks) {
-        Move base = cap.getMove();
-        Piece p = base.getPiece();
-        String from = base.getFrom().getSquare();
-        String to   = base.getTo().getSquare();
-        BoardState simBoard = board.cloneBoard();
-        applyMove(simBoard, cap, side);
-        boolean isCheck = isInCheck(simBoard, opposite(side));
-        boolean isMate  = (isCheck && isCheckmate(simBoard, opposite(side)));
-        String letter = (p == Piece.PAWN)? from.substring(0,1) : pieceLetter(p);
-        String disamb = (p == Piece.PAWN)? "" : disambiguate(board, from, to, side, p);
-        String baseNotation = letter + disamb + "x" + to;
-        String suffix = combineSuffixes(isCheck, isMate, remarks);
-        return baseNotation + suffix;
-    }
-
-    private String convertCastle(Castle cs, Color side, BoardState board, List<Remark> remarks) {
-        BoardState simBoard = board.cloneBoard();
-        applyMove(simBoard, cs, side);
-        boolean isCheck = isInCheck(simBoard, opposite(side));
-        boolean isMate  = (isCheck && isCheckmate(simBoard, opposite(side)));
-        String baseNotation = cs.getSide().equals("Kingside")? "O-O" : "O-O-O";
-        String suffix = combineSuffixes(isCheck, isMate, remarks);
-        return baseNotation + suffix;
-    }
-
-    private String convertEnPassant(EnPassant ep, Color side, BoardState board, List<Remark> remarks) {
-        Capture cp = ep.getCapture();
-        Move base = cp.getMove();
-        String from = base.getFrom().getSquare();
-        String to   = base.getTo().getSquare();
-        BoardState simBoard = board.cloneBoard();
-        applyMove(simBoard, ep, side);
-        boolean isCheck = isInCheck(simBoard, opposite(side));
-        boolean isMate  = (isCheck && isCheckmate(simBoard, opposite(side)));
-        // e.g. exd5 e.p.
-        String fileFrom = from.substring(0,1);
-        String suffix = combineSuffixes(isCheck, isMate, remarks);
-        return fileFrom + "x" + to + " e.p." + suffix;
-    }
-
-    private String convertPromotion(Promotion pm, Color side, BoardState board, List<Remark> remarks) {
-        DSLMove inner = pm.getMove();
-        Move mv = (inner instanceof Move) ? (Move)inner : ((Capture)inner).getMove();
-        BoardState simBoard = board.cloneBoard();
-        applyMove(simBoard, pm, side);
-        boolean isCheck = isInCheck(simBoard, opposite(side));
-        boolean isMate  = (isCheck && isCheckmate(simBoard, opposite(side)));
-        boolean isCap   = !(inner instanceof Move);
-        String from = mv.getFrom().getSquare();
-        String to   = mv.getTo().getSquare();
-        String pieceStr = pieceLetter(pm.getPiece());
-        String filePrefix = "";
-        if (mv.getPiece()==Piece.PAWN && isCap) {
-            filePrefix = from.substring(0,1);
-        } else if (mv.getPiece()!=Piece.PAWN) {
-            filePrefix = pieceLetter(mv.getPiece());
-        }
-        String baseNotation = (isCap? filePrefix + "x" : "") + to + "=" + pieceStr;
-        String suffix = combineSuffixes(isCheck, isMate, remarks);
-        return baseNotation + suffix;
     }
 
     private String combineSuffixes(boolean isCheck, boolean isMate, List<Remark> remarks) {
         StringBuilder sb = new StringBuilder();
-        if (isMate) sb.append("#");
-        else if (isCheck) sb.append("+");
+        if (isMate) {
+            sb.append("#");
+        } else if (isCheck) {
+            sb.append("+");
+        }
+        // Then symbolic remarks
         boolean hasCheckmateRemark = remarks.contains(Remark.CHECKMATE);
-        for (Remark r : remarks) {
-            if (r==Remark.CHECK && (hasCheckmateRemark || isMate)) {
-                continue;
+        // We'll skip printing "CHECK" or "CHECKMATE" if we already put # or +, but we do want to 
+        // show symbolic remarks (like "!" or "?").
+        for(Remark r: remarks) {
+            // If remark is "CHECK" or "CHECKMATE", skip or we can just skip them
+            switch(r) {
+                case GOOD:      sb.append("!"); break;
+                case BAD:       sb.append("?"); break;
+                case EXCELLENT: sb.append("!!"); break;
+                case RISKY:     sb.append("!?"); break;
+                case DUBIOUS:   sb.append("?!"); break;
+                default: break; // skip CHECK / CHECKMATE as we've appended + or #
             }
-            sb.append(translateRemark(r));
         }
         return sb.toString();
     }
 
-    private String translateRemark(Remark r) {
-        switch(r) {
-        case GOOD:       return "!";
-        case BAD:        return "?";
-        case EXCELLENT:  return "!!";
-        case RISKY:      return "!?";
-        case DUBIOUS:    return "?!";
-        default:         return "";
+    // For disambiguation in standard algebraic
+    private String disambiguate(BoardState board, String from, String to, Color side, Piece p) {
+        if(p==Piece.PAWN) return "";
+        // gather squares with same piece type
+        List<String> same = new ArrayList<>();
+        for(String sq: board.boardMap.keySet()) {
+            PieceInfo pi = board.boardMap.get(sq);
+            if(pi.color==side && pi.type==p) {
+                // check if can move to 'to'
+                if(isMovePatternLegal(board, sq, to, p, side, true) 
+                   || isMovePatternLegal(board, sq, to, p, side, false)) {
+                    same.add(sq);
+                }
+            }
         }
+        if(same.size()<=1) return "";
+        // If there's more than one, we check if file or rank are unique
+        // We'll do a minimal approach
+        boolean sameFile=false, sameRank=false;
+        String fromFile = from.substring(0,1);
+        String fromRank = from.substring(1);
+        for(String s: same) {
+            if(!s.equals(from)) {
+                if(s.charAt(0)==from.charAt(0)) sameFile=true;
+                if(s.charAt(1)==from.charAt(1)) sameRank=true;
+            }
+        }
+        if(!sameFile) return fromFile;
+        if(!sameRank) return fromRank;
+        return from; // fallback: full
     }
 
-    //  Conclusion
-    private String renderConclusion(Conclusion c, Game g) {
-        return renderMethod(c, g) + renderResult(c, g);
-    }
-    private String renderMethod(Conclusion c, Game g) {
-        if (c.getMethod()==null) return "";
-        Method m = c.getMethod();
-        if (m.getWin()!=null) {
-            Win w = m.getWin();
-            if(w.getMate()!=null) {
-                Checkmate mate = w.getMate();
-                PlayerOrColor p1 = mate.getPlayer1();
-                PlayerOrColor p2 = mate.getPlayer2();
-                return "... checkmated ...\n"; // short
-            }
-            if(w.getTime()!=null) {
-                TimeUp t = w.getTime();
-                return t.getPlayer().getColor() + " ran out of time.\n";
-            }
-            if(w.getResign()!=null) {
-                Resign r = w.getResign();
-                return r.getPlayer().getColor() + " resigned.\n";
-            }
-        } else if (m.getDraw()!=null) {
-            // etc
-            return "Game ended in a draw.\n";
+    // Convert DSLMove -> algebraic
+    private String toAlgebraic(DSLMove move, Color side, BoardState board) {
+        // We'll do the "simulate in a clone" approach to see if it's check or mate:
+        BoardState sim = board.cloneBoard();
+        applyMove(sim, move, side);
+        boolean isCheck = isInCheck(sim, opposite(side));
+        boolean isMate  = isCheck && isCheckmate(sim, opposite(side));
+
+        List<Remark> remarks = getRemarks(move);
+
+        if (move instanceof Move) {
+            return convertBasic((Move) move, side, board, remarks, isCheck, isMate);
+        } else if (move instanceof Capture) {
+            return convertCapture((Capture) move, side, board, remarks, isCheck, isMate);
+        } else if (move instanceof Castle) {
+            return convertCastle((Castle) move, side, board, remarks, isCheck, isMate);
+        } else if (move instanceof EnPassant) {
+            return convertEnPassant((EnPassant) move, side, board, remarks, isCheck, isMate);
+        } else if (move instanceof Promotion) {
+            return convertPromotion((Promotion) move, side, board, remarks, isCheck, isMate);
+        } else if (move instanceof Dummy) {
+            return "dummy";
         }
         return "";
     }
-    private String renderResult(Conclusion c, Game g) {
-        if (c.getResult()==null) return "";
-        Result r = c.getResult();
-        if ("draw".equalsIgnoreCase(r.toString())) return "1/2-1/2";
-        // or handle color wins
-        return "";
+
+    private String convertBasic(Move mv, Color side, BoardState board, List<Remark> remarks,
+                                boolean isCheck, boolean isMate) {
+        Piece p = mv.getPiece();
+        String from = mv.getFrom().getSquare();
+        String to   = mv.getTo().getSquare();
+        String disamb = (p==Piece.PAWN)? "" : disambiguate(board, from, to, side, p);
+        String letter = (p==Piece.PAWN)? "" : pieceLetter(p);
+        String base = letter + disamb + to;
+        String suffix = combineSuffixes(isCheck, isMate, remarks);
+        return base + suffix;
+    }
+
+    private String convertCapture(Capture cap, Color side, BoardState board, List<Remark> remarks,
+                                  boolean isCheck, boolean isMate) {
+        Move base = cap.getMove();
+        Piece p = base.getPiece();
+        String from = base.getFrom().getSquare();
+        String to   = base.getTo().getSquare();
+        // For pawns, we typically show the file of origin
+        String letter = (p==Piece.PAWN)? from.substring(0,1) : pieceLetter(p);
+        String disamb = (p==Piece.PAWN)? "" : disambiguate(board, from, to, side, p);
+        String notation = letter + disamb + "x" + to;
+        String suffix = combineSuffixes(isCheck, isMate, remarks);
+        return notation + suffix;
+    }
+
+    private String convertCastle(Castle cs, Color side, BoardState board, List<Remark> remarks,
+                                 boolean isCheck, boolean isMate) {
+        boolean queenside = "Queenside".equals(cs.getSide());
+        String base = queenside? "O-O-O" : "O-O";
+        String suffix = combineSuffixes(isCheck, isMate, remarks);
+        return base + suffix;
+    }
+
+    private String convertEnPassant(EnPassant ep, Color side, BoardState board, List<Remark> remarks,
+                                    boolean isCheck, boolean isMate) {
+        Capture cp = ep.getCapture();
+        Move base = cp.getMove();
+        String from = base.getFrom().getSquare();
+        String to   = base.getTo().getSquare();
+        String fileFrom = from.substring(0,1);
+        String baseNotation = fileFrom + "x" + to + " e.p.";
+        String suffix = combineSuffixes(isCheck, isMate, remarks);
+        return baseNotation + suffix;
+    }
+
+    private String convertPromotion(Promotion pm, Color side, BoardState board, List<Remark> remarks,
+                                    boolean isCheck, boolean isMate) {
+        DSLMove inner = pm.getMove();
+        Move base = (inner instanceof Move)? (Move)inner : ((Capture)inner).getMove();
+        boolean isCap = (inner instanceof Capture);
+        String from = base.getFrom().getSquare();
+        String to   = base.getTo().getSquare();
+        Piece promoted = pm.getPiece();
+        Piece p = base.getPiece();
+
+        // If it's a capturing promotion, we typically do something like exd8=Q
+        String letter = "";
+        if(p==Piece.PAWN && isCap) {
+            letter = from.substring(0,1)+"x";
+        } else if(p!=Piece.PAWN && isCap) {
+            letter = pieceLetter(p) + disambiguate(board, from, to, side, p) + "x";
+        } else if(p!=Piece.PAWN && !isCap) {
+            letter = pieceLetter(p) + disambiguate(board, from, to, side, p);
+        }
+        String pieceLetter = pieceLetter(promoted);
+        String baseNotation = letter + to + "=" + pieceLetter;
+
+        String suffix = combineSuffixes(isCheck, isMate, remarks);
+        return baseNotation + suffix;
     }
 
     // ----------------------------------------------------------------
-    //  Movement application logic
+    // 2) Concise DSL
     // ----------------------------------------------------------------
+
+    private String toConcise(DSLMove move, Color side, BoardState board) {
+        StringBuilder sb = new StringBuilder();
+        if(move instanceof Dummy) {
+            sb.append("dummy");
+            return sb.toString();
+        }
+
+        if(move instanceof Move) {
+            Move mv = (Move) move;
+            sb.append(pieceNameShort(mv.getPiece()))
+              .append("(").append(mv.getFrom().getSquare())
+              .append("->").append(mv.getTo().getSquare())
+              .append(")");
+        } else if(move instanceof Capture) {
+            Capture cap = (Capture) move;
+            Move base   = cap.getMove();
+            sb.append(pieceNameShort(base.getPiece()))
+              .append("(").append(base.getFrom().getSquare())
+              .append("->").append(base.getTo().getSquare())
+              .append(") Capture(").append(cap.getCapture()).append(")");
+        } else if(move instanceof EnPassant) {
+            EnPassant ep = (EnPassant) move;
+            Capture cp   = ep.getCapture();
+            Move base    = cp.getMove();
+            sb.append(pieceNameShort(base.getPiece()))
+              .append("(").append(base.getFrom().getSquare())
+              .append("->").append(base.getTo().getSquare())
+              .append(") Capture(").append(cp.getCapture()).append(")")
+              .append(" on ").append(ep.getSquare().getSquare());
+        } else if(move instanceof Promotion) {
+            Promotion pm = (Promotion) move;
+            DSLMove inner = pm.getMove();
+            if(inner instanceof Move) {
+                Move mv = (Move) inner;
+                sb.append(pieceNameShort(mv.getPiece()))
+                  .append("(").append(mv.getFrom().getSquare())
+                  .append("->").append(mv.getTo().getSquare())
+                  .append(")");
+            } else {
+                // it's a capture
+                Capture cp = (Capture)inner;
+                Move base = cp.getMove();
+                sb.append(pieceNameShort(base.getPiece()))
+                  .append("(").append(base.getFrom().getSquare())
+                  .append("->").append(base.getTo().getSquare())
+                  .append(") Capture(").append(cp.getCapture()).append(")");
+            }
+            sb.append(" Promotion(").append(pm.getPiece()).append(")");
+        } else if(move instanceof Castle) {
+            Castle cs = (Castle) move;
+            sb.append("Castle(").append(cs.getSide()).append(")");
+        }
+
+        // Append any remarks in parentheses, e.g. "(Check), (Good)"
+        List<Remark> remarks = getRemarks(move);
+        for(Remark r: remarks) {
+            sb.append(" (").append(r).append(")");
+        }
+        return sb.toString();
+    }
+
+    // a short name for pieces
+    private String pieceNameShort(Piece p) {
+        switch(p) {
+            case KING:   return "King";
+            case QUEEN:  return "Queen";
+            case ROOK:   return "Rook";
+            case BISHOP: return "Bishop";
+            case KNIGHT: return "Knight";
+            case PAWN:   return "Pawn";
+        }
+        return p.name();
+    }
+
+    // ----------------------------------------------------------------
+    // 3) Verbose DSL
+    // ----------------------------------------------------------------
+
+    private String toVerbose(DSLMove move, Color side, BoardState board) {
+        StringBuilder sb = new StringBuilder();
+        if(move instanceof Dummy) {
+            sb.append("dummy");
+            return sb.toString();
+        }
+
+        if(move instanceof Move) {
+            Move mv = (Move) move;
+            sb.append(pieceNameLong(mv.getPiece()))
+              .append(" from ")
+              .append(mv.getFrom().getSquare())
+              .append(" to ")
+              .append(mv.getTo().getSquare());
+        } else if(move instanceof Capture) {
+            Capture cap = (Capture) move;
+            Move base   = cap.getMove();
+            sb.append(pieceNameLong(base.getPiece()))
+              .append(" from ")
+              .append(base.getFrom().getSquare())
+              .append(" to ")
+              .append(base.getTo().getSquare())
+              .append(" and captures ")
+              .append(cap.getCapture());
+        } else if(move instanceof EnPassant) {
+            EnPassant ep = (EnPassant) move;
+            Capture cp   = ep.getCapture();
+            Move base    = cp.getMove();
+            sb.append(pieceNameLong(base.getPiece()))
+              .append(" from ")
+              .append(base.getFrom().getSquare())
+              .append(" to ")
+              .append(base.getTo().getSquare())
+              .append(" and captures ")
+              .append(cp.getCapture())
+              .append(" on ")
+              .append(ep.getSquare().getSquare());
+        } else if(move instanceof Promotion) {
+            Promotion pm = (Promotion) move;
+            DSLMove inner = pm.getMove();
+            if(inner instanceof Move) {
+                Move mv = (Move)inner;
+                sb.append(pieceNameLong(mv.getPiece()))
+                  .append(" from ")
+                  .append(mv.getFrom().getSquare())
+                  .append(" to ")
+                  .append(mv.getTo().getSquare());
+            } else {
+                // a capture
+                Capture cp = (Capture)inner;
+                Move base = cp.getMove();
+                sb.append(pieceNameLong(base.getPiece()))
+                  .append(" from ")
+                  .append(base.getFrom().getSquare())
+                  .append(" to ")
+                  .append(base.getTo().getSquare())
+                  .append(" and captures ")
+                  .append(cp.getCapture());
+            }
+            sb.append(" and promotes to ").append(pm.getPiece());
+        } else if(move instanceof Castle) {
+            Castle cs = (Castle) move;
+            sb.append("castles on the ").append(cs.getSide());
+        }
+
+        // Append remarks
+        List<Remark> remarks = getRemarks(move);
+        for(Remark r: remarks) {
+            sb.append(" (").append(r).append(")");
+        }
+        return sb.toString();
+    }
+
+    // A more spelled-out name
+    private String pieceNameLong(Piece p) {
+        // could be same as pieceNameShort, but let's keep an example
+        switch(p) {
+            case KING:   return "King";
+            case QUEEN:  return "Queen";
+            case ROOK:   return "Rook";
+            case BISHOP: return "Bishop";
+            case KNIGHT: return "Knight";
+            case PAWN:   return "Pawn";
+        }
+        return p.name();
+    }
+
+    // ----------------------------------------------------------------
+    // 4) applyMove as in your snippet
+    // ----------------------------------------------------------------
+
     private void applyMove(BoardState b, DSLMove m, Color side) {
         if (m instanceof Move) {
             Move mo = (Move) m;
             b.movePiece(mo.getFrom().getSquare(), mo.getTo().getSquare());
         } else if (m instanceof Capture) {
-            Move base = ((Capture)m).getMove();
+            Move base = ((Capture) m).getMove();
             b.movePiece(base.getFrom().getSquare(), base.getTo().getSquare());
         } else if (m instanceof EnPassant) {
             EnPassant ep = (EnPassant) m;
@@ -630,14 +659,14 @@ public class ChessDSLGenerator extends AbstractGenerator {
         } else if (m instanceof Promotion) {
             Promotion pm = (Promotion) m;
             DSLMove base = pm.getMove();
-            Move mo = (base instanceof Move)? (Move)base : ((Capture)base).getMove();
+            Move mo = (base instanceof Move)? (Move) base : ((Capture) base).getMove();
             b.movePiece(mo.getFrom().getSquare(), mo.getTo().getSquare());
             b.remove(mo.getTo().getSquare());
             b.place(mo.getTo().getSquare(), side, pm.getPiece());
         } else if (m instanceof Castle) {
-            Castle cs = (Castle)m;
+            Castle cs = (Castle) m;
             boolean kingside = "Kingside".equals(cs.getSide());
-            if (side==Color.WHITE) {
+            if (side == Color.WHITE) {
                 if (kingside) {
                     b.remove("e1");
                     b.remove("h1");
@@ -665,180 +694,263 @@ public class ChessDSLGenerator extends AbstractGenerator {
         }
     }
 
-    private Color opposite(Color c) {
-        return (c==Color.WHITE)? Color.BLACK : Color.WHITE;
+    // ----------------------------------------------------------------
+    // 5) renderConclusion from your snippet + a 'score' line
+    // ----------------------------------------------------------------
+
+    private String renderConclusion(Conclusion c, Game game) {
+        return renderMethod(c, game) + renderResult(c, game);
     }
-    
-    private String determineScore(Conclusion conclusion) {
-        if (conclusion == null || conclusion.getResult() == null) {
-            return "";
+
+    private String renderMethod(Conclusion c, Game game) {
+        if(c.getMethod()==null) return "";
+        Method m = c.getMethod();
+        if(m.getWin()!=null) {
+            Win w = m.getWin();
+            if(w.getMate()!=null) {
+                // checkmate
+                Checkmate mate = w.getMate();
+                PlayerOrColor p1 = mate.getPlayer1();
+                PlayerOrColor p2 = mate.getPlayer2();
+                if(p1.getPlayer()!=null && p2.getPlayer()!=null) {
+                    return p1.getPlayer().getColor()+" checkmated "
+                         + p2.getPlayer().getColor() + ".\n";
+                } else if(p1.getPlayer()!=null) {
+                    Color c1 = p1.getPlayer().getColor();
+                    return c1 + " checkmated " + opposite(c1) + ".\n";
+                } else if(p2.getPlayer()!=null) {
+                    Color c2 = p2.getPlayer().getColor();
+                    return opposite(c2) + " checkmated " + c2 + ".\n";
+                } else {
+                    return p1.getColor() + " checkmated " + p2.getColor() + ".\n";
+                }
+            }
+            if(w.getTime()!=null) {
+                TimeUp t = w.getTime();
+                PlayerOrColor pl = t.getPlayer();
+                if(pl.getPlayer()!=null) {
+                    return pl.getPlayer().getColor()+" ran out of time.\n";
+                } else {
+                    return pl.getColor()+" ran out of time.\n";
+                }
+            }
+            if(w.getResign()!=null) {
+                Resign r = w.getResign();
+                PlayerOrColor pl = r.getPlayer();
+                if(pl.getPlayer()!=null) {
+                    return pl.getPlayer().getColor()+" resigned.\n";
+                } else {
+                    return pl.getColor()+" resigned.\n";
+                }
+            }
+        } else if(m.getDraw()!=null) {
+            Draw d = m.getDraw();
+            PlayerOrColor p1 = d.getPlayer1();
+            PlayerOrColor p2 = d.getPlayer2();
+            String fluff = d.getResult().toString(); 
+            if(p1.getPlayer()!=null && p2.getPlayer()!=null) {
+                return p1.getPlayer().getColor()+" and "
+                     + p2.getPlayer().getColor() + fluff + ".\n";
+            } else if(p1.getPlayer()!=null) {
+                Color c1 = p1.getPlayer().getColor();
+                return c1 + " and " + opposite(c1) + fluff + ".\n";
+            } else if(p2.getPlayer()!=null) {
+                Color c2 = p2.getPlayer().getColor();
+                return opposite(c2) + " and " + c2 + fluff + ".\n";
+            } else {
+                return p1.getColor()+" and "+ p2.getColor() + fluff + ".\n";
+            }
         }
-        Result r = conclusion.getResult();
-        // 1) If it's a draw:
-        if ("draw".equalsIgnoreCase(r.toString())) {
+        return c.toString();
+    }
+
+    private String renderResult(Conclusion c, Game game) {
+        if(c.getResult()==null) return "";
+        Result r = c.getResult();
+        if("draw".equalsIgnoreCase(r.toString())) {
+            return "\n";
+        }
+        if(r.getPlayer()!=null) {
+            return r.getPlayer().getName()+" ("+r.getPlayer().getColor()
+                   + ") wins\n";
+        }
+        if(r.getColor()!=null && game.getPlayers()!=null && !game.getPlayers().isEmpty()) {
+            for(Player p: game.getPlayers()) {
+                if(p.getColor()==r.getColor()) {
+                    return p.getName()+" ("+p.getColor()+") wins\n";
+                }
+            }
+            return r.getColor()+" wins";
+        }
+        if(r.getColor()!=null) {
+            return r.getColor()+ " wins\n";
+        }
+        return r.toString();
+    }
+
+    // If you want a simple extracted final score:
+    //  White => "1-0"
+    //  Black => "0-1"
+    //  or if "draw", => "1/2-1/2"
+    private String determineScore(Conclusion c) {
+        if(c==null || c.getResult()==null) return "";
+        Result r = c.getResult();
+        if("draw".equalsIgnoreCase(r.toString())) {
             return "1/2-1/2";
         }
-        // 2) If it's White or Black wins:
-        //    ( if r.getColor() != null => we deduce white or black,
-        //      or if r.getPlayer() != null => we deduce that player’s color )
-        if (r.getColor() != null) {
-            return (r.getColor() == Color.WHITE) ? "1-0" : "0-1";
+        if(r.getColor()!=null) {
+            return (r.getColor()==Color.WHITE)? "1-0":"0-1";
         }
-        if (r.getPlayer() != null) {
-            // If e.g. r.getPlayer().getColor() == WHITE => 1-0
-            return (r.getPlayer().getColor() == Color.WHITE) ? "1-0" : "0-1";
+        if(r.getPlayer()!=null) {
+            return (r.getPlayer().getColor()==Color.WHITE)? "1-0":"0-1";
         }
         return "";
     }
 
     // ----------------------------------------------------------------
-    //  doGenerate => produce three files
+    // 6) doGenerate that writes 3 files
     // ----------------------------------------------------------------
+
     @Override
     public void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
         if (resource == null || resource.getContents().isEmpty()) return;
         if (!(resource.getContents().get(0) instanceof Model)) return;
-
         Model model = (Model) resource.getContents().get(0);
         Game game = model.getGame();
         if (game == null) return;
 
-        // Three separate buffers
-        StringBuilder algebraicSB = new StringBuilder();
-        StringBuilder conciseSB   = new StringBuilder();
-        StringBuilder verboseSB   = new StringBuilder();
-
-        // Initialize board
+        // Build the initial board
         BoardState board = new BoardState();
-        if (game.getInitial()!=null && game.getInitial().getPositions()!=null) {
-            for(Placement pl : game.getInitial().getPositions().getPlacement()) {
-                board.place(pl.getSquare().getSquare(), 
-                            pl.getPiece().getColor(), 
-                            pl.getPiece().getKind());
+        if (game.getInitial() != null && game.getInitial().getPositions() != null) {
+            for (Placement pl : game.getInitial().getPositions().getPlacement()) {
+                board.place(pl.getSquare().getSquare(), pl.getPiece().getColor(), pl.getPiece().getKind());
             }
         } else {
             board.initFreshBoard();
         }
 
-        // Headers
-        algebraicSB.append("=== Chess Algebraic Notation ===\n");
-        conciseSB.append("=== Chess DSL (Concise) Notation ===\n");
-        verboseSB.append("=== Chess DSL (Verbose) Notation ===\n");
+        // We'll build separate outputs:
+        StringBuilder sbAlg     = new StringBuilder();
+        StringBuilder sbConcise = new StringBuilder();
+        StringBuilder sbVerbose = new StringBuilder();
 
-        // Title line
-        algebraicSB.append("Game: ").append(game.getTitle()).append("\n");
-        conciseSB.append("Game: ").append(game.getTitle()).append("\n");
-        verboseSB.append("Game: ").append(game.getTitle()).append("\n");
+        // Start with some headings
+        sbAlg.append("=== Chess Algebraic Notation ===\n");
+        sbConcise.append("=== Concise DSL Notation ===\n");
+        sbVerbose.append("=== Verbose DSL Notation ===\n");
 
-        // If players
+        // Title
+        sbAlg.append("Game: ").append(game.getTitle()).append("\n");
+        sbConcise.append("Game: ").append(game.getTitle()).append("\n");
+        sbVerbose.append("Game: ").append(game.getTitle()).append("\n");
+
+        // If players exist, show them
         if (!game.getPlayers().isEmpty()) {
-            // e.g. "(Alice (White) vs Bob (Black))"
-            StringBuilder playersLine = new StringBuilder("Players: ");
+            // e.g. "John(White) vs Mary(Black)"
+            StringBuilder pLine = new StringBuilder("Players: ");
             for (int i=0; i<game.getPlayers().size(); i++) {
                 Player p = game.getPlayers().get(i);
-                playersLine.append(p.getName())
-                           .append(" (")
-                           .append(p.getColor())
-                           .append(")");
-                if (i<game.getPlayers().size()-1)
-                    playersLine.append(" vs ");
+                pLine.append(p.getName()).append(" (").append(p.getColor()).append(")");
+                if(i<game.getPlayers().size()-1) {
+                    pLine.append(" vs ");
+                }
             }
-            playersLine.append("\n");
-            algebraicSB.append(playersLine);
-            conciseSB.append(playersLine);
-            verboseSB.append(playersLine);
+            sbAlg.append(pLine).append("\n");
+            sbConcise.append(pLine).append("\n");
+            sbVerbose.append(pLine).append("\n");
         }
 
-        int moveIndex=1;
-        for (MovePair mp : game.getMoves()) {
-            // If "..." => black starts
-            boolean skipWhite = "...".equals(mp.getWhiteMove());
-            // Print moveIndex
-            algebraicSB.append(moveIndex).append(". ");
-            conciseSB.append(moveIndex).append(". ");
-            verboseSB.append(moveIndex).append(". ");
+        // Generate moves
+        int moveIndex = 1;
+        BoardState liveBoard = board; // we update this after each move
+        for(MovePair mp: game.getMoves()) {
+            // We'll handle skipping White's move if it says "..."
+            boolean skipWhite = ("...".equals(mp.getWhiteMove()));
 
-            if (skipWhite) {
-                // black only
-                if (mp.getBlackMove() != null && mp.getBlackMove().getMove() != null) {
-                    DSLMove blackMove = mp.getBlackMove().getMove();
-                    // Algebraic
-                    String algText = toAlgebraic(blackMove, Color.BLACK, board);
-                    // Concise
-                    String conText = toConcise(blackMove, Color.BLACK, board);
-                    // Verbose
-                    String verText = toVerbose(blackMove, Color.BLACK, board);
+            // Write the move index
+            sbAlg.append(moveIndex).append(". ");
+            sbConcise.append(moveIndex).append(". ");
+            sbVerbose.append(moveIndex).append(". ");
 
-                    // Update board
-                    applyMove(board, blackMove, Color.BLACK);
+            if(skipWhite) {
+                sbAlg.append("... ");
+                sbConcise.append("... ");
+                sbVerbose.append("... ");
+                // Then do black move if present
+                if(mp.getBlackMove()!=null && mp.getBlackMove().getMove()!=null) {
+                    DSLMove black = mp.getBlackMove().getMove();
+                    String noteA = toAlgebraic(black, Color.BLACK, liveBoard);
+                    String noteC = toConcise(black, Color.BLACK, liveBoard);
+                    String noteV = toVerbose(black, Color.BLACK, liveBoard);
 
-                    algebraicSB.append("... ").append(algText).append("\n");
-                    conciseSB.append("... ").append(conText).append("\n");
-                    verboseSB.append("... ").append(verText).append("\n");
+                    sbAlg.append(noteA).append("\n");
+                    sbConcise.append(noteC).append("\n");
+                    sbVerbose.append(noteV).append("\n");
+
+                    applyMove(liveBoard, black, Color.BLACK);
+                } else {
+                    sbAlg.append("\n");
+                    sbConcise.append("\n");
+                    sbVerbose.append("\n");
                 }
             } else {
-                // White first
-                if (mp.getWhiteMove()!=null && mp.getWhiteMove().getMove()!=null) {
-                    DSLMove whiteMove = mp.getWhiteMove().getMove();
-                    String a = toAlgebraic(whiteMove, Color.WHITE, board);
-                    String c = toConcise(whiteMove, Color.WHITE, board);
-                    String v = toVerbose(whiteMove, Color.WHITE, board);
+                // White
+                if(mp.getWhiteMove()!=null && mp.getWhiteMove().getMove()!=null) {
+                    DSLMove white = mp.getWhiteMove().getMove();
+                    String noteA = toAlgebraic(white, Color.WHITE, liveBoard);
+                    String noteC = toConcise(white, Color.WHITE, liveBoard);
+                    String noteV = toVerbose(white, Color.WHITE, liveBoard);
 
-                    applyMove(board, whiteMove, Color.WHITE);
+                    sbAlg.append(noteA).append(" ");
+                    sbConcise.append(noteC);
+                    sbVerbose.append(noteV);
 
-                    algebraicSB.append(a).append(" ");
-                    conciseSB.append(c).append(" ");
-                    verboseSB.append(v).append(" ");
+                    applyMove(liveBoard, white, Color.WHITE);
                 }
-                // Then black
-                if (mp.getBlackMove()!=null && mp.getBlackMove().getMove()!=null) {
-                    DSLMove blackMove = mp.getBlackMove().getMove();
-                    String a = toAlgebraic(blackMove, Color.BLACK, board);
-                    String c = toConcise(blackMove, Color.BLACK, board);
-                    String v = toVerbose(blackMove, Color.BLACK, board);
+                // Black
+                if(mp.getBlackMove()!=null && mp.getBlackMove().getMove()!=null) {
+                    sbConcise.append("; ");
+                    sbVerbose.append(" and ");
 
-                    applyMove(board, blackMove, Color.BLACK);
+                    DSLMove black = mp.getBlackMove().getMove();
+                    String noteA = toAlgebraic(black, Color.BLACK, liveBoard);
+                    String noteC = toConcise(black, Color.BLACK, liveBoard);
+                    String noteV = toVerbose(black, Color.BLACK, liveBoard);
 
-                    // typically we might put them on same line
-                    // or new line
-                    algebraicSB.append(a).append("\n");
-                    conciseSB.append("; ").append(c).append("\n");
-                    verboseSB.append("and ").append(v).append("\n");
-                } else {
-                    // no black move => just newline
-                    algebraicSB.append("\n");
-                    conciseSB.append("\n");
-                    verboseSB.append("\n");
+                    sbAlg.append(noteA).append(" ");
+                    sbConcise.append(noteC).append(" ");
+                    sbVerbose.append(noteV).append(" ");
+
+                    applyMove(liveBoard, black, Color.BLACK);
                 }
+                sbAlg.append("\n");
+                sbConcise.append("\n");
+                sbVerbose.append("\n");
             }
             moveIndex++;
         }
 
-        // If there's a conclusion, render it
-        if (game.getConclusion()!=null) {
-            String concTxt = renderConclusion(game.getConclusion(), game);
-            algebraicSB.append("Conclusion: ").append(concTxt).append("\n");
-            conciseSB.append("Conclusion: ").append(concTxt).append("\n");
-            verboseSB.append("Conclusion: ").append(concTxt).append("\n");
-        }
-        
-        // Now add the final score line
-        String finalScore = determineScore(game.getConclusion());
-        if (!finalScore.isEmpty()) {
-            algebraicSB.append("Score: ").append(finalScore).append("\n");
-            conciseSB.append("Score: ").append(finalScore).append("\n");
-            verboseSB.append("Score: ").append(finalScore).append("\n");
+        // Conclusion
+        if(game.getConclusion()!=null) {
+            String cText = renderConclusion(game.getConclusion(), game);
+            sbAlg.append("Conclusion: ").append(cText).append("\n");
+            sbConcise.append("Conclusion: ").append(cText).append("\n");
+            sbVerbose.append("Conclusion: ").append(cText).append("\n");
+
+            // Then show final score line if any
+            String finalScore = determineScore(game.getConclusion());
+            if(!finalScore.isEmpty()) {
+                sbAlg.append("Score: ").append(finalScore).append("\n");
+                sbConcise.append("Score: ").append(finalScore).append("\n");
+                sbVerbose.append("Score: ").append(finalScore).append("\n");
+            }
         }
 
-        // Derive filename
+        // Write out the three files
         String filename = resource.getURI().lastSegment();
-        if (filename.contains(".")) {
-            filename = filename.substring(0, filename.lastIndexOf('.'));
-        }
-
-        // Write out the 3 files
-        fsa.generateFile(filename + "_algebraic.txt", algebraicSB.toString());
-        fsa.generateFile(filename + "_concise.txt",   conciseSB.toString());
-        fsa.generateFile(filename + "_verbose.txt",   verboseSB.toString());
+        filename = filename.split("[.]")[0];
+        fsa.generateFile(filename + "_algebraic.txt", sbAlg.toString());
+        fsa.generateFile(filename + "_concise.txt",   sbConcise.toString());
+        fsa.generateFile(filename + "_verbose.txt",   sbVerbose.toString());
     }
 }
