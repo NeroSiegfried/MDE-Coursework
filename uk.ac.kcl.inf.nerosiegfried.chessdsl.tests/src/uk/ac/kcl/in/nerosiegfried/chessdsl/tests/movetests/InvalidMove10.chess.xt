@@ -1,0 +1,10 @@
+/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP */
+
+Game "Invalid Move 10"
+Moves:
+/* XPECT errors ---
+"Illegal move pattern from e1 to e3" at "King(e1 -> e3)"
+ ---
+ */
+1. King(e1->e3)
+end

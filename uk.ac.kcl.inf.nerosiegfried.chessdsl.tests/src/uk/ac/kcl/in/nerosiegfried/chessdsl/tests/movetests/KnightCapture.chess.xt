@@ -1,0 +1,9 @@
+/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP */
+
+Game "Knight Capture"
+Moves:
+1. Pawn(e2 -> e4) Pawn(c7 -> c5)
+2. Knight(g1 -> f3) Pawn(d7 -> d6)
+3. Pawn(d2 -> d4) Pawn(c5 -> d4)Capture(Pawn)
+4. Knight(f3 -> d4)Capture(Pawn)
+end

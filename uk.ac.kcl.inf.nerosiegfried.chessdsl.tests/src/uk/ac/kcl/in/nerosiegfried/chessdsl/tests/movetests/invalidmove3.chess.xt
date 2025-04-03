@@ -1,0 +1,7 @@
+/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP */
+
+Game "Invalid Move Test 3"
+Moves:
+// XPECT errors --> "Illegal move pattern from e2 to f3" at "Pawn(e2 -> f3)"
+1. Pawn(e2->f3)
+end

@@ -1,0 +1,7 @@
+/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP */
+
+Game "Invalid Move Test 1"
+Moves:
+// XPECT errors --> "Path is blocked for castling" at "Castle(Kingside)"
+1. Castle(Kingside)
+end

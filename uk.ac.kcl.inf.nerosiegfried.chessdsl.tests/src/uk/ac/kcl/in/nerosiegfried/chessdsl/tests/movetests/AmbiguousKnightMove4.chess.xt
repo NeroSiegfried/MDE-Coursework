@@ -1,0 +1,38 @@
+/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP */
+
+/*
+XPECT generated file AmbiguousKnightMove4.txt ---
+=== Chess Algebraic Notation ===
+Game: Ambiguous Knight Move (4)
+1. e4 c5 
+2. Nf3 d6 
+3. d4 cxd4 
+4. Nxd4 Nf6 
+5. Nc3 a6 
+6. Be3 e6 
+7. f3 b5 
+8. Qd2 Nbd7 
+9. O-O-O Bb7 
+10. g4 Nb6 
+11. Qf2 Nfd7 
+12. Kb1 Nb8 
+13. Bd3 N6d7
+---
+*/
+
+Game "Ambiguous Knight Move (4)"
+Moves:
+1. Pawn(e2 -> e4) Pawn(c7 -> c5)
+2. Knight(g1 -> f3) Pawn(d7 -> d6)
+3. Pawn(d2 -> d4) Pawn(c5 -> d4)Capture(Pawn)
+4. Knight(f3 -> d4)Capture(Pawn) Knight(g8 -> f6)
+5. Knight(b1 -> c3) Pawn(a7 -> a6)
+6. Bishop(c1 -> e3) Pawn(e7 -> e6)
+7. Pawn(f2 -> f3) Pawn(b7->b5)
+8. Queen(d1 -> d2) Knight(b8 -> d7)
+9. Castle(Queenside) Bishop(c8 -> b7)
+10. Pawn(g2 -> g4) Knight(d7 -> b6)
+11. Queen(d2 -> f2) Knight(f6 -> d7)
+12. King(c1 -> b1) Knight(d7 -> b8)
+13. Bishop(f1 -> d3) Knight(b6 -> d7)
+end

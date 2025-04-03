@@ -1,0 +1,7 @@
+/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP */
+
+Game "Test False Mate"
+Moves:
+// XPECT errors --> "Move claims checkmate but it's not a mate" at "1. Pawn(e2->e4)(Checkmate)"
+1. Pawn(e2->e4)(Checkmate)
+end

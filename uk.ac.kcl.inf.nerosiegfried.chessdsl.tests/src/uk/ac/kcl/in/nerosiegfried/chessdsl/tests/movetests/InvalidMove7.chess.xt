@@ -1,0 +1,7 @@
+/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP */
+
+Game "Invalid Move Test 7"
+Moves:
+// XPECT errors --> "Illegal move pattern from d1 to d6" at "Queen(d1 -> d6)"
+1. Queen(d1->d6)
+end
