@@ -136,16 +136,23 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
     
  // --- New Helper: Convert an algebraic (SAN) move into a DSLMove ---
     // This is a very simplified conversion. In a full implementation you would analyze disambiguation, etc.
-    private AnyMove convertSANtoDSL(SANMove san, Color side, BoardState board) {
+    private void transformSANMovetoDSL(AnyMove any, Color side, BoardState board) {
+    	// Only transform if an algebraic move is presesnt
+    	// The caller function already performs this check but can't hurt to be safe
+    	boolean skip = false;
+    	if(any.getAlgebraicmove() == null) {
+    		error("Move is not an algebraic move", any, null);
+    		return;
+    	}
+    	
     	// Get the token text from the SAN move node.
+    	SANMove san = any.getAlgebraicmove();
         String token = san.getToken();
-        AnyMove move = ChessDSLFactory.eINSTANCE.createAnyMove();
         if (token == null || token.isEmpty()) {
-            error("Empty algebraic move", san, null);
-            Dummy dummy = ChessDSLFactory.eINSTANCE.createDummy();
-            move.setMove(dummy);
-            return move;
-            //return dummy;
+            error("Empty algebraic move", any, null);
+            any.setMove(ChessDSLFactory.eINSTANCE.createDummy());
+            any.setAlgebraicmove(null);
+            //return;
         }
         
         //Strip off escape character
@@ -155,12 +162,32 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         }
         
         // Check for castling first.
-        if (token.equals("O-O") || token.equals("O-O-O")) {
+        if (token.startsWith("O-O")) {
             Castle castle = ChessDSLFactory.eINSTANCE.createCastle();
-            castle.setSide(token.equals("O-O-O") ? "Queenside" : "Kingside");
-            move.setMove(castle);
-            //return castle;
+            castle.setSide(token.startsWith("O-O-O") ? "Queenside" : "Kingside");
+            any.setMove(castle);
+            any.setAlgebraicmove(null);
+            token = token.startsWith("O-O-O") ? token.substring(5) : token.substring(3);
+            //return;
+            if(token.length()>0) {
+            	String regex ="^([+#]+)([!\\?]+)?$";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(token);
+                if (!matcher.matches()) {
+                    error("Invalid remarks: " + token, any, null);
+                    return;
+                }
+                String checkormate = matcher.group(1); // check/mate markers
+                String remark = matcher.group(2); // e.g. "?!"
+                if (remark != null) {
+                	any.getRemarks().add(translateAlgebraicRemark(remark, san));
+                }
+            }
+            return;
         }
+        
+        
+        
         
         // Define a regex to break the move into parts.
         // This regex covers:
@@ -169,17 +196,18 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         //  - Optional capture indicator "x"
         //  - Mandatory target square (e.g. e4)
         //  - Optional promotion (e.g. "=Q")
-        //  - Optional check/mate markers (ignored here)
+        //  - Optional check/mate markers (ignored here (for now))
+        //  - Optional remark characters (one or more "!" or "?")
         String regex = "^(?:(K|Q|R|B|N))?([a-h]|[1-8])?([a-h]|[1-8])?(x)?([a-h][1-8])?(?:=(Q|R|B|N))?([+#]*)([!\\?]+)?$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(token);
         if (!matcher.matches()) {
-            error("Invalid algebraic notation: " + token, san, null);
-            Dummy dummy = ChessDSLFactory.eINSTANCE.createDummy();
-            move.setMove(dummy);
-            return move;
-            //return dummy;
+            any.setMove(ChessDSLFactory.eINSTANCE.createDummy());
+            any.setAlgebraicmove(null);
+            error("Invalid algebraic notation: " + token, any, null);
+            return;
         }
+        
         // Extract parts:
         String pieceLetter = matcher.group(1); // may be null (pawn)
         String disamb1 = matcher.group(2); // optional disambiguation (file or rank)
@@ -187,7 +215,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         String captureIndicator = matcher.group(4); // "x" if present
         String target = matcher.group(5); // e.g. "f3"
         String promo = matcher.group(6);  // e.g. "Q" if promotion
-        // Group 7 (check/mate markers) is ignored.
+        String checkormate = matcher.group(7); // Group 7 (check/mate markers) is ignored.
         String remark = matcher.group(8); // e.g. "?!"
 
         Piece movingPiece = (pieceLetter != null) ? Piece.valueOf(pieceLetter) : Piece.PAWN;
@@ -202,7 +230,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         for (String sq : board.boardMap.keySet()) {
             PieceInfo pi = board.boardMap.get(sq);
             if (pi.color == side && pi.type == movingPiece) {
-                // Use your isMovePatternLegal() helper (assumed available) to check if a piece on square 'sq'
+                // Use isMovePatternLegal() helper (assumed available) to check if a piece on square 'sq'
                 // can move to 'target' given the rules for piece 'movingPiece'
                 if (isMovePatternLegal(board, sq, target, movingPiece, side, isCapture)) {
                     candidates.add(sq);
@@ -235,41 +263,85 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             candidates = filtered;
         }
         if (candidates.isEmpty()) {
-            error("No candidate piece found for move: " + token, san, null);
-            Dummy dummy = ChessDSLFactory.eINSTANCE.createDummy();
-            move.setMove(dummy);
-            return move;
-            //return dummy;
+            error("No candidate piece found for move: " + token, any, null);
+            any.setMove(ChessDSLFactory.eINSTANCE.createDummy());
+            any.setAlgebraicmove(null);
+            return;
         }
         if (candidates.size() > 1) {
             error("Ambiguous move: " + token, san, null);
             // For validation, it is an error. In case of ambiguity, pick the first candidate.
+            // Also impossible to enter this block logically
         }
         String fromSquare = candidates.get(0);
 
         // Now, create a Move (or Promotion if applicable)
-        Move bmove = ChessDSLFactory.eINSTANCE.createMove();
-        bmove.setPiece(movingPiece);
-        bmove.setFrom(createSquare(fromSquare));
-        bmove.setTo(createSquare(target));
-        move.setMove(bmove);
+        Move dslMove = ChessDSLFactory.eINSTANCE.createMove();
+        dslMove.setPiece(movingPiece);
+        dslMove.setFrom(createSquare(fromSquare));
+        dslMove.setTo(createSquare(target));
+        //translate remarks and add them
+        if (remark != null) {
+        	any.getRemarks().add(translateAlgebraicRemark(remark, san));
+        }
+
+
+     // If the move is a capture by a pawn, we must check for en passant.
+        if (isCapture && movingPiece == Piece.PAWN) {
+            if (board.isOccupied(target)) {
+                // Normal capture.
+                Capture capture = ChessDSLFactory.eINSTANCE.createCapture();
+                capture.setMove(dslMove);
+                PieceInfo victimInfo = board.getPieceAt(target);
+                if (victimInfo != null) {
+                    capture.setCapture(victimInfo.type);
+                }
+                any.setMove(capture);
+            } else {
+                // En passant: target square is empty; the captured pawn is on an adjacent square.
+                EnPassant enpassant = ChessDSLFactory.eINSTANCE.createEnPassant();
+                Capture capture = ChessDSLFactory.eINSTANCE.createCapture();
+                capture.setMove(dslMove);
+                enpassant.setCapture(capture);
+                char file = target.charAt(0);
+                int rank = Character.getNumericValue(target.charAt(1));
+                int victimRank = (side == Color.WHITE) ? rank - 1 : rank + 1;
+                String victimSquareStr = "" + file + victimRank;
+                Square victimSquare = createSquare(victimSquareStr);
+                enpassant.setSquare(victimSquare);
+                PieceInfo victimInfo = board.getPieceAt(victimSquareStr);
+                if (victimInfo != null) {
+                    capture.setCapture(victimInfo.type);
+                }
+                any.setMove(enpassant);
+            }
+        } else if (isCapture && movingPiece != Piece.PAWN) {
+            // For non-pawn captures, simply wrap the move in a Capture node.
+            Capture capture = ChessDSLFactory.eINSTANCE.createCapture();
+            capture.setMove(dslMove);
+            PieceInfo victimInfo = board.getPieceAt(target);
+            if (victimInfo != null) {
+                capture.setCapture(victimInfo.type);
+            }
+            any.setMove(capture);
+        } else {
+            // Normal (non-capture) move.
+            any.setMove(dslMove);
+        }
+        
         if (promo != null) {
             Promotion promotion = ChessDSLFactory.eINSTANCE.createPromotion();
             promotion.setPiece(Piece.valueOf(promo));
-            promotion.setMove(bmove);
-            move.setMove(promotion);
+            promotion.setMove(any.getMove());
+            any.setMove(promotion);
             //return promotion;
         }
         
+        any.setAlgebraicmove(null);
         
-        if (remark != null) {
-        	move.getRemarks().add(translateAlgebraicRemark(remark, move));
-        }
-        
-        return move;
     }
     
-    private Remark translateAlgebraicRemark(String r, AnyMove move) {
+    private Remark translateAlgebraicRemark(String r, SANMove san) {
     	if(r.startsWith("!!"))
     		return Remark.EXCELLENT;
     	else if(r.startsWith("?!"))
@@ -281,7 +353,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
     	else if(r.startsWith("!"))
     		return Remark.GOOD;
     	else
-    		error("Remark" + r + "cannot be identified", move, null);
+    		error("Remark" + r + "cannot be identified", san, null);
     	//will never run
     	return Remark.GOOD;
     }
@@ -334,8 +406,10 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         		if(whiteAny.getMove() != null) {
         			whiteMove = whiteAny.getMove();
         		} else if(whiteAny.getAlgebraicmove() != null) {
-        			whiteAny = convertSANtoDSL(whiteAny.getAlgebraicmove(), Color.WHITE, board);
+        			transformSANMovetoDSL(whiteAny, Color.WHITE, board);
         			whiteMove = whiteAny.getMove();
+        			if(whiteMove instanceof Dummy)
+        				return;
         		}
         	
                 if(whiteMove != null) {
@@ -363,8 +437,10 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             	if(blackAny.getMove() != null) {
             		blackMove = blackAny.getMove();
             	} else if(blackAny.getAlgebraicmove() != null) {
-            		blackAny = convertSANtoDSL(blackAny.getAlgebraicmove(), Color.BLACK, board);
+            		transformSANMovetoDSL(blackAny, Color.BLACK, board);
             		blackMove = blackAny.getMove();
+            		if(blackMove instanceof Dummy)
+            			return;
             	}
             }
             if(blackAny != null && blackMove != null) {
@@ -407,7 +483,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         } else if(move instanceof Castle) {
             return validateCastle((Castle) move, board, side, mp);
         } else if(move instanceof Dummy) {
-            return true;
+            return false;
         }
         error("Unknown move type", mp, null);
         return false;

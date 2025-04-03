@@ -1562,198 +1562,251 @@ public class InternalChessDSLLexer extends Lexer {
         try {
             int _type = RULE_SAN_TOKEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalChessDSL.g:5772:16: ( RULE_ESCAPE ( 'K' | 'Q' | 'R' | 'B' | 'N' )? ( RULE_LETTER | RULE_RANKDIGIT )* ( 'x' )? RULE_SQUARETERMINAL ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )? ( '+' | '#' )* ( '!' | '?' )* )
-            // InternalChessDSL.g:5772:18: RULE_ESCAPE ( 'K' | 'Q' | 'R' | 'B' | 'N' )? ( RULE_LETTER | RULE_RANKDIGIT )* ( 'x' )? RULE_SQUARETERMINAL ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )? ( '+' | '#' )* ( '!' | '?' )*
+            // InternalChessDSL.g:5772:16: ( RULE_ESCAPE ( 'O-O' ( '-O' )? | ( 'K' | 'Q' | 'R' | 'B' | 'N' )? ( RULE_LETTER | RULE_RANKDIGIT )* ( 'x' )? RULE_SQUARETERMINAL ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )? ( '+' | '#' )* ( '!' | '?' )* ) )
+            // InternalChessDSL.g:5772:18: RULE_ESCAPE ( 'O-O' ( '-O' )? | ( 'K' | 'Q' | 'R' | 'B' | 'N' )? ( RULE_LETTER | RULE_RANKDIGIT )* ( 'x' )? RULE_SQUARETERMINAL ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )? ( '+' | '#' )* ( '!' | '?' )* )
             {
             mRULE_ESCAPE(); 
-            // InternalChessDSL.g:5772:30: ( 'K' | 'Q' | 'R' | 'B' | 'N' )?
-            int alt2=2;
-            int LA2_0 = input.LA(1);
+            // InternalChessDSL.g:5772:30: ( 'O-O' ( '-O' )? | ( 'K' | 'Q' | 'R' | 'B' | 'N' )? ( RULE_LETTER | RULE_RANKDIGIT )* ( 'x' )? RULE_SQUARETERMINAL ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )? ( '+' | '#' )* ( '!' | '?' )* )
+            int alt9=2;
+            int LA9_0 = input.LA(1);
 
-            if ( (LA2_0=='B'||LA2_0=='K'||LA2_0=='N'||(LA2_0>='Q' && LA2_0<='R')) ) {
-                alt2=1;
+            if ( (LA9_0=='O') ) {
+                alt9=1;
             }
-            switch (alt2) {
+            else if ( ((LA9_0>='1' && LA9_0<='8')||LA9_0=='B'||LA9_0=='K'||LA9_0=='N'||(LA9_0>='Q' && LA9_0<='R')||(LA9_0>='a' && LA9_0<='h')||LA9_0=='x') ) {
+                alt9=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 9, 0, input);
+
+                throw nvae;
+            }
+            switch (alt9) {
                 case 1 :
-                    // InternalChessDSL.g:
+                    // InternalChessDSL.g:5772:31: 'O-O' ( '-O' )?
                     {
-                    if ( input.LA(1)=='B'||input.LA(1)=='K'||input.LA(1)=='N'||(input.LA(1)>='Q' && input.LA(1)<='R') ) {
-                        input.consume();
+                    match("O-O"); 
+
+                    // InternalChessDSL.g:5772:37: ( '-O' )?
+                    int alt2=2;
+                    int LA2_0 = input.LA(1);
+
+                    if ( (LA2_0=='-') ) {
+                        alt2=1;
+                    }
+                    switch (alt2) {
+                        case 1 :
+                            // InternalChessDSL.g:5772:37: '-O'
+                            {
+                            match("-O"); 
+
+
+                            }
+                            break;
 
                     }
-                    else {
-                        MismatchedSetException mse = new MismatchedSetException(null,input);
-                        recover(mse);
-                        throw mse;}
 
 
                     }
                     break;
+                case 2 :
+                    // InternalChessDSL.g:5772:43: ( 'K' | 'Q' | 'R' | 'B' | 'N' )? ( RULE_LETTER | RULE_RANKDIGIT )* ( 'x' )? RULE_SQUARETERMINAL ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )? ( '+' | '#' )* ( '!' | '?' )*
+                    {
+                    // InternalChessDSL.g:5772:43: ( 'K' | 'Q' | 'R' | 'B' | 'N' )?
+                    int alt3=2;
+                    int LA3_0 = input.LA(1);
 
-            }
-
-            // InternalChessDSL.g:5772:53: ( RULE_LETTER | RULE_RANKDIGIT )*
-            loop3:
-            do {
-                int alt3=2;
-                int LA3_0 = input.LA(1);
-
-                if ( ((LA3_0>='a' && LA3_0<='h')) ) {
-                    int LA3_2 = input.LA(2);
-
-                    if ( ((LA3_2>='a' && LA3_2<='h')||LA3_2=='x') ) {
+                    if ( (LA3_0=='B'||LA3_0=='K'||LA3_0=='N'||(LA3_0>='Q' && LA3_0<='R')) ) {
                         alt3=1;
                     }
-                    else if ( ((LA3_2>='1' && LA3_2<='8')) ) {
-                        int LA3_4 = input.LA(3);
+                    switch (alt3) {
+                        case 1 :
+                            // InternalChessDSL.g:
+                            {
+                            if ( input.LA(1)=='B'||input.LA(1)=='K'||input.LA(1)=='N'||(input.LA(1)>='Q' && input.LA(1)<='R') ) {
+                                input.consume();
 
-                        if ( ((LA3_4>='1' && LA3_4<='8')||(LA3_4>='a' && LA3_4<='h')||LA3_4=='x') ) {
-                            alt3=1;
+                            }
+                            else {
+                                MismatchedSetException mse = new MismatchedSetException(null,input);
+                                recover(mse);
+                                throw mse;}
+
+
+                            }
+                            break;
+
+                    }
+
+                    // InternalChessDSL.g:5772:66: ( RULE_LETTER | RULE_RANKDIGIT )*
+                    loop4:
+                    do {
+                        int alt4=2;
+                        int LA4_0 = input.LA(1);
+
+                        if ( ((LA4_0>='a' && LA4_0<='h')) ) {
+                            int LA4_2 = input.LA(2);
+
+                            if ( ((LA4_2>='1' && LA4_2<='8')) ) {
+                                int LA4_4 = input.LA(3);
+
+                                if ( ((LA4_4>='1' && LA4_4<='8')||(LA4_4>='a' && LA4_4<='h')||LA4_4=='x') ) {
+                                    alt4=1;
+                                }
+
+
+                            }
+                            else if ( ((LA4_2>='a' && LA4_2<='h')||LA4_2=='x') ) {
+                                alt4=1;
+                            }
+
+
+                        }
+                        else if ( ((LA4_0>='1' && LA4_0<='8')) ) {
+                            alt4=1;
                         }
 
 
+                        switch (alt4) {
+                    	case 1 :
+                    	    // InternalChessDSL.g:
+                    	    {
+                    	    if ( (input.LA(1)>='1' && input.LA(1)<='8')||(input.LA(1)>='a' && input.LA(1)<='h') ) {
+                    	        input.consume();
+
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
+                    	        recover(mse);
+                    	        throw mse;}
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop4;
+                        }
+                    } while (true);
+
+                    // InternalChessDSL.g:5772:96: ( 'x' )?
+                    int alt5=2;
+                    int LA5_0 = input.LA(1);
+
+                    if ( (LA5_0=='x') ) {
+                        alt5=1;
+                    }
+                    switch (alt5) {
+                        case 1 :
+                            // InternalChessDSL.g:5772:96: 'x'
+                            {
+                            match('x'); 
+
+                            }
+                            break;
+
                     }
 
+                    mRULE_SQUARETERMINAL(); 
+                    // InternalChessDSL.g:5772:121: ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )?
+                    int alt6=2;
+                    int LA6_0 = input.LA(1);
 
-                }
-                else if ( ((LA3_0>='1' && LA3_0<='8')) ) {
-                    alt3=1;
-                }
+                    if ( (LA6_0=='=') ) {
+                        alt6=1;
+                    }
+                    switch (alt6) {
+                        case 1 :
+                            // InternalChessDSL.g:5772:122: '=' ( 'Q' | 'R' | 'B' | 'N' )
+                            {
+                            match('='); 
+                            if ( input.LA(1)=='B'||input.LA(1)=='N'||(input.LA(1)>='Q' && input.LA(1)<='R') ) {
+                                input.consume();
+
+                            }
+                            else {
+                                MismatchedSetException mse = new MismatchedSetException(null,input);
+                                recover(mse);
+                                throw mse;}
 
 
-                switch (alt3) {
-            	case 1 :
-            	    // InternalChessDSL.g:
-            	    {
-            	    if ( (input.LA(1)>='1' && input.LA(1)<='8')||(input.LA(1)>='a' && input.LA(1)<='h') ) {
-            	        input.consume();
+                            }
+                            break;
 
-            	    }
-            	    else {
-            	        MismatchedSetException mse = new MismatchedSetException(null,input);
-            	        recover(mse);
-            	        throw mse;}
+                    }
+
+                    // InternalChessDSL.g:5772:146: ( '+' | '#' )*
+                    loop7:
+                    do {
+                        int alt7=2;
+                        int LA7_0 = input.LA(1);
+
+                        if ( (LA7_0=='#'||LA7_0=='+') ) {
+                            alt7=1;
+                        }
 
 
-            	    }
-            	    break;
+                        switch (alt7) {
+                    	case 1 :
+                    	    // InternalChessDSL.g:
+                    	    {
+                    	    if ( input.LA(1)=='#'||input.LA(1)=='+' ) {
+                    	        input.consume();
 
-            	default :
-            	    break loop3;
-                }
-            } while (true);
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
+                    	        recover(mse);
+                    	        throw mse;}
 
-            // InternalChessDSL.g:5772:83: ( 'x' )?
-            int alt4=2;
-            int LA4_0 = input.LA(1);
 
-            if ( (LA4_0=='x') ) {
-                alt4=1;
-            }
-            switch (alt4) {
-                case 1 :
-                    // InternalChessDSL.g:5772:83: 'x'
-                    {
-                    match('x'); 
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop7;
+                        }
+                    } while (true);
+
+                    // InternalChessDSL.g:5772:157: ( '!' | '?' )*
+                    loop8:
+                    do {
+                        int alt8=2;
+                        int LA8_0 = input.LA(1);
+
+                        if ( (LA8_0=='!'||LA8_0=='?') ) {
+                            alt8=1;
+                        }
+
+
+                        switch (alt8) {
+                    	case 1 :
+                    	    // InternalChessDSL.g:
+                    	    {
+                    	    if ( input.LA(1)=='!'||input.LA(1)=='?' ) {
+                    	        input.consume();
+
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
+                    	        recover(mse);
+                    	        throw mse;}
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop8;
+                        }
+                    } while (true);
+
 
                     }
                     break;
 
             }
-
-            mRULE_SQUARETERMINAL(); 
-            // InternalChessDSL.g:5772:108: ( '=' ( 'Q' | 'R' | 'B' | 'N' ) )?
-            int alt5=2;
-            int LA5_0 = input.LA(1);
-
-            if ( (LA5_0=='=') ) {
-                alt5=1;
-            }
-            switch (alt5) {
-                case 1 :
-                    // InternalChessDSL.g:5772:109: '=' ( 'Q' | 'R' | 'B' | 'N' )
-                    {
-                    match('='); 
-                    if ( input.LA(1)=='B'||input.LA(1)=='N'||(input.LA(1)>='Q' && input.LA(1)<='R') ) {
-                        input.consume();
-
-                    }
-                    else {
-                        MismatchedSetException mse = new MismatchedSetException(null,input);
-                        recover(mse);
-                        throw mse;}
-
-
-                    }
-                    break;
-
-            }
-
-            // InternalChessDSL.g:5772:133: ( '+' | '#' )*
-            loop6:
-            do {
-                int alt6=2;
-                int LA6_0 = input.LA(1);
-
-                if ( (LA6_0=='#'||LA6_0=='+') ) {
-                    alt6=1;
-                }
-
-
-                switch (alt6) {
-            	case 1 :
-            	    // InternalChessDSL.g:
-            	    {
-            	    if ( input.LA(1)=='#'||input.LA(1)=='+' ) {
-            	        input.consume();
-
-            	    }
-            	    else {
-            	        MismatchedSetException mse = new MismatchedSetException(null,input);
-            	        recover(mse);
-            	        throw mse;}
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop6;
-                }
-            } while (true);
-
-            // InternalChessDSL.g:5772:144: ( '!' | '?' )*
-            loop7:
-            do {
-                int alt7=2;
-                int LA7_0 = input.LA(1);
-
-                if ( (LA7_0=='!'||LA7_0=='?') ) {
-                    alt7=1;
-                }
-
-
-                switch (alt7) {
-            	case 1 :
-            	    // InternalChessDSL.g:
-            	    {
-            	    if ( input.LA(1)=='!'||input.LA(1)=='?' ) {
-            	        input.consume();
-
-            	    }
-            	    else {
-            	        MismatchedSetException mse = new MismatchedSetException(null,input);
-            	        recover(mse);
-            	        throw mse;}
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop7;
-                }
-            } while (true);
 
 
             }
@@ -1844,13 +1897,13 @@ public class InternalChessDSLLexer extends Lexer {
             // InternalChessDSL.g:5782:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
             // InternalChessDSL.g:5782:11: ( '^' )?
-            int alt8=2;
-            int LA8_0 = input.LA(1);
+            int alt10=2;
+            int LA10_0 = input.LA(1);
 
-            if ( (LA8_0=='^') ) {
-                alt8=1;
+            if ( (LA10_0=='^') ) {
+                alt10=1;
             }
-            switch (alt8) {
+            switch (alt10) {
                 case 1 :
                     // InternalChessDSL.g:5782:11: '^'
                     {
@@ -1871,17 +1924,17 @@ public class InternalChessDSLLexer extends Lexer {
                 throw mse;}
 
             // InternalChessDSL.g:5782:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
-            loop9:
+            loop11:
             do {
-                int alt9=2;
-                int LA9_0 = input.LA(1);
+                int alt11=2;
+                int LA11_0 = input.LA(1);
 
-                if ( ((LA9_0>='0' && LA9_0<='9')||(LA9_0>='A' && LA9_0<='Z')||LA9_0=='_'||(LA9_0>='a' && LA9_0<='z')) ) {
-                    alt9=1;
+                if ( ((LA11_0>='0' && LA11_0<='9')||(LA11_0>='A' && LA11_0<='Z')||LA11_0=='_'||(LA11_0>='a' && LA11_0<='z')) ) {
+                    alt11=1;
                 }
 
 
-                switch (alt9) {
+                switch (alt11) {
             	case 1 :
             	    // InternalChessDSL.g:
             	    {
@@ -1899,7 +1952,7 @@ public class InternalChessDSLLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop9;
+            	    break loop11;
                 }
             } while (true);
 
@@ -1923,18 +1976,18 @@ public class InternalChessDSLLexer extends Lexer {
             // InternalChessDSL.g:5784:12: ( '0' .. '9' )+
             {
             // InternalChessDSL.g:5784:12: ( '0' .. '9' )+
-            int cnt10=0;
-            loop10:
+            int cnt12=0;
+            loop12:
             do {
-                int alt10=2;
-                int LA10_0 = input.LA(1);
+                int alt12=2;
+                int LA12_0 = input.LA(1);
 
-                if ( ((LA10_0>='0' && LA10_0<='9')) ) {
-                    alt10=1;
+                if ( ((LA12_0>='0' && LA12_0<='9')) ) {
+                    alt12=1;
                 }
 
 
-                switch (alt10) {
+                switch (alt12) {
             	case 1 :
             	    // InternalChessDSL.g:5784:13: '0' .. '9'
             	    {
@@ -1944,12 +1997,12 @@ public class InternalChessDSLLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt10 >= 1 ) break loop10;
+            	    if ( cnt12 >= 1 ) break loop12;
                         EarlyExitException eee =
-                            new EarlyExitException(10, input);
+                            new EarlyExitException(12, input);
                         throw eee;
                 }
-                cnt10++;
+                cnt12++;
             } while (true);
 
 
@@ -1972,41 +2025,41 @@ public class InternalChessDSLLexer extends Lexer {
             // InternalChessDSL.g:5786:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
             // InternalChessDSL.g:5786:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            int alt13=2;
-            int LA13_0 = input.LA(1);
+            int alt15=2;
+            int LA15_0 = input.LA(1);
 
-            if ( (LA13_0=='\"') ) {
-                alt13=1;
+            if ( (LA15_0=='\"') ) {
+                alt15=1;
             }
-            else if ( (LA13_0=='\'') ) {
-                alt13=2;
+            else if ( (LA15_0=='\'') ) {
+                alt15=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 13, 0, input);
+                    new NoViableAltException("", 15, 0, input);
 
                 throw nvae;
             }
-            switch (alt13) {
+            switch (alt15) {
                 case 1 :
                     // InternalChessDSL.g:5786:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
                     // InternalChessDSL.g:5786:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
-                    loop11:
+                    loop13:
                     do {
-                        int alt11=3;
-                        int LA11_0 = input.LA(1);
+                        int alt13=3;
+                        int LA13_0 = input.LA(1);
 
-                        if ( (LA11_0=='\\') ) {
-                            alt11=1;
+                        if ( (LA13_0=='\\') ) {
+                            alt13=1;
                         }
-                        else if ( ((LA11_0>='\u0000' && LA11_0<='!')||(LA11_0>='#' && LA11_0<='[')||(LA11_0>=']' && LA11_0<='\uFFFF')) ) {
-                            alt11=2;
+                        else if ( ((LA13_0>='\u0000' && LA13_0<='!')||(LA13_0>='#' && LA13_0<='[')||(LA13_0>=']' && LA13_0<='\uFFFF')) ) {
+                            alt13=2;
                         }
 
 
-                        switch (alt11) {
+                        switch (alt13) {
                     	case 1 :
                     	    // InternalChessDSL.g:5786:21: '\\\\' .
                     	    {
@@ -2032,7 +2085,7 @@ public class InternalChessDSLLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    break loop11;
+                    	    break loop13;
                         }
                     } while (true);
 
@@ -2045,20 +2098,20 @@ public class InternalChessDSLLexer extends Lexer {
                     {
                     match('\''); 
                     // InternalChessDSL.g:5786:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
-                    loop12:
+                    loop14:
                     do {
-                        int alt12=3;
-                        int LA12_0 = input.LA(1);
+                        int alt14=3;
+                        int LA14_0 = input.LA(1);
 
-                        if ( (LA12_0=='\\') ) {
-                            alt12=1;
+                        if ( (LA14_0=='\\') ) {
+                            alt14=1;
                         }
-                        else if ( ((LA12_0>='\u0000' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='[')||(LA12_0>=']' && LA12_0<='\uFFFF')) ) {
-                            alt12=2;
+                        else if ( ((LA14_0>='\u0000' && LA14_0<='&')||(LA14_0>='(' && LA14_0<='[')||(LA14_0>=']' && LA14_0<='\uFFFF')) ) {
+                            alt14=2;
                         }
 
 
-                        switch (alt12) {
+                        switch (alt14) {
                     	case 1 :
                     	    // InternalChessDSL.g:5786:54: '\\\\' .
                     	    {
@@ -2084,7 +2137,7 @@ public class InternalChessDSLLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    break loop12;
+                    	    break loop14;
                         }
                     } while (true);
 
@@ -2117,29 +2170,29 @@ public class InternalChessDSLLexer extends Lexer {
             match("/*"); 
 
             // InternalChessDSL.g:5788:24: ( options {greedy=false; } : . )*
-            loop14:
+            loop16:
             do {
-                int alt14=2;
-                int LA14_0 = input.LA(1);
+                int alt16=2;
+                int LA16_0 = input.LA(1);
 
-                if ( (LA14_0=='*') ) {
-                    int LA14_1 = input.LA(2);
+                if ( (LA16_0=='*') ) {
+                    int LA16_1 = input.LA(2);
 
-                    if ( (LA14_1=='/') ) {
-                        alt14=2;
+                    if ( (LA16_1=='/') ) {
+                        alt16=2;
                     }
-                    else if ( ((LA14_1>='\u0000' && LA14_1<='.')||(LA14_1>='0' && LA14_1<='\uFFFF')) ) {
-                        alt14=1;
+                    else if ( ((LA16_1>='\u0000' && LA16_1<='.')||(LA16_1>='0' && LA16_1<='\uFFFF')) ) {
+                        alt16=1;
                     }
 
 
                 }
-                else if ( ((LA14_0>='\u0000' && LA14_0<=')')||(LA14_0>='+' && LA14_0<='\uFFFF')) ) {
-                    alt14=1;
+                else if ( ((LA16_0>='\u0000' && LA16_0<=')')||(LA16_0>='+' && LA16_0<='\uFFFF')) ) {
+                    alt16=1;
                 }
 
 
-                switch (alt14) {
+                switch (alt16) {
             	case 1 :
             	    // InternalChessDSL.g:5788:52: .
             	    {
@@ -2149,7 +2202,7 @@ public class InternalChessDSLLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop14;
+            	    break loop16;
                 }
             } while (true);
 
@@ -2177,17 +2230,17 @@ public class InternalChessDSLLexer extends Lexer {
             match("//"); 
 
             // InternalChessDSL.g:5790:24: (~ ( ( '\\n' | '\\r' ) ) )*
-            loop15:
+            loop17:
             do {
-                int alt15=2;
-                int LA15_0 = input.LA(1);
+                int alt17=2;
+                int LA17_0 = input.LA(1);
 
-                if ( ((LA15_0>='\u0000' && LA15_0<='\t')||(LA15_0>='\u000B' && LA15_0<='\f')||(LA15_0>='\u000E' && LA15_0<='\uFFFF')) ) {
-                    alt15=1;
+                if ( ((LA17_0>='\u0000' && LA17_0<='\t')||(LA17_0>='\u000B' && LA17_0<='\f')||(LA17_0>='\u000E' && LA17_0<='\uFFFF')) ) {
+                    alt17=1;
                 }
 
 
-                switch (alt15) {
+                switch (alt17) {
             	case 1 :
             	    // InternalChessDSL.g:5790:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
@@ -2205,29 +2258,29 @@ public class InternalChessDSLLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop15;
+            	    break loop17;
                 }
             } while (true);
 
             // InternalChessDSL.g:5790:40: ( ( '\\r' )? '\\n' )?
-            int alt17=2;
-            int LA17_0 = input.LA(1);
+            int alt19=2;
+            int LA19_0 = input.LA(1);
 
-            if ( (LA17_0=='\n'||LA17_0=='\r') ) {
-                alt17=1;
+            if ( (LA19_0=='\n'||LA19_0=='\r') ) {
+                alt19=1;
             }
-            switch (alt17) {
+            switch (alt19) {
                 case 1 :
                     // InternalChessDSL.g:5790:41: ( '\\r' )? '\\n'
                     {
                     // InternalChessDSL.g:5790:41: ( '\\r' )?
-                    int alt16=2;
-                    int LA16_0 = input.LA(1);
+                    int alt18=2;
+                    int LA18_0 = input.LA(1);
 
-                    if ( (LA16_0=='\r') ) {
-                        alt16=1;
+                    if ( (LA18_0=='\r') ) {
+                        alt18=1;
                     }
-                    switch (alt16) {
+                    switch (alt18) {
                         case 1 :
                             // InternalChessDSL.g:5790:41: '\\r'
                             {
@@ -2265,18 +2318,18 @@ public class InternalChessDSLLexer extends Lexer {
             // InternalChessDSL.g:5792:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
             // InternalChessDSL.g:5792:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
-            int cnt18=0;
-            loop18:
+            int cnt20=0;
+            loop20:
             do {
-                int alt18=2;
-                int LA18_0 = input.LA(1);
+                int alt20=2;
+                int LA20_0 = input.LA(1);
 
-                if ( ((LA18_0>='\t' && LA18_0<='\n')||LA18_0=='\r'||LA18_0==' ') ) {
-                    alt18=1;
+                if ( ((LA20_0>='\t' && LA20_0<='\n')||LA20_0=='\r'||LA20_0==' ') ) {
+                    alt20=1;
                 }
 
 
-                switch (alt18) {
+                switch (alt20) {
             	case 1 :
             	    // InternalChessDSL.g:
             	    {
@@ -2294,12 +2347,12 @@ public class InternalChessDSLLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt18 >= 1 ) break loop18;
+            	    if ( cnt20 >= 1 ) break loop20;
                         EarlyExitException eee =
-                            new EarlyExitException(18, input);
+                            new EarlyExitException(20, input);
                         throw eee;
                 }
-                cnt18++;
+                cnt20++;
             } while (true);
 
 
@@ -2335,9 +2388,9 @@ public class InternalChessDSLLexer extends Lexer {
 
     public void mTokens() throws RecognitionException {
         // InternalChessDSL.g:1:8: ( T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | RULE_MOVENUMBER | RULE_SAN_TOKEN | RULE_SQUARETERMINAL | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt19=77;
-        alt19 = dfa19.predict(input);
-        switch (alt19) {
+        int alt21=77;
+        alt21 = dfa21.predict(input);
+        switch (alt21) {
             case 1 :
                 // InternalChessDSL.g:1:10: T__17
                 {
@@ -2883,28 +2936,28 @@ public class InternalChessDSLLexer extends Lexer {
     }
 
 
-    protected DFA19 dfa19 = new DFA19(this);
-    static final String DFA19_eotS =
-        "\1\uffff\1\60\1\uffff\1\60\1\54\15\60\1\uffff\2\60\4\uffff\1\60\1\54\1\60\1\135\6\60\1\150\1\54\1\60\1\54\1\uffff\3\54\2\uffff\2\60\1\161\2\uffff\1\162\1\60\1\164\1\uffff\27\60\1\uffff\4\60\4\uffff\1\60\1\uffff\1\u0093\4\60\1\uffff\3\60\1\u009d\4\60\1\uffff\1\150\6\uffff\3\60\2\uffff\1\u00a6\1\uffff\7\60\1\u00ae\17\60\1\u00bf\6\60\1\uffff\1\u00c6\2\60\1\u00c9\1\60\1\u00cb\3\60\1\uffff\6\60\1\u00d5\1\60\1\uffff\1\u00d8\2\60\1\u00db\1\60\1\u00dd\1\u00de\1\uffff\4\60\1\u00e3\5\60\1\u00e9\5\60\1\uffff\6\60\1\uffff\1\60\1\u00f7\1\uffff\1\60\1\uffff\2\60\1\u00fb\4\60\1\u0100\1\u0101\1\uffff\1\u0102\1\60\1\uffff\1\60\1\u0106\1\uffff\1\u0107\2\uffff\1\u0108\2\60\1\u010b\1\uffff\1\60\1\u010e\2\60\1\u0111\1\uffff\4\60\1\u0116\5\60\1\u011c\1\u011d\1\u011e\1\uffff\3\60\1\uffff\4\60\3\uffff\1\60\1\u0127\1\60\3\uffff\1\u0129\1\60\1\uffff\2\60\1\uffff\2\60\1\uffff\3\60\2\uffff\1\60\1\u0133\3\60\3\uffff\1\u0137\4\60\1\u013c\2\60\1\uffff\1\60\1\uffff\1\60\1\u0141\2\60\1\uffff\4\60\1\uffff\1\u0149\1\u014a\1\60\1\uffff\4\60\1\uffff\1\u0150\1\u0151\2\60\1\uffff\1\60\2\uffff\3\60\1\u0158\2\uffff\1\60\1\u015a\1\u015b\1\60\1\u015d\2\uffff\1\u015e\1\u015f\1\u0160\3\60\1\uffff\1\60\2\uffff\1\u0165\6\uffff\1\60\1\u0167\1\uffff\1\60\1\uffff\1\u0169\1\uffff";
-    static final String DFA19_eofS =
+    protected DFA21 dfa21 = new DFA21(this);
+    static final String DFA21_eotS =
+        "\1\uffff\1\57\1\uffff\1\57\1\54\15\57\1\uffff\2\57\4\uffff\1\57\1\54\1\57\1\135\6\57\1\150\1\54\1\57\1\54\1\uffff\3\54\2\uffff\2\57\1\uffff\1\161\1\uffff\1\162\1\57\1\164\1\uffff\27\57\1\uffff\4\57\4\uffff\1\57\1\uffff\1\u0093\4\57\1\uffff\3\57\1\u009d\4\57\1\uffff\1\150\6\uffff\3\57\2\uffff\1\u00a6\1\uffff\7\57\1\u00ae\17\57\1\u00bf\6\57\1\uffff\1\u00c6\2\57\1\u00c9\1\57\1\u00cb\3\57\1\uffff\6\57\1\u00d5\1\57\1\uffff\1\u00d8\2\57\1\u00db\1\57\1\u00dd\1\u00de\1\uffff\4\57\1\u00e3\5\57\1\u00e9\5\57\1\uffff\6\57\1\uffff\1\57\1\u00f7\1\uffff\1\57\1\uffff\2\57\1\u00fb\4\57\1\u0100\1\u0101\1\uffff\1\u0102\1\57\1\uffff\1\57\1\u0106\1\uffff\1\u0107\2\uffff\1\u0108\2\57\1\u010b\1\uffff\1\57\1\u010e\2\57\1\u0111\1\uffff\4\57\1\u0116\5\57\1\u011c\1\u011d\1\u011e\1\uffff\3\57\1\uffff\4\57\3\uffff\1\57\1\u0127\1\57\3\uffff\1\u0129\1\57\1\uffff\2\57\1\uffff\2\57\1\uffff\3\57\2\uffff\1\57\1\u0133\3\57\3\uffff\1\u0137\4\57\1\u013c\2\57\1\uffff\1\57\1\uffff\1\57\1\u0141\2\57\1\uffff\4\57\1\uffff\1\u0149\1\u014a\1\57\1\uffff\4\57\1\uffff\1\u0150\1\u0151\2\57\1\uffff\1\57\2\uffff\3\57\1\u0158\2\uffff\1\57\1\u015a\1\u015b\1\57\1\u015d\2\uffff\1\u015e\1\u015f\1\u0160\3\57\1\uffff\1\57\2\uffff\1\u0165\6\uffff\1\57\1\u0167\1\uffff\1\57\1\uffff\1\u0169\1\uffff";
+    static final String DFA21_eofS =
         "\u016a\uffff";
-    static final String DFA19_minS =
-        "\1\0\1\61\1\uffff\1\146\1\56\1\151\1\165\1\61\2\141\1\170\1\151\1\165\1\141\1\150\1\141\1\157\1\61\1\uffff\1\156\1\61\4\uffff\1\157\1\76\1\150\1\60\1\141\1\61\1\156\1\164\1\154\1\151\1\56\2\61\1\101\1\uffff\2\0\1\52\2\uffff\1\145\1\146\1\60\2\uffff\1\60\1\164\1\60\1\uffff\1\156\1\151\1\145\1\141\1\155\1\157\1\155\1\144\1\141\1\163\1\143\1\163\1\157\1\142\1\145\1\160\1\151\1\167\1\141\1\163\1\157\1\166\1\144\1\uffff\1\151\1\163\1\160\1\145\4\uffff\1\166\1\uffff\1\60\1\145\1\155\1\144\1\162\1\uffff\1\156\1\160\1\155\1\60\1\141\1\163\1\141\1\156\1\uffff\1\56\6\uffff\1\163\1\155\1\164\2\uffff\1\60\1\uffff\2\147\1\145\1\167\1\155\1\144\1\145\1\60\1\143\1\150\1\145\2\153\1\151\1\143\3\164\1\156\1\171\1\151\1\155\1\145\1\60\4\164\1\143\1\145\1\uffff\1\60\2\145\1\60\1\145\1\60\1\151\2\145\1\uffff\1\154\1\151\1\171\1\150\1\163\1\150\1\60\1\171\1\uffff\1\60\1\150\1\156\1\60\1\171\2\60\1\uffff\1\153\1\157\1\154\1\171\1\60\1\157\1\153\1\165\1\154\1\145\1\60\1\145\1\164\1\157\1\163\1\144\1\uffff\1\151\1\157\1\165\1\154\1\153\1\163\1\uffff\1\145\1\60\1\uffff\1\145\1\uffff\1\147\1\141\1\60\1\145\1\164\1\145\1\157\2\60\1\uffff\1\60\1\151\1\uffff\1\164\1\60\1\uffff\1\60\2\uffff\1\60\1\160\1\154\1\60\1\uffff\1\165\1\60\1\162\1\145\1\60\1\uffff\1\162\1\151\1\164\1\72\1\60\1\141\1\155\1\162\1\145\1\155\3\60\1\uffff\1\144\1\156\1\164\1\uffff\1\155\1\151\1\144\1\165\3\uffff\1\144\1\60\1\151\3\uffff\1\60\1\145\1\uffff\1\163\1\141\1\uffff\1\145\1\50\1\uffff\1\163\1\157\1\151\2\uffff\1\154\1\60\1\145\1\163\1\141\3\uffff\1\60\2\145\1\141\1\157\1\60\1\164\1\145\1\uffff\1\144\1\uffff\1\156\1\60\1\164\1\50\1\uffff\1\72\1\156\1\157\1\123\1\uffff\2\60\1\164\1\uffff\2\144\1\164\1\156\1\uffff\2\60\1\145\1\164\1\uffff\1\145\2\uffff\1\163\1\156\1\164\1\60\2\uffff\1\145\2\60\1\145\1\60\2\uffff\3\60\1\72\1\50\1\141\1\uffff\1\144\2\uffff\1\60\6\uffff\1\164\1\60\1\uffff\1\145\1\uffff\1\60\1\uffff";
-    static final String DFA19_maxS =
-        "\1\uffff\1\162\1\uffff\1\165\1\56\1\156\2\165\1\157\1\154\1\170\1\157\1\165\2\150\1\162\1\157\1\156\1\uffff\1\156\1\165\4\uffff\1\157\1\76\1\157\1\172\1\145\1\141\1\156\1\164\1\157\1\151\1\71\1\170\1\70\1\172\1\uffff\2\uffff\1\57\2\uffff\1\157\1\146\1\172\2\uffff\1\172\1\164\1\172\1\uffff\1\156\1\151\1\145\1\141\1\155\1\157\1\155\1\144\1\141\1\163\1\143\1\163\1\157\1\142\1\145\1\163\1\151\1\167\1\141\1\163\1\157\1\166\1\144\1\uffff\1\151\2\163\1\145\4\uffff\1\166\1\uffff\1\172\1\162\1\155\1\144\1\162\1\uffff\1\156\1\163\1\155\1\172\1\141\1\163\1\141\1\164\1\uffff\1\71\6\uffff\1\163\1\155\1\164\2\uffff\1\172\1\uffff\2\147\1\145\1\167\1\155\1\144\1\145\1\172\1\143\1\150\1\145\2\153\1\151\1\143\3\164\1\156\1\171\1\151\1\155\1\145\1\172\4\164\1\143\1\145\1\uffff\1\172\2\145\1\172\1\145\1\172\1\151\2\145\1\uffff\1\154\1\151\1\171\1\150\1\163\1\150\1\172\1\171\1\uffff\1\172\1\150\1\156\1\172\1\171\2\172\1\uffff\1\153\1\157\1\154\1\171\1\172\1\157\1\153\1\165\1\154\1\145\1\172\1\145\1\164\1\157\1\163\1\144\1\uffff\1\151\1\157\1\165\1\154\1\153\1\163\1\uffff\1\145\1\172\1\uffff\1\145\1\uffff\1\147\1\141\1\172\1\145\1\164\1\145\1\157\2\172\1\uffff\1\172\1\151\1\uffff\1\164\1\172\1\uffff\1\172\2\uffff\1\172\1\160\1\154\1\172\1\uffff\1\165\1\172\1\162\1\145\1\172\1\uffff\1\162\1\151\1\164\1\72\1\172\1\141\1\155\1\162\1\145\1\155\3\172\1\uffff\1\144\1\156\1\164\1\uffff\1\155\1\151\1\144\1\165\3\uffff\1\144\1\172\1\151\3\uffff\1\172\1\145\1\uffff\1\163\1\141\1\uffff\1\145\1\50\1\uffff\1\163\1\157\1\151\2\uffff\1\154\1\172\1\145\1\163\1\141\3\uffff\1\172\2\145\1\141\1\157\1\172\1\164\1\145\1\uffff\1\144\1\uffff\1\156\1\172\1\164\1\50\1\uffff\1\72\1\156\1\157\1\123\1\uffff\2\172\1\164\1\uffff\2\144\1\164\1\156\1\uffff\2\172\1\145\1\164\1\uffff\1\145\2\uffff\1\163\1\156\1\164\1\172\2\uffff\1\145\2\172\1\145\1\172\2\uffff\3\172\1\72\1\50\1\141\1\uffff\1\144\2\uffff\1\172\6\uffff\1\164\1\172\1\uffff\1\145\1\uffff\1\172\1\uffff";
-    static final String DFA19_acceptS =
-        "\2\uffff\1\2\17\uffff\1\33\2\uffff\1\37\1\40\1\41\1\42\16\uffff\1\107\3\uffff\1\114\1\115\3\uffff\1\107\1\2\3\uffff\1\4\27\uffff\1\33\4\uffff\1\37\1\40\1\41\1\42\1\uffff\1\45\5\uffff\1\70\10\uffff\1\104\1\uffff\1\110\1\105\1\111\1\112\1\113\1\114\3\uffff\1\106\1\3\1\uffff\1\61\36\uffff\1\47\11\uffff\1\67\10\uffff\1\60\7\uffff\1\11\20\uffff\1\31\6\uffff\1\55\2\uffff\1\51\1\uffff\1\57\11\uffff\1\46\2\uffff\1\21\2\uffff\1\7\1\uffff\1\10\1\27\4\uffff\1\23\5\uffff\1\26\15\uffff\1\62\3\uffff\1\66\4\uffff\1\103\1\1\1\77\3\uffff\1\22\1\43\1\20\2\uffff\1\13\2\uffff\1\15\2\uffff\1\17\3\uffff\1\30\1\65\5\uffff\1\44\1\74\1\75\10\uffff\1\25\1\uffff\1\24\4\uffff\1\53\4\uffff\1\35\3\uffff\1\102\4\uffff\1\76\4\uffff\1\14\1\uffff\1\50\1\32\4\uffff\1\101\1\54\5\uffff\1\100\1\5\6\uffff\1\52\1\uffff\1\63\1\72\1\uffff\1\73\1\6\1\12\1\16\1\36\1\56\2\uffff\1\71\1\uffff\1\64\1\uffff\1\34";
-    static final String DFA19_specialS =
-        "\1\0\47\uffff\1\1\1\2\u0140\uffff}>";
-    static final String[] DFA19_transitionS = {
+    static final String DFA21_minS =
+        "\1\0\1\61\1\uffff\1\146\1\56\1\151\1\165\1\61\2\141\1\170\1\151\1\165\1\141\1\150\1\141\1\157\1\61\1\uffff\1\156\1\61\4\uffff\1\157\1\76\1\150\1\60\1\141\1\61\1\156\1\164\1\154\1\151\1\56\2\61\1\101\1\uffff\2\0\1\52\2\uffff\1\145\1\146\1\uffff\1\60\1\uffff\1\60\1\164\1\60\1\uffff\1\156\1\151\1\145\1\141\1\155\1\157\1\155\1\144\1\141\1\163\1\143\1\163\1\157\1\142\1\145\1\160\1\151\1\167\1\141\1\163\1\157\1\166\1\144\1\uffff\1\151\1\163\1\160\1\145\4\uffff\1\166\1\uffff\1\60\1\145\1\155\1\144\1\162\1\uffff\1\156\1\160\1\155\1\60\1\141\1\163\1\141\1\156\1\uffff\1\56\6\uffff\1\163\1\155\1\164\2\uffff\1\60\1\uffff\2\147\1\145\1\167\1\155\1\144\1\145\1\60\1\143\1\150\1\145\2\153\1\151\1\143\3\164\1\156\1\171\1\151\1\155\1\145\1\60\4\164\1\143\1\145\1\uffff\1\60\2\145\1\60\1\145\1\60\1\151\2\145\1\uffff\1\154\1\151\1\171\1\150\1\163\1\150\1\60\1\171\1\uffff\1\60\1\150\1\156\1\60\1\171\2\60\1\uffff\1\153\1\157\1\154\1\171\1\60\1\157\1\153\1\165\1\154\1\145\1\60\1\145\1\164\1\157\1\163\1\144\1\uffff\1\151\1\157\1\165\1\154\1\153\1\163\1\uffff\1\145\1\60\1\uffff\1\145\1\uffff\1\147\1\141\1\60\1\145\1\164\1\145\1\157\2\60\1\uffff\1\60\1\151\1\uffff\1\164\1\60\1\uffff\1\60\2\uffff\1\60\1\160\1\154\1\60\1\uffff\1\165\1\60\1\162\1\145\1\60\1\uffff\1\162\1\151\1\164\1\72\1\60\1\141\1\155\1\162\1\145\1\155\3\60\1\uffff\1\144\1\156\1\164\1\uffff\1\155\1\151\1\144\1\165\3\uffff\1\144\1\60\1\151\3\uffff\1\60\1\145\1\uffff\1\163\1\141\1\uffff\1\145\1\50\1\uffff\1\163\1\157\1\151\2\uffff\1\154\1\60\1\145\1\163\1\141\3\uffff\1\60\2\145\1\141\1\157\1\60\1\164\1\145\1\uffff\1\144\1\uffff\1\156\1\60\1\164\1\50\1\uffff\1\72\1\156\1\157\1\123\1\uffff\2\60\1\164\1\uffff\2\144\1\164\1\156\1\uffff\2\60\1\145\1\164\1\uffff\1\145\2\uffff\1\163\1\156\1\164\1\60\2\uffff\1\145\2\60\1\145\1\60\2\uffff\3\60\1\72\1\50\1\141\1\uffff\1\144\2\uffff\1\60\6\uffff\1\164\1\60\1\uffff\1\145\1\uffff\1\60\1\uffff";
+    static final String DFA21_maxS =
+        "\1\uffff\1\162\1\uffff\1\165\1\56\1\156\2\165\1\157\1\154\1\170\1\157\1\165\2\150\1\162\1\157\1\156\1\uffff\1\156\1\165\4\uffff\1\157\1\76\1\157\1\172\1\145\1\141\1\156\1\164\1\157\1\151\1\71\1\170\1\70\1\172\1\uffff\2\uffff\1\57\2\uffff\1\157\1\146\1\uffff\1\172\1\uffff\1\172\1\164\1\172\1\uffff\1\156\1\151\1\145\1\141\1\155\1\157\1\155\1\144\1\141\1\163\1\143\1\163\1\157\1\142\1\145\1\163\1\151\1\167\1\141\1\163\1\157\1\166\1\144\1\uffff\1\151\2\163\1\145\4\uffff\1\166\1\uffff\1\172\1\162\1\155\1\144\1\162\1\uffff\1\156\1\163\1\155\1\172\1\141\1\163\1\141\1\164\1\uffff\1\71\6\uffff\1\163\1\155\1\164\2\uffff\1\172\1\uffff\2\147\1\145\1\167\1\155\1\144\1\145\1\172\1\143\1\150\1\145\2\153\1\151\1\143\3\164\1\156\1\171\1\151\1\155\1\145\1\172\4\164\1\143\1\145\1\uffff\1\172\2\145\1\172\1\145\1\172\1\151\2\145\1\uffff\1\154\1\151\1\171\1\150\1\163\1\150\1\172\1\171\1\uffff\1\172\1\150\1\156\1\172\1\171\2\172\1\uffff\1\153\1\157\1\154\1\171\1\172\1\157\1\153\1\165\1\154\1\145\1\172\1\145\1\164\1\157\1\163\1\144\1\uffff\1\151\1\157\1\165\1\154\1\153\1\163\1\uffff\1\145\1\172\1\uffff\1\145\1\uffff\1\147\1\141\1\172\1\145\1\164\1\145\1\157\2\172\1\uffff\1\172\1\151\1\uffff\1\164\1\172\1\uffff\1\172\2\uffff\1\172\1\160\1\154\1\172\1\uffff\1\165\1\172\1\162\1\145\1\172\1\uffff\1\162\1\151\1\164\1\72\1\172\1\141\1\155\1\162\1\145\1\155\3\172\1\uffff\1\144\1\156\1\164\1\uffff\1\155\1\151\1\144\1\165\3\uffff\1\144\1\172\1\151\3\uffff\1\172\1\145\1\uffff\1\163\1\141\1\uffff\1\145\1\50\1\uffff\1\163\1\157\1\151\2\uffff\1\154\1\172\1\145\1\163\1\141\3\uffff\1\172\2\145\1\141\1\157\1\172\1\164\1\145\1\uffff\1\144\1\uffff\1\156\1\172\1\164\1\50\1\uffff\1\72\1\156\1\157\1\123\1\uffff\2\172\1\164\1\uffff\2\144\1\164\1\156\1\uffff\2\172\1\145\1\164\1\uffff\1\145\2\uffff\1\163\1\156\1\164\1\172\2\uffff\1\145\2\172\1\145\1\172\2\uffff\3\172\1\72\1\50\1\141\1\uffff\1\144\2\uffff\1\172\6\uffff\1\164\1\172\1\uffff\1\145\1\uffff\1\172\1\uffff";
+    static final String DFA21_acceptS =
+        "\2\uffff\1\2\17\uffff\1\33\2\uffff\1\37\1\40\1\41\1\42\16\uffff\1\107\3\uffff\1\114\1\115\2\uffff\1\107\1\uffff\1\2\3\uffff\1\4\27\uffff\1\33\4\uffff\1\37\1\40\1\41\1\42\1\uffff\1\45\5\uffff\1\70\10\uffff\1\104\1\uffff\1\110\1\105\1\111\1\112\1\113\1\114\3\uffff\1\106\1\3\1\uffff\1\61\36\uffff\1\47\11\uffff\1\67\10\uffff\1\60\7\uffff\1\11\20\uffff\1\31\6\uffff\1\55\2\uffff\1\51\1\uffff\1\57\11\uffff\1\46\2\uffff\1\21\2\uffff\1\7\1\uffff\1\10\1\27\4\uffff\1\23\5\uffff\1\26\15\uffff\1\62\3\uffff\1\66\4\uffff\1\103\1\1\1\77\3\uffff\1\22\1\43\1\20\2\uffff\1\13\2\uffff\1\15\2\uffff\1\17\3\uffff\1\30\1\65\5\uffff\1\44\1\74\1\75\10\uffff\1\25\1\uffff\1\24\4\uffff\1\53\4\uffff\1\35\3\uffff\1\102\4\uffff\1\76\4\uffff\1\14\1\uffff\1\50\1\32\4\uffff\1\101\1\54\5\uffff\1\100\1\5\6\uffff\1\52\1\uffff\1\63\1\72\1\uffff\1\73\1\6\1\12\1\16\1\36\1\56\2\uffff\1\71\1\uffff\1\64\1\uffff\1\34";
+    static final String DFA21_specialS =
+        "\1\1\47\uffff\1\0\1\2\u0140\uffff}>";
+    static final String[] DFA21_transitionS = {
             "\11\54\2\53\2\54\1\53\22\54\1\53\1\54\1\50\4\54\1\51\1\27\1\30\3\54\1\32\1\4\1\52\12\43\1\22\2\54\1\2\2\54\1\44\1\47\1\11\1\15\1\14\1\12\1\47\1\10\1\47\1\23\1\47\1\5\1\47\1\20\2\47\1\17\1\6\1\13\4\47\1\16\3\47\3\54\1\46\1\47\1\54\1\34\1\45\1\24\1\7\1\21\1\1\1\36\1\45\1\37\3\47\1\31\1\47\1\3\1\41\1\47\1\35\1\40\1\33\2\47\1\42\3\47\1\25\1\54\1\26\uff82\54",
-            "\10\57\60\uffff\1\56\10\uffff\1\55",
+            "\10\60\60\uffff\1\56\10\uffff\1\55",
             "",
             "\1\64\7\uffff\1\62\6\uffff\1\63",
             "\1\65",
             "\1\66\4\uffff\1\67",
             "\1\70",
-            "\10\57\71\uffff\1\71\2\uffff\1\72",
+            "\10\60\71\uffff\1\71\2\uffff\1\72",
             "\1\74\15\uffff\1\73",
             "\1\75\7\uffff\1\77\2\uffff\1\76",
             "\1\100",
@@ -2914,10 +2967,10 @@ public class InternalChessDSLLexer extends Lexer {
             "\1\106",
             "\1\107\12\uffff\1\110\2\uffff\1\111\2\uffff\1\112",
             "\1\113",
-            "\10\57\65\uffff\1\114",
+            "\10\60\65\uffff\1\114",
             "",
             "\1\116",
-            "\10\57\50\uffff\1\120\6\uffff\1\121\14\uffff\1\117",
+            "\10\60\50\uffff\1\120\6\uffff\1\121\14\uffff\1\117",
             "",
             "",
             "",
@@ -2925,17 +2978,17 @@ public class InternalChessDSLLexer extends Lexer {
             "\1\126",
             "\1\127",
             "\1\131\1\132\5\uffff\1\130",
-            "\1\60\10\57\1\60\7\uffff\32\60\4\uffff\1\60\1\uffff\6\60\1\134\6\60\1\133\14\60",
+            "\1\57\10\60\1\57\7\uffff\32\57\4\uffff\1\57\1\uffff\6\57\1\134\6\57\1\133\14\57",
             "\1\136\3\uffff\1\137",
-            "\10\57\50\uffff\1\140",
+            "\10\60\50\uffff\1\140",
             "\1\141",
             "\1\142",
             "\1\144\2\uffff\1\143",
             "\1\145",
             "\1\146\1\uffff\12\147",
-            "\10\151\11\uffff\1\151\10\uffff\1\151\2\uffff\1\151\2\uffff\2\151\16\uffff\10\151\17\uffff\1\151",
-            "\10\57",
-            "\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\10\151\11\uffff\1\151\10\uffff\1\151\2\uffff\2\151\1\uffff\2\151\16\uffff\10\151\17\uffff\1\151",
+            "\10\60",
+            "\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
             "\0\152",
             "\0\152",
@@ -2944,12 +2997,12 @@ public class InternalChessDSLLexer extends Lexer {
             "",
             "\1\156\11\uffff\1\157",
             "\1\160",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
             "",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\163",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
             "\1\165",
             "\1\166",
@@ -2985,7 +3038,7 @@ public class InternalChessDSLLexer extends Lexer {
             "",
             "\1\u0092",
             "",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u0094\14\uffff\1\u0095",
             "\1\u0096",
             "\1\u0097",
@@ -2994,7 +3047,7 @@ public class InternalChessDSLLexer extends Lexer {
             "\1\u0099",
             "\1\u009b\2\uffff\1\u009a",
             "\1\u009c",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u009e",
             "\1\u009f",
             "\1\u00a0",
@@ -3012,7 +3065,7 @@ public class InternalChessDSLLexer extends Lexer {
             "\1\u00a5",
             "",
             "",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
             "\1\u00a7",
             "\1\u00a8",
@@ -3021,7 +3074,7 @@ public class InternalChessDSLLexer extends Lexer {
             "\1\u00ab",
             "\1\u00ac",
             "\1\u00ad",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u00af",
             "\1\u00b0",
             "\1\u00b1",
@@ -3037,7 +3090,7 @@ public class InternalChessDSLLexer extends Lexer {
             "\1\u00bb",
             "\1\u00bc",
             "\1\u00bd",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\4\60\1\u00be\25\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\4\57\1\u00be\25\57",
             "\1\u00c0",
             "\1\u00c1",
             "\1\u00c2",
@@ -3045,12 +3098,12 @@ public class InternalChessDSLLexer extends Lexer {
             "\1\u00c4",
             "\1\u00c5",
             "",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u00c7",
             "\1\u00c8",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u00ca",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u00cc",
             "\1\u00cd",
             "\1\u00ce",
@@ -3061,28 +3114,28 @@ public class InternalChessDSLLexer extends Lexer {
             "\1\u00d2",
             "\1\u00d3",
             "\1\u00d4",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u00d6",
             "",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\22\60\1\u00d7\7\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\22\57\1\u00d7\7\57",
             "\1\u00d9",
             "\1\u00da",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u00dc",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
             "\1\u00df",
             "\1\u00e0",
             "\1\u00e1",
             "\1\u00e2",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u00e4",
             "\1\u00e5",
             "\1\u00e6",
             "\1\u00e7",
             "\1\u00e8",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u00ea",
             "\1\u00eb",
             "\1\u00ec",
@@ -3097,53 +3150,53 @@ public class InternalChessDSLLexer extends Lexer {
             "\1\u00f4",
             "",
             "\1\u00f5",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\22\60\1\u00f6\7\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\22\57\1\u00f6\7\57",
             "",
             "\1\u00f8",
             "",
             "\1\u00f9",
             "\1\u00fa",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u00fc",
             "\1\u00fd",
             "\1\u00fe",
             "\1\u00ff",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u0103",
             "",
             "\1\u0104",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\22\60\1\u0105\7\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\22\57\1\u0105\7\57",
             "",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
             "",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u0109",
             "\1\u010a",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
             "\1\u010c",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\14\60\1\u010d\15\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\14\57\1\u010d\15\57",
             "\1\u010f",
             "\1\u0110",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
             "\1\u0112",
             "\1\u0113",
             "\1\u0114",
             "\1\u0115",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u0117",
             "\1\u0118",
             "\1\u0119",
             "\1\u011a",
             "\1\u011b",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
             "\1\u011f",
             "\1\u0120",
@@ -3157,12 +3210,12 @@ public class InternalChessDSLLexer extends Lexer {
             "",
             "",
             "\1\u0126",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u0128",
             "",
             "",
             "",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u012a",
             "",
             "\1\u012b",
@@ -3177,26 +3230,26 @@ public class InternalChessDSLLexer extends Lexer {
             "",
             "",
             "\1\u0132",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u0134",
             "\1\u0135",
             "\1\u0136",
             "",
             "",
             "",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u0138",
             "\1\u0139",
             "\1\u013a",
             "\1\u013b",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u013d",
             "\1\u013e",
             "",
             "\1\u013f",
             "",
             "\1\u0140",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u0142",
             "\1\u0143",
             "",
@@ -3205,8 +3258,8 @@ public class InternalChessDSLLexer extends Lexer {
             "\1\u0146",
             "\1\u0147",
             "",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\22\60\1\u0148\7\60",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\22\57\1\u0148\7\57",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u014b",
             "",
             "\1\u014c",
@@ -3214,8 +3267,8 @@ public class InternalChessDSLLexer extends Lexer {
             "\1\u014e",
             "\1\u014f",
             "",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u0152",
             "\1\u0153",
             "",
@@ -3225,19 +3278,19 @@ public class InternalChessDSLLexer extends Lexer {
             "\1\u0155",
             "\1\u0156",
             "\1\u0157",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
             "",
             "\1\u0159",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u015c",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
             "",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "\1\u0161",
             "\1\u0162",
             "\1\u0163",
@@ -3245,7 +3298,7 @@ public class InternalChessDSLLexer extends Lexer {
             "\1\u0164",
             "",
             "",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
             "",
             "",
@@ -3253,42 +3306,42 @@ public class InternalChessDSLLexer extends Lexer {
             "",
             "",
             "\1\u0166",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
             "\1\u0168",
             "",
-            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             ""
     };
 
-    static final short[] DFA19_eot = DFA.unpackEncodedString(DFA19_eotS);
-    static final short[] DFA19_eof = DFA.unpackEncodedString(DFA19_eofS);
-    static final char[] DFA19_min = DFA.unpackEncodedStringToUnsignedChars(DFA19_minS);
-    static final char[] DFA19_max = DFA.unpackEncodedStringToUnsignedChars(DFA19_maxS);
-    static final short[] DFA19_accept = DFA.unpackEncodedString(DFA19_acceptS);
-    static final short[] DFA19_special = DFA.unpackEncodedString(DFA19_specialS);
-    static final short[][] DFA19_transition;
+    static final short[] DFA21_eot = DFA.unpackEncodedString(DFA21_eotS);
+    static final short[] DFA21_eof = DFA.unpackEncodedString(DFA21_eofS);
+    static final char[] DFA21_min = DFA.unpackEncodedStringToUnsignedChars(DFA21_minS);
+    static final char[] DFA21_max = DFA.unpackEncodedStringToUnsignedChars(DFA21_maxS);
+    static final short[] DFA21_accept = DFA.unpackEncodedString(DFA21_acceptS);
+    static final short[] DFA21_special = DFA.unpackEncodedString(DFA21_specialS);
+    static final short[][] DFA21_transition;
 
     static {
-        int numStates = DFA19_transitionS.length;
-        DFA19_transition = new short[numStates][];
+        int numStates = DFA21_transitionS.length;
+        DFA21_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA19_transition[i] = DFA.unpackEncodedString(DFA19_transitionS[i]);
+            DFA21_transition[i] = DFA.unpackEncodedString(DFA21_transitionS[i]);
         }
     }
 
-    class DFA19 extends DFA {
+    class DFA21 extends DFA {
 
-        public DFA19(BaseRecognizer recognizer) {
+        public DFA21(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 19;
-            this.eot = DFA19_eot;
-            this.eof = DFA19_eof;
-            this.min = DFA19_min;
-            this.max = DFA19_max;
-            this.accept = DFA19_accept;
-            this.special = DFA19_special;
-            this.transition = DFA19_transition;
+            this.decisionNumber = 21;
+            this.eot = DFA21_eot;
+            this.eof = DFA21_eof;
+            this.min = DFA21_min;
+            this.max = DFA21_max;
+            this.accept = DFA21_accept;
+            this.special = DFA21_special;
+            this.transition = DFA21_transition;
         }
         public String getDescription() {
             return "1:1: Tokens : ( T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | RULE_MOVENUMBER | RULE_SAN_TOKEN | RULE_SQUARETERMINAL | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
@@ -3298,114 +3351,114 @@ public class InternalChessDSLLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA19_0 = input.LA(1);
+                        int LA21_40 = input.LA(1);
 
                         s = -1;
-                        if ( (LA19_0=='f') ) {s = 1;}
-
-                        else if ( (LA19_0=='=') ) {s = 2;}
-
-                        else if ( (LA19_0=='o') ) {s = 3;}
-
-                        else if ( (LA19_0=='.') ) {s = 4;}
-
-                        else if ( (LA19_0=='K') ) {s = 5;}
-
-                        else if ( (LA19_0=='Q') ) {s = 6;}
-
-                        else if ( (LA19_0=='d') ) {s = 7;}
-
-                        else if ( (LA19_0=='G') ) {s = 8;}
-
-                        else if ( (LA19_0=='B') ) {s = 9;}
-
-                        else if ( (LA19_0=='E') ) {s = 10;}
-
-                        else if ( (LA19_0=='R') ) {s = 11;}
-
-                        else if ( (LA19_0=='D') ) {s = 12;}
-
-                        else if ( (LA19_0=='C') ) {s = 13;}
-
-                        else if ( (LA19_0=='W') ) {s = 14;}
-
-                        else if ( (LA19_0=='P') ) {s = 15;}
-
-                        else if ( (LA19_0=='M') ) {s = 16;}
-
-                        else if ( (LA19_0=='e') ) {s = 17;}
-
-                        else if ( (LA19_0==':') ) {s = 18;}
-
-                        else if ( (LA19_0=='I') ) {s = 19;}
-
-                        else if ( (LA19_0=='c') ) {s = 20;}
-
-                        else if ( (LA19_0=='{') ) {s = 21;}
-
-                        else if ( (LA19_0=='}') ) {s = 22;}
-
-                        else if ( (LA19_0=='(') ) {s = 23;}
-
-                        else if ( (LA19_0==')') ) {s = 24;}
-
-                        else if ( (LA19_0=='m') ) {s = 25;}
-
-                        else if ( (LA19_0=='-') ) {s = 26;}
-
-                        else if ( (LA19_0=='t') ) {s = 27;}
-
-                        else if ( (LA19_0=='a') ) {s = 28;}
-
-                        else if ( (LA19_0=='r') ) {s = 29;}
-
-                        else if ( (LA19_0=='g') ) {s = 30;}
-
-                        else if ( (LA19_0=='i') ) {s = 31;}
-
-                        else if ( (LA19_0=='s') ) {s = 32;}
-
-                        else if ( (LA19_0=='p') ) {s = 33;}
-
-                        else if ( (LA19_0=='w') ) {s = 34;}
-
-                        else if ( ((LA19_0>='0' && LA19_0<='9')) ) {s = 35;}
-
-                        else if ( (LA19_0=='@') ) {s = 36;}
-
-                        else if ( (LA19_0=='b'||LA19_0=='h') ) {s = 37;}
-
-                        else if ( (LA19_0=='^') ) {s = 38;}
-
-                        else if ( (LA19_0=='A'||LA19_0=='F'||LA19_0=='H'||LA19_0=='J'||LA19_0=='L'||(LA19_0>='N' && LA19_0<='O')||(LA19_0>='S' && LA19_0<='V')||(LA19_0>='X' && LA19_0<='Z')||LA19_0=='_'||(LA19_0>='j' && LA19_0<='l')||LA19_0=='n'||LA19_0=='q'||(LA19_0>='u' && LA19_0<='v')||(LA19_0>='x' && LA19_0<='z')) ) {s = 39;}
-
-                        else if ( (LA19_0=='\"') ) {s = 40;}
-
-                        else if ( (LA19_0=='\'') ) {s = 41;}
-
-                        else if ( (LA19_0=='/') ) {s = 42;}
-
-                        else if ( ((LA19_0>='\t' && LA19_0<='\n')||LA19_0=='\r'||LA19_0==' ') ) {s = 43;}
-
-                        else if ( ((LA19_0>='\u0000' && LA19_0<='\b')||(LA19_0>='\u000B' && LA19_0<='\f')||(LA19_0>='\u000E' && LA19_0<='\u001F')||LA19_0=='!'||(LA19_0>='#' && LA19_0<='&')||(LA19_0>='*' && LA19_0<=',')||(LA19_0>=';' && LA19_0<='<')||(LA19_0>='>' && LA19_0<='?')||(LA19_0>='[' && LA19_0<=']')||LA19_0=='`'||LA19_0=='|'||(LA19_0>='~' && LA19_0<='\uFFFF')) ) {s = 44;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA19_40 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA19_40>='\u0000' && LA19_40<='\uFFFF')) ) {s = 106;}
+                        if ( ((LA21_40>='\u0000' && LA21_40<='\uFFFF')) ) {s = 106;}
 
                         else s = 44;
 
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
-                        int LA19_41 = input.LA(1);
+                    case 1 : 
+                        int LA21_0 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA19_41>='\u0000' && LA19_41<='\uFFFF')) ) {s = 106;}
+                        if ( (LA21_0=='f') ) {s = 1;}
+
+                        else if ( (LA21_0=='=') ) {s = 2;}
+
+                        else if ( (LA21_0=='o') ) {s = 3;}
+
+                        else if ( (LA21_0=='.') ) {s = 4;}
+
+                        else if ( (LA21_0=='K') ) {s = 5;}
+
+                        else if ( (LA21_0=='Q') ) {s = 6;}
+
+                        else if ( (LA21_0=='d') ) {s = 7;}
+
+                        else if ( (LA21_0=='G') ) {s = 8;}
+
+                        else if ( (LA21_0=='B') ) {s = 9;}
+
+                        else if ( (LA21_0=='E') ) {s = 10;}
+
+                        else if ( (LA21_0=='R') ) {s = 11;}
+
+                        else if ( (LA21_0=='D') ) {s = 12;}
+
+                        else if ( (LA21_0=='C') ) {s = 13;}
+
+                        else if ( (LA21_0=='W') ) {s = 14;}
+
+                        else if ( (LA21_0=='P') ) {s = 15;}
+
+                        else if ( (LA21_0=='M') ) {s = 16;}
+
+                        else if ( (LA21_0=='e') ) {s = 17;}
+
+                        else if ( (LA21_0==':') ) {s = 18;}
+
+                        else if ( (LA21_0=='I') ) {s = 19;}
+
+                        else if ( (LA21_0=='c') ) {s = 20;}
+
+                        else if ( (LA21_0=='{') ) {s = 21;}
+
+                        else if ( (LA21_0=='}') ) {s = 22;}
+
+                        else if ( (LA21_0=='(') ) {s = 23;}
+
+                        else if ( (LA21_0==')') ) {s = 24;}
+
+                        else if ( (LA21_0=='m') ) {s = 25;}
+
+                        else if ( (LA21_0=='-') ) {s = 26;}
+
+                        else if ( (LA21_0=='t') ) {s = 27;}
+
+                        else if ( (LA21_0=='a') ) {s = 28;}
+
+                        else if ( (LA21_0=='r') ) {s = 29;}
+
+                        else if ( (LA21_0=='g') ) {s = 30;}
+
+                        else if ( (LA21_0=='i') ) {s = 31;}
+
+                        else if ( (LA21_0=='s') ) {s = 32;}
+
+                        else if ( (LA21_0=='p') ) {s = 33;}
+
+                        else if ( (LA21_0=='w') ) {s = 34;}
+
+                        else if ( ((LA21_0>='0' && LA21_0<='9')) ) {s = 35;}
+
+                        else if ( (LA21_0=='@') ) {s = 36;}
+
+                        else if ( (LA21_0=='b'||LA21_0=='h') ) {s = 37;}
+
+                        else if ( (LA21_0=='^') ) {s = 38;}
+
+                        else if ( (LA21_0=='A'||LA21_0=='F'||LA21_0=='H'||LA21_0=='J'||LA21_0=='L'||(LA21_0>='N' && LA21_0<='O')||(LA21_0>='S' && LA21_0<='V')||(LA21_0>='X' && LA21_0<='Z')||LA21_0=='_'||(LA21_0>='j' && LA21_0<='l')||LA21_0=='n'||LA21_0=='q'||(LA21_0>='u' && LA21_0<='v')||(LA21_0>='x' && LA21_0<='z')) ) {s = 39;}
+
+                        else if ( (LA21_0=='\"') ) {s = 40;}
+
+                        else if ( (LA21_0=='\'') ) {s = 41;}
+
+                        else if ( (LA21_0=='/') ) {s = 42;}
+
+                        else if ( ((LA21_0>='\t' && LA21_0<='\n')||LA21_0=='\r'||LA21_0==' ') ) {s = 43;}
+
+                        else if ( ((LA21_0>='\u0000' && LA21_0<='\b')||(LA21_0>='\u000B' && LA21_0<='\f')||(LA21_0>='\u000E' && LA21_0<='\u001F')||LA21_0=='!'||(LA21_0>='#' && LA21_0<='&')||(LA21_0>='*' && LA21_0<=',')||(LA21_0>=';' && LA21_0<='<')||(LA21_0>='>' && LA21_0<='?')||(LA21_0>='[' && LA21_0<=']')||LA21_0=='`'||LA21_0=='|'||(LA21_0>='~' && LA21_0<='\uFFFF')) ) {s = 44;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA21_41 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA21_41>='\u0000' && LA21_41<='\uFFFF')) ) {s = 106;}
 
                         else s = 44;
 
@@ -3413,7 +3466,7 @@ public class InternalChessDSLLexer extends Lexer {
                         break;
             }
             NoViableAltException nvae =
-                new NoViableAltException(getDescription(), 19, _s, input);
+                new NoViableAltException(getDescription(), 21, _s, input);
             error(nvae);
             throw nvae;
         }

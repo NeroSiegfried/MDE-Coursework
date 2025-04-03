@@ -1987,14 +1987,16 @@ public class ChessDSLGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//terminal SAN_TOKEN:
-	//     ESCAPE
-	//     (('K'|'Q'|'R'|'B'|'N')?                  // Optional piece letter; if missing, it's a pawn.
-	//     (LETTER | RANKDIGIT)*                   // Optional disambiguation.
-	//     ('x')?                                  // Optional capture indicator.
-	//     SQUARETERMINAL                        // Target square.
-	//     ('=' ('Q'|'R'|'B'|'N'))?                // Optional promotion.
-	//     ('+'|'#')*                              // Optional check or mate markers.
-	//     ('!'|'?')*                              // Optional remarks.
+	//     ESCAPE(
+	//         ("O-O"("-O")?) |
+	//         (('K'|'Q'|'R'|'B'|'N')?                  // Optional piece letter; if missing, it's a pawn.
+	//         (LETTER | RANKDIGIT)*                   // Optional disambiguation.
+	//         ('x')?                                  // Optional capture indicator.
+	//         SQUARETERMINAL                        // Target square.
+	//         ('=' ('Q'|'R'|'B'|'N'))?                // Optional promotion.
+	//         ('+'|'#')*                              // Optional check or mate markers.
+	//         ('!'|'?')*                              // Optional remarks.
+	//        )
 	//    )
 	//;
 	public TerminalRule getSAN_TOKENRule() {

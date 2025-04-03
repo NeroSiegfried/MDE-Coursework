@@ -2432,7 +2432,7 @@ rulePiece returns [Enumerator current=null]
 
 RULE_MOVENUMBER : ('0'..'9')+ '.';
 
-RULE_SAN_TOKEN : RULE_ESCAPE ('K'|'Q'|'R'|'B'|'N')? (RULE_LETTER|RULE_RANKDIGIT)* 'x'? RULE_SQUARETERMINAL ('=' ('Q'|'R'|'B'|'N'))? ('+'|'#')* ('!'|'?')*;
+RULE_SAN_TOKEN : RULE_ESCAPE ('O-O' '-O'?|('K'|'Q'|'R'|'B'|'N')? (RULE_LETTER|RULE_RANKDIGIT)* 'x'? RULE_SQUARETERMINAL ('=' ('Q'|'R'|'B'|'N'))? ('+'|'#')* ('!'|'?')*);
 
 fragment RULE_LETTER : 'a'..'h';
 
