@@ -1,0 +1,7 @@
+/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP */
+
+Game "Invalid Move Test 6"
+Moves:
+// XPECT errors --> "Illegal movement pattern from h1 to h6" at "Rook(h1->h6)"
+1. Rook(h1->h6)
+end

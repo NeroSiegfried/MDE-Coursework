@@ -1,0 +1,37 @@
+/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP */
+
+/*
+XPECT generated file AmbiguousBishopMove3_algebraic.txt ---
+=== Chess Algebraic Notation ===
+Game: Ambiguous Bishop Move (3)
+1. B2d5 
+---
+*/
+/*
+XPECT generated file AmbiguousBishopMove3_concise.txt ---
+=== Concise DSL Notation ===
+Game: Ambiguous Bishop Move (3)
+1. Bishop(a2->d5)
+
+---
+*/
+/*
+XPECT generated file AmbiguousBishopMove3_verbose.txt ---
+=== Verbose DSL Notation ===
+Game: Ambiguous Bishop Move (3)
+1. Bishop from a2 to d5
+
+---
+*/
+
+Game "Ambiguous Bishop Move (3)"
+InitialState custom Positions: {
+	White King on b5
+	Black King on h5
+	White Bishop on a8
+	White Rook on a1
+	White Bishop on a2
+}
+Moves:
+1. Bishop(a2->d5)
+end

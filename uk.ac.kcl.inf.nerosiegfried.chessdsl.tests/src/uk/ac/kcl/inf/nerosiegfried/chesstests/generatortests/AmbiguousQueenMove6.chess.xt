@@ -1,0 +1,37 @@
+/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP */
+
+/*
+XPECT generated file AmbiguousQueenMove6_algebraic.txt ---
+=== Chess Algebraic Notation ===
+Game: Ambiguous Queen Move (6)
+1. Q2d5 
+
+---
+*/
+/*
+XPECT generated file AmbiguousQueenMove6_concise.txt ---
+=== Concise DSL Notation ===
+Game: Ambiguous Queen Move (6)
+1. Queen(a2->d5)
+
+---
+*/
+/*
+XPECT generated file AmbiguousQueenMove6_verbose.txt ---
+=== Verbose DSL Notation ===
+Game: Ambiguous Queen Move (6)
+1. Queen from a2 to d5
+
+---
+*/
+
+Game "Ambiguous Queen Move (6)"
+InitialState custom Positions: {
+	White King on f5
+	Black King on h5
+	White Queen on a8
+	White Queen on a2
+}
+Moves:
+1. Queen(a2->d5)
+end
