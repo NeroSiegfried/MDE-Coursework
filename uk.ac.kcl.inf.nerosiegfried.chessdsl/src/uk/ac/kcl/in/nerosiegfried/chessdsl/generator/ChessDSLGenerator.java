@@ -18,6 +18,17 @@ import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Color;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Piece;
 import uk.ac.kcl.in.nerosiegfried.chessdsl.chessDSL.Remark;
 
+/**
+ * A Chess Generator that:
+ *  - Accepts input in either the DSL notation or the Standard Algebraic Notation or a mix
+ *  - Works through the game move by move, ensuring that no ambiguous moves are made 
+ *    without clarifying which piece it was that made the move
+ *  - Adds remarks like (Check) or (Checkmate) when they occur even if the user does not specify
+ *  - Creates .txt output files with the game in three levels of brevity:
+ *    + One in the standard algebraic notation: <file_name>_algebraic.txt
+ *    + Another in our concise DSL notation: <file_name>_concise.txt
+ *    + A third in our verbose DSL notation: <file_name>_verbose.txt
+ */
 public class ChessDSLGenerator extends AbstractGenerator {
 
     // ---------------------------
@@ -92,7 +103,7 @@ public class ChessDSLGenerator extends AbstractGenerator {
             }
         }
         
-        // Create a shallow clone for simulation
+        /** Create a shallow clone for simulation */
         public BoardState cloneBoard() {
             BoardState copy = new BoardState();
             for (String sq : boardMap.keySet()) {
@@ -454,6 +465,10 @@ public class ChessDSLGenerator extends AbstractGenerator {
     // -------------------------------
     private String toConcise(DSLMove move, Color side, BoardState board) {
         StringBuilder sb = new StringBuilder();
+        BoardState sim = board.cloneBoard();
+        applyMove(sim, move, side);
+        boolean isCheck = isInCheck(sim, opposite(side));
+        boolean isMate  = isCheck && isCheckmate(sim, opposite(side));
         if (move instanceof Dummy) {
             sb.append("dummy");
             return sb.toString();
@@ -471,7 +486,7 @@ public class ChessDSLGenerator extends AbstractGenerator {
             sb.append(pieceNameShort(base.getPiece()))
               .append("(").append(base.getFrom().getSquare())
               .append("->").append(base.getTo().getSquare())
-              .append(") Captures(").append(cap.getCapture()).append(")");
+              .append(") Capture(").append(cap.getCapture()).append(")");
         } else if (move instanceof EnPassant) {
             EnPassant ep = (EnPassant) move;
             Capture cp = (Capture) ep.getCapture();
@@ -479,7 +494,7 @@ public class ChessDSLGenerator extends AbstractGenerator {
             sb.append(pieceNameShort(base.getPiece()))
               .append("(").append(base.getFrom().getSquare())
               .append("->").append(base.getTo().getSquare())
-              .append(") Captures(").append(cp.getCapture()).append(")")
+              .append(") Capture(").append(cp.getCapture()).append(")")
               .append(" on ").append(ep.getSquare().getSquare());
         } else if (move instanceof Promotion) {
             Promotion pm = (Promotion) move;
@@ -496,7 +511,7 @@ public class ChessDSLGenerator extends AbstractGenerator {
                 sb.append(pieceNameShort(base.getPiece()))
                   .append("(").append(base.getFrom().getSquare())
                   .append("->").append(base.getTo().getSquare())
-                  .append(") Captures(").append(cp.getCapture()).append(")");
+                  .append(") Capture(").append(cp.getCapture()).append(")");
             }
             sb.append(" Promotes(").append(pm.getPiece()).append(")");
         } else if (move instanceof Castle) {
@@ -506,8 +521,21 @@ public class ChessDSLGenerator extends AbstractGenerator {
     
         // Append remarks in full words in parentheses.
         List<Remark> remarks = getRemarks(move);
+        sb.append(combineSuffixesWord(isCheck, isMate, remarks));
+        return sb.toString();
+    }
+    
+    private String combineSuffixesWord(boolean isCheck, boolean isMate, List<Remark> remarks) {
+        StringBuilder sb = new StringBuilder();
+        if (isMate) {
+            sb.append("(Checkmate)");
+        } else if (isCheck) {
+            sb.append("(Check)");
+        }
         for (Remark r : remarks) {
-            sb.append(" (").append(r.name()).append(")");
+            // Skip CHECK and CHECKMATE since already rendered by + or #
+            if (r == Remark.CHECK || r == Remark.CHECKMATE) continue;
+            sb.append(" (").append(r.name().substring(0,1)).append(r.name().substring(1).toLowerCase()).append(")");
         }
         return sb.toString();
     }
@@ -529,6 +557,10 @@ public class ChessDSLGenerator extends AbstractGenerator {
     // -------------------------------
     private String toVerbose(DSLMove move, Color side, BoardState board) {
         StringBuilder sb = new StringBuilder();
+        BoardState sim = board.cloneBoard();
+        applyMove(sim, move, side);
+        boolean isCheck = isInCheck(sim, opposite(side));
+        boolean isMate  = isCheck && isCheckmate(sim, opposite(side));
         if (move instanceof Dummy) {
             sb.append("dummy");
             return sb.toString();
@@ -593,9 +625,7 @@ public class ChessDSLGenerator extends AbstractGenerator {
     
         // Append remarks in full words in parentheses.
         List<Remark> remarks = getRemarks(move);
-        for (Remark r : remarks) {
-            sb.append(" (").append(r.name()).append(")");
-        }
+        sb.append(combineSuffixesWord(isCheck, isMate, remarks));
         return sb.toString();
     }
     
@@ -952,16 +982,27 @@ public class ChessDSLGenerator extends AbstractGenerator {
         if (c.getResult() == null)
             return "";
         Result r = c.getResult();
+        // Check for draw
         if ("draw".equalsIgnoreCase(r.toString())) {
-            return "1/2-1/2";
+            return "draw\n";
+        }
+        HashMap<Color, String> colorNames = new HashMap<Color, String>();
+        for(Player player: game.getPlayers()) {
+        	colorNames.put(player.getColor(), player.getName());
+        }
+        // If a player is provided, output player's name and color
+        if (colorNames.size() > 0) {
+            return colorNames.get(r.getColor()) + " (" + r.getColor().toString() + ") wins\n";
         }
         if (r.getPlayer() != null) {
-            return (r.getPlayer().getColor() == Color.WHITE) ? "1-0" : "0-1";
+            return r.getPlayer().getName() + " (" + r.getPlayer().getColor() + ") wins\n";
         }
+        // If only a color is provided, output the color
         if (r.getColor() != null) {
-            return (r.getColor() == Color.WHITE) ? "1-0" : "0-1";
+            return r.getColor().toString() + " wins\n";
         }
-        return "";
+        // Fallback
+        return r.toString();
     }
     
     private String determineScore(Conclusion c) {

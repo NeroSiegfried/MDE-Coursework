@@ -1,0 +1,6 @@
+Game "Fool's Mate Test"
+Moves:
+1. Pawn(f2 -> f3) Pawn(e7 -> e6)
+2. Pawn(g2 -> g4)(Dubious) Queen(d8 -> h4)(Checkmate)
+end
+Black wins

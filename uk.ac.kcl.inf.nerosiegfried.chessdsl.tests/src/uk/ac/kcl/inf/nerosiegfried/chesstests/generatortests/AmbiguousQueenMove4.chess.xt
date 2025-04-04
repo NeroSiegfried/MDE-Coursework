@@ -1,4 +1,4 @@
-/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP */
+/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.generatortests.GeneratorTests END_SETUP */
 
 /*
 XPECT generated file AmbiguousQueenMove4_algebraic.txt ---

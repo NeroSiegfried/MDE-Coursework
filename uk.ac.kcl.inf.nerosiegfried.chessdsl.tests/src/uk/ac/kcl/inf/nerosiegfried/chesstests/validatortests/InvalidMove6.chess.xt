@@ -1,4 +1,4 @@
-/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP */
+/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.validatortests.ValidatorTests END_SETUP */
 
 Game "Invalid Move Test 6"
 Moves:

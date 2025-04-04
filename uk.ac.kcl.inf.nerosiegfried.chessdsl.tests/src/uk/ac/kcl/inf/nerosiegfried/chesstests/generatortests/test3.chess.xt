@@ -1,4 +1,5 @@
-/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP */
+/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.generatortests.GeneratorTests END_SETUP */
+
 /*
 XPECT generated file test3_algebraic.txt ---
 === Chess Algebraic Notation ===
@@ -80,7 +81,7 @@ Players: Sergei_Movsesian (White) vs Garry_Kasparov (Black)
 29. Queen(h1->g2); Rook(c8->b8) 
 30. Bishop(c1->b2); Knight(a4->b2) Capture(Bishop) 
 31. Knight(e2->d4); Knight(b2->d1) Capture(Rook) 
-32. Knight(d4->e6) Capture(Pawn); King(f8->f7) Capture(Pawn) 
+32. Knight(d4->e6) Capture(Pawn)(Check); King(f8->f7) Capture(Pawn) 
 Conclusion: White resigned.
 Garry_Kasparov (Black) wins
 
@@ -125,7 +126,7 @@ Players: Sergei_Movsesian (White) vs Garry_Kasparov (Black)
 29. Queen from h1 to g2 and Rook from c8 to b8 
 30. Bishop from c1 to b2 and Knight from a4 to b2 and captures Bishop 
 31. Knight from e2 to d4 and Knight from b2 to d1 and captures Rook 
-32. Knight from d4 to e6 and captures Pawn and King from f8 to f7 and captures Pawn 
+32. Knight from d4 to e6 and captures Pawn (Check) and King from f8 to f7 and captures Pawn 
 Conclusion: White resigned.
 Garry_Kasparov (Black) wins
 

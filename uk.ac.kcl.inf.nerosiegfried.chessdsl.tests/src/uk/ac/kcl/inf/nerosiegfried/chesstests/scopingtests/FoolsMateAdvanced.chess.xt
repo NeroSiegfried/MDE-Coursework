@@ -1,15 +1,4 @@
-//XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP
-/*
-XPECT generated file FoolsMateAdvanced.txt ---
-=== Chess Algebraic Notation ===
-Game: Fool's Mate Test (Victor (White) vs Nero (Black))
-1. f3 e6 
-2. g4?! Qh4# 
-Conclusion: Nero (Black) wins
-0-1
-
----
-*/
+//XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.scopingtests.ScopingTests END_SETUP
 
 Game "Fool's Mate Test"
 Players:

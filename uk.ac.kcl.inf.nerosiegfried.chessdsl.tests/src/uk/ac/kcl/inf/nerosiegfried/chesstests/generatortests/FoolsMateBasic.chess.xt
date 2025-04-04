@@ -1,10 +1,29 @@
-//XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP
+/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.generatortests.GeneratorTests END_SETUP */
+
 /*
-XPECT generated file FoolsMateBasic.txt ---
+XPECT generated file FoolsMateBasic_algebraic.txt ---
 === Chess Algebraic Notation ===
 Game: Fool's Mate Test
 1. f3 e6 
 2. g4?! Qh4# 
+
+---
+*/
+/*
+XPECT generated file FoolsMateBasic_concise.txt ---
+=== Concise DSL Notation ===
+Game: Fool's Mate Test
+1. Pawn(f2->f3); Pawn(e7->e6) 
+2. Pawn(g2->g4) (Dubious); Queen(d8->h4) (Checkmate) 
+
+---
+*/
+/*
+XPECT generated file FoolsMateBasic_verbose.txt ---
+=== Verbose DSL Notation ===
+Game: Fool's Mate Test
+1. Pawn from f2 to f3 and Pawn from e7 to e6 
+2. Pawn from g2 to g4 (Dubious) and Queen from d8 to h4 (Checkmate) 
 
 ---
 */

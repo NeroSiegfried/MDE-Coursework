@@ -1,4 +1,5 @@
-/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.ChessTests END_SETUP */
+/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.movetests.MoveTests END_SETUP */
+
 
 Game "Knight Move"
 Moves:
