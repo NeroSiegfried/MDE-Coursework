@@ -32,7 +32,7 @@ EasyChess bridges the gap between conventional chess notation and user-friendly 
 1. **Clone the repository**:
 
    ```
-   git clone https://github.com/yourusername/EasyChess.git
+   git clone https://github.com/6ccs3mde-7ccsmmdd-classroom-2024-25/coursework-NeroSiegfried.git
    ```
 
 2. **Import the project into Eclipse as an Xtext project**:
@@ -111,7 +111,7 @@ Don't know how this works
 
 ## Author
 
-- Victor Nabasu - nerosiegfried@gmail.com
+- Victor Nabasu - k21217907@kcl.ac.uk
 
 ## To-Do List
 - [X] Refine Validation
