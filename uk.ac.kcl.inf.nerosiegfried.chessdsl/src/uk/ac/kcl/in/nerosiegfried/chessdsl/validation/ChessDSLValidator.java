@@ -181,7 +181,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         if(any.getMove() != null) {
             return validateDSLMove(any.getMove(), any, board, side, mp, lastMove);
         }
-        if(any.getAlgebraicmove() != null) {
+        else if(any.getAlgebraicmove() != null) {
             return validateSANMove(any, board, side, mp, lastMove);
         }
         error("Empty move definition", any, null);
@@ -313,8 +313,24 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
         Move base = cap.getMove();
         String from = base.getFrom().getSquare();
         String to = base.getTo().getSquare();
+        
+        if (!board.isOccupied(from)) {
+            error("No piece at " + from + " for en passant capture", ep, null);
+            return false;
+        }
+        PieceInfo piFrom = board.getPieceAt(from);
+        if (piFrom.color != side) {
+            error("Wrong color piece at " + from + " for en passant", ep, null);
+            return false;
+        }
+        if (piFrom.type != Piece.PAWN) {
+            error("Only pawns can do en passant. Piece on square is " + piFrom.type.toString(), ep, null);
+            return false;
+        }
+        
+        
         if(base.getPiece() != Piece.PAWN) {
-            error("Only pawns can do en passant", ep, null);
+            error("Only pawns can do en passant. Piece declared is " + base.getPiece().toString(), ep, null);
             return false;
         }
         String victimSquare = ep.getSquare().getSquare();
@@ -358,12 +374,24 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             error("Promotion must have a base Move or Capture", pm, null);
             return false;
         }
-        if(mv.getPiece() != Piece.PAWN) {
+        
+        String from = mv.getFrom().getSquare();
+        String to = mv.getTo().getSquare();
+        
+        if (!board.isOccupied(from)) {
+            error("No piece at " + from + " for promotion", pm, null);
+            return false;
+        }
+        PieceInfo fromPi = board.getPieceAt(from);
+        if (fromPi.color != side) {
+            error("Wrong color piece at " + from + " for promotion", pm, null);
+            return false;
+        }
+        if (fromPi.type != Piece.PAWN) {
             error("Only a pawn can promote", pm, null);
             return false;
         }
-        String from = mv.getFrom().getSquare();
-        String to = mv.getTo().getSquare();
+        
         if(side == Color.WHITE && !to.endsWith("8")) {
             error("White pawn must promote on rank 8", pm, null);
             return false;
@@ -550,6 +578,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             return false;
         }
         String fromSquare = candidates.get(0);
+        
         if(isCapture) {
             if(movingPiece == Piece.PAWN) {
                 if(board.isOccupied(targetSq)) {
@@ -576,6 +605,11 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
                         error("En passant target is not an enemy pawn", san, null);
                         return false;
                     }
+                    if (lastMove != null && !lastMove.wasDoublePawnAdvance 
+                    	    && !(lastMove.to == victimSq) ) {
+                    	    error("Cannot do en passant because condiitons not met", san, null);
+                    	    return false;
+                    	}
                 }
             } else {
                 if(!board.isOccupied(targetSq)) {
@@ -599,13 +633,13 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
                     return false;
                 }
             }
-        }
-        if(movingPiece == Piece.PAWN) {
-            if((side == Color.WHITE && targetSq.endsWith("8")) ||
-               (side == Color.BLACK && targetSq.endsWith("1"))) {
-                if(promotion == null) {
-                    error("Pawn reached last rank but no promotion indicated", san, null);
-                    return false;
+            if(movingPiece == Piece.PAWN) {
+                if((side == Color.WHITE && targetSq.endsWith("8")) ||
+                   (side == Color.BLACK && targetSq.endsWith("1"))) {
+                    if(promotion == null) {
+                        error("Pawn reached last rank but no promotion indicated", san, null);
+                        return false;
+                    }
                 }
             }
         }
@@ -631,6 +665,8 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             error("This SAN move leaves your king in check", san, null);
             return false;
         }
+        
+        
         List<Remark> gleaned = new ArrayList<>();
         if(checkMarkers != null && !checkMarkers.isEmpty()) {
             if(checkMarkers.contains("#")) {
@@ -639,31 +675,28 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
                 gleaned.add(Remark.CHECK);
             }
         }
-        if(remarksStr != null && !remarksStr.isEmpty()) {
-            if(remarksStr.contains("!!"))
-                gleaned.add(Remark.EXCELLENT);
-            else if(remarksStr.contains("?!"))
-                gleaned.add(Remark.RISKY);
-            else if(remarksStr.contains("!?"))
-                gleaned.add(Remark.DUBIOUS);
-            else if(remarksStr.contains("?"))
-                gleaned.add(Remark.BAD);
-            else if(remarksStr.contains("!"))
-                gleaned.add(Remark.GOOD);
-        }
+//        if(remarksStr != null && !remarksStr.isEmpty()) {
+//            if(remarksStr.startsWith("!!"))
+//                gleaned.add(Remark.EXCELLENT);
+//            else if(remarksStr.startsWith("?!"))
+//                gleaned.add(Remark.RISKY);
+//            else if(remarksStr.startsWith("!?"))
+//                gleaned.add(Remark.DUBIOUS);
+//            else if(remarksStr.startsWith("?"))
+//                gleaned.add(Remark.BAD);
+//            else if(remarksStr.startsWith("!"))
+//                gleaned.add(Remark.GOOD);
+//        }
         if(gleaned.contains(Remark.CHECKMATE) && !isCheckmate(board, oppositeColor(side))) {
             error("Move claims checkmate but it's not mate. One legal move for " + oppositeColor(side) + " is: " 
                   + getLegalMove(board, oppositeColor(side)), san, null);
         } else if(gleaned.contains(Remark.CHECK) && !isInCheck(board, oppositeColor(side))) {
-            error("Move claims check but it's not check. One legal move for " + oppositeColor(side) + " is: " 
-                  + getLegalMove(board, oppositeColor(side)), san, null);
+            error("Move claims check but it's not check", san, null);
         }
         return true;
     }
 
     private Piece pieceFromSANLetter(String letter) {
-        if(letter == null)
-            return Piece.PAWN;
         switch(letter) {
             case "K": return Piece.KING;
             case "Q": return Piece.QUEEN;
@@ -671,7 +704,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             case "B": return Piece.BISHOP;
             case "N": return Piece.KNIGHT;
             default:
-                throw new IllegalArgumentException("Unknown SAN letter: " + letter);
+            	return Piece.PAWN;
         }
     }
 
@@ -802,7 +835,100 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             return buildLastMoveInfo(board, dsl, side);
         }
         if(any.getAlgebraicmove() != null) {
-            return null;
+        	SANMove san = any.getAlgebraicmove();
+            String token = san.getToken();
+            if (token.startsWith("@")) {
+                token = token.substring(1);
+            }
+
+            // 1) Check if castling:
+            if (token.startsWith("O-O")) {
+                boolean isQueenside = token.startsWith("O-O-O");
+                // King is always from e1 or e8:
+                String fromSquare = (side == Color.WHITE ? "e1" : "e8");
+                String toSquare;
+                if (!isQueenside) {
+                    // short castle
+                    toSquare = (side == Color.WHITE ? "g1" : "g8");
+                } else {
+                    // long castle
+                    toSquare = (side == Color.WHITE ? "c1" : "c8");
+                }
+                // The king obviously didn't do a double-pawn push
+                return new LastMoveInfo(side, Piece.KING, fromSquare, toSquare, false);
+            }
+
+            // 2) Otherwise parse normal SAN
+            //    e.g., Nf3, exd5, Qxe4+, etc.
+            Pattern pattern = Pattern.compile(
+                "^(?:(K|Q|R|B|N))?([a-h1-8])?([a-h1-8])?(x)?([a-h][1-8])(?:=(Q|R|B|N))?([+#]*)([!?]+)?$"
+            );
+            Matcher matcher = pattern.matcher(token);
+            if (!matcher.matches()) {
+                // If it's unparseable, just give up; your validator likely already flagged it.
+                return null;
+            }
+
+            String pieceLetter = matcher.group(1);
+            String disamb1    = matcher.group(2);
+            String disamb2    = matcher.group(3);
+            boolean isCapture = (matcher.group(4) != null);
+            String targetSq   = matcher.group(5);
+            String promotion  = matcher.group(6);
+
+            Piece movingPiece = pieceFromSANLetter(pieceLetter);
+
+            // We replicate the candidate search:
+            List<String> candidates = new ArrayList<>();
+            for (String sq : board.boardMap.keySet()) {
+                PieceInfo pi = board.boardMap.get(sq);
+                if (pi.color == side && pi.type == movingPiece) {
+                    if (isMovePatternLegal(board, sq, targetSq, movingPiece, side, isCapture)) {
+                        candidates.add(sq);
+                    }
+                }
+            }
+
+            // Disambiguation
+            String disamb = "";
+            if (disamb1 != null) disamb += disamb1;
+            if (disamb2 != null) disamb += disamb2;
+            if (!disamb.isEmpty()) {
+                List<String> filtered = new ArrayList<>();
+                for (String cand : candidates) {
+                    boolean ok = true;
+                    for (char c : disamb.toCharArray()) {
+                        if (Character.isLetter(c) && cand.charAt(0) != c) {
+                            ok = false; 
+                            break;
+                        }
+                        if (Character.isDigit(c) && cand.charAt(1) != c) {
+                            ok = false; 
+                            break;
+                        }
+                    }
+                    if (ok) filtered.add(cand);
+                }
+                candidates = filtered;
+            }
+
+            // If no candidate or ambiguous, we cannot build a single from->to
+            if (candidates.size() != 1) {
+                return null;
+            }
+
+            String fromSquare = candidates.get(0);
+
+            // If it's a pawn, see if it was a 2-square push
+            boolean doublePush = false;
+            if (movingPiece == Piece.PAWN) {
+                int rankDiff = Math.abs(fromSquare.charAt(1) - targetSq.charAt(1));
+                if (rankDiff == 2) {
+                    doublePush = true;
+                }
+            }
+
+            return new LastMoveInfo(side, movingPiece, fromSquare, targetSq, doublePush);
         }
         return null;
     }
@@ -1032,8 +1158,7 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
             }
         } else if(remarks.contains(Remark.CHECK)) {
             if(!isInCheck(board, sideInCheck)) {
-                String legalMove = getLegalMove(board, sideInCheck);
-                error("Move claims check but isn't in check. One legal move for " + sideInCheck + " is: " + legalMove, any, null);
+                error("Move claims check but isn't in check", any, null);
             }
         }
     }

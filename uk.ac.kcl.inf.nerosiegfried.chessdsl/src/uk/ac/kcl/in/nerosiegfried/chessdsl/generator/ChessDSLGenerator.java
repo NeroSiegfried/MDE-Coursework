@@ -812,13 +812,19 @@ public class ChessDSLGenerator extends AbstractGenerator {
         mv.setFrom(fromSq);
         mv.setTo(toSq);
         if (isCapture) {
-            if (movingPiece == Piece.PAWN) {
-                any.setMove(mv);
+            // Always create a Capture node for a capture, even for pawn moves.
+            Capture cap = ChessDSLFactory.eINSTANCE.createCapture();
+            cap.setMove(mv);
+            // For pawn captures, if the target square is occupied, deduce the captured piece.
+            if (board.isOccupied(targetSq)) {
+                PieceInfo occupant = board.getPieceAt(targetSq);
+                cap.setCapture(occupant.type);
             } else {
-                Capture cap = ChessDSLFactory.eINSTANCE.createCapture();
-                cap.setMove(mv);
-                any.setMove(cap);
+                // If not occupied (could be en passant), default to Pawn.
+            	// assumes that the validator catches invalid en passants
+                cap.setCapture(Piece.PAWN);
             }
+            any.setMove(cap);
         } else {
             any.setMove(mv);
         }
