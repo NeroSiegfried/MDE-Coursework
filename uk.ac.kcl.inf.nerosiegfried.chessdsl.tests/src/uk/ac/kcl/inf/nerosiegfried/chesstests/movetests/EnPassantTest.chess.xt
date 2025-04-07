@@ -1,9 +1,0 @@
-/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.movetests.MoveTests END_SETUP */
-
-
-Game "En Passant Test"
-Moves:
-1. Pawn(f2 -> f4) Pawn(e7 -> e5)
-2. Pawn(f4 -> f5) Pawn(g7 -> g5)
-3. Pawn(f5 -> g6)Capture(Pawn) on g5
-end

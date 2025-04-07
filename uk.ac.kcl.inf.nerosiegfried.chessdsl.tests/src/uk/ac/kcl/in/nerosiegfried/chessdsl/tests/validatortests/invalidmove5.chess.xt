@@ -1,0 +1,7 @@
+//XPECT_SETUP uk.ac.kcl.in.nerosiegfried.chessdsl.tests.validatortests.ValidatorTests END_SETUP
+
+Game "Invalid Move Test 5"
+Moves:
+// XPECT errors --> "Illegal movement pattern from f1 to d3" at "Bishop(f1->d3)"
+1. Bishop(f1->d3)
+end

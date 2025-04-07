@@ -1,0 +1,8 @@
+//XPECT_SETUP uk.ac.kcl.in.nerosiegfried.chessdsl.tests.validatortests.ValidatorTests END_SETUP
+
+Game "Fool's Mate Test"
+Moves:
+1. Pawn(f2 -> f3) Pawn from e7 to e6
+2. @g4?! @Qh4#
+end
+Black wins

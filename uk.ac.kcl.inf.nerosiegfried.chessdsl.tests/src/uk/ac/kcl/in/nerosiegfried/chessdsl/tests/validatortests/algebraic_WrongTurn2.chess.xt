@@ -1,0 +1,9 @@
+//XPECT_SETUP uk.ac.kcl.in.nerosiegfried.chessdsl.tests.validatortests.ValidatorTests END_SETUP
+
+Game "Wrong Turn 1"
+Moves:
+//XPECT errors
+
+1. @e4 Pawn(g1 -> f3)
+2. Pawn(c4 -> c5) Pawn(c5->c6)
+end

@@ -1,0 +1,12 @@
+//XPECT_SETUP uk.ac.kcl.in.nerosiegfried.chessdsl.tests.validatortests.ValidatorTests END_SETUP
+
+Game "Invalid Square To"
+Moves:
+/* XPECT errors ---
+"Empty move definition" at ""
+"mismatched input 'd1' expecting ')'" at "d1"
+"no viable alternative at input 'd0'" at "Queen"
+ ---
+ */
+1. Queen(d1->d0)
+end

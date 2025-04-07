@@ -1,0 +1,21 @@
+/*XPECT_SETUP uk.ac.kcl.in.nerosiegfried.chessdsl.tests.movetests.MoveTests END_SETUP */
+
+Game "King Side Castling"
+Moves:
+1. Pawn(e2 -> e4) Pawn(c7 -> c5)
+2. Knight(g1 -> f3) Pawn(d7 -> d6)
+3. Pawn(d2 -> d4) Pawn(c5 -> d4)Capture(Pawn)
+4. Knight(f3 -> d4)Capture(Pawn) Knight(g8 -> f6)
+5. Knight(b1 -> c3) Pawn(a7 -> a6)
+6. Bishop(c1 -> e3) Pawn(e7 -> e6)
+7. Pawn(f2 -> f3) Pawn(b7->b5)
+8. Queen(d1 -> d2) Knight(b8 -> d7)
+9. Castle(Queenside) Bishop(c8 -> b7)
+10. Pawn(g2 -> g4) Knight(d7 -> b6)
+11. Queen(d2 -> f2) Knight(f6 -> d7)
+12. King(c1 -> b1) Rook(a8 -> c8)
+13. Bishop(f1 -> d3) Rook(c8 -> c3)Capture(Knight)
+14. Pawn(b2 -> c3)Capture(Rook) Queen(d8 ->c7)
+15. Knight from d4 to e2  Bishop from f8 to e7
+16. Pawn from g4 to g5 Castle(Kingside)
+end

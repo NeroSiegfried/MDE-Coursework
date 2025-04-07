@@ -1,7 +1,0 @@
-/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.validatortests.ValidatorTests END_SETUP */
-
-Game "Invalid Move Test 1"
-Moves:
-// XPECT errors --> "Path blocked for castling between f1 & g1" at "Castle(Kingside)"
-1. Castle(Kingside)
-end

@@ -1,0 +1,10 @@
+//XPECT_SETUP uk.ac.kcl.in.nerosiegfried.chessdsl.tests.validatortests.ValidatorTests END_SETUP
+
+Game "Invalid Move 10"
+Moves:
+/* XPECT errors ---
+"No candidate piece found for Ke3" at "@Ke3"
+ ---
+ */
+1. @Ke3
+end

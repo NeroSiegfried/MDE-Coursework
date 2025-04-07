@@ -972,24 +972,41 @@ public class ChessDSLValidator extends AbstractChessDSLValidator {
                 return pathClear(board, from, to);
             }
             return false;
-        } else if(p == Piece.PAWN) {
+        } else if (p == Piece.PAWN) {
             int fFrom = from.charAt(0) - 'a';
             int rFrom = from.charAt(1) - '0';
             int fTo = to.charAt(0) - 'a';
             int rTo = to.charAt(1) - '0';
             int fileDiff = Math.abs(fTo - fFrom);
-            int rankDiff = (side == Color.WHITE) ? rTo - rFrom : rFrom - rTo;
-            if(isCapture) {
-                return fileDiff == 1 && rankDiff == 1;
-            } else {
-                if(fileDiff != 0)
-                    return false;
-                if(rankDiff == 1)
+            int rankDiff = (side == Color.WHITE ? rTo - rFrom : rFrom - rTo);
+
+            // Moving backwards or sideways?
+            if (rankDiff <= 0) return false;  // Must move forward
+            // "isCapture" means we're expecting a diagonal capture
+            if (isCapture) {
+                // Must move exactly 1 rank forward, 1 file sideways
+                if (fileDiff == 1 && rankDiff == 1) {
+                    // Also ensure the 'to' square is either occupied by enemy or is a valid en passant 
+                    // - but you *could* keep that logic in the caller if you prefer
                     return true;
-                if(rankDiff == 2 && ((side == Color.WHITE && rFrom == 2) || (side == Color.BLACK && rFrom == 7))) {
-                    char intermediate = (side == Color.WHITE) ? (char)(rFrom + 1 + '0') : (char)(rFrom - 1 + '0');
-                    String interSq = "" + from.charAt(0) + intermediate;
-                    return !board.isOccupied(interSq);
+                }
+                return false;
+            } else {
+                // Pawn push (no capture)
+                if (fileDiff != 0) return false; // must stay on same file
+                if (rankDiff == 1) {
+                    // Single step forward - final square must be empty
+                    return !board.isOccupied(to);
+                }
+                if (rankDiff == 2 && 
+                    ((side == Color.WHITE && rFrom == 2) || (side == Color.BLACK && rFrom == 7))) {
+                    // Double step from initial rank
+                    // Check intermediate
+                    int midRank = (side == Color.WHITE ? rFrom+1 : rFrom-1);
+                    String midSq = "" + (char)('a' + fFrom) + (char)('0' + midRank);
+                    if (board.isOccupied(midSq)) return false;
+                    if (board.isOccupied(to)) return false;
+                    return true;
                 }
                 return false;
             }

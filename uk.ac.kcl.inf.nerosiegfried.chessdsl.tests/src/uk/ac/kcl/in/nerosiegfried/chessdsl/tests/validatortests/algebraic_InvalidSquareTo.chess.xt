@@ -1,0 +1,14 @@
+//XPECT_SETUP uk.ac.kcl.in.nerosiegfried.chessdsl.tests.validatortests.ValidatorTests END_SETUP
+
+Game "Invalid Square To"
+Moves:
+/* XPECT errors ---
+"mismatched character '0' expecting set '1'..'8'" at "@Qd0"
+ ---
+ */
+1. @Qd0
+/* XPECT errors ---
+"no viable alternative at input 'end'" at "end"
+ ---
+ */
+end

@@ -1,0 +1,7 @@
+//XPECT_SETUP uk.ac.kcl.in.nerosiegfried.chessdsl.tests.validatortests.ValidatorTests END_SETUP
+
+Game "Test False Mate"
+Moves:
+// XPECT errors --> "Move claims checkmate but it's not mate. One legal move for Black is: Pawn from h7 to h5" at "@Nf3#"
+1. @Nf3#
+end

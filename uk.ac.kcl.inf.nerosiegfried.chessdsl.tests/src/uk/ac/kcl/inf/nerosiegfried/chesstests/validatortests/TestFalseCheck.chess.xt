@@ -1,7 +1,0 @@
-/*XPECT_SETUP uk.ac.kcl.inf.nerosiegfried.chesstests.validatortests.ValidatorTests END_SETUP */
-
-Game "Test False Check"
-Moves:
-// XPECT errors --> "Move claims check but isn't in check" at "Pawn(e2->e4)(Check)"
-1. Pawn(e2->e4)(Check)
-end

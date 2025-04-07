@@ -1,0 +1,14 @@
+//XPECT_SETUP uk.ac.kcl.in.nerosiegfried.chessdsl.tests.scopingtests.ScopingTests END_SETUP
+
+Game "Fool's Mate Test"
+Players:
+White: "Victor"
+Black: "Nero"
+Moves:
+1. Pawn(f2 -> f3) Pawn(e7 -> e6)
+//XPECT scope at Victor --> Victor, !Nero,...
+2. Victor moves Pawn(g2 -> g4)(Dubious)
+//XPECT scope at Nero --> Nero, !Victor,...
+Nero moves Queen(d8 -> h4)(Checkmate)
+end
+Black wins

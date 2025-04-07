@@ -1,0 +1,8 @@
+/*XPECT_SETUP uk.ac.kcl.in.nerosiegfried.chessdsl.tests.movetests.MoveTests END_SETUP */
+
+Game "Pawn Capture"
+Moves:
+1. @e4 @c5
+2. @Nf3 @d6
+3. @d4 @cxd4
+end
